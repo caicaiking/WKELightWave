@@ -1,0 +1,57 @@
+<RCC>
+    <qresource prefix="/">
+        <file>add_bottom.png</file>
+        <file>add_left.png</file>
+        <file>add_right.png</file>
+        <file>add_top.png</file>
+        <file>btn_close.png</file>
+        <file>btn_ok.png</file>
+        <file>checkbox_checked.png</file>
+        <file>checkbox_unchecked.png</file>
+        <file>close.ico</file>
+        <file>close2.png</file>
+        <file>curTest.ico</file>
+        <file>data.png</file>
+        <file>down16.ico</file>
+        <file>down24.ico</file>
+        <file>First.ico</file>
+        <file>Font Awesome Cheatsheet.png</file>
+        <file>fontawesome-webfont.ttf</file>
+        <file>hide.png</file>
+        <file>instrument.ico</file>
+        <file>Last.ico</file>
+        <file>left_down.ico</file>
+        <file>login.ico</file>
+        <file>machine.ico</file>
+        <file>max.ico</file>
+        <file>max1.png</file>
+        <file>max2.png</file>
+        <file>max3.png</file>
+        <file>min.ico</file>
+        <file>min.png</file>
+        <file>msg_error.png</file>
+        <file>msg_info.png</file>
+        <file>msg_question.png</file>
+        <file>Nexpaget.ico</file>
+        <file>next.ico</file>
+        <file>qt_zh_CN.qm</file>
+        <file>radio_normal.png</file>
+        <file>radio_selected.png</file>
+        <file>res.qrc</file>
+        <file>right_up.ico</file>
+        <file>single.png</file>
+        <file>Stop3.ico</file>
+        <file>up1.png</file>
+        <file>up16.ico</file>
+        <file>up24.ico</file>
+        <file>up32.ico</file>
+        <file>up32b.ico</file>
+        <file>up48.ico</file>
+        <file>wk.ico</file>
+        <file>wk.png</file>
+        <file>wk1.png</file>
+        <file>wk6.png</file>
+        <file>wk88.png</file>
+        <file>wk666.png</file>
+    </qresource>
+</RCC>
