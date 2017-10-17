@@ -1,6 +1,5 @@
 ﻿#include "frmSetLimit.h"
 #include "doubleType.h"
-#include "UserfulFunctions.h"
 #include "NumberInput.h"
 frmSetLimit::frmSetLimit(QWidget *parent) :
     QDialog(parent)
@@ -54,7 +53,7 @@ void frmSetLimit::updateButtons()
 
     doubleType dt;
     QString dQ ="DQ";
-    QString unit =UserfulFunctions::getSuffix(item);
+    QString unit ="";//UserfulFunctions::getSuffix(item);
     if(!dQ.contains(item))
     {
         dt.setData(m1.getAbsHi(),"");

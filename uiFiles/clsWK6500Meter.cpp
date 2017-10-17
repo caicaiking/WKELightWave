@@ -134,7 +134,7 @@ void clsWK6500Meter::onLabellimit1Clicked()
     if(frm->exec()==QDialog::Accepted)
     {
         mlItem1= frm->getMeterLimit();
-        labelLimit1->setText(mlItem1.showLimits(UserfulFunctions::getSuffix(item1)));
+        //labelLimit1->setText(mlItem1.showLimits(UserfulFunctions::getSuffix(item1)));
         //labelLimit2->setText(mlItem2.showLimits(UserfulFunctions::getSuffix(item2)));
 
     }
@@ -147,7 +147,7 @@ void clsWK6500Meter::onLabellimit2Clicked()
     {
         mlItem2= frm->getMeterLimit();
         //labelLimit1->setText(mlItem1.showLimits(UserfulFunctions::getSuffix(item1)));
-        labelLimit2->setText(mlItem2.showLimits(UserfulFunctions::getSuffix(item2)));
+        //labelLimit2->setText(mlItem2.showLimits(UserfulFunctions::getSuffix(item2)));
     }
 }
 
@@ -174,8 +174,7 @@ QString clsWK6500Meter::getCondtion() const
     condition.insert("biasSwitch",this->biasSwitch);
     condition.insert("biasType",this->biasType);
     condition.insert("relaySwitch",this->relaySwitch);
-    condition.insert("",this->mlItem1);
-    condition.insert("mlItem2",this->mlItem2);
+
 
 
     QJsonDocument jsonDocument=QJsonDocument::fromVariant(condition);
