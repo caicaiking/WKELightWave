@@ -66,6 +66,8 @@ void clsChannelSettings::updateLabels()
     labelChannel->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
     labelChannel->setText(tr("通道")+QString::number(channel));
     labelChannel->setFont(QFont("楷体",13));
+    labelChannel1->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
+    labelClose->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
     //labelBias->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel)));
     labelBias1->setText(QString::number(bias)+biasType);
     //labelBias1->setFont(QFont("楷体",12));
@@ -85,4 +87,14 @@ void clsChannelSettings::onLabelCloseClicked()
 
     emit deleteChannelSettings(channel);
     qDebug()<<"on labelClose clicked";
+}
+
+void clsChannelSettings::setChannelSettings()
+{
+    stackedWidget->setCurrentIndex(0);
+}
+
+void clsChannelSettings::setChannelRunnings()
+{
+    stackedWidget->setCurrentIndex(1);
 }

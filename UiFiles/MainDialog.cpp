@@ -69,12 +69,34 @@ void MainDialog::on_btnNewSetup_clicked()
 
 void MainDialog::on_btnSettings_clicked()
 {
-    stackedWidget->setCurrentIndex(0);
+    //stackedWidget->setCurrentIndex(0);
+    QList<QWidget*> widgetList;
+    widgetList<<widget<<widget_2<<widget_3<<widget_4<<widget_5<<widget_6
+                <<widget_7<<widget_8;
+    for(int i=0;i<widgetList.length();i++)
+    {
+        if(widgetList.at(i)->layout()!=NULL)
+        {
+            channelMap[i]->setChannelSettings();
+        }
+    }
+    btnNewSetup->setEnabled(true);
 }
 
 void MainDialog::on_btnRunning_clicked()
 {
-    stackedWidget->setCurrentIndex(1);
+    //stackedWidget->setCurrentIndex(1);
+    QList<QWidget*> widgetList;
+    widgetList<<widget<<widget_2<<widget_3<<widget_4<<widget_5<<widget_6
+                <<widget_7<<widget_8;
+    for(int i=0;i<widgetList.length();i++)
+    {
+        if(widgetList.at(i)->layout()!=NULL)
+        {
+            channelMap[i]->setChannelRunnings();
+        }
+    }
+    btnNewSetup->setEnabled(false);
 }
 
 void MainDialog::deleteChannel(int index)

@@ -13,9 +13,12 @@ public:
     void setCondition(const QString condition);
 
     void updateLabels();
+    void setChannelSettings();
+    void setChannelRunnings();
 
 private slots:
   void onLabelCloseClicked();
+
 
 signals:
   void deleteChannelSettings(int index);
