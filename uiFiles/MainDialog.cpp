@@ -69,9 +69,7 @@ void MainDialog::on_btnNewSetup_clicked()
 
 void MainDialog::on_btnSettings_clicked()
 {
-
     stackedWidget->setCurrentIndex(0);
-
 }
 
 void MainDialog::on_btnRunning_clicked()

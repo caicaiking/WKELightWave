@@ -24,64 +24,60 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+INCLUDEPATH += PublicFiles UiFiles
 
-SOURCES += \
-        main.cpp \
-    clsWK6500Meter.cpp \
-    clsRangeDialog.cpp \
-    clsSpeedDialog.cpp \
-    clsWK6500Items.cpp \
-    doubleType.cpp \
-    NumberInput.cpp \
-    clsADU200.cpp \
-    clsADU200Thread.cpp \
-    clsWKEControlBox.cpp \
-    clsLabel.cpp \
-    clsHightVoltage.cpp \
-    MainDialog.cpp \
-    clsNewSetup.cpp \
-    clsChannelSettings.cpp \
-    frmSetLimit.cpp \
-    UserfulFunctions.cpp \
-    clsMeterLimit.cpp \
-    clsRunningStatus.cpp
-
-HEADERS += \
-    clsWK6500Meter.h \
-    clsRangeDialog.h \
-    clsSpeedDialog.h \
-    clsWK6500Items.h \
-    doubleType.h \
-    NumberInput.h \
-    AduHid.h \
-    clsADU200.h \
-    clsADU200Thread.h \
-    clsWKEControlBox.h \
-    clsLabel.h \
-    clsHightVoltage.h \
-    MainDialog.h \
-    clsNewSetup.h \
-    clsChannelSettings.h \
-    frmSetLimit.h \
-    UserfulFunctions.h \
-    clsMeterLimit.h \
-    Globle.h \
-    clsRunningStatus.h
-
-FORMS += \
-    clsWK6500Meter.ui \
-    clsRangeDialog.ui \
-    clsSpeedDialog.ui \
-    clsWK6500Items.ui \
-    NumberInput.ui \
-    clsIODialog.ui \
-    clsWKEControlBox.ui \
-    clsHightVoltage.ui \
-    MainDialog.ui \
-    clsNewSetup.ui \
-    clsChannelSettings.ui \
-    frmSetLimit.ui \
-    clsRunningStatus.ui
 
 RESOURCES += \
     images/res.qrc
+
+HEADERS += \
+    PublicFiles/clsMeterLimit.h \
+    PublicFiles/doubleType.h \
+    UiFiles/clsChannelSettings.h \
+    UiFiles/clsHightVoltage.h \
+    UiFiles/clsLabel.h \
+    UiFiles/clsNewSetup.h \
+    UiFiles/clsRangeDialog.h \
+    UiFiles/clsRunningStatus.h \
+    UiFiles/clsSpeedDialog.h \
+    UiFiles/clsWK6500Items.h \
+    UiFiles/clsWK6500Meter.h \
+    UiFiles/clsWKEControlBox.h \
+    UiFiles/frmSetLimit.h \
+    UiFiles/MainDialog.h \
+    UiFiles/NumberInput.h
+
+SOURCES += \
+    PublicFiles/clsMeterLimit.cpp \
+    PublicFiles/doubleType.cpp \
+    PublicFiles/main.cpp \
+    UiFiles/clsChannelSettings.cpp \
+    UiFiles/clsHightVoltage.cpp \
+    UiFiles/clsLabel.cpp \
+    UiFiles/clsNewSetup.cpp \
+    UiFiles/clsRangeDialog.cpp \
+    UiFiles/clsRunningStatus.cpp \
+    UiFiles/clsSpeedDialog.cpp \
+    UiFiles/clsWK6500Items.cpp \
+    UiFiles/clsWK6500Meter.cpp \
+    UiFiles/clsWKEControlBox.cpp \
+    UiFiles/frmSetLimit.cpp \
+    UiFiles/MainDialog.cpp \
+    UiFiles/NumberInput.cpp
+
+FORMS += \
+    UiFiles/clsChannelSettings.ui \
+    UiFiles/clsHightVoltage.ui \
+    UiFiles/clsIODialog.ui \
+    UiFiles/clsNewSetup.ui \
+    UiFiles/clsRangeDialog.ui \
+    UiFiles/clsRunningStatus.ui \
+    UiFiles/clsSpeedDialog.ui \
+    UiFiles/clsWK6500Items.ui \
+    UiFiles/clsWK6500Meter.ui \
+    UiFiles/clsWKEControlBox.ui \
+    UiFiles/frmSetLimit.ui \
+    UiFiles/MainDialog.ui \
+    UiFiles/NumberInput.ui
+
+

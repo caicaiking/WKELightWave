@@ -19,6 +19,7 @@ public:
     void updateCommand();
     void turnOffDisplay();
     void turnOnDisplay();
+    QStringList setCmbSuffix(int i);
 
 private slots:
     void onLabellimit1Clicked();
@@ -51,6 +52,7 @@ private slots:
 
 private:
     QString item1,item2;
+    int item1Index,item2Index;
     double frequency;
     double level;
     QString levelUnit;
@@ -61,6 +63,9 @@ private:
     QString biasType;
     QString biasSwitch;
     clsMeterLimit mlItem1,mlItem2;
+    QString item1HiLimit,item1LowLimit,item2HiLimit,item2LowLimit;
+    QString suffix1,suffix2;
+
     QString relaySwitch;
 
 };

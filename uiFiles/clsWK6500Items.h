@@ -14,6 +14,7 @@ public:
     {
         return func;
     }
+    int getIndex() const;
     //void setBtnOFFVisable();
 
 private slots:
@@ -32,6 +33,7 @@ private slots:
 
 private:
     QString func;
+    int index;
 };
 
 #endif // CLSWK6500ITEMS_H

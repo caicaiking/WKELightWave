@@ -7,7 +7,7 @@
 #include <QJsonDocument>
 #include <QJsonParseError>
 #include "frmSetLimit.h"
-#include "UserfulFunctions.h"
+
 
 
 clsWK6500Meter::clsWK6500Meter(QWidget *parent) :
@@ -81,6 +81,53 @@ void clsWK6500Meter::turnOnDisplay()
     //    clsSingleton::getInstance()->sendCommand(QString(":METER:FAST-GPIB OFF"),false);
 }
 
+QStringList clsWK6500Meter::setCmbSuffix(int i)
+{
+    QStringList suffixList;
+    suffixList.clear();
+    switch (i) {
+    case 0:
+        suffixList<<" F"<<"mF"<<"uF"<<"nF"<<"pF";
+        break;
+    case 1:
+        suffixList<<" D";
+        break;
+    case 2:
+        suffixList<<" H"<<"mH"<<"uH"<<"nH";
+        break;
+    case 3:
+        suffixList<<" Q";
+        break;
+    case 4:
+        suffixList<<"MΩ"<<"kΩ"<<" Ω"<<"mΩ";
+        break;
+    case 5:
+        suffixList<<"MΩ"<<"kΩ"<<" Ω"<<"mΩ";
+        break;
+    case 6:
+        suffixList<<" S"<<"mS"<<"uS"<<"nS";
+        break;
+    case 7:
+        suffixList<<" S"<<"mS"<<"uS"<<"nS";
+        break;
+    case 8:
+        suffixList<<"MΩ"<<"kΩ"<<" Ω"<<"mΩ";
+        break;
+    case 9:
+        suffixList<<" °";
+        break;
+    case 10:
+        suffixList<<" S"<<"mS"<<"uS"<<"nS";
+        break;
+    case 11:
+        suffixList<<" ";
+        break;
+    default:
+        break;
+    }
+    return suffixList;
+}
+
 void clsWK6500Meter::onLabellimit1Clicked()
 {
     frmSetLimit *frm=new frmSetLimit(this);
@@ -89,6 +136,7 @@ void clsWK6500Meter::onLabellimit1Clicked()
         mlItem1= frm->getMeterLimit();
         labelLimit1->setText(mlItem1.showLimits(UserfulFunctions::getSuffix(item1)));
         //labelLimit2->setText(mlItem2.showLimits(UserfulFunctions::getSuffix(item2)));
+
     }
 }
 
@@ -125,6 +173,10 @@ QString clsWK6500Meter::getCondtion() const
     condition.insert("bias",this->bias);
     condition.insert("biasSwitch",this->biasSwitch);
     condition.insert("biasType",this->biasType);
+    condition.insert("relaySwitch",this->relaySwitch);
+    condition.insert("",this->mlItem1);
+    condition.insert("mlItem2",this->mlItem2);
+
 
     QJsonDocument jsonDocument=QJsonDocument::fromVariant(condition);
     if(!jsonDocument.isNull())
@@ -157,6 +209,8 @@ void clsWK6500Meter::setCondition(const QString condition)
                 this->bias=conditionMap["bias"].toDouble();
                 this->biasSwitch=conditionMap["biasSwitch"].toString();
                 this->biasType=conditionMap["biasType"].toString();
+                this->relaySwitch=conditionMap["relaySwitch"].toString();
+
             }
         }
     }
@@ -169,6 +223,8 @@ void clsWK6500Meter::on_btnItem1_clicked()
     if(dlg->exec()==QDialog::Accepted)
     {
         item1=dlg->getFunc();
+        item1Index=dlg->getIndex();
+        cmbItem1->addItems(setCmbSuffix(item1Index));
         btnItem1->setText(item1);
     }
 }
@@ -180,6 +236,8 @@ void clsWK6500Meter::on_btnItem2_clicked()
     if(dlg->exec()==QDialog::Accepted)
     {
         item2=dlg->getFunc();
+        item2Index=dlg->getIndex();
+        cmbItem2->addItems(setCmbSuffix(item2Index));
         btnItem2->setText(item2);
     }
 }
