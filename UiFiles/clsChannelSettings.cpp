@@ -98,3 +98,11 @@ void clsChannelSettings::setChannelRunnings()
 {
     stackedWidget->setCurrentIndex(1);
 }
+
+void clsChannelSettings::setCloseEnabled(bool bl)
+{
+    if(bl)
+        labelClose->setEnabled(true);
+    else
+        labelClose->setEnabled(false);
+}

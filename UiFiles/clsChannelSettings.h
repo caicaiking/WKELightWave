@@ -15,6 +15,7 @@ public:
     void updateLabels();
     void setChannelSettings();
     void setChannelRunnings();
+    void setCloseEnabled(bool bl);
 
 private slots:
   void onLabelCloseClicked();

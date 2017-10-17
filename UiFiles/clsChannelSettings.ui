@@ -617,13 +617,13 @@ font: 12pt &quot;楷体&quot;;</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
           <property name="leftMargin">
-           <number>3</number>
+           <number>1</number>
           </property>
           <property name="topMargin">
            <number>3</number>
           </property>
           <property name="rightMargin">
-           <number>3</number>
+           <number>1</number>
           </property>
           <property name="bottomMargin">
            <number>3</number>
@@ -782,6 +782,7 @@ font: 12pt &quot;楷体&quot;;</string>
   </customwidget>
  </customwidgets>
  <resources>
+  <include location="../images/res.qrc"/>
   <include location="../images/res.qrc"/>
   <include location="../images/res.qrc"/>
  </resources>

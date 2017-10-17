@@ -78,9 +78,11 @@ void MainDialog::on_btnSettings_clicked()
         if(widgetList.at(i)->layout()!=NULL)
         {
             channelMap[i]->setChannelSettings();
+            channelMap[i]->setCloseEnabled(true);
         }
     }
     btnNewSetup->setEnabled(true);
+
 }
 
 void MainDialog::on_btnRunning_clicked()
@@ -94,6 +96,7 @@ void MainDialog::on_btnRunning_clicked()
         if(widgetList.at(i)->layout()!=NULL)
         {
             channelMap[i]->setChannelRunnings();
+            channelMap[i]->setCloseEnabled(false);
         }
     }
     btnNewSetup->setEnabled(false);
