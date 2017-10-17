@@ -23,7 +23,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-INCLUDEPATH += PublicFiles UiFiles
+INCLUDEPATH += PublicFiles UiFiles Service
 
 
 RESOURCES += \
@@ -44,7 +44,11 @@ HEADERS += \
     UiFiles/clsWKEControlBox.h \
     UiFiles/frmSetLimit.h \
     UiFiles/MainDialog.h \
-    UiFiles/NumberInput.h
+    UiFiles/NumberInput.h \
+    Service/clsSignalControl.h \
+    Service/clsRunService.h \
+    Service/singleton.h \
+    Service/clsInstrument.h
 
 SOURCES += \
     PublicFiles/clsMeterLimit.cpp \
@@ -62,7 +66,10 @@ SOURCES += \
     UiFiles/clsWKEControlBox.cpp \
     UiFiles/frmSetLimit.cpp \
     UiFiles/MainDialog.cpp \
-    UiFiles/NumberInput.cpp
+    UiFiles/NumberInput.cpp \
+    Service/clsSignalControl.cpp \
+    Service/clsRunService.cpp \
+    Service/clsInstrument.cpp
 
 FORMS += \
     UiFiles/clsChannelSettings.ui \
