@@ -54,7 +54,8 @@ HEADERS += \
     Service/clsSignalStatus.h \
     Service/clsSignalThread.h \
     Service/clsControlBox.h \
-    Service/AduHid.h
+    Service/AduHid.h \
+    Service/clsAbamaTestWindow.h
 
 SOURCES += \
     PublicFiles/clsMeterLimit.cpp \
@@ -77,7 +78,8 @@ SOURCES += \
     Service/clsInstrument.cpp \
     Service/clsSignalStatus.cpp \
     Service/clsSignalThread.cpp \
-    Service/clsControlBox.cpp
+    Service/clsControlBox.cpp \
+    Service/clsAbamaTestWindow.cpp
 
 FORMS += \
     UiFiles/clsChannelSettings.ui \
@@ -92,6 +94,7 @@ FORMS += \
     UiFiles/clsWKEControlBox.ui \
     UiFiles/frmSetLimit.ui \
     UiFiles/MainDialog.ui \
-    UiFiles/NumberInput.ui
+    UiFiles/NumberInput.ui \
+    Service/clsAbamaTestWindow.ui
 
 

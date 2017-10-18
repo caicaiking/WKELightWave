@@ -3,11 +3,16 @@
 #include "clsSignalThread.h"
 #include <qdebug.h>
 #include <QObject>
+#include "clsAbamaTestWindow.h"
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
     sngSignalThread::Instance()->start();
+
+    //clsAbamaTestWindow abT;
+    //abT.exec();
+
 
     MainDialog w;
     w.show();
