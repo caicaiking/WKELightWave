@@ -7,7 +7,7 @@
 #include <QJsonDocument>
 #include <QJsonParseError>
 #include "frmSetLimit.h"
-
+#include "publicUtility.h"
 
 
 clsWK6500Meter::clsWK6500Meter(QWidget *parent) :
@@ -26,10 +26,17 @@ clsWK6500Meter::clsWK6500Meter(QWidget *parent) :
     biasType="V";
     biasSwitch="OFF";
     levelUnit="V";
+    suffix1="u";
+    suffix2="u";
+    item1HiLimit=100;
+    item1LowLimit=88;
+    item2HiLimit=200;
+    item2LowLimit=99;
     groupBoxBias->setEnabled(false);
 
     connect(labelLimit1,SIGNAL(labelClicked()),this,SLOT(onLabellimit1Clicked()));
     connect(labelLimit2,SIGNAL(labelClicked()),this,SLOT(onLabellimit2Clicked()));
+    updateButtons();
 }
 
 
@@ -57,6 +64,12 @@ void clsWK6500Meter::updateButtons()
         btnEqucct->setText(tr("串联"));
     else if(equcct=="PAR")
         btnEqucct->setText(tr("并联"));
+    mlItem1.setAbsHi(item1HiLimit);
+    mlItem1.setAbsLo(item1LowLimit);
+    mlItem2.setAbsHi(item2HiLimit);
+    mlItem2.setAbsLo(item2LowLimit);
+    labelLimit1->setText(mlItem1.showLimits(publicUtility::getSuffix(suffix1)));
+    labelLimit2->setText(mlItem2.showLimits(publicUtility::getSuffix(suffix2)));
 }
 
 void clsWK6500Meter::updateCommand()
@@ -134,9 +147,9 @@ void clsWK6500Meter::onLabellimit1Clicked()
     if(frm->exec()==QDialog::Accepted)
     {
         mlItem1= frm->getMeterLimit();
-        //labelLimit1->setText(mlItem1.showLimits(UserfulFunctions::getSuffix(item1)));
-        //labelLimit2->setText(mlItem2.showLimits(UserfulFunctions::getSuffix(item2)));
-
+        labelLimit1->setText(mlItem1.showLimits(publicUtility::getSuffix(item1)));
+        item1HiLimit=mlItem1.getAbsLimitHigh();
+        item1LowLimit=mlItem1.getAbsLimitLow();
     }
 }
 
@@ -145,9 +158,10 @@ void clsWK6500Meter::onLabellimit2Clicked()
     frmSetLimit *frm=new frmSetLimit(this);
     if(frm->exec()==QDialog::Accepted)
     {
-        mlItem2= frm->getMeterLimit();
-        //labelLimit1->setText(mlItem1.showLimits(UserfulFunctions::getSuffix(item1)));
-        //labelLimit2->setText(mlItem2.showLimits(UserfulFunctions::getSuffix(item2)));
+        mlItem2= frm->getMeterLimit();   
+        labelLimit2->setText(mlItem2.showLimits(publicUtility::getSuffix(item2)));
+        item2HiLimit=mlItem2.getAbsLimitHigh();
+        item2LowLimit=mlItem2.getAbsLimitLow();
     }
 }
 
@@ -174,7 +188,10 @@ QString clsWK6500Meter::getCondtion() const
     condition.insert("biasSwitch",this->biasSwitch);
     condition.insert("biasType",this->biasType);
     condition.insert("relaySwitch",this->relaySwitch);
-
+    condition.insert("item1HiLimit",this->item1HiLimit);
+    condition.insert("item1LowLimit",this->item1LowLimit);
+    condition.insert("item2Hilimit",this->item2HiLimit);
+    condition.insert("item2LowLimit",this->item2LowLimit);
 
 
     QJsonDocument jsonDocument=QJsonDocument::fromVariant(condition);
@@ -209,7 +226,10 @@ void clsWK6500Meter::setCondition(const QString condition)
                 this->biasSwitch=conditionMap["biasSwitch"].toString();
                 this->biasType=conditionMap["biasType"].toString();
                 this->relaySwitch=conditionMap["relaySwitch"].toString();
-
+                this->item1HiLimit=conditionMap["item1Hilimit"].toDouble();
+                this->item1LowLimit=conditionMap["item1LowLimit"].toDouble();
+                this->item2HiLimit=conditionMap["item2Hilimit"].toDouble();
+                this->item2LowLimit=conditionMap["item2LowLimit"].toDouble();
             }
         }
     }
@@ -223,6 +243,7 @@ void clsWK6500Meter::on_btnItem1_clicked()
     {
         item1=dlg->getFunc();
         item1Index=dlg->getIndex();
+        cmbItem1->clear();
         cmbItem1->addItems(setCmbSuffix(item1Index));
         btnItem1->setText(item1);
     }
@@ -236,6 +257,7 @@ void clsWK6500Meter::on_btnItem2_clicked()
     {
         item2=dlg->getFunc();
         item2Index=dlg->getIndex();
+        cmbItem2->clear();
         cmbItem2->addItems(setCmbSuffix(item2Index));
         btnItem2->setText(item2);
     }

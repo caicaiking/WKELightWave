@@ -1,6 +1,9 @@
 #include "clsNewSetup.h"
 #include "clsWK6500Meter.h"
 #include "clsHightVoltage.h"
+#include <QJsonDocument>
+#include <QJsonParseError>
+#include <QDebug>
 
 clsNewSetup::clsNewSetup(QWidget *parent) :
     QDialog(parent)
@@ -22,14 +25,36 @@ QString clsNewSetup::getCondtion() const
 void clsNewSetup::on_cmbChannel_currentIndexChanged(int index)
 {
     this->channel=index+1;
+    qDebug()<<" new "<<channel;
 }
 
 void clsNewSetup::on_btnLCR_clicked()
 {
+    channel=cmbChannel->currentIndex()+1;
     clsWK6500Meter *meter=new clsWK6500Meter(this);
     if(meter->exec()==QDialog::Accepted)
     {
-        QString condition=meter->getCondtion();
+        QString tmpCondition=meter->getCondtion();
+        QVariantMap conditionMap;
+        QJsonParseError error;
+        QJsonDocument jsondocument=QJsonDocument::fromJson(tmpCondition.toUtf8(),&error);
+        if(error.error==QJsonParseError::NoError)
+        {
+            if(!(jsondocument.isNull() || jsondocument.isEmpty()))
+            {
+                if(jsondocument.isObject())
+                {
+                    conditionMap=jsondocument.toVariant().toMap();
+                    conditionMap.insert("channel",channel);
+                }
+            }
+        }
+        jsondocument=QJsonDocument::fromVariant(conditionMap);
+        if(!(jsondocument.isNull()))
+        {
+            condition=jsondocument.toJson();
+        }
+
         //lcrCondition.replace(1,condition);
 //        QVariantMap conditionMap=parseCondition(condition);
 //        QString item21=conditionMap["item1"].toString();
@@ -44,12 +69,10 @@ void clsNewSetup::on_btnLCR_clicked()
 //        QString biasType2=conditionMap["biasType"].toString();
 //        QString biasSwitch2=conditionMap["biasSwitch"].toString();
 
-//        QString tx=QString("%1,%2,%3,%4,%5,%6,%7,%8,%9").arg(item21).arg(item22)
-//                .arg(QString::number(freqency2)+"Hz").arg(QString::number(level2)+levelUnit2)
-//                .arg(range2).arg(speed2).arg(equcct2).arg(QString::number(bias2)+biasType2)
-//                .arg(biasSwitch2);
-        channel=cmbChannel->currentIndex()+1;
-        this->condition=meter->getCondtion();
+
+
+
+//        this->condition=meter->getCondtion();
         this->accept();
     }
 }

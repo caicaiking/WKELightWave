@@ -1,6 +1,7 @@
 #include "clsHightVoltage.h"
 #include "NumberInput.h"
 
+
 clsHightVoltage::clsHightVoltage(QWidget *parent) :
     QDialog(parent)
 {
@@ -17,6 +18,11 @@ QString clsHightVoltage::getVoltageSwitch() const
 double clsHightVoltage::getVoltage() const
 {
     return this->voltage;
+}
+
+QString clsHightVoltage::getCondition() const
+{
+
 }
 
 void clsHightVoltage::updateCommand()

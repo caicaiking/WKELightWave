@@ -11,6 +11,9 @@ public:
     explicit clsHightVoltage(QWidget *parent = 0);
     QString getVoltageSwitch() const;
     double getVoltage() const;
+
+    QString getCondition() const;
+
     void updateCommand();
 private slots:
     void on_btnSwitch_clicked();

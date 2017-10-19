@@ -63,7 +63,7 @@ private:
     QString biasType;
     QString biasSwitch;
     clsMeterLimit mlItem1,mlItem2;
-    QString item1HiLimit,item1LowLimit,item2HiLimit,item2LowLimit;
+    double item1HiLimit,item1LowLimit,item2HiLimit,item2LowLimit;
     QString suffix1,suffix2;
 
     QString relaySwitch;

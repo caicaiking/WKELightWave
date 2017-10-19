@@ -35,7 +35,7 @@ private:
     QString range;
     QString equcct;
     QString biasSwitch,biasType;
-    double item1Limit,item2Limit;
+    double item1HiLimit,item1LowLimit,item2HiLimit,item2LowLimit;
 };
 
 #endif // CLSCHANNELSETTINGS_H
