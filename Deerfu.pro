@@ -48,7 +48,8 @@ HEADERS += \
     Service/clsSignalControl.h \
     Service/clsRunService.h \
     Service/singleton.h \
-    Service/clsInstrument.h
+    Service/clsInstrument.h \
+    PublicFiles/publicUtility.h
 
 SOURCES += \
     PublicFiles/clsMeterLimit.cpp \
@@ -69,7 +70,8 @@ SOURCES += \
     UiFiles/NumberInput.cpp \
     Service/clsSignalControl.cpp \
     Service/clsRunService.cpp \
-    Service/clsInstrument.cpp
+    Service/clsInstrument.cpp \
+    PublicFiles/publicUtility.cpp
 
 FORMS += \
     UiFiles/clsChannelSettings.ui \

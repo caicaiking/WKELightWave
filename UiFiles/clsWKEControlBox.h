@@ -29,6 +29,8 @@ private slots:
     void on_rbtnLCR1_clicked();
     void on_rbtnHV1_clicked();
 
+    void on_btnNewSetup_clicked();
+
 private:
     QStringList lcrCondition;
 

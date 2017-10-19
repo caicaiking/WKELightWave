@@ -289,7 +289,7 @@ background-color: rgb(85, 255, 127);</string>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>5</x>
@@ -417,7 +417,7 @@ background-color: rgb(85, 255, 127);</string>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -474,12 +474,22 @@ background-color: rgb(85, 255, 127);</string>
     </item>
    </layout>
   </widget>
+  <widget class="QTextEdit" name="textEdit">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>180</y>
+     <width>101</width>
+     <height>51</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <customwidgets>
   <customwidget>
    <class>clsLabel</class>
    <extends>QLabel</extends>
-   <header>clsLabel.h</header>
+   <header location="global">clsLabel.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

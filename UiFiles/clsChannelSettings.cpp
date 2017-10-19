@@ -8,7 +8,6 @@ clsChannelSettings::clsChannelSettings(QWidget *parent) :
 {
     setupUi(this);
     connect(labelClose,SIGNAL(labelClicked()),this,SLOT(onLabelCloseClicked()));
-
 }
 
 void clsChannelSettings::setChannel(const int channel)
@@ -39,6 +38,11 @@ void clsChannelSettings::setCondition(const QString condition)
                 this->bias=conditionMap["bias"].toDouble();
                 this->biasSwitch=conditionMap["biasSwitch"].toString();
                 this->biasType=conditionMap["biasType"].toString();
+                this->item1HiLimit=conditionMap["item1HiLimit"].toDouble();
+                this->item1LowLimit=conditionMap["item1LowLimit"].toDouble();
+                this->item2HiLimit=conditionMap["item2HiLimit"].toDouble();
+                this->item2LowLimit=conditionMap["item2LowLimit"].toDouble();
+                this->channel=conditionMap["channel"].toInt();
             }
         }
     }
@@ -56,6 +60,12 @@ void clsChannelSettings::updateLabels()
             <<labelItem2<<labelLimit1<<labelLimit2<<labelRange<<labelSpeed;
     labelList1<<labelBias1<<labelEqucct1<<labelFreq1<<labelLevel1<<labelItem11
             <<labelItem22<<labelLimit11<<labelLimit22<<labelRange1<<labelSpeed1;
+
+//    this->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
+//    this->setStyleSheet(QString("border:2px solid %1").arg(colorList.at(channel-1)));
+//    this->setStyleSheet(QString("border-radius: 9px"));
+    this->setStyleSheet(QString("QDialog{background-color:%1;border:2px solid %2;border-radius: 9px;}")
+                        .arg(colorList.at(channel-1)).arg(colorList.at(channel-1)));
     for(int i=0;i<labelList.length();i++)
     {
         labelList.at(i)->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
@@ -63,9 +73,14 @@ void clsChannelSettings::updateLabels()
         labelList1.at(i)->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
         labelList1.at(i)->setFont(QFont("楷体",12));
     }
+
+
+    labelChannel->setStyleSheet(QString("border:0px solid %1").arg(colorList.at(channel-1)));
+    labelChannel->setStyleSheet(QString("border-radius: 0px"));
     labelChannel->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
     labelChannel->setText(tr("通道")+QString::number(channel));
     labelChannel->setFont(QFont("楷体",13));
+
     labelChannel1->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
     labelClose->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
     //labelBias->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel)));
@@ -76,17 +91,15 @@ void clsChannelSettings::updateLabels()
     labelLevel1->setText(QString::number(level)+levelUnit);
     labelItem11->setText(item1);
     labelItem22->setText(item2);
-    labelLimit11->setText(QString::number(item1Limit));
-    labelLimit22->setText(QString::number(item2Limit));
+    labelLimit11->setText(QString::number(item1HiLimit)+"--"+QString::number(item1LowLimit));
+    labelLimit22->setText(QString::number(item2HiLimit)+"--"+QString::number(item2LowLimit));
     labelRange1->setText(range);
     labelSpeed1->setText(speed);
 }
 
 void clsChannelSettings::onLabelCloseClicked()
 {
-
     emit deleteChannelSettings(channel);
-    qDebug()<<"on labelClose clicked";
 }
 
 void clsChannelSettings::setChannelSettings()

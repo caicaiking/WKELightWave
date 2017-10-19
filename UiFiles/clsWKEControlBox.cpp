@@ -210,3 +210,8 @@ void clsWKEControlBox::on_rbtnLCR1_clicked()
         rbtnLCR1->setText(tx);
     }
 }
+
+void clsWKEControlBox::on_btnNewSetup_clicked()
+{
+
+}
