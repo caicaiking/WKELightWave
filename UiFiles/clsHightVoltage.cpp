@@ -1,5 +1,6 @@
 #include "clsHightVoltage.h"
 #include "NumberInput.h"
+#include "publicUtility.h"
 
 
 clsHightVoltage::clsHightVoltage(QWidget *parent) :
@@ -22,7 +23,18 @@ double clsHightVoltage::getVoltage() const
 
 QString clsHightVoltage::getCondition() const
 {
+    QVariantMap conditionMap;
+    conditionMap.insert("voltage",this->voltage);
+    conditionMap.insert("volSwitch",this->volSwitch);
 
+}
+
+void clsHightVoltage::setCondition(const QString condition)
+{
+    QVariantMap conditionMap;
+    conditionMap=publicUtility::parseConditions(condition);
+    this->voltage=conditionMap["voltage"].toDouble();
+    volSwitch=conditionMap["volSwitch"].toString();
 }
 
 void clsHightVoltage::updateCommand()

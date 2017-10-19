@@ -13,7 +13,7 @@ public:
     double getVoltage() const;
 
     QString getCondition() const;
-
+    void setCondition(const QString condition);
     void updateCommand();
 private slots:
     void on_btnSwitch_clicked();
