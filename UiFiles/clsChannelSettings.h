@@ -2,13 +2,14 @@
 #define CLSCHANNELSETTINGS_H
 
 #include "ui_clsChannelSettings.h"
+#include "clsMeter.h"
 
-class clsChannelSettings : public QDialog, private Ui::clsChannelSettings
+class clsChannelSettings : public clsMeter, private Ui::clsChannelSettings
 {
     Q_OBJECT
 
 public:
-    explicit clsChannelSettings(QWidget *parent = 0);
+    explicit clsChannelSettings(clsMeter *parent = 0);
     void setChannel(const int channel);
     void setCondition(const QString condition);
 

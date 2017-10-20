@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>clsChannelSettings</class>
- <widget class="QDialog" name="clsChannelSettings">
+ <class>clsHVChannelSettings</class>
+ <widget class="QDialog" name="clsHVChannelSettings">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -12,21 +12,21 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>66666</width>
-    <height>288</height>
+    <width>332</width>
+    <height>16777215</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">
-QDialog
+   <string notr="true">QDialog
 {
-	background-color:#D891EF;
-	border:2px solid rgb(170, 85, 255);
-	border-radius: 9px;
-}</string>
+	background-color:rgb(150,150,251);
+	border:2px solid rgb(170,85,255);
+	border-radius:9px;
+}
+</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_5">
    <property name="leftMargin">
@@ -174,6 +174,93 @@ font:17pt &quot;楷体&quot;;</string>
           <property name="spacing">
            <number>3</number>
           </property>
+          <item row="0" column="1">
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <property name="spacing">
+             <number>3</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="labelItem11">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 0);
+font: 18pt &quot;楷体&quot;;</string>
+              </property>
+              <property name="text">
+               <string>L</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelLimit11">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 0);
+font: 12pt &quot;楷体&quot;;</string>
+              </property>
+              <property name="text">
+               <string>100.00uΩ--108.88uΩ</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelVoltageRes">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 0);
+font: 12pt &quot;楷体&quot;;</string>
+              </property>
+              <property name="text">
+               <string>100.00V</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelRelayRes">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 0);
+font: 12pt &quot;楷体&quot;;</string>
+              </property>
+              <property name="text">
+               <string>开</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
           <item row="0" column="0">
            <layout class="QVBoxLayout" name="verticalLayout_2">
             <property name="spacing">
@@ -183,7 +270,7 @@ font:17pt &quot;楷体&quot;;</string>
              <number>0</number>
             </property>
             <item>
-             <widget class="QLabel" name="labelItem1">
+             <widget class="QLabel" name="labelItem">
               <property name="minimumSize">
                <size>
                 <width>0</width>
@@ -198,36 +285,10 @@ font:17pt &quot;楷体&quot;;</string>
               </property>
               <property name="styleSheet">
                <string notr="true">background-color: rgb(255, 255, 0);
-font: 12pt &quot;楷体&quot;;</string>
+font: 13pt &quot;楷体&quot;;</string>
               </property>
               <property name="text">
-               <string>项目1：</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelItem2">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>100</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 255, 0);
-font: 12pt &quot;楷体&quot;;</string>
-              </property>
-              <property name="text">
-               <string>项目2：</string>
+               <string>项目：</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -253,7 +314,7 @@ font: 12pt &quot;楷体&quot;;</string>
 font: 12pt &quot;楷体&quot;;</string>
               </property>
               <property name="text">
-               <string>项目1上下限：</string>
+               <string>上下限：</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -261,7 +322,7 @@ font: 12pt &quot;楷体&quot;;</string>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="labelLimit2">
+             <widget class="QLabel" name="labelVoltage">
               <property name="minimumSize">
                <size>
                 <width>0</width>
@@ -279,7 +340,7 @@ font: 12pt &quot;楷体&quot;;</string>
 font: 12pt &quot;楷体&quot;;</string>
               </property>
               <property name="text">
-               <string>项目2上下限：</string>
+               <string>电压：</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -287,7 +348,7 @@ font: 12pt &quot;楷体&quot;;</string>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="labelFreq">
+             <widget class="QLabel" name="labelRelay">
               <property name="minimumSize">
                <size>
                 <width>0</width>
@@ -305,344 +366,7 @@ font: 12pt &quot;楷体&quot;;</string>
 font: 12pt &quot;楷体&quot;;</string>
               </property>
               <property name="text">
-               <string>频率：</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelLevel">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>100</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 255, 0);
-font: 12pt &quot;楷体&quot;;</string>
-              </property>
-              <property name="text">
-               <string>电平：</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelRange">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>100</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 255, 0);
-font: 12pt &quot;楷体&quot;;</string>
-              </property>
-              <property name="text">
-               <string>档位：</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelSpeed">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>100</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 255, 0);
-font: 12pt &quot;楷体&quot;;</string>
-              </property>
-              <property name="text">
-               <string>速度：</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelEqucct">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>100</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 255, 0);
-font: 12pt &quot;楷体&quot;;</string>
-              </property>
-              <property name="text">
-               <string>等效电路：</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelBias">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>100</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 255, 0);
-font: 12pt &quot;楷体&quot;;</string>
-              </property>
-              <property name="text">
-               <string>偏置：</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="0" column="1">
-           <layout class="QVBoxLayout" name="verticalLayout_3">
-            <property name="spacing">
-             <number>3</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="labelItem11">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 255, 0);
-font: 12pt &quot;楷体&quot;;</string>
-              </property>
-              <property name="text">
-               <string>L</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelItem22">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 255, 0);
-font: 12pt &quot;楷体&quot;;</string>
-              </property>
-              <property name="text">
-               <string>Q</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelLimit11">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 255, 0);
-font: 12pt &quot;楷体&quot;;</string>
-              </property>
-              <property name="text">
-               <string>100uH--108uH</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelLimit22">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 255, 0);
-font: 12pt &quot;楷体&quot;;</string>
-              </property>
-              <property name="text">
-               <string>6Q--88Q</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelFreq1">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 255, 0);
-font: 12pt &quot;楷体&quot;;</string>
-              </property>
-              <property name="text">
-               <string>100kHz</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelLevel1">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 255, 0);
-font: 12pt &quot;楷体&quot;;</string>
-              </property>
-              <property name="text">
-               <string>1.00V</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelRange1">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 255, 0);
-font: 12pt &quot;楷体&quot;;</string>
-              </property>
-              <property name="text">
-               <string>Auto</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelSpeed1">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 255, 0);
-font: 12pt &quot;楷体&quot;;</string>
-              </property>
-              <property name="text">
-               <string>Fast</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelEqucct1">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 255, 0);
-font: 12pt &quot;楷体&quot;;</string>
-              </property>
-              <property name="text">
-               <string>Series</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelBias1">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 255, 0);
-font: 12pt &quot;楷体&quot;;</string>
-              </property>
-              <property name="text">
-               <string>0.5V,开</string>
+               <string>Relay：</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -681,7 +405,7 @@ font: 12pt &quot;楷体&quot;;</string>
          <property name="title">
           <string/>
          </property>
-         <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0" columnstretch="0" rowminimumheight="0,1">
+         <layout class="QGridLayout" name="gridLayout_2" rowstretch="0" columnstretch="0">
           <property name="leftMargin">
            <number>3</number>
           </property>
@@ -720,7 +444,7 @@ font: 12pt &quot;楷体&quot;;</string>
                <string notr="true">background-color:#66FF00;</string>
               </property>
               <property name="text">
-               <string>L:</string>
+               <string>R:</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -745,7 +469,7 @@ font: 12pt &quot;楷体&quot;;</string>
                <string notr="true">background-color: #66FF00;</string>
               </property>
               <property name="text">
-               <string>100.88uH</string>
+               <string>100.88uΩ</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -765,82 +489,6 @@ font: 12pt &quot;楷体&quot;;</string>
               </property>
               <property name="text">
                <string>PASS</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="1" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <property name="spacing">
-             <number>2</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="labelResItem2">
-              <property name="minimumSize">
-               <size>
-                <width>36</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>56</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: red;</string>
-              </property>
-              <property name="text">
-               <string>Q:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelRes2">
-              <property name="minimumSize">
-               <size>
-                <width>108</width>
-                <height>26</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>188</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color:red;</string>
-              </property>
-              <property name="text">
-               <string>36.6Q</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelResStatus2">
-              <property name="maximumSize">
-               <size>
-                <width>56</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: red;</string>
-              </property>
-              <property name="text">
-               <string>FAIL</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>

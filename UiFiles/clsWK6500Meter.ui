@@ -594,7 +594,7 @@ background-color: rgb(203, 201, 239);
       <string notr="true">font: 75 12pt &quot;楷体&quot;;</string>
      </property>
      <property name="title">
-      <string>Relay settings</string>
+      <string>Relay 设置</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_5">
       <property name="topMargin">

@@ -7,6 +7,7 @@
 #include <QJsonDocument>
 #include <QJsonParseError>
 #include "publicUtility.h"
+#include "clsMeterFactory.h"
 #include <QDebug>
 
 MainDialog::MainDialog(QWidget *parent) :
@@ -31,25 +32,30 @@ void MainDialog::updateChannelSettings(QVariantMap map)
     conditionMap=map;
     for(int i=0;i<conditionMap.count();i++)
     {
-        clsChannelSettings *channelSettings=new clsChannelSettings;
-        connect(channelSettings,SIGNAL(deleteChannelSettings(int)),this,SLOT(deleteChannel(int)));
+       // clsChannelSettings *channelSettings=new clsChannelSettings;
+        QString strCondition=conditionMap[QString::number(i)].toString();
+
+        QVariantMap strMap=publicUtility::parseConditions(strCondition);
+        QString str=strMap["meter"].toString();
+        clsMeter *tmpMeter=clsMeterFactory::getMeter(str);
+        connect(tmpMeter,SIGNAL(deleteChannelSettings(int)),this,SLOT(deleteChannel(int)));
         if(widgetList.at(i)->layout()!=NULL)
         {
             deleteChannel(i+1);
         }
 
-        channelMap.insert(i,channelSettings);
+        channelMap.insert(i,tmpMeter);
 
-        QString strCondition=conditionMap[QString::number(i)].toString();
+
         //QString strCondition=publicUtility::pressConditions(variant);
-        channelSettings->setCondition(strCondition);
-        channelSettings->updateLabels();
+        tmpMeter->setCondition(strCondition);
+        tmpMeter->updateLabels();
 
         QGridLayout* mlayout=new QGridLayout;
         mlayout->setHorizontalSpacing(1);
         mlayout->setSpacing(1);
 
-        mlayout->addWidget(channelSettings);
+        mlayout->addWidget(tmpMeter);
         mlayout->setHorizontalSpacing(1);
         widgetList.at(i)->setLayout(mlayout);
 
@@ -66,18 +72,19 @@ void MainDialog::on_btnNewSetup_clicked()
     if(dlg->exec()==QDialog::Accepted)
     {
         channel=dlg->getChannel();
+        QString tmpMeter=dlg->getMeter();
+        meter=clsMeterFactory::getMeter(tmpMeter);
+        //clsChannelSettings *channelSettings=new clsChannelSettings;
 
-        clsChannelSettings *channelSettings=new clsChannelSettings;
-
-        connect(channelSettings,SIGNAL(deleteChannelSettings(int)),this,SLOT(deleteChannel(int)));
+        connect(meter,SIGNAL(deleteChannelSettings(int)),this,SLOT(deleteChannel(int)));
         if(widgetList.at(channel-1)->layout()!=NULL)
         {
             deleteChannel(channel);
         }
-        channelMap.insert(channel-1,channelSettings);
-        channelSettings->setChannel(channel);
-        channelSettings->setCondition(dlg->getCondtion());
-        channelSettings->updateLabels();
+        channelMap.insert(channel-1,meter);
+        meter->setChannel(channel);
+        meter->setCondition(dlg->getCondtion());
+        meter->updateLabels();
 
         conditionMap.insert(QString::number(channel-1),dlg->getCondtion());
 
@@ -85,7 +92,7 @@ void MainDialog::on_btnNewSetup_clicked()
         mlayout->setHorizontalSpacing(1);
         mlayout->setSpacing(1);
 
-        mlayout->addWidget(channelSettings);
+        mlayout->addWidget(meter);
         mlayout->setHorizontalSpacing(1);
         widgetList.at(channel-1)->setLayout(mlayout);
     }

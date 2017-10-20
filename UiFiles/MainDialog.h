@@ -6,6 +6,7 @@
 #include "clsChannelSettings.h"
 #include "clsRunningStatus.h"
 #include "clsRunService.h"
+#include "clsMeter.h"
 
 class MainDialog : public QDialog, private Ui::MainDialog
 {
@@ -33,12 +34,13 @@ private slots:
 private:
     QGridLayout *layout;
     int channel;
-    QMap<int,clsChannelSettings*> channelMap;
+    QMap<int,clsMeter*> channelMap;
     QMap<int,clsRunningStatus*> runningMap;
     QVariantMap conditionMap;
     int num;
 
     clsRunService runService;
+    clsMeter *meter;
 };
 
 #endif // MAINDIALOG_H

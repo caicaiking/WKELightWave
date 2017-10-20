@@ -11,6 +11,7 @@ public:
     explicit clsNewSetup(QWidget *parent = 0);
     int getChannel() const;
     QString getCondtion() const;
+    QString getMeter() const;
 private slots:
     void on_cmbChannel_currentIndexChanged(int index);
     void on_btnLCR_clicked();
@@ -20,6 +21,7 @@ private slots:
 private:
     int channel;
     QString condition;
+    QString meter;
 };
 
 #endif // CLSNEWSETUP_H
