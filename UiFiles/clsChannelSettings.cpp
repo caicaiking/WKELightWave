@@ -3,8 +3,8 @@
 #include <QJsonParseError>
 #include <QDebug>
 
-clsChannelSettings::clsChannelSettings(QWidget *parent) :
-    QDialog(parent)
+clsChannelSettings::clsChannelSettings(clsMeter *parent) :
+    clsMeter(parent)
 {
     setupUi(this);
     connect(labelClose,SIGNAL(labelClicked()),this,SLOT(onLabelCloseClicked()));
@@ -61,9 +61,6 @@ void clsChannelSettings::updateLabels()
     labelList1<<labelBias1<<labelEqucct1<<labelFreq1<<labelLevel1<<labelItem11
             <<labelItem22<<labelLimit11<<labelLimit22<<labelRange1<<labelSpeed1;
 
-//    this->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
-//    this->setStyleSheet(QString("border:2px solid %1").arg(colorList.at(channel-1)));
-//    this->setStyleSheet(QString("border-radius: 9px"));
     this->setStyleSheet(QString("QDialog{background-color:%1;border:2px solid %2;border-radius: 9px;}")
                         .arg(colorList.at(channel-1)).arg(colorList.at(channel-1)));
     for(int i=0;i<labelList.length();i++)
@@ -74,12 +71,11 @@ void clsChannelSettings::updateLabels()
         labelList1.at(i)->setFont(QFont("楷体",12));
     }
 
-
     labelChannel->setStyleSheet(QString("border:0px solid %1").arg(colorList.at(channel-1)));
     labelChannel->setStyleSheet(QString("border-radius: 0px"));
     labelChannel->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
     labelChannel->setText(tr("通道")+QString::number(channel));
-    labelChannel->setFont(QFont("楷体",13));
+    labelChannel->setFont(QFont("楷体",17));
 
     labelChannel1->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
     labelClose->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));

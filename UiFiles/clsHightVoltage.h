@@ -2,6 +2,7 @@
 #define CLSHIGHTVOLTAGE_H
 
 #include "ui_clsHightVoltage.h"
+#include "clsMeterLimit.h"
 
 class clsHightVoltage : public QDialog, private Ui::clsHightVoltage
 {
@@ -14,6 +15,7 @@ public:
 
     QString getCondition() const;
     void setCondition(const QString condition);
+    void updateButtons();
     void updateCommand();
 private slots:
     void on_btnSwitch_clicked();
@@ -24,9 +26,16 @@ private slots:
 
     void on_btnCancel_clicked();
 
+    void on_btnRelay_clicked();
+
+    void onLabelLimitClicked();
+
 private:
     QString volSwitch;
     double voltage;
+    QString relaySwitch;
+    clsMeterLimit mLimit;
+    double hiLimit,lowLimit;
 };
 
 #endif // CLSHIGHTVOLTAGE_H

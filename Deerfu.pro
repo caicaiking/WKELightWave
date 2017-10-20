@@ -49,7 +49,11 @@ HEADERS += \
     Service/clsRunService.h \
     Service/singleton.h \
     Service/clsInstrument.h \
-    PublicFiles/publicUtility.h
+    PublicFiles/publicUtility.h \
+    UiFiles/clsHVChannelSettings.h \
+    clsMeter.h \
+    UiFiles/clsMeterFactory.h
+
 
 SOURCES += \
     PublicFiles/clsMeterLimit.cpp \
@@ -71,7 +75,11 @@ SOURCES += \
     Service/clsSignalControl.cpp \
     Service/clsRunService.cpp \
     Service/clsInstrument.cpp \
-    PublicFiles/publicUtility.cpp
+    PublicFiles/publicUtility.cpp \
+    UiFiles/clsHVChannelSettings.cpp \
+    clsMeter.cpp \
+    UiFiles/clsMeterFactory.cpp
+
 
 FORMS += \
     UiFiles/clsChannelSettings.ui \
@@ -86,6 +94,8 @@ FORMS += \
     UiFiles/clsWKEControlBox.ui \
     UiFiles/frmSetLimit.ui \
     UiFiles/MainDialog.ui \
-    UiFiles/NumberInput.ui
+    UiFiles/NumberInput.ui \
+    UiFiles/clsHVChannelSettings.ui
+
 
 
