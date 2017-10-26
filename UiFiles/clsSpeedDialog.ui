@@ -64,7 +64,7 @@
         <string notr="true">font: 75 12pt &quot;楷体&quot;;</string>
        </property>
        <property name="text">
-        <string>Max</string>
+        <string>MAX</string>
        </property>
       </widget>
      </item>
@@ -86,7 +86,7 @@
         <string notr="true">font: 75 12pt &quot;楷体&quot;;</string>
        </property>
        <property name="text">
-        <string>Fast</string>
+        <string>FAST</string>
        </property>
       </widget>
      </item>
@@ -108,7 +108,7 @@
         <string notr="true">font: 75 12pt &quot;楷体&quot;;</string>
        </property>
        <property name="text">
-        <string>Med</string>
+        <string>MED</string>
        </property>
       </widget>
      </item>
@@ -130,7 +130,7 @@
         <string notr="true">font: 75 12pt &quot;楷体&quot;;</string>
        </property>
        <property name="text">
-        <string>Slow</string>
+        <string>SLOW</string>
        </property>
       </widget>
      </item>

@@ -11,9 +11,13 @@ clsHightVoltage::clsHightVoltage(QWidget *parent) :
     QDialog(parent)
 {
     setupUi(this);
-    this->volSwitch=tr("开");
-    this->voltage=25.0;
+    this->volSwitch=tr("关");
+    this->voltage=100.0;
+    this->hiLimit=0.00;
+    lowLimit=0.00;
+    relaySwitch="开";
     connect(labelLimit,SIGNAL(labelClicked()),this,SLOT(onLabelLimitClicked()));
+    updateButtons();
 }
 
 QString clsHightVoltage::getVoltageSwitch() const
@@ -56,7 +60,14 @@ void clsHightVoltage::setCondition(const QString condition)
 
 void clsHightVoltage::updateButtons()
 {
-
+    btnRelay->setText(relaySwitch);
+    btnSwitch->setText(volSwitch);
+    doubleType dt;
+    dt.setData(voltage,"");
+    btnVoltage->setText(dt.formateToString(5)+"V");
+    mLimit.setAbsHi(hiLimit);
+    mLimit.setAbsLo(lowLimit);
+    labelLimit->setText(mLimit.showLimits("Ω"));
 }
 
 void clsHightVoltage::updateCommand()
@@ -106,12 +117,12 @@ void clsHightVoltage::on_btnRelay_clicked()
 {
     if(btnRelay->text()==tr("开"))
     {
-        relaySwitch="OFF";
+        relaySwitch="关";
         btnRelay->setText(tr("关"));
     }
     else
     {
-        relaySwitch="ON";
+        relaySwitch="开";
         btnRelay->setText(tr("开"));
     }
 }
@@ -122,7 +133,7 @@ void clsHightVoltage::onLabelLimitClicked()
     if(dlg->exec()==QDialog::Accepted)
     {
         mLimit=dlg->getMeterLimit();
-        labelLimit->setText(mLimit.showLimits("V"));
+        labelLimit->setText(mLimit.showLimits("Ω"));
         hiLimit=mLimit.getAbsLimitHigh();
         lowLimit=mLimit.getAbsLimitLow();
     }

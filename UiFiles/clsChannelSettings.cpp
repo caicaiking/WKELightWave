@@ -1,6 +1,8 @@
 #include "clsChannelSettings.h"
 #include <QJsonDocument>
 #include <QJsonParseError>
+#include "publicUtility.h"
+#include "doubleType.h"
 #include <QDebug>
 
 clsChannelSettings::clsChannelSettings(clsMeter *parent) :
@@ -43,6 +45,10 @@ void clsChannelSettings::setCondition(const QString condition)
                 this->item2HiLimit=conditionMap["item2HiLimit"].toDouble();
                 this->item2LowLimit=conditionMap["item2LowLimit"].toDouble();
                 this->channel=conditionMap["channel"].toInt();
+                this->suffix1=conditionMap["suffix1"].toString();
+                this->suffix2=conditionMap["suffix2"].toString();
+                this->relaySwitch=conditionMap["relaySwitch"].toString();
+
             }
         }
     }
@@ -79,18 +85,38 @@ void clsChannelSettings::updateLabels()
 
     labelChannel1->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
     labelClose->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
-    //labelBias->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel)));
-    labelBias1->setText(QString::number(bias)+biasType);
+    labelRelay->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
+    labelRelaySwitch->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
+    labelBias1->setText(QString::number(bias)+biasType+","+biasSwitch);
     //labelBias1->setFont(QFont("楷体",12));
     labelEqucct1->setText(equcct);
-    labelFreq1->setText(QString::number(frequency)+"Hz");
-    labelLevel1->setText(QString::number(level)+levelUnit);
+    doubleType dt;
+    dt.setData(frequency,"");
+    labelFreq1->setText(dt.formateToString(6)+"Hz");
+
+    dt.setData(level,"");
+    labelLevel1->setText(dt.formateToString(6)+levelUnit);
+
     labelItem11->setText(item1);
     labelItem22->setText(item2);
-    labelLimit11->setText(QString::number(item1HiLimit)+"--"+QString::number(item1LowLimit));
-    labelLimit22->setText(QString::number(item2HiLimit)+"--"+QString::number(item2LowLimit));
+
+    QString sf1=suffix1.remove(0,1);
+    dt.setData(item1HiLimit,"");
+    QString hiLimit=dt.formateToString(6)+sf1;
+    dt.setData(item1LowLimit,"");
+    QString lowLimit=dt.formateToString(6)+sf1;
+    labelLimit11->setText(lowLimit+"--"+hiLimit);
+
+    QString sf2=suffix2.remove(0,1);
+    dt.setData(item2HiLimit,"");
+    QString hiLimit2=dt.formateToString(6)+sf2;
+    dt.setData(item2LowLimit,"");
+    QString lowLimit2=dt.formateToString(6)+sf2;
+    labelLimit22->setText(lowLimit2+"--"+hiLimit2);
+
     labelRange1->setText(range);
     labelSpeed1->setText(speed);
+    labelRelaySwitch->setText(relaySwitch);
 }
 
 void clsChannelSettings::onLabelCloseClicked()
@@ -114,4 +140,52 @@ void clsChannelSettings::setCloseEnabled(bool bl)
         labelClose->setEnabled(true);
     else
         labelClose->setEnabled(false);
+}
+
+void clsChannelSettings::updateRes(const QString res)
+{
+    QVariantMap resMap;
+    resMap=publicUtility::parseConditions(res);
+    bool resStatus1,resStatus2;
+    double result1,result2;
+    QString resUnit1,resUnit2;
+    resStatus1=resMap["resStatus1"].toBool();
+    resStatus2=resMap["resStatus2"].toBool();
+    result1=resMap["result1"].toDouble();
+    result2=resMap["result2"].toDouble();
+    resUnit1=resMap["resUnit1"].toString();
+    resUnit2=resMap["resUnit2"].toString();
+    if(resStatus1)
+    {
+        labelResStatus1->setStyleSheet(QString("background-color:#66FF00"));
+        labelItem1->setStyleSheet(QString("background-color:#66FF00"));
+        labelRes1->setStyleSheet(QString("background-color:#66FF00"));
+        labelResStatus1->setText(tr("PASS"));
+    }
+    else
+    {
+        labelResStatus1->setStyleSheet(QString("background-color:red"));
+        labelItem1->setStyleSheet(QString("background-color:red"));
+        labelRes1->setStyleSheet(QString("background-color:red"));
+        labelResStatus1->setText(tr("FAIL"));
+    }
+    if(resStatus2)
+    {
+        labelResStatus2->setStyleSheet(QString("background-color:#66FF00"));
+        labelItem2->setStyleSheet(QString("background-color:#66FF00"));
+        labelRes2->setStyleSheet(QString("background-color:#66FF00"));
+        labelResStatus2->setText(tr("PASS"));
+    }
+    else
+    {
+        labelResStatus2->setStyleSheet(QString("background-color:red"));
+        labelItem2->setStyleSheet(QString("background-color:red"));
+        labelRes2->setStyleSheet(QString("background-color:red"));
+        labelResStatus2->setText(tr("FAIL"));
+    }
+    doubleType dt;
+    dt.setData(result1,"");
+    labelRes1->setText(dt.formateToString(6)+resUnit1);
+    dt.setData(result2,"");
+    labelRes2->setText(dt.formateToString(6)+resUnit2);
 }

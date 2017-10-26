@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>550</width>
+    <width>538</width>
     <height>434</height>
    </rect>
   </property>
@@ -85,7 +85,7 @@ font: 75 12pt &quot;楷体&quot;;</string>
          <widget class="QComboBox" name="cmbItem1">
           <property name="minimumSize">
            <size>
-            <width>0</width>
+            <width>50</width>
             <height>31</height>
            </size>
           </property>
@@ -95,6 +95,26 @@ font: 75 12pt &quot;楷体&quot;;</string>
             <height>16777215</height>
            </size>
           </property>
+          <item>
+           <property name="text">
+            <string> H</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>mH</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>uH</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>nH</string>
+           </property>
+          </item>
          </widget>
         </item>
        </layout>
@@ -217,7 +237,7 @@ font: 75 12pt &quot;楷体&quot;;</string>
          <widget class="QComboBox" name="cmbItem2">
           <property name="minimumSize">
            <size>
-            <width>0</width>
+            <width>50</width>
             <height>31</height>
            </size>
           </property>
@@ -227,6 +247,11 @@ font: 75 12pt &quot;楷体&quot;;</string>
             <height>16777215</height>
            </size>
           </property>
+          <item>
+           <property name="text">
+            <string> Q</string>
+           </property>
+          </item>
          </widget>
         </item>
        </layout>

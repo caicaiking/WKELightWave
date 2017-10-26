@@ -8,6 +8,7 @@
 #include <QJsonParseError>
 #include "publicUtility.h"
 #include "clsMeterFactory.h"
+#include "singleton.h"
 #include <QDebug>
 
 MainDialog::MainDialog(QWidget *parent) :
@@ -17,7 +18,16 @@ MainDialog::MainDialog(QWidget *parent) :
     this->setWindowFlags(Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint
                          | Qt::WindowMaximizeButtonHint);
     this->showMaximized();
+    //    QList<QWidget*> widgetList;
+    //    widgetList<<widget<<widget_2<<widget_3<<widget_4<<widget_5<<widget_6
+    //             <<widget_7<<widget_8;
+    //    for(int i=0;i<widgetList.length();i++)
+    //    {
+    //        widgetList.at(i)->setVisible(false);
+    //    }
     connect(&runService,SIGNAL(showRes(QString)),this,SLOT(showChannelRes(QString)));
+    connect(this,SIGNAL(startTrig()),&runService,SLOT(getTrigSignal()));
+    connect(this,SIGNAL(switchMode(bool)),&runService,SLOT(switchToRunningMode(bool)));
 }
 
 void MainDialog::updateChannelSettings(QVariantMap map)
@@ -25,41 +35,52 @@ void MainDialog::updateChannelSettings(QVariantMap map)
     QList<QWidget*> widgetList;
     widgetList<<widget<<widget_2<<widget_3<<widget_4<<widget_5<<widget_6
              <<widget_7<<widget_8;
-    for(int i=0;i<channelMap.count();i++)
+    QList<int> k=channelMap.keys();
+
+    for(int i=0;i<k.length();i++)
     {
-        deleteChannel(i+1);
+        int ch1=k.at(i);
+        deleteChannel(ch1+1);
     }
+   // channelMap.clear();
     conditionMap=map;
+    QStringList keys=conditionMap.keys();
+
     for(int i=0;i<conditionMap.count();i++)
     {
-       // clsChannelSettings *channelSettings=new clsChannelSettings;
-        QString strCondition=conditionMap[QString::number(i)].toString();
+        QString key=keys.at(i);
+        int ch=key.toInt();
+        QString strCondition=conditionMap[keys.at(i)].toString();
 
         QVariantMap strMap=publicUtility::parseConditions(strCondition);
         QString str=strMap["meter"].toString();
-        clsMeter *tmpMeter=clsMeterFactory::getMeter(str);
-        connect(tmpMeter,SIGNAL(deleteChannelSettings(int)),this,SLOT(deleteChannel(int)));
-        if(widgetList.at(i)->layout()!=NULL)
-        {
-            deleteChannel(i+1);
-        }
+        clsMeter *tmpmeterType=clsMeterFactory::getMeter(str);
+        connect(tmpmeterType,SIGNAL(deleteChannelSettings(int)),this,SLOT(deleteChannel(int)));
 
-        channelMap.insert(i,tmpMeter);
-
-
-        //QString strCondition=publicUtility::pressConditions(variant);
-        tmpMeter->setCondition(strCondition);
-        tmpMeter->updateLabels();
+        channelMap.insert(ch,tmpmeterType);
+        tmpmeterType->setCondition(strCondition);
+        tmpmeterType->updateLabels();
 
         QGridLayout* mlayout=new QGridLayout;
         mlayout->setHorizontalSpacing(1);
         mlayout->setSpacing(1);
 
-        mlayout->addWidget(tmpMeter);
+        mlayout->addWidget(tmpmeterType);
         mlayout->setHorizontalSpacing(1);
-        widgetList.at(i)->setLayout(mlayout);
 
+        widgetList.at(ch)->setLayout(mlayout);
     }
+}
+
+QString MainDialog::getCondition() const
+{
+    QString strSetup;
+    QJsonDocument jsonDocument=QJsonDocument::fromVariant(conditionMap);
+    if(!(jsonDocument.isNull()))
+    {
+        strSetup=jsonDocument.toJson(QJsonDocument::Indented);
+    }
+    return strSetup;
 }
 
 void MainDialog::on_btnNewSetup_clicked()
@@ -72,19 +93,20 @@ void MainDialog::on_btnNewSetup_clicked()
     if(dlg->exec()==QDialog::Accepted)
     {
         channel=dlg->getChannel();
-        QString tmpMeter=dlg->getMeter();
-        meter=clsMeterFactory::getMeter(tmpMeter);
+        QString tmpmeterType=dlg->getMeter();
+        meterType=clsMeterFactory::getMeter(tmpmeterType);
         //clsChannelSettings *channelSettings=new clsChannelSettings;
 
-        connect(meter,SIGNAL(deleteChannelSettings(int)),this,SLOT(deleteChannel(int)));
+        connect(meterType,SIGNAL(deleteChannelSettings(int)),this,SLOT(deleteChannel(int)));
         if(widgetList.at(channel-1)->layout()!=NULL)
         {
             deleteChannel(channel);
         }
-        channelMap.insert(channel-1,meter);
-        meter->setChannel(channel);
-        meter->setCondition(dlg->getCondtion());
-        meter->updateLabels();
+        //        widgetList.at(channel-1)->setVisible(true);
+        channelMap.insert(channel-1,meterType);
+        meterType->setChannel(channel);
+        meterType->setCondition(dlg->getCondtion());
+        meterType->updateLabels();
 
         conditionMap.insert(QString::number(channel-1),dlg->getCondtion());
 
@@ -92,7 +114,7 @@ void MainDialog::on_btnNewSetup_clicked()
         mlayout->setHorizontalSpacing(1);
         mlayout->setSpacing(1);
 
-        mlayout->addWidget(meter);
+        mlayout->addWidget(meterType);
         mlayout->setHorizontalSpacing(1);
         widgetList.at(channel-1)->setLayout(mlayout);
     }
@@ -115,7 +137,7 @@ void MainDialog::on_btnSettings_clicked()
     btnNewSetup->setEnabled(true);
     btnOpenSetup->setEnabled(true);
     btnSaveSetup->setEnabled(true);
-
+    emit switchMode(false);
 }
 
 void MainDialog::on_btnRunning_clicked()
@@ -135,34 +157,33 @@ void MainDialog::on_btnRunning_clicked()
     btnNewSetup->setEnabled(false);
     btnOpenSetup->setEnabled(false);
     btnSaveSetup->setEnabled(false);
+    emit switchMode(true);
+    emit startTrig();
 }
 
 void MainDialog::deleteChannel(int index)
 {
-    qDebug()<<"delete channel"<<index;
     QList<QWidget*> widgetList;
     widgetList<<widget<<widget_2<<widget_3<<widget_4<<widget_5<<widget_6
              <<widget_7<<widget_8;
+    disconnect(channelMap[index-1],SIGNAL(deleteChannelSettings(int)),this,SLOT(deleteChannel(int)));
 
-    if(widgetList.at(index-1)->layout()!=NULL)
-    {
-        disconnect(channelMap[index-1],SIGNAL(deleteChannelSettings(int)),this,SLOT(deleteChannel(int)));
-        delete channelMap[index-1];//一定要先删除该控件  否则无法从界面中删除该控件
-        widgetList.at(index-1)->layout()->removeWidget(channelMap[index-1]);
-        delete widgetList.at(index-1)->layout();
-        widgetList.at(index-1)->repaint();
-        widgetList.at(index-1)->update();
-    }
-    else
-        qDebug()<<"no layout";
+    delete channelMap[index-1];//一定要先删除该控件  否则无法从界面中删除该控件
 
+    widgetList.at(index-1)->layout()->removeWidget(channelMap[index-1]);
+    delete widgetList.at(index-1)->layout();
+    widgetList.at(index-1)->repaint();
+    widgetList.at(index-1)->update();
+    channelMap.remove(index-1);
 }
 
 void MainDialog::showChannelRes(QString res)
 {
-    QVariant resVariant;
-    resVariant=publicUtility::parseConditions(res);
-
+    QVariantMap resMap;
+    resMap=publicUtility::parseConditions(res);
+    meter=resMap["meter"].toString();
+    int iChannel=resMap["channel"].toInt();
+    channelMap[iChannel]->updateRes(res);
 }
 
 void MainDialog::on_btnSaveSetup_clicked()
@@ -214,10 +235,10 @@ void MainDialog::on_btnOpenSetup_clicked()
             if(jsonDocument.isObject())
             {
                 tmpConditionMap=jsonDocument.toVariant().toMap();
-                for(int i=0;i<tmpConditionMap.count();i++)
-                {
-                    qDebug()<<tmpConditionMap[QString::number(i)].toString();
-                }
+//                for(int i=0;i<tmpConditionMap.count();i++)
+//                {
+//                    qDebug()<<tmpConditionMap[QString::number(i)].toString();
+//                }
             }
         }
     }

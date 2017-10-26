@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>315</width>
-    <height>205</height>
+    <width>317</width>
+    <height>224</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -42,7 +42,7 @@ QDialog
     <number>3</number>
    </property>
    <property name="spacing">
-    <number>1</number>
+    <number>3</number>
    </property>
    <item row="0" column="0">
     <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1">
@@ -128,7 +128,7 @@ font:17pt &quot;楷体&quot;;</string>
       <number>0</number>
      </property>
      <widget class="QWidget" name="page">
-      <layout class="QGridLayout" name="gridLayout_3" rowstretch="0">
+      <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0">
        <property name="leftMargin">
         <number>1</number>
        </property>
@@ -144,7 +144,7 @@ font:17pt &quot;楷体&quot;;</string>
        <property name="spacing">
         <number>1</number>
        </property>
-       <item row="0" column="0">
+       <item row="1" column="0">
         <widget class="QGroupBox" name="groupBox">
          <property name="minimumSize">
           <size>
@@ -158,7 +158,7 @@ font:17pt &quot;楷体&quot;;</string>
          <property name="title">
           <string/>
          </property>
-         <layout class="QGridLayout" name="gridLayout" columnstretch="0,1">
+         <layout class="QGridLayout" name="gridLayout" columnstretch="1,1">
           <property name="leftMargin">
            <number>3</number>
           </property>
@@ -178,9 +178,6 @@ font:17pt &quot;楷体&quot;;</string>
            <layout class="QVBoxLayout" name="verticalLayout_2">
             <property name="spacing">
              <number>3</number>
-            </property>
-            <property name="rightMargin">
-             <number>0</number>
             </property>
             <item>
              <widget class="QLabel" name="labelItem1">
@@ -253,7 +250,7 @@ font: 12pt &quot;楷体&quot;;</string>
 font: 12pt &quot;楷体&quot;;</string>
               </property>
               <property name="text">
-               <string>项目1上下限：</string>
+               <string>限定1：</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -279,7 +276,7 @@ font: 12pt &quot;楷体&quot;;</string>
 font: 12pt &quot;楷体&quot;;</string>
               </property>
               <property name="text">
-               <string>项目2上下限：</string>
+               <string>限定2：</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -442,6 +439,32 @@ font: 12pt &quot;楷体&quot;;</string>
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QLabel" name="labelRelay">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 0);
+font: 12pt &quot;楷体&quot;;</string>
+              </property>
+              <property name="text">
+               <string>Relay</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
           <item row="0" column="1">
@@ -493,7 +516,7 @@ font: 12pt &quot;楷体&quot;;</string>
              <widget class="QLabel" name="labelLimit11">
               <property name="minimumSize">
                <size>
-                <width>0</width>
+                <width>147</width>
                 <height>0</height>
                </size>
               </property>
@@ -502,7 +525,7 @@ font: 12pt &quot;楷体&quot;;</string>
 font: 12pt &quot;楷体&quot;;</string>
               </property>
               <property name="text">
-               <string>100uH--108uH</string>
+               <string>100.00uH--108.00uH</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -643,6 +666,26 @@ font: 12pt &quot;楷体&quot;;</string>
               </property>
               <property name="text">
                <string>0.5V,开</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelRelaySwitch">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 0);
+font: 12pt &quot;楷体&quot;;</string>
+              </property>
+              <property name="text">
+               <string>开</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>

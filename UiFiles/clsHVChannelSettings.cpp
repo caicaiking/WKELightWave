@@ -1,11 +1,14 @@
 #include "clsHVChannelSettings.h"
 #include <QJsonDocument>
 #include <QJsonParseError>
+#include "publicUtility.h"
+#include "doubleType.h"
 
 clsHVChannelSettings::clsHVChannelSettings(clsMeter *parent) :
     clsMeter(parent)
 {
     setupUi(this);
+
     connect(labelClose,SIGNAL(labelClicked()),this,SLOT(onCloseLabelClicked()));
 }
 
@@ -99,6 +102,35 @@ void clsHVChannelSettings::setCloseEnabled(const bool bl)
         labelClose->setEnabled(true);
     else
         labelClose->setEnabled(false);
+}
+
+void clsHVChannelSettings::updateRes(const QString res)
+{
+    QVariantMap conditionMap;
+    conditionMap=publicUtility::parseConditions(res);
+    bool resBl;
+    double tmpRes;
+    QString resUnit;
+    tmpRes=conditionMap["result"].toDouble();
+    resBl=conditionMap["resStatus"].toBool();
+    resUnit=conditionMap["resUnit"].toString();
+    if(resBl)
+    {
+        labelResItem1->setStyleSheet(QString("background-color:#66FF00"));
+        labelRes1->setStyleSheet(QString("background-color:#66FF00"));
+        labelResStatus1->setStyleSheet(QString("background-color:#66FF00"));
+        labelResStatus1->setText(tr("PASS"));
+    }
+    else
+    {
+        labelResItem1->setStyleSheet(QString("background-color:red"));
+        labelRes1->setStyleSheet(QString("background-color:red"));
+        labelResStatus1->setStyleSheet(QString("background-color:red"));
+        labelResStatus1->setText(tr("FAIL"));
+    }
+    doubleType dt;
+    dt.setData(tmpRes,"");
+    labelRes1->setText(dt.formateToString(6)+resStatus);
 }
 
 void clsHVChannelSettings::onCloseLabelClicked()

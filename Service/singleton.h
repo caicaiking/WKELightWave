@@ -1,6 +1,7 @@
 #ifndef SINGLETON_H
 #define SINGLETON_H
 #include <assert.h>
+#include "clsRunService.h"
 
 /**
  * Singleton class facilitiates turning any class into a Singleton (one instance) object
@@ -33,3 +34,5 @@ private:
 template <class T> T* Singleton<T>::m_pInstance=NULL;
 
 #endif // SINGLETON_H
+
+

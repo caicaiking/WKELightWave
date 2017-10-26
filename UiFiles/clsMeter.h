@@ -14,6 +14,7 @@ public:
     virtual void setChannelRunnings()=0;
     virtual void setCloseEnabled(const bool bl)=0;
     virtual void updateLabels()=0;
+    virtual void updateRes(const QString res)=0;
 };
 
 #endif // CLSMETER_H

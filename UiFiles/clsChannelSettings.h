@@ -17,6 +17,7 @@ public:
     void setChannelSettings();
     void setChannelRunnings();
     void setCloseEnabled(bool bl);
+    void updateRes(const QString res);
 
 private slots:
   void onLabelCloseClicked();
@@ -37,6 +38,8 @@ private:
     QString equcct;
     QString biasSwitch,biasType;
     double item1HiLimit,item1LowLimit,item2HiLimit,item2LowLimit;
+    QString suffix1,suffix2;
+    QString relaySwitch;
 };
 
 #endif // CLSCHANNELSETTINGS_H

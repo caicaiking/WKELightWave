@@ -14,11 +14,7 @@ public:
     QString trig() const;
     QString getCondtion() const;
     void setCondition(const QString condition);
-
     void updateButtons();
-    void updateCommand();
-    void turnOffDisplay();
-    void turnOnDisplay();
     QStringList setCmbSuffix(int i);
 
 private slots:
@@ -49,6 +45,8 @@ private slots:
     void on_btnCancel_clicked();
 
     void on_btnRelay_clicked();
+
+    void on_btnBias_clicked();
 
 private:
     QString item1,item2;

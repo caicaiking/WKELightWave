@@ -41,7 +41,6 @@ HEADERS += \
     UiFiles/clsSpeedDialog.h \
     UiFiles/clsWK6500Items.h \
     UiFiles/clsWK6500Meter.h \
-    UiFiles/clsWKEControlBox.h \
     UiFiles/frmSetLimit.h \
     UiFiles/MainDialog.h \
     UiFiles/NumberInput.h \
@@ -51,8 +50,8 @@ HEADERS += \
     Service/clsInstrument.h \
     PublicFiles/publicUtility.h \
     UiFiles/clsHVChannelSettings.h \
-    clsMeter.h \
-    UiFiles/clsMeterFactory.h
+    UiFiles/clsMeterFactory.h \
+    UiFiles/clsMeter.h
 
 
 SOURCES += \
@@ -68,7 +67,6 @@ SOURCES += \
     UiFiles/clsSpeedDialog.cpp \
     UiFiles/clsWK6500Items.cpp \
     UiFiles/clsWK6500Meter.cpp \
-    UiFiles/clsWKEControlBox.cpp \
     UiFiles/frmSetLimit.cpp \
     UiFiles/MainDialog.cpp \
     UiFiles/NumberInput.cpp \
@@ -77,21 +75,19 @@ SOURCES += \
     Service/clsInstrument.cpp \
     PublicFiles/publicUtility.cpp \
     UiFiles/clsHVChannelSettings.cpp \
-    clsMeter.cpp \
-    UiFiles/clsMeterFactory.cpp
+    UiFiles/clsMeterFactory.cpp \
+    UiFiles/clsMeter.cpp
 
 
 FORMS += \
     UiFiles/clsChannelSettings.ui \
     UiFiles/clsHightVoltage.ui \
-    UiFiles/clsIODialog.ui \
     UiFiles/clsNewSetup.ui \
     UiFiles/clsRangeDialog.ui \
     UiFiles/clsRunningStatus.ui \
     UiFiles/clsSpeedDialog.ui \
     UiFiles/clsWK6500Items.ui \
     UiFiles/clsWK6500Meter.ui \
-    UiFiles/clsWKEControlBox.ui \
     UiFiles/frmSetLimit.ui \
     UiFiles/MainDialog.ui \
     UiFiles/NumberInput.ui \

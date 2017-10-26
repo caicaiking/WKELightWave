@@ -16,6 +16,7 @@ public:
     void setChannelSettings();
     void setChannelRunnings();
     void setCloseEnabled(const bool bl);
+    void updateRes(const QString res);
 
 public slots:
     void onCloseLabelClicked();

@@ -24,15 +24,15 @@ clsWK6500Meter::clsWK6500Meter(QWidget *parent) :
     equcct="串联";
     bias=0;
     biasType="V";
-    biasSwitch="OFF";
+    biasSwitch="关";
     levelUnit="V";
-    suffix1="u";
-    suffix2="u";
-    item1HiLimit=100;
-    item1LowLimit=88;
-    item2HiLimit=200;
-    item2LowLimit=99;
-    groupBoxBias->setEnabled(false);
+    suffix1="H";
+    suffix2="Q";
+    item1HiLimit=0.00;
+    item1LowLimit=0.000;
+    item2HiLimit=0.0;
+    item2LowLimit=0.0;
+    relaySwitch="开";
 
     connect(labelLimit1,SIGNAL(labelClicked()),this,SLOT(onLabellimit1Clicked()));
     connect(labelLimit2,SIGNAL(labelClicked()),this,SLOT(onLabellimit2Clicked()));
@@ -52,46 +52,30 @@ void clsWK6500Meter::updateButtons()
     dt.setData(bias,"");
     QString strUnit;
     if(biasType=="CUR")
+    {
         strUnit="A";
+        btnBiasType->setText(tr("电流"));
+    }
     else if(biasType=="VOL")
+    {
         strUnit="V";
+        btnBiasType->setText(tr("电压"));
+    }
     btnBias->setText(dt.formateToString(6)+strUnit);
     btnBiasSwitch->setText(biasSwitch);
-    btnBiasType->setText(biasType);
     btnRange->setText(range);
     btnSpeed->setText(speed);
-    if(equcct=="SER")
-        btnEqucct->setText(tr("串联"));
-    else if(equcct=="PAR")
-        btnEqucct->setText(tr("并联"));
+//    if(equcct=="串联")
+//        btnEqucct->setText(tr("串联"));
+//    else if(equcct=="并联")
+//        btnEqucct->setText(tr("并联"));
+    btnEqucct->setText(equcct);
     mlItem1.setAbsHi(item1HiLimit);
     mlItem1.setAbsLo(item1LowLimit);
     mlItem2.setAbsHi(item2HiLimit);
     mlItem2.setAbsLo(item2LowLimit);
     labelLimit1->setText(mlItem1.showLimits(publicUtility::getSuffix(suffix1)));
     labelLimit2->setText(mlItem2.showLimits(publicUtility::getSuffix(suffix2)));
-}
-
-void clsWK6500Meter::updateCommand()
-{
-
-    QString cmd=QString(":METER:FUNC:1 %1;2 %2").arg(item1).arg(item2);
-//    clsSingleton::getInstance()->sendCommand(cmd,false);
-//    clsSingleton::getInstance()->sendCommand(":METER:FREQ "+QString::number(frequency.at(0)),false);
-//    clsSingleton::getInstance()->sendCommand(":METER:LEVEL "+QString::number(level.at(0))+unit.at(0),false);
-//    clsSingleton::getInstance()->sendCommand(":METER:SPEED "+speed.at(0),false);
-//    clsSingleton::getInstance()->sendCommand(":METER:RANGE "+range.at(0),false);
-//    clsSingleton::getInstance()->sendCommand(":METER:EQU-CCT "+equcct.at(0),false);
-}
-
-void clsWK6500Meter::turnOffDisplay()
-{
-//    clsSingleton::getInstance()->sendCommand(QString(":METER:FAST-GPIB ON"),false);
-}
-
-void clsWK6500Meter::turnOnDisplay()
-{
-    //    clsSingleton::getInstance()->sendCommand(QString(":METER:FAST-GPIB OFF"),false);
 }
 
 QStringList clsWK6500Meter::setCmbSuffix(int i)
@@ -165,13 +149,6 @@ void clsWK6500Meter::onLabellimit2Clicked()
     }
 }
 
-QString clsWK6500Meter::trig() const
-{
-    QString strRes;
-//    strRes=clsSingleton::getInstance()->sendCommand(":METER:TRIG",true);
-    return strRes;
-}
-
 QString clsWK6500Meter::getCondtion() const
 {
     QVariantMap condition;
@@ -190,9 +167,11 @@ QString clsWK6500Meter::getCondtion() const
     condition.insert("relaySwitch",this->relaySwitch);
     condition.insert("item1HiLimit",this->item1HiLimit);
     condition.insert("item1LowLimit",this->item1LowLimit);
-    condition.insert("item2Hilimit",this->item2HiLimit);
+    condition.insert("item2HiLimit",this->item2HiLimit);
     condition.insert("item2LowLimit",this->item2LowLimit);
-
+    condition.insert("suffix1",this->suffix1);
+    condition.insert("suffix2",this->suffix2);
+    qDebug()<<item2HiLimit;
 
     QJsonDocument jsonDocument=QJsonDocument::fromVariant(condition);
     if(!jsonDocument.isNull())
@@ -230,6 +209,8 @@ void clsWK6500Meter::setCondition(const QString condition)
                 this->item1LowLimit=conditionMap["item1LowLimit"].toDouble();
                 this->item2HiLimit=conditionMap["item2Hilimit"].toDouble();
                 this->item2LowLimit=conditionMap["item2LowLimit"].toDouble();
+                this->suffix1=conditionMap["suffix1"].toString();
+                this->suffix2=conditionMap["suffix2"].toString();
             }
         }
     }
@@ -281,6 +262,8 @@ void clsWK6500Meter::on_btnFreq_clicked()
 void clsWK6500Meter::on_btnOK_clicked()
 {
     //updateCommand();
+    suffix1=cmbItem1->currentText();
+    suffix2=cmbItem2->currentText();
     this->accept();
 }
 
@@ -304,12 +287,12 @@ void clsWK6500Meter::on_btnEqucct_clicked()
 {
     if(btnEqucct->text()==tr("串联"))
     {
-        equcct="PAR";
+        equcct="并联";
         btnEqucct->setText(tr("并联"));
     }
     else if(btnEqucct->text()==tr("并联"))
     {
-        equcct="SER";
+        equcct="并联";
         btnEqucct->setText(tr("串联"));
     }
 }
@@ -340,27 +323,27 @@ void clsWK6500Meter::on_btnBiasType_clicked()
 {
     if(btnBiasType->text()=="电流")
     {
-        biasType="VOL";
+        biasType="V";
         btnBiasType->setText(tr("电压"));
     }
     else if(btnBiasType->text()=="电压")
     {
-        biasType="CUR";
+        biasType="A";
         btnBiasType->setText(tr("电流"));
     }
 }
 
 void clsWK6500Meter::on_btnBiasSwitch_clicked()
 {
-    if(btnBiasSwitch->text()=="ON")
+    if(btnBiasSwitch->text()=="开")
     {
-        biasSwitch="OFF";
-        btnBiasSwitch->setText(tr("OFF"));
+        biasSwitch="关";
+        btnBiasSwitch->setText(tr("关"));
     }
-    else if(btnBiasSwitch->text()=="OFF")
+    else if(btnBiasSwitch->text()=="关")
     {
-        biasSwitch="ON";
-        btnBiasSwitch->setText(tr("ON"));
+        biasSwitch="开";
+        btnBiasSwitch->setText(tr("开"));
     }
 }
 
@@ -373,12 +356,24 @@ void clsWK6500Meter::on_btnRelay_clicked()
 {
     if(btnRelay->text()==tr("开"))
     {
-        relaySwitch="OFF";
+        relaySwitch="关";
         btnRelay->setText(tr("关"));
     }
     else if(btnRelay->text()==tr("关"))
     {
-        relaySwitch="ON";
+        relaySwitch="开";
         btnRelay->setText(tr("开"));
+    }
+}
+
+void clsWK6500Meter::on_btnBias_clicked()
+{
+    NumberInput *dlg=new NumberInput(this);
+    if(dlg->exec()==QDialog::Accepted)
+    {
+        bias=dlg->getNumber();
+        doubleType dt;
+        dt.setData(bias,"");
+        btnBias->setText(dt.formateToString(6)+biasType);
     }
 }

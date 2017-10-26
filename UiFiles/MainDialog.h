@@ -7,6 +7,7 @@
 #include "clsRunningStatus.h"
 #include "clsRunService.h"
 #include "clsMeter.h"
+#include "singleton.h"
 
 class MainDialog : public QDialog, private Ui::MainDialog
 {
@@ -16,6 +17,7 @@ public:
     explicit MainDialog(QWidget *parent = 0);
 
     void updateChannelSettings(QVariantMap map);
+    QString getCondition() const;
 
 private slots:
     void on_btnNewSetup_clicked();
@@ -30,6 +32,9 @@ private slots:
     void deleteChannel(int index);
     void showChannelRes(QString res);
 
+signals:
+    void startTrig();
+    void switchMode(bool);
 
 private:
     QGridLayout *layout;
@@ -40,7 +45,10 @@ private:
     int num;
 
     clsRunService runService;
-    clsMeter *meter;
+    clsMeter *meterType;
+    QString meter;
+
+    //Singleton<clsRunService> runService;
 };
 
 #endif // MAINDIALOG_H
