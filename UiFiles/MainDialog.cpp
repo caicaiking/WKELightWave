@@ -25,9 +25,10 @@ MainDialog::MainDialog(QWidget *parent) :
     //    {
     //        widgetList.at(i)->setVisible(false);
     //    }
-    connect(&runService,SIGNAL(showRes(QString)),this,SLOT(showChannelRes(QString)));
-    connect(this,SIGNAL(startTrig()),&runService,SLOT(getTrigSignal()));
-    connect(this,SIGNAL(switchMode(bool)),&runService,SLOT(switchToRunningMode(bool)));
+
+    connect(sngRunService::Instance(),SIGNAL(showRes(QString)),this,SLOT(showChannelRes(QString)));
+    connect(this,SIGNAL(startTrig()),sngRunService::Instance(),SLOT(getTrigSignal()));
+    connect(this,SIGNAL(switchMode(bool)),sngRunService::Instance(),SLOT(getTrigSignal()));
 }
 
 void MainDialog::updateChannelSettings(QVariantMap map)
@@ -67,7 +68,7 @@ void MainDialog::updateChannelSettings(QVariantMap map)
 
         mlayout->addWidget(tmpmeterType);
         mlayout->setHorizontalSpacing(1);
-
+        widgetList.at(ch)->setVisible(true);
         widgetList.at(ch)->setLayout(mlayout);
     }
 }
@@ -102,6 +103,7 @@ void MainDialog::on_btnNewSetup_clicked()
         {
             deleteChannel(channel);
         }
+        widgetList.at(channel-1)->setVisible(true);
         //        widgetList.at(channel-1)->setVisible(true);
         channelMap.insert(channel-1,meterType);
         meterType->setChannel(channel);
@@ -175,6 +177,7 @@ void MainDialog::deleteChannel(int index)
     widgetList.at(index-1)->repaint();
     widgetList.at(index-1)->update();
     channelMap.remove(index-1);
+    widgetList.at(index-1)->setVisible(false);
 }
 
 void MainDialog::showChannelRes(QString res)

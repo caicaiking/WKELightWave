@@ -53,5 +53,11 @@
         <file>wk6.png</file>
         <file>wk88.png</file>
         <file>wk666.png</file>
+        <file>add.png</file>
+        <file>del.png</file>
+        <file>new.png</file>
+        <file>stepSave.png</file>
+        <file>open.png</file>
+        <file>chennal.png</file>
     </qresource>
 </RCC>

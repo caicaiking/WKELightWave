@@ -44,11 +44,8 @@ private:
     QVariantMap conditionMap;
     int num;
 
-    clsRunService runService;
     clsMeter *meterType;
     QString meter;
-
-    //Singleton<clsRunService> runService;
 };
 
 #endif // MAINDIALOG_H
