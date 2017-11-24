@@ -27,5 +27,5 @@ private:
     bool hvStatus;
 };
 
-typedef Singleton <clsSignalStatus> sngSignalStatus;
+typedef Singleton<clsSignalStatus> sngSignalStatus;
 #endif // CLSSIGNALCONTROL_H

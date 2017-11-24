@@ -48,7 +48,6 @@ HEADERS += \
     UiFiles/MainDialog.h \
     UiFiles/NumberInput.h \
     Service/clsRunService.h \
-    Service/singleton.h \
     Service/clsInstrument.h \
     PublicFiles/publicUtility.h \
     UiFiles/clsHVChannelSettings.h \
@@ -58,7 +57,8 @@ HEADERS += \
     Service/clsSignalThread.h \
     Service/clsControlBox.h \
     Service/AduHid.h \
-    Service/clsAbamaTestWindow.h
+    Service/clsAbamaTestWindow.h \
+    Service/singleton.h
 
 SOURCES += \
     PublicFiles/clsMeterLimit.cpp \

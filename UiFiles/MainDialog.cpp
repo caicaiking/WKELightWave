@@ -8,7 +8,7 @@
 #include <QJsonParseError>
 #include "publicUtility.h"
 #include "clsMeterFactory.h"
-#include "singleton.h"
+#include "clsRunService.h"
 #include <QDebug>
 
 MainDialog::MainDialog(QWidget *parent) :
