@@ -20,5 +20,5 @@ private slots:
    void getTrigSignal();
 };
 
-typedef Singleton < clsRunService > sngRunService;
+typedef Singleton <clsRunService> sngRunService;
 #endif // CLSRUNSERVICE_H

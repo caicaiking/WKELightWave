@@ -25,6 +25,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 INCLUDEPATH += PublicFiles UiFiles Service
 
+DESTDIR =$$PWD/Libs/
+LIBS += $$PWD/Libs/AduHid.lib \
+        $$PWD/Libs/AduHid.dll
 
 RESOURCES += \
     images/res.qrc
@@ -44,15 +47,18 @@ HEADERS += \
     UiFiles/frmSetLimit.h \
     UiFiles/MainDialog.h \
     UiFiles/NumberInput.h \
-    Service/clsSignalControl.h \
     Service/clsRunService.h \
     Service/singleton.h \
     Service/clsInstrument.h \
     PublicFiles/publicUtility.h \
     UiFiles/clsHVChannelSettings.h \
     UiFiles/clsMeterFactory.h \
-    UiFiles/clsMeter.h
-
+    UiFiles/clsMeter.h \
+    Service/clsSignalStatus.h \
+    Service/clsSignalThread.h \
+    Service/clsControlBox.h \
+    Service/AduHid.h \
+    Service/clsAbamaTestWindow.h
 
 SOURCES += \
     PublicFiles/clsMeterLimit.cpp \
@@ -70,14 +76,16 @@ SOURCES += \
     UiFiles/frmSetLimit.cpp \
     UiFiles/MainDialog.cpp \
     UiFiles/NumberInput.cpp \
-    Service/clsSignalControl.cpp \
     Service/clsRunService.cpp \
     Service/clsInstrument.cpp \
     PublicFiles/publicUtility.cpp \
     UiFiles/clsHVChannelSettings.cpp \
     UiFiles/clsMeterFactory.cpp \
-    UiFiles/clsMeter.cpp
-
+    UiFiles/clsMeter.cpp \
+    Service/clsSignalStatus.cpp \
+    Service/clsSignalThread.cpp \
+    Service/clsControlBox.cpp \
+    Service/clsAbamaTestWindow.cpp
 
 FORMS += \
     UiFiles/clsChannelSettings.ui \
@@ -91,7 +99,5 @@ FORMS += \
     UiFiles/frmSetLimit.ui \
     UiFiles/MainDialog.ui \
     UiFiles/NumberInput.ui \
-    UiFiles/clsHVChannelSettings.ui
-
-
-
+    UiFiles/clsHVChannelSettings.ui \
+    Service/clsAbamaTestWindow.ui
