@@ -4,6 +4,8 @@
 #include <qdebug.h>
 #include <QObject>
 #include "clsLcrCnntWindow.h"
+#include "clsHVCnntWindow.h"
+#include "clsFtdiCnntWindow.h"
 
 int main(int argc, char *argv[])
 {
@@ -15,6 +17,20 @@ int main(int argc, char *argv[])
     if(clsLcrCnntWindow::setupConnection()!= true)
     {
         clsLcrCnntWindow window;
+        window.exec();
+    }
+
+    //检查默认的地址能否连接到高压仪器，如果不能弹出连接对话框
+    if(clsHVCnntWindow::setupConnection()!= true)
+    {
+        clsHVCnntWindow window;
+        window.exec();
+    }
+
+    //检查是否连接到WKE control Box，如果不能弹出连接设置对话框
+    if(clsFtdiCnntWindow::setupConnection() != true)
+    {
+        clsFtdiCnntWindow window;
         window.exec();
     }
 

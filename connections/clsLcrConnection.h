@@ -26,7 +26,7 @@ private:
 
     clsConnection *cnnt;
 signals:
-
+    void showMessage(QString msg);
 public slots:
 };
 

@@ -61,7 +61,11 @@ HEADERS += \
     connections/clsLan.h \
     connections/clsLcrConnection.h \
     connections/clsLcrCnntWindow.h \
-    PublicFiles/clsSettings.h
+    PublicFiles/clsSettings.h \
+    connections/clsHVConnection.h \
+    connections/clsHVCnntWindow.h \
+    connections/clsFtdiConnection.h \
+    connections/clsFtdiCnntWindow.h
 
 SOURCES += \
     PublicFiles/clsMeterLimit.cpp \
@@ -92,7 +96,11 @@ SOURCES += \
     connections/clsLan.cpp \
     connections/clsLcrConnection.cpp \
     connections/clsLcrCnntWindow.cpp \
-    PublicFiles/clsSettings.cpp
+    PublicFiles/clsSettings.cpp \
+    connections/clsHVConnection.cpp \
+    connections/clsHVCnntWindow.cpp \
+    connections/clsFtdiConnection.cpp \
+    connections/clsFtdiCnntWindow.cpp
 
 FORMS += \
     UiFiles/clsChannelSettings.ui \
@@ -108,4 +116,6 @@ FORMS += \
     UiFiles/NumberInput.ui \
     UiFiles/clsHVChannelSettings.ui \
     Service/clsAbamaTestWindow.ui \
-    connections/clsLcrCnntWindow.ui
+    connections/clsLcrCnntWindow.ui \
+    connections/clsHVCnntWindow.ui \
+    connections/clsFtdiCnntWindow.ui
