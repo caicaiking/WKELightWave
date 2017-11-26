@@ -3,22 +3,26 @@
 #include "clsSignalThread.h"
 #include <qdebug.h>
 #include <QObject>
-#include "clsAbamaTestWindow.h"
+#include "clsLcrCnntWindow.h"
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    sngSignalThread::Instance()->start();
+    sngSignalThread::Ins()->start();
 
-    //clsAbamaTestWindow abT;
-    //abT.exec();
-
+    //检查默认IP是否能连接到仪器，如果不能弹出连接对话框
+    if(clsLcrCnntWindow::setupConnection()!= true)
+    {
+        clsLcrCnntWindow window;
+        window.exec();
+    }
 
     MainDialog w;
     w.show();
 
     //当关闭了主窗口就停止接收Trig信号
-    QObject::connect(&w,&MainDialog::close, sngSignalThread::Instance(),&clsSignalThread::stop);
+    QObject::connect(&w,&MainDialog::close, sngSignalThread::Ins(),&clsSignalThread::stop);
 
     return a.exec();
 }

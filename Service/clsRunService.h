@@ -12,14 +12,17 @@ public:
 
 signals:
     void showRes(QString);
+
 public slots:
-    void setTestConditions(QString);
+    void setTestConditon(QString);
     void switchToRunningMode(bool value);
 
-
 private slots:
-    void getTrigSignal();
+    void trig();
+private:
+    bool isRunningMode;
 };
 
-typedef Singleton <clsRunService> sngRunService;
+typedef Singleton<clsRunService> sngRunService;
+
 #endif // CLSRUNSERVICE_H

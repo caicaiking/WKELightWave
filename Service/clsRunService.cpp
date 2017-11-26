@@ -2,10 +2,11 @@
 
 clsRunService::clsRunService(QObject *parent) : QObject(parent)
 {
+    isRunningMode = false;
 
 }
 
-void clsRunService::setTestConditions(QString)
+void clsRunService::setTestConditon(QString)
 {
 
 }
@@ -15,7 +16,7 @@ void clsRunService::switchToRunningMode(bool value)
 
 }
 
-void clsRunService::getTrigSignal()
+void clsRunService::trig()
 {
 
 }

@@ -1,7 +1,6 @@
 #ifndef SINGLETON_H
 #define SINGLETON_H
 #include <assert.h>
-#include "clsRunService.h"
 
 /**
  * Singleton class facilitiates turning any class into a Singleton (one instance) object
@@ -15,7 +14,7 @@ public:
    * @brief Create or get the instance of the object in memory
    * @return
    */
-  static T* Instance()
+  static T* Ins()
   {
       if(!m_pInstance) m_pInstance = new T;
       assert(m_pInstance != NULL);

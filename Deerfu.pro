@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -23,11 +23,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-INCLUDEPATH += PublicFiles UiFiles Service
+INCLUDEPATH += PublicFiles UiFiles Service Instruments connections
 
 DESTDIR =$$PWD/Libs/
-LIBS += $$PWD/Libs/AduHid.lib \
-        $$PWD/Libs/AduHid.dll
 
 RESOURCES += \
     images/res.qrc
@@ -47,7 +45,6 @@ HEADERS += \
     UiFiles/frmSetLimit.h \
     UiFiles/MainDialog.h \
     UiFiles/NumberInput.h \
-    Service/clsRunService.h \
     Service/clsInstrument.h \
     PublicFiles/publicUtility.h \
     UiFiles/clsHVChannelSettings.h \
@@ -55,10 +52,16 @@ HEADERS += \
     UiFiles/clsMeter.h \
     Service/clsSignalStatus.h \
     Service/clsSignalThread.h \
-    Service/clsControlBox.h \
     Service/AduHid.h \
     Service/clsAbamaTestWindow.h \
-    Service/singleton.h
+    Service/singleton.h \
+    Service/clsRunService.h \
+    Instruments/clsInstrument.h \
+    connections/clsConnection.h \
+    connections/clsLan.h \
+    connections/clsLcrConnection.h \
+    connections/clsLcrCnntWindow.h \
+    PublicFiles/clsSettings.h
 
 SOURCES += \
     PublicFiles/clsMeterLimit.cpp \
@@ -76,7 +79,6 @@ SOURCES += \
     UiFiles/frmSetLimit.cpp \
     UiFiles/MainDialog.cpp \
     UiFiles/NumberInput.cpp \
-    Service/clsRunService.cpp \
     Service/clsInstrument.cpp \
     PublicFiles/publicUtility.cpp \
     UiFiles/clsHVChannelSettings.cpp \
@@ -84,8 +86,13 @@ SOURCES += \
     UiFiles/clsMeter.cpp \
     Service/clsSignalStatus.cpp \
     Service/clsSignalThread.cpp \
-    Service/clsControlBox.cpp \
-    Service/clsAbamaTestWindow.cpp
+    Service/clsAbamaTestWindow.cpp \
+    Service/clsRunService.cpp \
+    connections/clsConnection.cpp \
+    connections/clsLan.cpp \
+    connections/clsLcrConnection.cpp \
+    connections/clsLcrCnntWindow.cpp \
+    PublicFiles/clsSettings.cpp
 
 FORMS += \
     UiFiles/clsChannelSettings.ui \
@@ -100,4 +107,5 @@ FORMS += \
     UiFiles/MainDialog.ui \
     UiFiles/NumberInput.ui \
     UiFiles/clsHVChannelSettings.ui \
-    Service/clsAbamaTestWindow.ui
+    Service/clsAbamaTestWindow.ui \
+    connections/clsLcrCnntWindow.ui

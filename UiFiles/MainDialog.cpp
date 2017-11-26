@@ -26,9 +26,9 @@ MainDialog::MainDialog(QWidget *parent) :
     //        widgetList.at(i)->setVisible(false);
     //    }
 
-    connect(sngRunService::Instance(),SIGNAL(showRes(QString)),this,SLOT(showChannelRes(QString)));
-    connect(this,SIGNAL(startTrig()),sngRunService::Instance(),SLOT(getTrigSignal()));
-    connect(this,SIGNAL(switchMode(bool)),sngRunService::Instance(),SLOT(getTrigSignal()));
+    connect(sngRunService::Ins(),SIGNAL(showRes(QString)),this,SLOT(showChannelRes(QString)));
+    connect(this,SIGNAL(startTrig()),sngRunService::Ins(),SLOT(getTrigSignal()));
+    connect(this,SIGNAL(switchMode(bool)),sngRunService::Ins(),SLOT(getTrigSignal()));
 }
 
 void MainDialog::updateChannelSettings(QVariantMap map)

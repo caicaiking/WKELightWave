@@ -2,7 +2,6 @@
 #define CLSSIGNALTHREAD_H
 
 #include <QThread>
-#include "clsControlBox.h"
 #include "singleton.h"
 class clsSignalThread : public QThread
 {
@@ -11,7 +10,6 @@ public:
     explicit clsSignalThread(QObject *parent = 0);
     ~clsSignalThread();
     void stop();
-    clsControlBox * getControlBox();
 
     void setPass();
     void setFail();
@@ -31,7 +29,6 @@ protected:
     void run();
 
 private:
-    clsControlBox *box;
     bool isStop;
 };
 

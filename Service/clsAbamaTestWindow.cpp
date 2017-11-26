@@ -6,7 +6,7 @@ clsAbamaTestWindow::clsAbamaTestWindow(QWidget *parent) :
     setupUi(this);
 
 
-    connect(sngSignalThread::Instance(),&clsSignalThread::trigCaptured,[=]()
+    connect(sngSignalThread::Ins(),&clsSignalThread::trigCaptured,[=]()
     {
         this->label->setText("Trig Captured");
     });
