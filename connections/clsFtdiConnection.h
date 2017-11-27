@@ -3,6 +3,9 @@
 
 #include <QObject>
 #include "singleton.h"
+#include <QMutex>
+#include <QReadWriteLock>
+
 class clsFtdiConnection : public QObject
 {
     Q_OBJECT
@@ -17,9 +20,11 @@ public:
 private:
     QString strAddress;
     bool isInit;
+    QMutex mutex;
+    QReadWriteLock lock;
 
 signals:
-    void switchChannel(QString);
+    void commandMsg(QString);
     void showMessage(QString);
 
 public slots:

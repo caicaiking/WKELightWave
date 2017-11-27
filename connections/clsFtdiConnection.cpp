@@ -20,8 +20,20 @@ bool clsFtdiConnection::setupConnection()
 
 QString clsFtdiConnection::sendCommand(QString command, bool hasReturn)
 {
-    if(isInit)
-        emit switchChannel(command);
+    if(!isInit)
+        return "0";
+
+    mutex.lock();
+    const bool isLocked = lock.tryLockForWrite();
+    if(isLocked)
+    {
+        //在此处插入代码
+        if(isInit)
+            emit commandMsg(command);
+        //在此处插入代码结束
+        lock.unlock();
+    }
+    mutex.unlock();
 
     if(hasReturn)
         return "1";

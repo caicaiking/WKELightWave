@@ -65,7 +65,9 @@ HEADERS += \
     connections/clsHVConnection.h \
     connections/clsHVCnntWindow.h \
     connections/clsFtdiConnection.h \
-    connections/clsFtdiCnntWindow.h
+    connections/clsFtdiCnntWindow.h \
+    connections/clsSignalProcess.h \
+    connections/clsTestClass.h
 
 SOURCES += \
     PublicFiles/clsMeterLimit.cpp \
@@ -100,7 +102,8 @@ SOURCES += \
     connections/clsHVConnection.cpp \
     connections/clsHVCnntWindow.cpp \
     connections/clsFtdiConnection.cpp \
-    connections/clsFtdiCnntWindow.cpp
+    connections/clsFtdiCnntWindow.cpp \
+    connections/clsSignalProcess.cpp
 
 FORMS += \
     UiFiles/clsChannelSettings.ui \

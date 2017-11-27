@@ -2,7 +2,7 @@
 #define CLSFTDICNNTWINDOW_H
 
 #include "ui_clsFtdiCnntWindow.h"
-
+#include <QMutex>
 class clsFtdiCnntWindow : public QDialog, private Ui::clsFtdiCnntWindow
 {
     Q_OBJECT
@@ -16,6 +16,9 @@ private slots:
 private:
     void readSettings();
     void writeSettings();
+
+private:
+    QMutex mutex;
 
 };
 
