@@ -7,13 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>315</width>
-    <height>205</height>
+    <height>224</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>224</height>
+   </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>332</width>
-    <height>16777215</height>
+    <height>224</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -58,18 +64,34 @@
         <widget class="clsLabel" name="labelClose">
          <property name="minimumSize">
           <size>
-           <width>33</width>
-           <height>33</height>
+           <width>34</width>
+           <height>34</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>33</width>
-           <height>33</height>
+           <width>34</width>
+           <height>34</height>
           </size>
          </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 0);</string>
+          <string notr="true">QLabel:hover{  
+    font: 9pt;  
+    font-family:&quot;Vrinda&quot;;  
+    color: rgb(236, 218, 127);  
+    border: 4px solid red;  
+    border-radius: 17px;  
+    padding: 2px;  
+    
+} 
+
+QLabel
+{
+  border-radius: 17px; 
+}</string>
          </property>
          <property name="text">
           <string/>
@@ -77,15 +99,27 @@
          <property name="pixmap">
           <pixmap resource="../images/res.qrc">:/close.ico</pixmap>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item>
         <widget class="QLabel" name="labelChannel1">
+         <property name="font">
+          <font>
+           <family>楷体</family>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
          <property name="styleSheet">
           <string notr="true">background-color: rgb(255, 255, 0);</string>
          </property>
          <property name="text">
-          <string/>
+          <string>1</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -192,7 +226,7 @@ font:17pt &quot;楷体&quot;;</string>
 font: 18pt &quot;楷体&quot;;</string>
               </property>
               <property name="text">
-               <string>L</string>
+               <string>R</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -212,7 +246,7 @@ font: 18pt &quot;楷体&quot;;</string>
 font: 12pt &quot;楷体&quot;;</string>
               </property>
               <property name="text">
-               <string>100.00uΩ--108.88uΩ</string>
+               <string/>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -314,7 +348,7 @@ font: 13pt &quot;楷体&quot;;</string>
 font: 12pt &quot;楷体&quot;;</string>
               </property>
               <property name="text">
-               <string>上下限：</string>
+               <string>限制：</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -441,10 +475,10 @@ font: 12pt &quot;楷体&quot;;</string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">background-color:#66FF00;</string>
+               <string notr="true"/>
               </property>
               <property name="text">
-               <string>R:</string>
+               <string>R</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -466,10 +500,10 @@ font: 12pt &quot;楷体&quot;;</string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">background-color: #66FF00;</string>
+               <string notr="true"/>
               </property>
               <property name="text">
-               <string>100.88uΩ</string>
+               <string>--</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -485,10 +519,10 @@ font: 12pt &quot;楷体&quot;;</string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">background-color: #66FF00;</string>
+               <string notr="true"/>
               </property>
               <property name="text">
-               <string>PASS</string>
+               <string>--</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>

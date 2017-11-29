@@ -11,6 +11,7 @@ clsHightVoltage::clsHightVoltage(QWidget *parent) :
     QDialog(parent)
 {
     setupUi(this);
+    setWindowFlags(windowFlags()&~Qt::WindowContextHelpButtonHint);
     this->volSwitch=tr("关");
     this->voltage=100.0;
     this->hiLimit=0.00;
@@ -50,7 +51,17 @@ QString clsHightVoltage::getCondition() const
 void clsHightVoltage::setCondition(const QString condition)
 {
     QVariantMap conditionMap;
-    conditionMap=publicUtility::parseConditions(condition);
+
+    QJsonParseError error;
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(condition.toUtf8(), &error);
+
+    if(error.error != QJsonParseError::NoError)
+        return ;
+
+    if(jsonDocument.isNull() || jsonDocument.isEmpty())
+        return;
+
+    conditionMap = jsonDocument.toVariant().toMap();
     this->voltage=conditionMap["voltage"].toDouble();
     this->volSwitch=conditionMap["volSwitch"].toString();
     this->relaySwitch=conditionMap["relaySwitch"].toString();
@@ -130,6 +141,7 @@ void clsHightVoltage::on_btnRelay_clicked()
 void clsHightVoltage::onLabelLimitClicked()
 {
     frmSetLimit *dlg=new frmSetLimit(this);
+    dlg->setLimits(mLimit);
     if(dlg->exec()==QDialog::Accepted)
     {
         mLimit=dlg->getMeterLimit();

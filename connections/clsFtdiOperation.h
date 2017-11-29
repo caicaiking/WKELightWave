@@ -11,12 +11,14 @@
 #define HVPASSCMMD "Set Hv Pass Command"
 #define HVFAILCMMD "Set Hv Fail Command"
 #define SETCHANNEL "Set Channel command"
-
-class clsSignalProcess : public QObject
+#define QUERYCMMD "Query Status command"
+#include <QMutex>
+#include <QReadWriteLock>
+class clsFtdiOperation : public QObject
 {
     Q_OBJECT
 public:
-    explicit clsSignalProcess(QObject *parent = nullptr);
+    explicit clsFtdiOperation(QObject *parent = nullptr);
 
     void setBusy(bool value);
     void setLcrPassFail(bool value);
@@ -24,13 +26,26 @@ public:
     void setChannel(int channel);       //切换通道，这里是采用互斥的方法
     QString getValue();                 //主要是为了判定用户是否是输入了Trig 或者reset指令
 
+    void updataFTDIdata();              //开始更新串口用户读取的数据
+    void stop();
+
+    QString getReadString() const;
+    void setReadString(const QString &value);
+
 signals:
     void channelChanged(int value);
     void lcrStatusChanged(bool value);
     void hvStatusChanged(bool value);
     void busyStatusChanged(bool value);
 public slots:
+    void sleepMs(int svalue);
+private:
+    bool blStop;
+
+    QString readString;         //用于更新Binning口的数据
+    QMutex mutex;
+    QReadWriteLock locker;
 };
 
-typedef Singleton<clsSignalProcess> sngSgnlProcess;
+typedef Singleton<clsFtdiOperation> sngFtdiOp;
 #endif // CLSSIGNALPROCESS_H

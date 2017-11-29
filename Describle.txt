@@ -1,0 +1,13 @@
+在这个程序中用了很多的SingleTon的类，作用分别为：
+
+    sngFtdiCnnt::Ins();  用于FTDI的连接
+
+    sngFtdiData::Ins();  用于更新FTDI的数据
+
+    sngFtdiOp::Ins();    用于操作Binning的输出
+
+
+用于捕捉Trig 信号和 Reset 信号：
+    clsRunningThread()  Bit（0） 为Trig， Bit（1）为Reset；
+    在使用这个Thread之前，先要调用 setCaptureBit(X) 方法，然后在的调用start 方法
+    在程序结束之前，调用stop（）方法。

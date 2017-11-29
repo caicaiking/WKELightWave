@@ -45,8 +45,6 @@ public:
     static QString converToQString(QList<double> tmp);
     static QList<double> converToDoubleList(QString tmp);
 
-    static QVariantMap parseConditions(QString condition);
-    static pressConditions(QVariant condition);
 
 };
 

@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include "singleton.h"
+#include "clsInstrument.h"
+#include "clsTestConditon.h"
 
 class clsRunService : public QObject
 {
@@ -12,15 +14,21 @@ public:
 
 signals:
     void showRes(QString);
+    void showMsg(QString);
 
 public slots:
-    void setTestConditon(QString);
+    void setTestConditon(QString value);
     void switchToRunningMode(bool value);
 
-private slots:
+public slots:
     void trig();
+    void reset();
 private:
     bool isRunningMode;
+    bool isReset;
+    QString strCondition;
+    QList<clsTestConditons* > steps;
+    clsInstrument *meter;
 };
 
 typedef Singleton<clsRunService> sngRunService;

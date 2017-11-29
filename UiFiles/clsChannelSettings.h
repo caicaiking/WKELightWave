@@ -19,18 +19,19 @@ public:
     void setCloseEnabled(bool bl);
     void updateRes(const QString res);
 
+    void setStep(int i) override;
+    int getStep() const override;
+
 private slots:
   void onLabelCloseClicked();
 
-
-signals:
-  void deleteChannelSettings(int index);
 
 
 private:
     QString condition;
     int channel;
     QString item1,item2;
+    bool isItem2Enable;
     double frequency,level,bias;
     QString levelUnit;
     QString speed;
@@ -40,6 +41,9 @@ private:
     double item1HiLimit,item1LowLimit,item2HiLimit,item2LowLimit;
     QString suffix1,suffix2;
     QString relaySwitch;
+
+private:
+    int intStep;
 };
 
 #endif // CLSCHANNELSETTINGS_H

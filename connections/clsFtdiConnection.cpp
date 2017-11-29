@@ -1,5 +1,6 @@
 #include "clsFtdiConnection.h"
-
+#include "clsTestClass.h"
+#include <QDebug>
 clsFtdiConnection::clsFtdiConnection(QObject *parent) : QObject(parent)
 {
     isInit = false;
@@ -30,13 +31,15 @@ QString clsFtdiConnection::sendCommand(QString command, bool hasReturn)
         //在此处插入代码
         if(isInit)
             emit commandMsg(command);
+        //qDebug()<< command;
+
         //在此处插入代码结束
         lock.unlock();
     }
     mutex.unlock();
 
     if(hasReturn)
-        return "1";
+        return sngTest::Ins()->getFtdiReadString(); //For demo test use.
     else
         return "0";
 }

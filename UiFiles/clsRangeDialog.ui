@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>设置档位</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QDialog
@@ -54,7 +54,7 @@
       <string notr="true">font: 75 12pt &quot;楷体&quot;;</string>
      </property>
      <property name="text">
-      <string>AUTO</string>
+      <string>自动</string>
      </property>
     </widget>
    </item>

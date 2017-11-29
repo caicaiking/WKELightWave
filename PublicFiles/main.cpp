@@ -1,17 +1,23 @@
 #include <QApplication>
-#include "MainDialog.h"
-#include "clsSignalThread.h"
+#include "clsMainTestWindow.h"
 #include <qdebug.h>
-#include <QObject>
 #include "clsLcrCnntWindow.h"
 #include "clsHVCnntWindow.h"
 #include "clsFtdiCnntWindow.h"
+#include "clsFtdiConnection.h"
+#include "clsFtdiOperation.h"
+#include "clsUpdateFtdiDataThread.h"
+#include "clsAbamaTestWindow.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    sngSignalThread::Ins()->start();
+
+    sngFtdiCnnt::Ins();
+    sngFtdiData::Ins();
+    sngFtdiOp::Ins();
+    sngRunService::Ins();
 
     //检查默认IP是否能连接到仪器，如果不能弹出连接对话框
     if(clsLcrCnntWindow::setupConnection()!= true)
@@ -34,11 +40,18 @@ int main(int argc, char *argv[])
         window.exec();
     }
 
-    MainDialog w;
-    w.show();
+    //如果初始化完成的话，Binning初始化。
+    if(sngFtdiCnnt::Ins()->hasInitSucess())
+    {
+        sngFtdiOp::Ins()->setBusy(false);
+        sngFtdiOp::Ins()->setLcrPassFail(false);
+        sngFtdiOp::Ins()->setHvPassFail(false);
+        sngFtdiOp::Ins()->setChannel(0);
+        sngFtdiOp::Ins()->setReadString("00000000");
+    }
 
-    //当关闭了主窗口就停止接收Trig信号
-    QObject::connect(&w,&MainDialog::close, sngSignalThread::Ins(),&clsSignalThread::stop);
+    clsMainTestWindow window;
+    window.show();
 
     return a.exec();
 }

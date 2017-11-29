@@ -13,6 +13,8 @@ public:
     explicit clsLabel(QWidget *parent=0);
 
     void mousePressEvent(QMouseEvent *e);
+protected:
+    void mouseReleaseEvent(QMouseEvent *e);
 signals:
     void labelClicked();
 

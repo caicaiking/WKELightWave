@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>设置测试速度</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QDialog
@@ -64,7 +64,7 @@
         <string notr="true">font: 75 12pt &quot;楷体&quot;;</string>
        </property>
        <property name="text">
-        <string>MAX</string>
+        <string>最快</string>
        </property>
       </widget>
      </item>
@@ -86,7 +86,7 @@
         <string notr="true">font: 75 12pt &quot;楷体&quot;;</string>
        </property>
        <property name="text">
-        <string>FAST</string>
+        <string>快速</string>
        </property>
       </widget>
      </item>
@@ -108,7 +108,7 @@
         <string notr="true">font: 75 12pt &quot;楷体&quot;;</string>
        </property>
        <property name="text">
-        <string>MED</string>
+        <string>中速</string>
        </property>
       </widget>
      </item>
@@ -130,7 +130,7 @@
         <string notr="true">font: 75 12pt &quot;楷体&quot;;</string>
        </property>
        <property name="text">
-        <string>SLOW</string>
+        <string>慢速</string>
        </property>
       </widget>
      </item>

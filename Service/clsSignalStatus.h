@@ -18,7 +18,7 @@ public:
 signals:
 
 public slots:
-
+    void setStatus(QString meter, bool value);
     void setLCRStatus(bool value);
     void setHVStatus(bool value);
 

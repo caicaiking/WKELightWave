@@ -9,11 +9,12 @@ class clsInstrument : public QObject
 {
     Q_OBJECT
 public:
+    explicit clsInstrument(QObject *parent=0):QObject(parent){}
     virtual void initConnection()=0;            //初始化连接
     virtual bool connectionStatus()=0;          //查询连接状态
     virtual void setCondition(QString)=0;       //设置测试条件
     virtual QString getCondition()=0;           //获取设置状态
-    virtual bool Trig()=0;                      //获取测试数据
+    virtual bool trig()=0;                      //获取测试数据
 
     virtual int getItemsCount()=0;              //获取结果数目
     virtual bool getItemStatus(int i)=0;        //获取单独项目测试结果的状态
@@ -29,3 +30,4 @@ public slots:
 };
 
 #endif // CLSINSTRUMENT_H
+

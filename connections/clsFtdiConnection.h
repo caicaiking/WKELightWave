@@ -17,17 +17,17 @@ public:
     QString sendCommand(QString command, bool hasReturn);
     void disConnectInstrument();
     bool hasInitSucess();
+
 private:
     QString strAddress;
     bool isInit;
     QMutex mutex;
     QReadWriteLock lock;
-
 signals:
     void commandMsg(QString);
     void showMessage(QString);
 
 public slots:
 };
-typedef Singleton< clsFtdiConnection> sngControlBox;
+typedef Singleton< clsFtdiConnection> sngFtdiCnnt;
 #endif // CLSFTDICONNECTION_H

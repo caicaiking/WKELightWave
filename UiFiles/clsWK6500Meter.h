@@ -51,6 +51,7 @@ private slots:
 private:
     QString item1,item2;
     int item1Index,item2Index;
+    bool isItem2Enable;
     double frequency;
     double level;
     QString levelUnit;

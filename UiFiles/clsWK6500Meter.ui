@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>538</width>
-    <height>434</height>
+    <width>564</width>
+    <height>351</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>楷体</family>
+    <pointsize>12</pointsize>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
@@ -20,23 +26,32 @@
 }
 </string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_7">
-   <item row="0" column="0">
-    <widget class="QGroupBox" name="groupBox">
-     <property name="styleSheet">
-      <string notr="true">
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_10">
+     <item>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="styleSheet">
+        <string notr="true">
 font: 75 12pt &quot;楷体&quot;;</string>
-     </property>
-     <property name="title">
-      <string>主参数</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
+       </property>
+       <property name="title">
+        <string>主参数</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
          <widget class="QLabel" name="label">
+          <property name="font">
+           <font>
+            <family>楷体</family>
+            <pointsize>11</pointsize>
+            <weight>9</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
+          </property>
           <property name="styleSheet">
-           <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
+           <string notr="true">font: 75 11pt &quot;楷体&quot;;</string>
           </property>
           <property name="text">
            <string>项目1：</string>
@@ -46,7 +61,7 @@ font: 75 12pt &quot;楷体&quot;;</string>
           </property>
          </widget>
         </item>
-        <item>
+        <item row="0" column="1">
          <widget class="QPushButton" name="btnItem1">
           <property name="minimumSize">
            <size>
@@ -60,18 +75,36 @@ font: 75 12pt &quot;楷体&quot;;</string>
             <height>30</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>楷体</family>
+            <pointsize>11</pointsize>
+            <weight>9</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
+          </property>
           <property name="styleSheet">
-           <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
+           <string notr="true">font: 75 11pt &quot;楷体&quot;;</string>
           </property>
           <property name="text">
            <string>L</string>
           </property>
          </widget>
         </item>
-        <item>
+        <item row="0" column="2">
          <widget class="QLabel" name="label_9">
+          <property name="font">
+           <font>
+            <family>楷体</family>
+            <pointsize>11</pointsize>
+            <weight>9</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
+          </property>
           <property name="styleSheet">
-           <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
+           <string notr="true">font: 75 11pt &quot;楷体&quot;;</string>
           </property>
           <property name="text">
            <string>单位：</string>
@@ -81,7 +114,7 @@ font: 75 12pt &quot;楷体&quot;;</string>
           </property>
          </widget>
         </item>
-        <item>
+        <item row="0" column="3">
          <widget class="QComboBox" name="cmbItem1">
           <property name="minimumSize">
            <size>
@@ -94,6 +127,15 @@ font: 75 12pt &quot;楷体&quot;;</string>
             <width>56</width>
             <height>16777215</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>楷体</family>
+            <pointsize>12</pointsize>
+            <weight>9</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
           </property>
           <item>
            <property name="text">
@@ -117,11 +159,7 @@ font: 75 12pt &quot;楷体&quot;;</string>
           </item>
          </widget>
         </item>
-       </layout>
-      </item>
-      <item row="1" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout_8">
-        <item>
+        <item row="1" column="0">
          <widget class="QLabel" name="label_5">
           <property name="maximumSize">
            <size>
@@ -129,18 +167,27 @@ font: 75 12pt &quot;楷体&quot;;</string>
             <height>16777215</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>楷体</family>
+            <pointsize>11</pointsize>
+            <weight>50</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
+          </property>
           <property name="styleSheet">
-           <string notr="true">font: 14pt &quot;楷体&quot;;</string>
+           <string notr="true">font: 11pt &quot;楷体&quot;;</string>
           </property>
           <property name="text">
-           <string>上下限:</string>
+           <string>限定：</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
-        <item>
+        <item row="1" column="1" colspan="3">
          <widget class="clsLabel" name="labelLimit1">
           <property name="minimumSize">
            <size>
@@ -148,11 +195,18 @@ font: 75 12pt &quot;楷体&quot;;</string>
             <height>43</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>楷体</family>
+            <pointsize>12</pointsize>
+            <weight>9</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
+          </property>
           <property name="styleSheet">
            <string notr="true">QLabel
 {
-	
-	
 	background-color: rgb(203, 201, 239);
 	border:1px solid rgb(255, 255, 255);
 }</string>
@@ -166,29 +220,34 @@ font: 75 12pt &quot;楷体&quot;;</string>
          </widget>
         </item>
        </layout>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QGroupBox" name="groupBox_4">
-     <property name="styleSheet">
-      <string notr="true">
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="grpItem2">
+       <property name="styleSheet">
+        <string notr="true">
 font: 75 12pt &quot;楷体&quot;;</string>
-     </property>
-     <property name="title">
-      <string>副参数</string>
-     </property>
-     <property name="checkable">
-      <bool>true</bool>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_6">
-      <item row="0" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
+       </property>
+       <property name="title">
+        <string>副参数</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
          <widget class="QLabel" name="label_2">
+          <property name="font">
+           <font>
+            <family>楷体</family>
+            <pointsize>11</pointsize>
+            <weight>9</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
+          </property>
           <property name="styleSheet">
-           <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
+           <string notr="true">font: 75 11pt &quot;楷体&quot;;</string>
           </property>
           <property name="text">
            <string>项目2：</string>
@@ -198,7 +257,7 @@ font: 75 12pt &quot;楷体&quot;;</string>
           </property>
          </widget>
         </item>
-        <item>
+        <item row="0" column="1">
          <widget class="QPushButton" name="btnItem2">
           <property name="minimumSize">
            <size>
@@ -212,18 +271,36 @@ font: 75 12pt &quot;楷体&quot;;</string>
             <height>30</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>楷体</family>
+            <pointsize>11</pointsize>
+            <weight>9</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
+          </property>
           <property name="styleSheet">
-           <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
+           <string notr="true">font: 75 11pt &quot;楷体&quot;;</string>
           </property>
           <property name="text">
            <string>Q</string>
           </property>
          </widget>
         </item>
-        <item>
+        <item row="0" column="2">
          <widget class="QLabel" name="label_10">
+          <property name="font">
+           <font>
+            <family>楷体</family>
+            <pointsize>11</pointsize>
+            <weight>9</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
+          </property>
           <property name="styleSheet">
-           <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
+           <string notr="true">font: 75 11pt &quot;楷体&quot;;</string>
           </property>
           <property name="text">
            <string>单位：</string>
@@ -233,7 +310,7 @@ font: 75 12pt &quot;楷体&quot;;</string>
           </property>
          </widget>
         </item>
-        <item>
+        <item row="0" column="3">
          <widget class="QComboBox" name="cmbItem2">
           <property name="minimumSize">
            <size>
@@ -247,6 +324,15 @@ font: 75 12pt &quot;楷体&quot;;</string>
             <height>16777215</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>楷体</family>
+            <pointsize>12</pointsize>
+            <weight>9</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
+          </property>
           <item>
            <property name="text">
             <string> Q</string>
@@ -254,11 +340,7 @@ font: 75 12pt &quot;楷体&quot;;</string>
           </item>
          </widget>
         </item>
-       </layout>
-      </item>
-      <item row="1" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout_11">
-        <item>
+        <item row="1" column="0">
          <widget class="QLabel" name="label_6">
           <property name="maximumSize">
            <size>
@@ -266,24 +348,42 @@ font: 75 12pt &quot;楷体&quot;;</string>
             <height>16777215</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>楷体</family>
+            <pointsize>11</pointsize>
+            <weight>50</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
+          </property>
           <property name="styleSheet">
-           <string notr="true">font: 14pt &quot;楷体&quot;;</string>
+           <string notr="true">font: 11pt &quot;楷体&quot;;</string>
           </property>
           <property name="text">
-           <string>上下限:</string>
+           <string>限定：</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
-        <item>
+        <item row="1" column="1" colspan="3">
          <widget class="clsLabel" name="labelLimit2">
           <property name="minimumSize">
            <size>
             <width>0</width>
             <height>43</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>楷体</family>
+            <pointsize>12</pointsize>
+            <weight>9</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
           </property>
           <property name="styleSheet">
            <string notr="true">QLabel
@@ -301,243 +401,171 @@ background-color: rgb(203, 201, 239);
          </widget>
         </item>
        </layout>
-      </item>
-     </layout>
-    </widget>
+      </widget>
+     </item>
+    </layout>
    </item>
-   <item row="1" column="0">
-    <widget class="QGroupBox" name="groupBox_2">
-     <property name="styleSheet">
-      <string notr="true">font: 75 12pt &quot;楷体&quot;;</string>
-     </property>
-     <property name="title">
-      <string>频率电平</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_2">
-      <property name="leftMargin">
-       <number>5</number>
-      </property>
-      <property name="topMargin">
-       <number>5</number>
-      </property>
-      <property name="rightMargin">
-       <number>5</number>
-      </property>
-      <property name="bottomMargin">
-       <number>5</number>
-      </property>
-      <property name="spacing">
-       <number>3</number>
-      </property>
-      <item row="0" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_6">
+     <item>
+      <widget class="QGroupBox" name="groupBox_2">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;楷体&quot;;</string>
+       </property>
+       <property name="title">
+        <string>频率电平</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QLabel" name="label_3">
-          <property name="styleSheet">
-           <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>频率：</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="font">
+             <font>
+              <family>楷体</family>
+              <pointsize>11</pointsize>
+              <weight>9</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 11pt &quot;楷体&quot;;</string>
+            </property>
+            <property name="text">
+             <string>频率：</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnFreq">
+            <property name="minimumSize">
+             <size>
+              <width>108</width>
+              <height>33</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>楷体</family>
+              <pointsize>11</pointsize>
+              <weight>9</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 11pt &quot;楷体&quot;;</string>
+            </property>
+            <property name="text">
+             <string>100.00kHz</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
-         <widget class="QPushButton" name="btnFreq">
-          <property name="minimumSize">
-           <size>
-            <width>108</width>
-            <height>33</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>100.00kHz</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item row="1" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout_4">
-        <item>
-         <widget class="QLabel" name="label_4">
-          <property name="styleSheet">
-           <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>电平：</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnLevel">
-          <property name="minimumSize">
-           <size>
-            <width>108</width>
-            <height>33</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>1.00V</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QGroupBox" name="groupBox_3">
-     <property name="styleSheet">
-      <string notr="true">font: 75 12pt &quot;楷体&quot;;</string>
-     </property>
-     <property name="title">
-      <string>档位速度</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_3">
-      <property name="leftMargin">
-       <number>5</number>
-      </property>
-      <property name="topMargin">
-       <number>5</number>
-      </property>
-      <property name="rightMargin">
-       <number>5</number>
-      </property>
-      <property name="bottomMargin">
-       <number>5</number>
-      </property>
-      <property name="spacing">
-       <number>3</number>
-      </property>
-      <item row="0" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout_5">
-        <item>
-         <widget class="QPushButton" name="btnRange">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>33</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>Auto</string>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="font">
+             <font>
+              <family>楷体</family>
+              <pointsize>11</pointsize>
+              <weight>9</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 11pt &quot;楷体&quot;;</string>
+            </property>
+            <property name="text">
+             <string>电平：</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnLevel">
+            <property name="minimumSize">
+             <size>
+              <width>108</width>
+              <height>33</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>楷体</family>
+              <pointsize>11</pointsize>
+              <weight>9</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 11pt &quot;楷体&quot;;</string>
+            </property>
+            <property name="text">
+             <string>1.00V</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
-         <widget class="QPushButton" name="btnSpeed">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>33</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>Fast</string>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_12">
+          <item>
+           <widget class="QPushButton" name="btnEqucct">
+            <property name="minimumSize">
+             <size>
+              <width>108</width>
+              <height>33</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>666666</width>
+              <height>33</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>楷体</family>
+              <pointsize>11</pointsize>
+              <weight>9</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 11pt &quot;楷体&quot;;</string>
+            </property>
+            <property name="text">
+             <string>串联</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
-      </item>
-      <item row="1" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout_10">
-        <item>
-         <spacer name="horizontalSpacer_4">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>18</width>
-            <height>30</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnEqucct">
-          <property name="minimumSize">
-           <size>
-            <width>108</width>
-            <height>33</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>666666</width>
-            <height>33</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>串联</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_5">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>28</width>
-            <height>30</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="2" column="0" colspan="2">
-    <widget class="QGroupBox" name="groupBoxBias">
-     <property name="styleSheet">
-      <string notr="true">font: 75 12pt &quot;楷体&quot;;</string>
-     </property>
-     <property name="title">
-      <string>偏置设置</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_4">
-      <item row="0" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout_6">
-        <item>
-         <spacer name="horizontalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>32</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBoxBias">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;楷体&quot;;</string>
+       </property>
+       <property name="title">
+        <string>偏置设置</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
          <widget class="QLabel" name="label_7">
           <property name="text">
            <string>类型：</string>
@@ -547,7 +575,7 @@ background-color: rgb(203, 201, 239);
           </property>
          </widget>
         </item>
-        <item>
+        <item row="0" column="1">
          <widget class="QPushButton" name="btnBiasType">
           <property name="minimumSize">
            <size>
@@ -555,31 +583,34 @@ background-color: rgb(203, 201, 239);
             <height>33</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>楷体</family>
+            <pointsize>11</pointsize>
+            <weight>9</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
+          </property>
           <property name="styleSheet">
-           <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
+           <string notr="true">font: 75 11pt &quot;楷体&quot;;</string>
           </property>
           <property name="text">
            <string>电压</string>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QPushButton" name="btnBias">
-          <property name="minimumSize">
-           <size>
-            <width>108</width>
-            <height>33</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
-          </property>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_8">
           <property name="text">
-           <string>1.00V</string>
+           <string>状态：</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
-        <item>
+        <item row="1" column="1">
          <widget class="QPushButton" name="btnBiasSwitch">
           <property name="minimumSize">
            <size>
@@ -587,100 +618,170 @@ background-color: rgb(203, 201, 239);
             <height>33</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>楷体</family>
+            <pointsize>11</pointsize>
+            <weight>9</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
+          </property>
           <property name="styleSheet">
-           <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
+           <string notr="true">font: 75 11pt &quot;楷体&quot;;</string>
           </property>
           <property name="text">
            <string>开</string>
           </property>
          </widget>
         </item>
-        <item>
-         <spacer name="horizontalSpacer_6">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>32</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="3" column="0" colspan="2">
-    <widget class="QGroupBox" name="groupBoxBias_2">
-     <property name="styleSheet">
-      <string notr="true">font: 75 12pt &quot;楷体&quot;;</string>
-     </property>
-     <property name="title">
-      <string>Relay 设置</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_5">
-      <property name="topMargin">
-       <number>5</number>
-      </property>
-      <property name="rightMargin">
-       <number>5</number>
-      </property>
-      <property name="bottomMargin">
-       <number>5</number>
-      </property>
-      <item row="0" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout_9">
-        <item>
-         <spacer name="horizontalSpacer_7">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>32</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnRelay">
+        <item row="2" column="0" colspan="2">
+         <widget class="QPushButton" name="btnBias">
           <property name="minimumSize">
            <size>
-            <width>39</width>
+            <width>108</width>
             <height>33</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>楷体</family>
+            <pointsize>11</pointsize>
+            <weight>9</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
+          </property>
           <property name="styleSheet">
-           <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
+           <string notr="true">font: 75 11pt &quot;楷体&quot;;</string>
           </property>
           <property name="text">
-           <string>开</string>
+           <string>1.00V</string>
           </property>
          </widget>
         </item>
-        <item>
-         <spacer name="horizontalSpacer_8">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>32</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
        </layout>
-      </item>
-     </layout>
-    </widget>
+      </widget>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="styleSheet">
+          <string notr="true">font: 75 12pt &quot;楷体&quot;;</string>
+         </property>
+         <property name="title">
+          <string>档位速度</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QPushButton" name="btnRange">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>33</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>楷体</family>
+              <pointsize>11</pointsize>
+              <weight>9</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 11pt &quot;楷体&quot;;</string>
+            </property>
+            <property name="text">
+             <string>自动</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnSpeed">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>33</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>楷体</family>
+              <pointsize>11</pointsize>
+              <weight>9</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 11pt &quot;楷体&quot;;</string>
+            </property>
+            <property name="text">
+             <string>快速</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBoxBias_2">
+         <property name="styleSheet">
+          <string notr="true">font: 75 12pt &quot;楷体&quot;;</string>
+         </property>
+         <property name="title">
+          <string>Relay 设置</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_5">
+          <property name="topMargin">
+           <number>5</number>
+          </property>
+          <property name="rightMargin">
+           <number>5</number>
+          </property>
+          <property name="bottomMargin">
+           <number>5</number>
+          </property>
+          <item row="0" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_9">
+            <item>
+             <widget class="QPushButton" name="btnRelay">
+              <property name="minimumSize">
+               <size>
+                <width>39</width>
+                <height>33</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>楷体</family>
+                <pointsize>11</pointsize>
+                <weight>9</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">font: 75 11pt &quot;楷体&quot;;</string>
+              </property>
+              <property name="text">
+               <string>开</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </item>
-   <item row="4" column="0" colspan="2">
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_7">
      <property name="spacing">
       <number>3</number>
@@ -703,14 +804,23 @@ background-color: rgb(203, 201, 239);
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>33</height>
+         <height>40</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>楷体</family>
+         <pointsize>12</pointsize>
+         <weight>9</weight>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">font: 75 12pt &quot;楷体&quot;;</string>
        </property>
        <property name="text">
-        <string>Cancel</string>
+        <string>取消</string>
        </property>
       </widget>
      </item>
@@ -719,14 +829,23 @@ background-color: rgb(203, 201, 239);
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>33</height>
+         <height>40</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>楷体</family>
+         <pointsize>12</pointsize>
+         <weight>9</weight>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">font: 75 12pt &quot;楷体&quot;;</string>
        </property>
        <property name="text">
-        <string>OK</string>
+        <string>确定</string>
        </property>
       </widget>
      </item>

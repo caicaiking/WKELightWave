@@ -38,21 +38,16 @@ HEADERS += \
     UiFiles/clsLabel.h \
     UiFiles/clsNewSetup.h \
     UiFiles/clsRangeDialog.h \
-    UiFiles/clsRunningStatus.h \
     UiFiles/clsSpeedDialog.h \
     UiFiles/clsWK6500Items.h \
     UiFiles/clsWK6500Meter.h \
     UiFiles/frmSetLimit.h \
-    UiFiles/MainDialog.h \
     UiFiles/NumberInput.h \
-    Service/clsInstrument.h \
     PublicFiles/publicUtility.h \
     UiFiles/clsHVChannelSettings.h \
     UiFiles/clsMeterFactory.h \
     UiFiles/clsMeter.h \
     Service/clsSignalStatus.h \
-    Service/clsSignalThread.h \
-    Service/AduHid.h \
     Service/clsAbamaTestWindow.h \
     Service/singleton.h \
     Service/clsRunService.h \
@@ -66,8 +61,18 @@ HEADERS += \
     connections/clsHVCnntWindow.h \
     connections/clsFtdiConnection.h \
     connections/clsFtdiCnntWindow.h \
-    connections/clsSignalProcess.h \
-    connections/clsTestClass.h
+    connections/clsTestClass.h \
+    connections/clsRunningThread.h \
+    connections/clsUpdateFtdiDataThread.h \
+    connections/clsFtdiOperation.h \
+    UiFiles/QFlowLayout.h \
+    UiFiles/clsMainTestWindow.h \
+    UiFiles/clsWarningBox.h \
+    UiFiles/clsSelectUpdateStep.h \
+    Instruments/clsWK6500RunningMode.h \
+    Instruments/clsHVRunningMode.h \
+    Instruments/clsRunningMeterFactory.h \
+    UiFiles/clsTestConditon.h
 
 SOURCES += \
     PublicFiles/clsMeterLimit.cpp \
@@ -78,20 +83,16 @@ SOURCES += \
     UiFiles/clsLabel.cpp \
     UiFiles/clsNewSetup.cpp \
     UiFiles/clsRangeDialog.cpp \
-    UiFiles/clsRunningStatus.cpp \
     UiFiles/clsSpeedDialog.cpp \
     UiFiles/clsWK6500Items.cpp \
     UiFiles/clsWK6500Meter.cpp \
     UiFiles/frmSetLimit.cpp \
-    UiFiles/MainDialog.cpp \
     UiFiles/NumberInput.cpp \
-    Service/clsInstrument.cpp \
     PublicFiles/publicUtility.cpp \
     UiFiles/clsHVChannelSettings.cpp \
     UiFiles/clsMeterFactory.cpp \
     UiFiles/clsMeter.cpp \
     Service/clsSignalStatus.cpp \
-    Service/clsSignalThread.cpp \
     Service/clsAbamaTestWindow.cpp \
     Service/clsRunService.cpp \
     connections/clsConnection.cpp \
@@ -103,7 +104,16 @@ SOURCES += \
     connections/clsHVCnntWindow.cpp \
     connections/clsFtdiConnection.cpp \
     connections/clsFtdiCnntWindow.cpp \
-    connections/clsSignalProcess.cpp
+    connections/clsRunningThread.cpp \
+    connections/clsTestClass.cpp \
+    connections/clsUpdateFtdiDataThread.cpp \
+    connections/clsFtdiOperation.cpp \
+    UiFiles/QFlowLayout.cpp \
+    UiFiles/clsMainTestWindow.cpp \
+    UiFiles/clsWarningBox.cpp \
+    UiFiles/clsSelectUpdateStep.cpp \
+    Instruments/clsWK6500RunningMode.cpp \
+    Instruments/clsHVRunningMode.cpp
 
 FORMS += \
     UiFiles/clsChannelSettings.ui \
@@ -115,10 +125,15 @@ FORMS += \
     UiFiles/clsWK6500Items.ui \
     UiFiles/clsWK6500Meter.ui \
     UiFiles/frmSetLimit.ui \
-    UiFiles/MainDialog.ui \
     UiFiles/NumberInput.ui \
     UiFiles/clsHVChannelSettings.ui \
     Service/clsAbamaTestWindow.ui \
     connections/clsLcrCnntWindow.ui \
     connections/clsHVCnntWindow.ui \
-    connections/clsFtdiCnntWindow.ui
+    connections/clsFtdiCnntWindow.ui \
+    UiFiles/clsMainTestWindow.ui \
+    UiFiles/clsWarningBox.ui \
+    UiFiles/clsSelectUpdateStep.ui
+
+DISTFILES += \
+    Describle.txt

@@ -19,6 +19,9 @@ void clsLcrConnection::setAddress(QString address)
 
 bool clsLcrConnection::setupConnection()
 {
+    if(isInit)
+        return true;
+
     cnnt = connectionFactory::getConnection(this->connectionType);
     cnnt->setAddress(this->strAddress);
 

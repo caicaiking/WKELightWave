@@ -10,6 +10,7 @@ clsNewSetup::clsNewSetup(QWidget *parent) :
     QDialog(parent)
 {
     setupUi(this);
+    setWindowFlags(windowFlags()&~Qt::WindowContextHelpButtonHint);
 
 }
 
@@ -31,7 +32,6 @@ QString clsNewSetup::getMeter() const
 void clsNewSetup::on_cmbChannel_currentIndexChanged(int index)
 {
     this->channel=index+1;
-    qDebug()<<" new "<<channel;
 }
 
 void clsNewSetup::on_btnLCR_clicked()
@@ -40,23 +40,16 @@ void clsNewSetup::on_btnLCR_clicked()
     clsWK6500Meter *dlg=new clsWK6500Meter(this);
     if(dlg->exec()==QDialog::Accepted)
     {
-        this->meter="WK";
+        this->meter="WK6500";
         QString tmpCondition=dlg->getCondtion();
         QVariantMap conditionMap;
         QJsonParseError error;
-        QJsonDocument jsondocument=QJsonDocument::fromJson(tmpCondition.toUtf8(),&error);
-        if(error.error==QJsonParseError::NoError)
-        {
-            if(!(jsondocument.isNull() || jsondocument.isEmpty()))
-            {
-                if(jsondocument.isObject())
-                {
-                    conditionMap=jsondocument.toVariant().toMap();
-                    conditionMap.insert("channel",channel);
-                    conditionMap.insert("meter",meter);
-                }
-            }
-        }
+        QJsonDocument jsondocument;
+
+        conditionMap.insert("channel", channel);
+        conditionMap.insert("meter", meter);
+        conditionMap.insert("conditions", tmpCondition);
+
         jsondocument=QJsonDocument::fromVariant(conditionMap);
         if(!(jsondocument.isNull()))
         {
@@ -73,11 +66,11 @@ void clsNewSetup::on_btnHV_clicked()
     if(dlg->exec()==QDialog::Accepted)
     {
         this->meter="HV";
-        QString tmpCondition;
-        tmpCondition=dlg->getCondition();
-        QVariantMap conditionMap=publicUtility::parseConditions(tmpCondition);
+        QString tmpCondition=dlg->getCondition();
+        QVariantMap conditionMap;
         conditionMap.insert("channel",channel);
         conditionMap.insert("meter",meter);
+        conditionMap.insert("conditions", tmpCondition);
         QJsonDocument jsondocument=QJsonDocument::fromVariant(conditionMap);
         if(!(jsondocument.isNull()))
         {

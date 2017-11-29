@@ -19,8 +19,8 @@ bool clsFtdiCnntWindow::setupConnection()
 
     settings.readSetting(strPath + "Address", strTmp);
 
-    sngControlBox::Ins()->setAddress(strTmp);
-    bool blRet = sngControlBox::Ins()->setupConnection();
+    sngFtdiCnnt::Ins()->setAddress(strTmp);
+    bool blRet = sngFtdiCnnt::Ins()->setupConnection();
 
     return blRet;
 }
@@ -50,8 +50,8 @@ void clsFtdiCnntWindow::writeSettings()
 
 void clsFtdiCnntWindow::on_btnTest_clicked()
 {
-    sngControlBox::Ins()->setAddress(txtAddress->text());
-    bool blRet = sngControlBox::Ins()->setupConnection();
+    sngFtdiCnnt::Ins()->setAddress(txtAddress->text());
+    bool blRet = sngFtdiCnnt::Ins()->setupConnection();
     btnTest->setEnabled(!blRet);
 
     if(blRet)

@@ -4,6 +4,7 @@ clsRangeDialog::clsRangeDialog(QWidget *parent) :
     QDialog(parent)
 {
     setupUi(this);
+    setWindowFlags(windowFlags()&~Qt::WindowContextHelpButtonHint);
     //this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowMinimizeButtonHint);
 }
 
@@ -14,7 +15,7 @@ QString clsRangeDialog::getRange() const
 
 void clsRangeDialog::on_btnAuto_clicked()
 {
-    this->range="AUTO";
+    this->range=tr("自动");
     this->accept();
 }
 

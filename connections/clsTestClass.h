@@ -3,13 +3,13 @@
 #include "singleton.h"
 #include <QMutex>
 #include <QReadWriteLock>
+#include <QString>
+
 class clsTestClass
 {
 public:
 
     explicit clsTestClass();
-
-
 
     QString getFtdiReadString() const;
     void setFtdiReadString(const QString &value);
@@ -25,25 +25,5 @@ private:
 typedef Singleton<clsTestClass> sngTest;
 #endif // CLSTESTCLASS_H
 
-clsTestClass::clsTestClass()
-{
-    this->ftdiReadString = "00000000";
-}
 
-QString clsTestClass::getFtdiReadString() const
-{
-    return ftdiReadString;
-}
 
-void clsTestClass::setFtdiReadString(const QString &value)
-{
-    mutex.lock();
-
-    const bool lock = locker.lockForWrite();
-    if(lock)
-    {
-        ftdiReadString = value;
-        locker.unlock();
-    }
-    mutex.unlock();
-}

@@ -31,6 +31,7 @@ void clsChannelSettings::setCondition(const QString condition)
                 QVariantMap conditionMap=jsonDocument.toVariant().toMap();
                 this->item1=conditionMap["item1"].toString();
                 this->item2=conditionMap["item2"].toString();
+                this->isItem2Enable=conditionMap["isItem2Enable"].toBool();
                 this->frequency=conditionMap["frequency"].toDouble();
                 this->level=conditionMap["level"].toDouble();
                 this->levelUnit=conditionMap["levelUnit"].toString();
@@ -60,33 +61,34 @@ void clsChannelSettings::updateLabels()
     colorList<<"#D891EF"<<"#FFBF00"<<"#00FFFF"<<"#FDEE00"<<"#D0FF14"<<"#D19FE8"
             <<"#FA6E79"<<"#FE6F5E"<<"#ACE5EE"<<"#66FF00"<<"#FF007F"<<"#84DE02"<<"#1F75FE"
            <<"#08E8DE"<<"#FFAA1D"<<"#FF55A3"<<"#FF033E"<<"#FF2052"<<"#E0218A"<<"#ACE5EE";
+    int colorIndex = (channel-1) % colorList.length();
     QList<QLabel*> labelList;
     QList<QLabel*> labelList1;
     labelList<<labelBias<<labelEqucct<<labelFreq<<labelLevel<<labelItem1
             <<labelItem2<<labelLimit1<<labelLimit2<<labelRange<<labelSpeed;
     labelList1<<labelBias1<<labelEqucct1<<labelFreq1<<labelLevel1<<labelItem11
-            <<labelItem22<<labelLimit11<<labelLimit22<<labelRange1<<labelSpeed1;
+             <<labelItem22<<labelLimit11<<labelLimit22<<labelRange1<<labelSpeed1;
 
     this->setStyleSheet(QString("QDialog{background-color:%1;border:2px solid %2;border-radius: 9px;}")
-                        .arg(colorList.at(channel-1)).arg(colorList.at(channel-1)));
+                        .arg(colorList.at(colorIndex)).arg(Qt::cyan));
     for(int i=0;i<labelList.length();i++)
     {
-        labelList.at(i)->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
+        labelList.at(i)->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
         labelList.at(i)->setFont(QFont("楷体",12));
-        labelList1.at(i)->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
+        labelList1.at(i)->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
         labelList1.at(i)->setFont(QFont("楷体",12));
     }
 
-    labelChannel->setStyleSheet(QString("border:0px solid %1").arg(colorList.at(channel-1)));
+    labelChannel->setStyleSheet(QString("border:0px solid %1").arg(colorList.at(colorIndex)));
     labelChannel->setStyleSheet(QString("border-radius: 0px"));
-    labelChannel->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
+    labelChannel->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
     labelChannel->setText(tr("通道")+QString::number(channel));
     labelChannel->setFont(QFont("楷体",17));
 
-    labelChannel1->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
-    labelClose->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
-    labelRelay->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
-    labelRelaySwitch->setStyleSheet(QString("background-color:%1").arg(colorList.at(channel-1)));
+    labelChannel1->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
+    //labelClose->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
+    labelRelay->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
+    labelRelaySwitch->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
     labelBias1->setText(QString::number(bias)+biasType+","+biasSwitch);
     //labelBias1->setFont(QFont("楷体",12));
     labelEqucct1->setText(equcct);
@@ -98,7 +100,12 @@ void clsChannelSettings::updateLabels()
     labelLevel1->setText(dt.formateToString(6)+levelUnit);
 
     labelItem11->setText(item1);
-    labelItem22->setText(item2);
+
+    if(isItem2Enable)
+        labelItem22->setText(item2);
+    else
+        labelItem22->setText(tr("关"));
+
 
     QString sf1=suffix1.remove(0,1);
     dt.setData(item1HiLimit,"");
@@ -112,18 +119,30 @@ void clsChannelSettings::updateLabels()
     QString hiLimit2=dt.formateToString(6)+sf2;
     dt.setData(item2LowLimit,"");
     QString lowLimit2=dt.formateToString(6)+sf2;
-    labelLimit22->setText(lowLimit2+"--"+hiLimit2);
+    if(isItem2Enable)
+        labelLimit22->setText(lowLimit2+"--"+hiLimit2);
+    else
+        labelLimit22->setText(tr("关"));
 
     labelRange1->setText(range);
     labelSpeed1->setText(speed);
     labelRelaySwitch->setText(relaySwitch);
+
+    this->labelResItem1->setText(this->item1);
+
+
+    this->labelResItem2->setText(this->item2);
+    labelResItem2->setVisible(isItem2Enable);
+    labelRes2->setVisible(isItem2Enable);
+    labelResStatus2->setVisible(isItem2Enable);
+
 }
+
 
 void clsChannelSettings::onLabelCloseClicked()
 {
-    emit deleteChannelSettings(channel);
+    emit deleteChannelSettings(intStep);
 }
-
 void clsChannelSettings::setChannelSettings()
 {
     stackedWidget->setCurrentIndex(0);
@@ -145,10 +164,21 @@ void clsChannelSettings::setCloseEnabled(bool bl)
 void clsChannelSettings::updateRes(const QString res)
 {
     QVariantMap resMap;
-    resMap=publicUtility::parseConditions(res);
     bool resStatus1,resStatus2;
     double result1,result2;
     QString resUnit1,resUnit2;
+
+    QJsonParseError error;
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(res.toUtf8(), &error);
+
+    if(error.error != QJsonParseError::NoError)
+        return;
+
+    if(jsonDocument.isEmpty() || jsonDocument.isNull())
+        return;
+
+    resMap = jsonDocument.toVariant().toMap();
+
     resStatus1=resMap["resStatus1"].toBool();
     resStatus2=resMap["resStatus2"].toBool();
     result1=resMap["result1"].toDouble();
@@ -188,4 +218,15 @@ void clsChannelSettings::updateRes(const QString res)
     labelRes1->setText(dt.formateToString(6)+resUnit1);
     dt.setData(result2,"");
     labelRes2->setText(dt.formateToString(6)+resUnit2);
+}
+
+void clsChannelSettings::setStep(int i)
+{
+    labelChannel1->setText("s"+QString::number(i+1));
+    this->intStep =i;
+}
+
+int clsChannelSettings::getStep() const
+{
+    return this->intStep;
 }

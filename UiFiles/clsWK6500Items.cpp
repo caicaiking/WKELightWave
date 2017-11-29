@@ -4,6 +4,7 @@ clsWK6500Items::clsWK6500Items(QWidget *parent) :
     QDialog(parent)
 {
     setupUi(this);
+    setWindowFlags(windowFlags()&~Qt::WindowContextHelpButtonHint);
 
 }
 

@@ -5,6 +5,7 @@ NumberInput::NumberInput(QWidget *parent) :
 {
 
    setupUi(this);
+   setWindowFlags(windowFlags()&~Qt::WindowContextHelpButtonHint);
    stopInput=false;
 }
 

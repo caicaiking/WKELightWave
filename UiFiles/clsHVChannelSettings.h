@@ -17,20 +17,21 @@ public:
     void setChannelRunnings();
     void setCloseEnabled(const bool bl);
     void updateRes(const QString res);
+ void setStep(int i) override;
+    int getStep() const override;
 
 public slots:
     void onCloseLabelClicked();
-
-signals:
-    void deleteChannelSettings(int i);
-
 private:
     int channel;
     QString condition;
-    QString item;
     QString resStatus;
+    double hiLimit, lowLimit, voltage;
     double res;
     QString relaySwitch;
+    QString hvStatus;
+
+    int intStep;
 };
 
 #endif // CLSHVCHANNELSETTINGS_H

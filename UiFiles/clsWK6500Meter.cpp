@@ -14,13 +14,15 @@ clsWK6500Meter::clsWK6500Meter(QWidget *parent) :
     QDialog(parent)
 {
     setupUi(this);
+    setWindowFlags(windowFlags()&~Qt::WindowContextHelpButtonHint);
     this->setWindowTitle(tr("设置测试条件"));
     item1="L";
     item2="Q";
+    isItem2Enable = true;
     frequency=1000;
     this->level=1;
-    range="AUTO";
-    speed="FAST";
+    range=tr("自动");
+    speed=tr("快速");
     equcct="串联";
     bias=0;
     biasType="V";
@@ -44,6 +46,7 @@ void clsWK6500Meter::updateButtons()
 {
     btnItem1->setText(item1);
     btnItem2->setText(item2);
+    grpItem2->setCheckable(isItem2Enable);
     doubleType dt;
     dt.setData(frequency,"");
     btnFreq->setText(dt.formateToString(6)+"Hz");
@@ -128,6 +131,7 @@ QStringList clsWK6500Meter::setCmbSuffix(int i)
 void clsWK6500Meter::onLabellimit1Clicked()
 {
     frmSetLimit *frm=new frmSetLimit(this);
+    frm->setLimits(mlItem1);
     if(frm->exec()==QDialog::Accepted)
     {
         mlItem1= frm->getMeterLimit();
@@ -140,6 +144,7 @@ void clsWK6500Meter::onLabellimit1Clicked()
 void clsWK6500Meter::onLabellimit2Clicked()
 {
     frmSetLimit *frm=new frmSetLimit(this);
+    frm->setLimits(mlItem2);
     if(frm->exec()==QDialog::Accepted)
     {
         mlItem2= frm->getMeterLimit();   
@@ -155,6 +160,7 @@ QString clsWK6500Meter::getCondtion() const
 
     condition.insert("item1",this->item1);
     condition.insert("item2",this->item2);
+    condition.insert("isItem2Enable",this->isItem2Enable);
     condition.insert("frequency",this->frequency);
     condition.insert("level",this->level);
     condition.insert("levelUnit",levelUnit);
@@ -195,6 +201,7 @@ void clsWK6500Meter::setCondition(const QString condition)
                 QVariantMap conditionMap=jsondocument.toVariant().toMap();
                 this->item1=conditionMap["item1"].toString();
                 this->item2=conditionMap["item2"].toString();
+                this->isItem2Enable = conditionMap["isItem2Enable"].toBool();
                 this->frequency=conditionMap["frequency"].toDouble();
                 this->level=conditionMap["level"].toDouble();
                 this->levelUnit=conditionMap["levelUnit"].toString();
@@ -264,6 +271,7 @@ void clsWK6500Meter::on_btnOK_clicked()
     //updateCommand();
     suffix1=cmbItem1->currentText();
     suffix2=cmbItem2->currentText();
+    isItem2Enable = grpItem2->isChecked();
     this->accept();
 }
 
@@ -369,6 +377,7 @@ void clsWK6500Meter::on_btnRelay_clicked()
 void clsWK6500Meter::on_btnBias_clicked()
 {
     NumberInput *dlg=new NumberInput(this);
+    dlg->setWindowTitle(tr("输入数值"));
     if(dlg->exec()==QDialog::Accepted)
     {
         bias=dlg->getNumber();

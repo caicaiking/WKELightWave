@@ -208,33 +208,6 @@ QList<double> publicUtility::converToDoubleList(QString tmp)
     return list;
 }
 
-QVariantMap publicUtility::parseConditions(QString condition)
-{
-    QJsonParseError error;
-    QJsonDocument jsondocument=QJsonDocument::fromJson(condition.toUtf8(),&error);
-    if(error.error==QJsonParseError::NoError)
-    {
-        if(!(jsondocument.isNull() || jsondocument.isEmpty()))
-        {
-            if(jsondocument.isObject())
-            {
-                QVariantMap conditionMap=jsondocument.toVariant().toMap();
-                return conditionMap;
-            }
-        }
-    }
-}
-
-publicUtility::pressConditions(QVariant condition)
-{
-    QString strSetup;
-    QJsonDocument jsonDocument=QJsonDocument::fromVariant(condition);
-    if(!(jsonDocument.isNull()))
-    {
-        strSetup=jsonDocument.toJson(QJsonDocument::Indented);
-    }
-}
-
 double publicUtility::Max(const QList<double> &arry)
 {
     if(arry.length()==0)
