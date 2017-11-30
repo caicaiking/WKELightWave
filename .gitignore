@@ -36,4 +36,6 @@ Makefile*
 # QtCtreator CMake
 CMakeLists.txt.user*
 
-./Libs/*
+/Libs/*
+/Libs/WKELightWave.exe
+/Libs/Settings.ini

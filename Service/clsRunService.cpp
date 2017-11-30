@@ -123,8 +123,7 @@ RESET:
     sngFtdiOp::Ins()->setBusy(false);
     qDebug()<<"Reset";
 END:
-    qDebug()<<"End";
-
+    return;
 }
 
 void clsRunService::reset()
