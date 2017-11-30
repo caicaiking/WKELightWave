@@ -24,15 +24,22 @@ public:
 
 private slots:
     void on_btnNewSetup_clicked();
-    void on_btnSettings_clicked();
-    void on_btnRunning_clicked();
     void on_btnSaveSetup_clicked();
     void on_btnOpenSetup_clicked();
-
-private slots:
+    void on_btnTrig_clicked();
     void deleteChannel(int index);
     void showChannelRes(QString res);
-    void on_btnTrig_clicked();
+    void deleteAllSteps();   //删除所有步骤
+
+    void saveLastFile(QString file); //保存最后打开的文件的名称 和 路径
+    QString getLastFilePath();          //获取最后打开的文件的路径
+    QString getLastFile();          //获取最后打开的文件的名称
+    void openTaskFile(QString strPath);
+    void saveTaskFile(QString strPath);
+
+    void on_btnSettings_clicked(bool checked);
+
+    void on_btnRunning_clicked(bool checked);
 
 signals:
     void switchMode(bool);

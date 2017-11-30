@@ -18,6 +18,8 @@ public:
     int getItemsCount() ;              //获取结果数目
     bool getItemStatus(int i) ;        //获取单独项目测试结果的状态
     bool getTotleStatus() ;            //获取所有测试项目的总体状态
+    QString getItem(int i);           //获取测试项目
+    QString getItemSuffix(int i);       //格式化数据的后缀
 
     double getItemValue(int i) ;       //获取每个项目的测试值 如： 1.0000E+3
     double getItemValueWithSuffix(int i) ; //获取每个项目的测试值具有格式 如： 1.000k

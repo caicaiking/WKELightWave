@@ -45,7 +45,6 @@ public:
     static QString converToQString(QList<double> tmp);
     static QList<double> converToDoubleList(QString tmp);
 
-
 };
 
 #endif // PUBLICUTILITY_H

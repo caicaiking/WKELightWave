@@ -5,6 +5,9 @@
 #include "doubleType.h"
 #include "doubleType.h"
 #include "publicUtility.h"
+//TODO: 状态切换
+//TODO: 修改让其行为和仪表一样
+//BUG: 此类不能正常工作
 clsHVChannelSettings::clsHVChannelSettings(clsMeter *parent) :
     clsMeter(parent)
 {
@@ -30,7 +33,6 @@ void clsHVChannelSettings::setCondition(const QString condition)
                 this->voltage = conditionMap["voltage"].toDouble();
                 this->relaySwitch = conditionMap["relaySwitch"].toString();
                 this->hvStatus = conditionMap["volSwitch"].toString();
-
             }
         }
     }
@@ -44,9 +46,6 @@ void clsHVChannelSettings::setChannel(const int channel)
 void clsHVChannelSettings::updateLabels()
 {
     QStringList colorList;
-
-
-
     colorList<<"#D891EF"<<"#FFBF00"<<"#00FFFF"<<"#FDEE00"<<"#D0FF14"<<"#D19FE8"
             <<"#FA6E79"<<"#FE6F5E"<<"#ACE5EE"<<"#66FF00"<<"#FF007F"<<"#84DE02"<<"#1F75FE"
            <<"#08E8DE"<<"#FFAA1D"<<"#FF55A3"<<"#FF033E"<<"#FF2052"<<"#E0218A"<<"#ACE5EE";
@@ -55,14 +54,11 @@ void clsHVChannelSettings::updateLabels()
     this->setStyleSheet(QString("QDialog{background-color:%1;border:2px solid %2;border-radius: 9px;}")
                         .arg(colorList.at(colorIndex)).arg(colorList.at(colorIndex)));
 
-    //    labelChannel->setStyleSheet(QString("border:0px solid %1").arg(colorList.at(channel-1)));
-    //    labelChannel->setStyleSheet(QString("border-radius: 0px"));
     labelChannel->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
     labelChannel->setText(tr("通道")+QString::number(channel));
     labelChannel->setFont(QFont("楷体",17));
 
     labelChannel1->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
-    // labelClose->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
     labelItem->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
     labelItem->setFont(QFont("楷体",17));
     labelItem11->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));

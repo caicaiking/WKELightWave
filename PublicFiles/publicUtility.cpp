@@ -43,7 +43,7 @@ bool publicUtility::IsDouble(const QString r)
 
 QString publicUtility::getVersion()
 {
-    QFile file(":/Icons/version.txt");
+    QFile file(":/version.txt");
 
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return "0.0.0";
@@ -144,7 +144,7 @@ QString publicUtility::getName(const QString &value)
         return QObject::tr("损耗");
 
     else
-        return QString::null;
+        return "";
 }
 
 void publicUtility::sleepMs(int svalue)

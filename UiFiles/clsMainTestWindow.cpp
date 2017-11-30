@@ -14,14 +14,19 @@
 #include "clsSelectUpdateStep.h"
 #include "clsRunService.h"
 #include "clsUpdateFtdiDataThread.h"
-
+#include "clsSettings.h"
+#include <QFile>
+#include <QDir>
+//TODO: 增加信号显示面板
+//TODO: 增加多通道校准界面
+//TODO: 信号模拟
 clsMainTestWindow::clsMainTestWindow(QWidget *parent) :
     QMainWindow(parent)
 {
     setupUi(this);
     this->setWindowFlags(Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint
                          | Qt::WindowMaximizeButtonHint);
-    this->showMaximized();
+    // this->showMaximized();
 
     layout = new QFlowLayout(6,6,6);
 
@@ -41,7 +46,17 @@ clsMainTestWindow::clsMainTestWindow(QWidget *parent) :
 
     connect(sngRunService::Ins(),SIGNAL(showRes(QString)),this,SLOT(showChannelRes(QString)));
 
+    QString lastFile = getLastFile();
+    if(!lastFile.isEmpty())
+    {
+        this->deleteAllSteps();
+        openTaskFile(lastFile);
 
+        btnRunning->clicked(true);
+        on_btnSettings_clicked(false);
+    }
+    else
+        on_btnSettings_clicked(true);
 }
 
 void clsMainTestWindow::updateChannelSettings(const QList<clsTestConditons *> map)
@@ -174,48 +189,6 @@ void clsMainTestWindow::on_btnNewSetup_clicked()
     }
 }
 
-void clsMainTestWindow::on_btnSettings_clicked()
-{
-    for(int i=0; i< items.length(); i++)
-    {
-        items[i]->setChannelSettings();
-        items[i]->setCloseEnabled(true);
-    }
-
-    btnNewSetup->setEnabled(true);
-    btnOpenSetup->setEnabled(true);
-    btnSaveSetup->setEnabled(true);
-    btnTrig->setEnabled(false);
-
-    sngRunService::Ins()->switchToRunningMode(false);
-    disconnect(trigThread,SIGNAL(getSignal()),sngRunService::Ins(),SLOT(trig()));
-    disconnect(resetThread,SIGNAL(getSignal()),sngRunService::Ins(),SLOT(reset()));
-
-
-}
-
-void clsMainTestWindow::on_btnRunning_clicked()
-{
-    for(int i=0; i< items.length(); i++)
-    {
-        items[i]->setChannelRunnings();
-        items[i]->setCloseEnabled(false);
-    }
-    btnNewSetup->setEnabled(false);
-    btnOpenSetup->setEnabled(false);
-    btnSaveSetup->setEnabled(false);
-    btnTrig->setEnabled(true);
-
-    sngRunService::Ins()->setTestConditon(getTestCondition());
-    sngRunService::Ins()->switchToRunningMode(true);
-
-    connect(trigThread,SIGNAL(getSignal()),sngRunService::Ins(),SLOT(trig()));
-    connect(resetThread,SIGNAL(getSignal()),sngRunService::Ins(),SLOT(reset()));
-
-
-
-}
-
 void clsMainTestWindow::deleteChannel(int index)
 {
     steps.removeAt(index);
@@ -225,37 +198,104 @@ void clsMainTestWindow::deleteChannel(int index)
 
 void clsMainTestWindow::showChannelRes(QString res)
 {
-    qDebug()<<res;
-}
-
-void clsMainTestWindow::on_btnSaveSetup_clicked()
-{
-    QString strPath=QFileDialog::getSaveFileName(this,tr("保存测试任务"), ".",
-                                                 tr("WKE FactoryView 任务 (*.wket)"),0);
-    QString strSetup;
-    strSetup = getTestCondition();
-
-    if(strPath.isEmpty())
-        return;
-    else
+    /* Res Json 语句示例
     {
-        QFile file(strPath);
-        if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
-            return;
-        QTextStream outStream(&file);
-        outStream<<strSetup;
-        outStream.flush();
-        file.close();
+        "channel": 1,
+        "data": [
+            {
+                "item": "R",
+                "result": 584880.54,
+                "status": false,
+                "suffix": "k"
+            },
+            {
+                "item": "L",
+                "result": 523.44221,
+                "status": true,
+                "suffix": "u"
+            }
+        ],
+        "meter": "WK6500",
+        "step": 0
     }
+    */
+    QString strRes = res;
+
+    QJsonDocument jsDocument;
+    QJsonParseError error;
+
+    jsDocument = QJsonDocument::fromJson(strRes.toUtf8(), &error);
+
+    if(error.error != QJsonParseError::NoError)
+        return;
+
+    if(jsDocument.isEmpty() || jsDocument.isNull())
+        return;
+
+    QVariantMap tmpMap = jsDocument.toVariant().toMap();
+
+    int currentStep = tmpMap["step"].toInt();
+
+    if(currentStep > items.length())
+        return;
+
+    items.at(currentStep)->updateRes(strRes);
 }
 
-void clsMainTestWindow::on_btnOpenSetup_clicked()
+void clsMainTestWindow::deleteAllSteps()
 {
-    QString strPath=QFileDialog::getOpenFileName(this,tr("保存测试任务"), ".",
-                                                 tr("WKE FactoryView 任务 (*.wket)"),0);
-    QString strSetup;
-    if(strPath.isEmpty())
+    steps.clear();
+    updateChannelSettings(steps);
+
+}
+//!
+//! \param file 文件的全路径包含文件名称
+//!
+void clsMainTestWindow::saveLastFile(QString file)
+{
+    if(file.isEmpty())
         return;
+
+    QFileInfo fileInfo(file);
+    if(!fileInfo.exists())
+        return;
+
+    clsSettings settings;
+    QString strNode = "File/";
+
+    settings.writeSetting(strNode + "lastDir", fileInfo.absoluteDir().canonicalPath());
+    settings.writeSetting(strNode + "lastFile", fileInfo.absoluteFilePath());
+}
+
+QString clsMainTestWindow::getLastFilePath()
+{
+    clsSettings settings;
+    QString strNode = "File/";
+    QString filePath;
+    settings.readSetting(strNode + "lastDir", filePath);
+    QDir d;
+    if(d.exists(filePath))
+        return filePath;
+    else
+        return ".";
+}
+
+QString clsMainTestWindow::getLastFile()
+{
+    clsSettings settings;
+    QString strNode = "File/";
+    QString fileName;
+    settings.readSetting(strNode + "lastFile", fileName);
+
+    if(QFile::exists(fileName))
+        return fileName;
+    else
+        return "";
+}
+
+void clsMainTestWindow::openTaskFile(QString strPath)
+{
+    QString strSetup;
     QFile file(strPath);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return;
@@ -277,17 +317,90 @@ void clsMainTestWindow::on_btnOpenSetup_clicked()
 
             for(int i=0; i<tmpConditionList.length(); i++)
             {
-                clsTestConditons* tmp = new clsTestConditons();
+                clsTestConditons *tmp = new clsTestConditons();
                 tmp->setJson(tmpConditionList.at(i).toString());
-
                 steps.append(tmp);
             }
         }
     }
+    saveLastFile(strPath);
+    myStatusBar->showMessage(tr("成功打开步骤文件：%1").arg(strPath),3000);
     updateChannelSettings(steps);
+}
+
+void clsMainTestWindow::saveTaskFile(QString strPath)
+{
+    QString strSetup;
+    QFile file(strPath);
+    if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        return;
+    strSetup = getTestCondition();
+    QTextStream outStream(&file);
+    outStream<<strSetup;
+    outStream.flush();
+    file.close();
+    saveLastFile(strPath);
+    myStatusBar->showMessage(tr("文件已保存至：%1").arg(strPath),3000);
+}
+
+void clsMainTestWindow::on_btnSaveSetup_clicked()
+{
+    QString strPath=QFileDialog::getSaveFileName(this,tr("保存测试任务"), getLastFilePath(),
+                                                 tr("WKE FactoryView 任务 (*.wket)"),0);
+
+    if(strPath.isEmpty())
+        return;
+    saveTaskFile(strPath);
+}
+
+void clsMainTestWindow::on_btnOpenSetup_clicked()
+{
+    QString strPath=QFileDialog::getOpenFileName(this,tr("保存测试任务"), getLastFilePath(),
+                                                 tr("WKE FactoryView 任务 (*.wket)"),0);
+    if(strPath.isEmpty())
+        return;
+    this->deleteAllSteps();
+    openTaskFile(strPath);
 }
 
 void clsMainTestWindow::on_btnTrig_clicked()
 {
-   sngRunService::Ins()->trig();
+    sngRunService::Ins()->trig();
+}
+
+void clsMainTestWindow::on_btnSettings_clicked(bool checked)
+{
+    btnSettings->setChecked(checked);
+    btnRunning->setChecked(!checked);
+    if(checked) //Setting Mode
+    {
+        for(int i=0; i< items.length(); i++)
+        {
+            items[i]->setChannelSettings();
+            items[i]->setCloseEnabled(true);
+        }
+
+        sngRunService::Ins()->switchToRunningMode(false);
+        disconnect(trigThread,SIGNAL(getSignal()),sngRunService::Ins(),SLOT(trig()));
+        disconnect(resetThread,SIGNAL(getSignal()),sngRunService::Ins(),SLOT(reset()));
+    }
+    else //Running Mode
+    {
+        for(int i=0; i< items.length(); i++)
+        {
+            items[i]->setChannelRunnings();
+            items[i]->setCloseEnabled(false);
+        }
+
+        sngRunService::Ins()->setTestConditon(getTestCondition());
+        sngRunService::Ins()->switchToRunningMode(true);
+
+        connect(trigThread,SIGNAL(getSignal()),sngRunService::Ins(),SLOT(trig()));
+        connect(resetThread,SIGNAL(getSignal()),sngRunService::Ins(),SLOT(reset()));
+    }
+}
+
+void clsMainTestWindow::on_btnRunning_clicked(bool checked)
+{
+    btnSettings->clicked(!checked);
 }

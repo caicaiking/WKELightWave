@@ -6,21 +6,19 @@
 class NumberInput : public QDialog, private Ui::NumberInput
 {
     Q_OBJECT
-
+    
 public:
     explicit NumberInput(QWidget *parent = 0);
     explicit NumberInput(const double,const QString,QWidget *parent = 0);
     void setValueAndSuffix(const double,const QString);
     double getValue(){ return  value;}
     QString getSuffix(){return  suffix;}
-    QString getUnit(){return unit;}
 
     double getNumber()
     {
         doubleType dt(value, suffix);
         return dt.Data();
     }
-
 
 private slots:
     void on_btnClear_clicked();
@@ -33,6 +31,9 @@ private slots:
     void on_btnn_clicked();
     void on_btnp_clicked();
     void on_btnf_clicked();
+
+
+    void on_btnCancel_clicked();
 
     void numberInput(int i);
     void signInput();
@@ -65,10 +66,6 @@ private slots:
 
     void on_btnOk_clicked();
 
-    void on_btnV_clicked();
-
-    void on_btnA_clicked();
-
 private:
 
     double value;
@@ -77,7 +74,6 @@ private:
     bool firstInput;
 
     QString strInput;
-    QString unit;
 };
 
 #endif // NUMBERINPUT_H

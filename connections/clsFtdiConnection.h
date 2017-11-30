@@ -5,7 +5,7 @@
 #include "singleton.h"
 #include <QMutex>
 #include <QReadWriteLock>
-
+//TODO: 用FTDI进行编程
 class clsFtdiConnection : public QObject
 {
     Q_OBJECT

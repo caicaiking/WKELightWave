@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>FTDI连接测试</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../images/res.qrc">
+    <normaloff>:/lightWave.png</normaloff>:/lightWave.png</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">QDialog
 {
@@ -90,6 +94,10 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../images/res.qrc"/>
+  <include location="../images/res.qrc"/>
+  <include location="../images/res.qrc"/>
+ </resources>
  <connections/>
 </ui>

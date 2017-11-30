@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../images/res.qrc">
+    <normaloff>:/lightWave.png</normaloff>:/lightWave.png</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">QDialog
 {
@@ -114,51 +118,6 @@ font: 75 12pt &quot;楷体&quot;;</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="3">
-         <widget class="QComboBox" name="cmbItem1">
-          <property name="minimumSize">
-           <size>
-            <width>50</width>
-            <height>31</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>56</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>楷体</family>
-            <pointsize>12</pointsize>
-            <weight>9</weight>
-            <italic>false</italic>
-            <bold>false</bold>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string> H</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>mH</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>uH</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>nH</string>
-           </property>
-          </item>
-         </widget>
-        </item>
         <item row="1" column="0">
          <widget class="QLabel" name="label_5">
           <property name="maximumSize">
@@ -216,6 +175,37 @@ font: 75 12pt &quot;楷体&quot;;</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QPushButton" name="btnItem1Unit">
+          <property name="minimumSize">
+           <size>
+            <width>40</width>
+            <height>33</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>6666666</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>楷体</family>
+            <pointsize>11</pointsize>
+            <weight>9</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 75 11pt &quot;楷体&quot;;</string>
+          </property>
+          <property name="text">
+           <string>L</string>
           </property>
          </widget>
         </item>
@@ -310,36 +300,6 @@ font: 75 12pt &quot;楷体&quot;;</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="3">
-         <widget class="QComboBox" name="cmbItem2">
-          <property name="minimumSize">
-           <size>
-            <width>50</width>
-            <height>31</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>56</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>楷体</family>
-            <pointsize>12</pointsize>
-            <weight>9</weight>
-            <italic>false</italic>
-            <bold>false</bold>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string> Q</string>
-           </property>
-          </item>
-         </widget>
-        </item>
         <item row="1" column="0">
          <widget class="QLabel" name="label_6">
           <property name="maximumSize">
@@ -397,6 +357,37 @@ background-color: rgb(203, 201, 239);
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QPushButton" name="btnItem2Unit">
+          <property name="minimumSize">
+           <size>
+            <width>40</width>
+            <height>33</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>楷体</family>
+            <pointsize>11</pointsize>
+            <weight>9</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 75 11pt &quot;楷体&quot;;</string>
+          </property>
+          <property name="text">
+           <string>Q</string>
           </property>
          </widget>
         </item>
@@ -860,6 +851,10 @@ background-color: rgb(203, 201, 239);
    <header location="global">clsLabel.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../images/res.qrc"/>
+  <include location="../images/res.qrc"/>
+  <include location="../images/res.qrc"/>
+ </resources>
  <connections/>
 </ui>

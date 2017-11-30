@@ -7,6 +7,10 @@
 #include "clsSignalStatus.h"
 #include "clsFtdiOperation.h"
 
+#include <QTextStream>
+#include <stdio.h>
+
+
 clsRunService::clsRunService(QObject *parent) : QObject(parent)
 {
     isRunningMode = false;
@@ -50,6 +54,7 @@ void clsRunService::switchToRunningMode(bool value)
 
 void clsRunService::trig()
 {
+
     if(!isRunningMode)
         return;
 
@@ -77,7 +82,9 @@ void clsRunService::trig()
         meter->setCondition(tmpStep->condition);
         //仪表测试
         meter->trig();
-       //设置单步状态
+        //关闭仪表的输出
+        meter->turnOffOutput();
+        //设置单步状态
         sngSignalStatus::Ins()->setStatus(tmpStep->meter,meter->getTotleStatus());
 
         //For output result for display & save
@@ -90,7 +97,9 @@ void clsRunService::trig()
         for(int i=0; i< meter->getItemsCount(); i++)
         {
             QVariantMap tmpRes;
+            tmpRes.insert("item", meter->getItem(i));
             tmpRes.insert("result", meter->getItemValue(i));
+            tmpRes.insert("suffix", meter->getItemSuffix(i));
             tmpRes.insert("status", meter->getItemStatus(i));
 
             res.append(tmpRes);

@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../images/res.qrc">
+    <normaloff>:/lightWave.png</normaloff>:/lightWave.png</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">QDialog
 {

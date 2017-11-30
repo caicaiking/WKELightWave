@@ -4,7 +4,7 @@
 #include <QObject>
 #include "clsInstrument.h"
 #include "singleton.h"
-
+#include "clsMeterLimit.h"
 class clsWK6500RunningMode: public clsInstrument
 {
     Q_OBJECT
@@ -21,11 +21,22 @@ public:
     int getItemsCount() ;              //获取结果数目
     bool getItemStatus(int i) ;        //获取单独项目测试结果的状态
     bool getTotleStatus() ;            //获取所有测试项目的总体状态
+    QString getItem(int i);           //获取测试项目
+    QString getItemSuffix(int i);       //格式化数据的后缀
 
     double getItemValue(int i) ;       //获取每个项目的测试值 如： 1.0000E+3
     double getItemValueWithSuffix(int i) ; //获取每个项目的测试值具有格式 如： 1.000k
     QString getInstrumentType() ;      //获取仪器的类型
     void turnOffOutput()  ;            //关闭所有的输出
+protected slots:
+    QString changeItemToGpib(QString value);
+private slots:
+    void updateGpibCommand();
+
+
+private:
+    QStringList normCommands;
+    QString biasCommand;
 private:
 
     bool isConnected;
@@ -46,7 +57,7 @@ private:
     QList<double> results;
 
     QString strConditon;
-
+    QList<clsMeterLimit* > limits;
 
 };
 typedef Singleton<clsWK6500RunningMode> sngWK6500Run;

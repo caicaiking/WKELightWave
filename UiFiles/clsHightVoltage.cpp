@@ -5,8 +5,8 @@
 #include <QJsonParseError>
 #include "doubleType.h"
 #include "frmSetLimit.h"
-
-
+//TODO: 读取上一次的配置文件
+//TODO: 完善此类的功能
 clsHightVoltage::clsHightVoltage(QWidget *parent) :
     QDialog(parent)
 {

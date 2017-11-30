@@ -24,7 +24,7 @@ public:
 
 private slots:
   void onLabelCloseClicked();
-
+   void onLblChannelClicked();
 
 
 private:

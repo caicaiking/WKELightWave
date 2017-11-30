@@ -45,6 +45,16 @@ bool clsHVRunningMode::getTotleStatus()
 
 }
 
+QString clsHVRunningMode::getItem(int i)
+{
+
+}
+
+QString clsHVRunningMode::getItemSuffix(int i)
+{
+
+}
+
 double clsHVRunningMode::getItemValue(int i)
 {
 

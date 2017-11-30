@@ -14,51 +14,45 @@ public:
     QString trig() const;
     QString getCondtion() const;
     void setCondition(const QString condition);
-    void updateButtons();
-    QStringList setCmbSuffix(int i);
 
 private slots:
     void onLabellimit1Clicked();
     void onLabellimit2Clicked();
 
 private slots:
-    void on_btnItem1_clicked();
-
-    void on_btnItem2_clicked();
-
     void on_btnFreq_clicked();
-
     void on_btnOK_clicked();
-
     void on_btnLevel_clicked();
-
     void on_btnEqucct_clicked();
-
     void on_btnRange_clicked();
-
     void on_btnSpeed_clicked();
-
     void on_btnBiasType_clicked();
-
     void on_btnBiasSwitch_clicked();
-
     void on_btnCancel_clicked();
-
     void on_btnRelay_clicked();
-
     void on_btnBias_clicked();
-
+private slots:
+    QString readSettings();
+    void saveSettings();
+    void on_btnItem2Unit_clicked();
+    void on_btnItem1Unit_clicked();
+    void on_btnItem1_clicked();
+    void on_btnItem2_clicked();
+    void on_grpItem2_clicked(bool checked);
+private:
+    double limitCheck( double value, const double max, const double min);
+    void updateButtons();
 private:
     QString item1,item2;
     int item1Index,item2Index;
     bool isItem2Enable;
     double frequency;
-    double level;
+    double level, levelA, levelV;
     QString levelUnit;
     QString equcct;
     QString speed;
     QString range;
-    double bias;
+    double bias, biasA, biasV;
     QString biasType;
     QString biasSwitch;
     clsMeterLimit mlItem1,mlItem2;

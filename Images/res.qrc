@@ -59,5 +59,11 @@
         <file>stepSave.png</file>
         <file>open.png</file>
         <file>chennal.png</file>
+        <file>manualTrig.png</file>
+        <file>dotGreen.png</file>
+        <file>dotRed.png</file>
+        <file>lightWave.png</file>
+        <file>splashScreen2.png</file>
+        <file>version.txt</file>
     </qresource>
 </RCC>
