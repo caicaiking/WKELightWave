@@ -56,6 +56,9 @@
    </property>
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="bottomMargin">
+      <number>5</number>
+     </property>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
@@ -139,6 +142,9 @@ QLabel
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <spacer name="horizontalSpacer">
          <property name="orientation">
@@ -146,7 +152,7 @@ QLabel
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>10</width>
+           <width>6</width>
            <height>10</height>
           </size>
          </property>
@@ -197,7 +203,7 @@ border: 3px solid rgb(252, 255, 74);</string>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>10</width>
+           <width>6</width>
            <height>10</height>
           </size>
          </property>
@@ -234,8 +240,8 @@ border: 3px solid rgb(252, 255, 74);</string>
        </property>
        <property name="font">
         <font>
-         <family>楷体</family>
-         <pointsize>14</pointsize>
+         <family>Arial</family>
+         <pointsize>11</pointsize>
         </font>
        </property>
        <property name="autoFillBackground">
@@ -668,6 +674,7 @@ font: 12pt &quot;楷体&quot;;</string>
   </customwidget>
  </customwidgets>
  <resources>
+  <include location="../images/res.qrc"/>
   <include location="../images/res.qrc"/>
   <include location="../images/res.qrc"/>
  </resources>

@@ -174,7 +174,7 @@ void clsHVChannelSettings::updateRes(const QString res)
 
 void clsHVChannelSettings::setStep(int i)
 {
-    labelChannel1->setText("s"+QString::number(i+1));
+    labelChannel1->setText("s"+QString::number(i+1)+"\n"+"HVMeter");
     intStep =i;
 }
 

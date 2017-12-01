@@ -260,7 +260,7 @@ void clsChannelSettings::updateRes(const QString res)
 
 void clsChannelSettings::setStep(int i)
 {
-    labelChannel1->setText("s"+QString::number(i+1));
+    labelChannel1->setText("s"+QString::number(i+1)+"\n"+"WK6500");
     this->intStep =i;
 }
 

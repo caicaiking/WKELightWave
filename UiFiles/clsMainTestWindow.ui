@@ -342,7 +342,7 @@
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(203, 215, 255);</string>
+         <string notr="true"/>
         </property>
        </widget>
       </item>
@@ -370,6 +370,7 @@
   </widget>
  </widget>
  <resources>
+  <include location="../images/res.qrc"/>
   <include location="../images/res.qrc"/>
   <include location="../images/res.qrc"/>
  </resources>
