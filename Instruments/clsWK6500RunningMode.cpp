@@ -5,9 +5,14 @@
 #include <QVariantMap>
 #include "doubleType.h"
 #include "clsMeterLimit.h"
+#include "clsFtdiOperation.h"
 clsWK6500RunningMode::clsWK6500RunningMode(clsInstrument *parent): clsInstrument(parent)
 {
-    limits<< new clsMeterLimit()<< new clsMeterLimit();
+    for(int i=0; i<4; i++)
+    {
+        limits << new clsMeterLimit();
+        results <<0;
+    }
 
 }
 
@@ -20,6 +25,7 @@ bool clsWK6500RunningMode::connectionStatus()
 {
     isConnected = sngLCRCnnt::Ins()->hasInitSucess();
     emit this->setConnectStatus(isConnected);
+    return isConnected;
 
 }
 
@@ -101,7 +107,7 @@ bool clsWK6500RunningMode::trig()
 
     results.append(resList.at(0).toDouble());
     results.append(resList.at(1).toDouble());
-
+    return true;
 }
 
 int clsWK6500RunningMode::getItemsCount()
@@ -276,7 +282,7 @@ void clsWK6500RunningMode::updateGpibCommand()
         this->biasCommand == tmpBiasStatusCmd;
     }
 
-
+    sngFtdiOp::Ins()->setRelay(relaySwitch==tr("开")?false:true);
 
 }
 

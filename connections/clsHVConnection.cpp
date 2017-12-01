@@ -40,7 +40,10 @@ QString clsHVConnection::sendCommand(QString command, bool hasReturn)
     command = "";
 
     if(hasReturn)
-        return "5000.00";
+    {
+        int number = getRandomNumber(1E5,20E3);
+        return QString::number(number*10);
+    }
     else
         return "0";
 
@@ -54,4 +57,9 @@ void clsHVConnection::disConnectInstrument()
 bool clsHVConnection::hasInitSucess()
 {
     return this->isInit;
+}
+
+double clsHVConnection::getRandomNumber(int max, int min)
+{
+   return (rand() % (max-min))+ min;
 }

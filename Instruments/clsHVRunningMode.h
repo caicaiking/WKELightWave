@@ -4,6 +4,10 @@
 #include <QObject>
 #include "clsInstrument.h"
 #include "clsHVConnection.h"
+#include "clsMeterLimit.h"
+
+#define HVTRGCMD "\t\t -->HV:TRIG"
+#define HVTURNOFFCMD "\t\t -->HV:TURNOFF"
 
 class clsHVRunningMode :public clsInstrument
 {
@@ -11,7 +15,7 @@ public:
     explicit clsHVRunningMode(clsInstrument *parent=0);
     void initConnection() ;            //初始化连接
     bool connectionStatus() ;          //查询连接状态
-    void setCondition(QString) ;       //设置测试条件
+    void setCondition(QString value) ;       //设置测试条件
     QString getCondition() ;           //获取设置状态
     bool trig() ;                      //获取测试数据
 
@@ -24,7 +28,20 @@ public:
     double getItemValue(int i) ;       //获取每个项目的测试值 如： 1.0000E+3
     double getItemValueWithSuffix(int i) ; //获取每个项目的测试值具有格式 如： 1.000k
     QString getInstrumentType() ;      //获取仪器的类型
-    void turnOffOutput()  ;            //关闭所有的输出
+    void turnOffOutput();            //关闭所有的输出
+private slots:
+    void updateGpibCommands();
+
+private:
+    QString strCondition;
+    double voltage;
+    QString item, suffix;
+    QString relaySwitch;
+    QList<clsMeterLimit *> limits;
+    double hiLimit,lowLimit;
+
+    bool isConnected;
+    QList<double> results;
 
 };
 typedef Singleton<clsHVRunningMode> sngHVRun;

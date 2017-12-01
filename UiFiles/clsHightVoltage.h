@@ -10,29 +10,23 @@ class clsHightVoltage : public QDialog, private Ui::clsHightVoltage
 
 public:
     explicit clsHightVoltage(QWidget *parent = 0);
-    QString getVoltageSwitch() const;
-    double getVoltage() const;
 
     QString getCondition() const;
     void setCondition(const QString condition);
-    void updateButtons();
-    void updateCommand();
 private slots:
-    void on_btnSwitch_clicked();
-
     void on_btnVoltage_clicked();
-
     void on_btnOK_clicked();
-
     void on_btnCancel_clicked();
-
     void on_btnRelay_clicked();
-
     void onLabelLimitClicked();
-
+    void on_btnItem_clicked();
+    void on_btnUnit_clicked();
+    void updateButtons();
+    void saveSettings();
+    QString readSettings();
 private:
-    QString volSwitch;
     double voltage;
+    QString item, suffix;
     QString relaySwitch;
     clsMeterLimit mLimit;
     double hiLimit,lowLimit;

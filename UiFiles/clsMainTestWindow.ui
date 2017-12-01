@@ -24,7 +24,7 @@
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,10">
+   <layout class="QVBoxLayout" name="verticalLayout">
     <property name="spacing">
      <number>2</number>
     </property>
@@ -152,7 +152,13 @@
         </property>
         <property name="icon">
          <iconset resource="../images/res.qrc">
-          <normaloff>:/single.png</normaloff>:/single.png</iconset>
+          <normaloff>:/run2.png</normaloff>:/run2.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -164,19 +170,6 @@
          <bool>true</bool>
         </property>
        </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
       </item>
       <item>
        <widget class="QPushButton" name="btnTrig">
@@ -195,6 +188,49 @@
         </property>
         <property name="icon">
          <iconset resource="../images/res.qrc">
+          <normaloff>:/single.png</normaloff>:/single.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="shortcut">
+         <string>Return</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnSignal">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>33</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 11pt &quot;楷体&quot;;</string>
+        </property>
+        <property name="text">
+         <string>显示
+信号</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../images/res.qrc">
           <normaloff>:/manualTrig.png</normaloff>:/manualTrig.png</iconset>
         </property>
         <property name="iconSize">
@@ -205,6 +241,9 @@
         </property>
         <property name="shortcut">
          <string>Return</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -218,67 +257,96 @@
      </widget>
     </item>
     <item>
-     <widget class="QWidget" name="stepWidget" native="true">
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <property name="spacing">
-        <number>1</number>
-       </property>
-       <property name="leftMargin">
-        <number>1</number>
-       </property>
-       <property name="topMargin">
-        <number>1</number>
-       </property>
-       <property name="rightMargin">
-        <number>1</number>
-       </property>
-       <property name="bottomMargin">
-        <number>1</number>
-       </property>
-       <item>
-        <widget class="QScrollArea" name="scrollArea">
-         <property name="widgetResizable">
-          <bool>true</bool>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QWidget" name="stepWidget" native="true">
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <property name="spacing">
+          <number>0</number>
          </property>
-         <widget class="QWidget" name="scrollAreaWidgetContents">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>1209</width>
-            <height>507</height>
-           </rect>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_3">
-           <property name="spacing">
-            <number>1</number>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QScrollArea" name="scrollArea">
+           <property name="lineWidth">
+            <number>0</number>
            </property>
-           <property name="leftMargin">
-            <number>1</number>
+           <property name="widgetResizable">
+            <bool>true</bool>
            </property>
-           <property name="topMargin">
-            <number>1</number>
-           </property>
-           <property name="rightMargin">
-            <number>1</number>
-           </property>
-           <property name="bottomMargin">
-            <number>1</number>
-           </property>
-           <item>
-            <widget class="QWidget" name="itemWidget" native="true">
-             <property name="styleSheet">
-              <string notr="true">background-color: rgb(203, 215, 255);
-</string>
+           <widget class="QWidget" name="scrollAreaWidgetContents">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>1009</width>
+              <height>507</height>
+             </rect>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_3">
+             <property name="spacing">
+              <number>0</number>
              </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </widget>
-       </item>
-      </layout>
-     </widget>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QWidget" name="itemWidget" native="true">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(203, 215, 255);
+</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QWidget" name="wgtSignalPannel" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>200</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(203, 215, 255);</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
@@ -317,8 +385,8 @@
      <y>48</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1029</x>
-     <y>49</y>
+     <x>482</x>
+     <y>65</y>
     </hint>
    </hints>
   </connection>
@@ -367,6 +435,22 @@
     <hint type="destinationlabel">
      <x>147</x>
      <y>40</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnSignal</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>wgtSignalPannel</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1185</x>
+     <y>46</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1183</x>
+     <y>100</y>
     </hint>
    </hints>
   </connection>

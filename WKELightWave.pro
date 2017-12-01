@@ -76,7 +76,8 @@ HEADERS += \
     Instruments/clsRunningMeterFactory.h \
     UiFiles/clsTestConditon.h \
     UiFiles/clsMeterUnit.h \
-    UiFiles/dlgLevelInputBox.h
+    UiFiles/dlgLevelInputBox.h \
+    UiFiles/clsSignalDisplayWidget.h
 
 SOURCES += \
     PublicFiles/clsMeterLimit.cpp \
@@ -119,7 +120,8 @@ SOURCES += \
     Instruments/clsWK6500RunningMode.cpp \
     Instruments/clsHVRunningMode.cpp \
     UiFiles/clsMeterUnit.cpp \
-    UiFiles/dlgLevelInputBox.cpp
+    UiFiles/dlgLevelInputBox.cpp \
+    UiFiles/clsSignalDisplayWidget.cpp
 
 FORMS += \
     UiFiles/clsChannelSettings.ui \
@@ -141,7 +143,8 @@ FORMS += \
     UiFiles/clsWarningBox.ui \
     UiFiles/clsSelectUpdateStep.ui \
     UiFiles/clsMeterUnit.ui \
-    UiFiles/dlgLevelInputBox.ui
+    UiFiles/dlgLevelInputBox.ui \
+    UiFiles/clsSignalDisplayWidget.ui
 
 DISTFILES += \
     Describle.txt

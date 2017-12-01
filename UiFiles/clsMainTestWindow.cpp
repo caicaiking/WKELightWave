@@ -365,7 +365,9 @@ void clsMainTestWindow::on_btnOpenSetup_clicked()
 
 void clsMainTestWindow::on_btnTrig_clicked()
 {
+    btnTrig->setEnabled(false);
     sngRunService::Ins()->trig();
+    btnTrig->setEnabled(true);
 }
 
 void clsMainTestWindow::on_btnSettings_clicked(bool checked)

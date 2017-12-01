@@ -27,6 +27,7 @@ signals:
 private:
     bool isInit;
     QString strAddress;
+    double getRandomNumber(int max, int min);
 public slots:
 };
 

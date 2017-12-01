@@ -61,6 +61,8 @@ void clsRunService::trig()
     sngSignalStatus::Ins()->resetHVStatus(); //恢复原始值
     sngSignalStatus::Ins()->resetLCRStatus();//恢复原始值
 
+    //Set busy
+    sngFtdiOp::Ins()->setBusy(true);
 
     for(int i=0; i<steps.length(); i++)
     {
@@ -74,18 +76,17 @@ void clsRunService::trig()
         //get current test step
         clsTestConditons *tmpStep = steps.at(i);
 
-        //Set busy
-        sngFtdiOp::Ins()->setBusy(true);
         //切换通道
         sngFtdiOp::Ins()->setChannel(tmpStep->channel);
         //更新仪表的测试条件
         meter->setCondition(tmpStep->condition);
         //仪表测试
         meter->trig();
-        //关闭仪表的输出
-        meter->turnOffOutput();
         //设置单步状态
         sngSignalStatus::Ins()->setStatus(tmpStep->meter,meter->getTotleStatus());
+
+        //关闭仪表的输出
+        meter->turnOffOutput();
 
         //For output result for display & save
         QVariantMap tmpMap;

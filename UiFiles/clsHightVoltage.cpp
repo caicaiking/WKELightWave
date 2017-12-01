@@ -5,37 +5,39 @@
 #include <QJsonParseError>
 #include "doubleType.h"
 #include "frmSetLimit.h"
-//TODO: 读取上一次的配置文件
-//TODO: 完善此类的功能
+#include "publicUtility.h"
+#include "clsMeterUnit.h"
+#include "clsSettings.h"
 clsHightVoltage::clsHightVoltage(QWidget *parent) :
     QDialog(parent)
 {
     setupUi(this);
     setWindowFlags(windowFlags()&~Qt::WindowContextHelpButtonHint);
-    this->volSwitch=tr("关");
-    this->voltage=100.0;
-    this->hiLimit=0.00;
-    lowLimit=0.00;
-    relaySwitch="开";
+
+    QString lastSettings = readSettings();
+    if(lastSettings.isEmpty())
+    {
+        this->item = "R";
+        this->suffix ="k";
+        this->voltage=100.0;
+        this->hiLimit=0.00;
+        lowLimit=0.00;
+        relaySwitch="开";
+    }
+    else
+    {
+        this->setCondition(lastSettings);
+    }
     connect(labelLimit,SIGNAL(labelClicked()),this,SLOT(onLabelLimitClicked()));
     updateButtons();
-}
-
-QString clsHightVoltage::getVoltageSwitch() const
-{
-    return this->volSwitch;
-}
-
-double clsHightVoltage::getVoltage() const
-{
-    return this->voltage;
 }
 
 QString clsHightVoltage::getCondition() const
 {
     QVariantMap conditionMap;
+    conditionMap.insert("item", this->item);
+    conditionMap.insert("suffix", this->suffix);
     conditionMap.insert("voltage",this->voltage);
-    conditionMap.insert("volSwitch",this->volSwitch);
     conditionMap.insert("relaySwitch",this->relaySwitch);
     conditionMap.insert("hiLimit",this->hiLimit);
     conditionMap.insert("lowLimit",this->lowLimit);
@@ -62,8 +64,9 @@ void clsHightVoltage::setCondition(const QString condition)
         return;
 
     conditionMap = jsonDocument.toVariant().toMap();
+    this->item = conditionMap["item"].toString();
+    this->suffix = conditionMap["suffix"].toString();
     this->voltage=conditionMap["voltage"].toDouble();
-    this->volSwitch=conditionMap["volSwitch"].toString();
     this->relaySwitch=conditionMap["relaySwitch"].toString();
     this->hiLimit=conditionMap["hiLimit"].toDouble();
     this->lowLimit=conditionMap["lowLimit"].toDouble();
@@ -71,33 +74,19 @@ void clsHightVoltage::setCondition(const QString condition)
 
 void clsHightVoltage::updateButtons()
 {
+    btnItem->setText(this->item);
+    if(this->suffix == tr("自动"))
+        this->btnUnit->setText(suffix);
+    else
+        btnUnit->setText(this->suffix + publicUtility::getSuffix(this->item));
     btnRelay->setText(relaySwitch);
-    btnSwitch->setText(volSwitch);
     doubleType dt;
     dt.setData(voltage,"");
     btnVoltage->setText(dt.formateToString(5)+"V");
     mLimit.setAbsHi(hiLimit);
     mLimit.setAbsLo(lowLimit);
-    labelLimit->setText(mLimit.showLimits("Ω"));
-}
-
-void clsHightVoltage::updateCommand()
-{
-
-}
-
-void clsHightVoltage::on_btnSwitch_clicked()
-{
-    if(btnSwitch->text()==tr("开"))
-    {
-        this->volSwitch=tr("关");
-        btnSwitch->setText(tr("关"));
-    }
-    else if(btnSwitch->text()==tr("关"))
-    {
-        this->volSwitch=tr("开");
-        btnSwitch->setText(tr("开"));
-    }
+    mLimit.setLimitType("Norm");
+    labelLimit->setText(mLimit.showLimits(publicUtility::getSuffix(this->item)));
 }
 
 void clsHightVoltage::on_btnVoltage_clicked()
@@ -105,17 +94,13 @@ void clsHightVoltage::on_btnVoltage_clicked()
     NumberInput *dlg=new NumberInput(this);
     if(dlg->exec()==QDialog::Accepted)
     {
-        doubleType dt;
-
         voltage=dlg->getNumber();
-        dt.setData(voltage,"");
-        btnVoltage->setText(dt.formateToString(6)+"V");
+        updateButtons();
     }
 }
 
 void clsHightVoltage::on_btnOK_clicked()
 {
-    //updateCommand();
     this->accept();
 }
 
@@ -127,15 +112,10 @@ void clsHightVoltage::on_btnCancel_clicked()
 void clsHightVoltage::on_btnRelay_clicked()
 {
     if(btnRelay->text()==tr("开"))
-    {
         relaySwitch="关";
-        btnRelay->setText(tr("关"));
-    }
     else
-    {
         relaySwitch="开";
-        btnRelay->setText(tr("开"));
-    }
+    updateButtons();
 }
 
 void clsHightVoltage::onLabelLimitClicked()
@@ -149,4 +129,42 @@ void clsHightVoltage::onLabelLimitClicked()
         hiLimit=mLimit.getAbsLimitHigh();
         lowLimit=mLimit.getAbsLimitLow();
     }
+}
+
+void clsHightVoltage::on_btnItem_clicked()
+{
+    if(item == "R")
+        item = "Cur";
+    else
+        item = "R";
+    updateButtons();
+}
+
+void clsHightVoltage::on_btnUnit_clicked()
+{
+    clsMeterUnit *dlg = new clsMeterUnit(this);
+    dlg->setWindowTitle(tr("选择后缀"));
+    dlg->setAutoEnable(true);
+    dlg->setItem(this->item);
+    if(dlg->exec() == QDialog::Accepted)
+    {
+        this->suffix = dlg->getSuffix();
+        this->updateButtons();
+    }
+}
+QString clsHightVoltage::readSettings()
+{
+    clsSettings settings;
+    QString strTmp;
+    QString strNode = "HV/";
+    settings.readSetting(strNode + "latestSettings", strTmp);
+    return strTmp;
+}
+
+void clsHightVoltage::saveSettings()
+{
+    clsSettings settings;
+
+    QString strNode = "HV/";
+    settings.writeSetting(strNode + "latestSettings", this->getCondition());
 }

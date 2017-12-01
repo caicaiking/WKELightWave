@@ -41,9 +41,8 @@ void clsNewSetup::on_btnLCR_clicked()
     if(dlg->exec()==QDialog::Accepted)
     {
         this->meter="WK6500";
-        QString tmpCondition=dlg->getCondtion();
+        QString tmpCondition=dlg->getCondition();
         QVariantMap conditionMap;
-        QJsonParseError error;
         QJsonDocument jsondocument;
 
         conditionMap.insert("channel", channel);

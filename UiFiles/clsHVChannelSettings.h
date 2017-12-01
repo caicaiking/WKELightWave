@@ -22,10 +22,13 @@ public:
 
 public slots:
     void onCloseLabelClicked();
+    void onChannelLabelClicked();
 private:
     int channel;
     QString condition;
     QString resStatus;
+    QString item;
+    QString suffix;
     double hiLimit, lowLimit, voltage;
     double res;
     QString relaySwitch;

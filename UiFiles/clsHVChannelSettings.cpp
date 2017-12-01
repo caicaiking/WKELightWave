@@ -5,15 +5,14 @@
 #include "doubleType.h"
 #include "doubleType.h"
 #include "publicUtility.h"
-//TODO: 状态切换
-//TODO: 修改让其行为和仪表一样
-//BUG: 此类不能正常工作
 clsHVChannelSettings::clsHVChannelSettings(clsMeter *parent) :
     clsMeter(parent)
 {
     setupUi(this);
 
     connect(labelClose,SIGNAL(labelClicked()),this,SLOT(onCloseLabelClicked()));
+    connect(labelChannel,SIGNAL(labelClicked()),this,SLOT(onChannelLabelClicked()));
+
 }
 
 void clsHVChannelSettings::setCondition(const QString condition)
@@ -28,11 +27,12 @@ void clsHVChannelSettings::setCondition(const QString condition)
             if(jsonDocument.isObject())
             {
                 QVariantMap conditionMap=jsonDocument.toVariant().toMap();
+                this->item = conditionMap["item"].toString();
+                this->suffix = conditionMap["suffix"].toString();
                 this->hiLimit = conditionMap["hiLimit"].toDouble();
                 this->lowLimit = conditionMap["lowLimit"].toDouble();
                 this->voltage = conditionMap["voltage"].toDouble();
                 this->relaySwitch = conditionMap["relaySwitch"].toString();
-                this->hvStatus = conditionMap["volSwitch"].toString();
             }
         }
     }
@@ -54,15 +54,14 @@ void clsHVChannelSettings::updateLabels()
     this->setStyleSheet(QString("QDialog{background-color:%1;border:2px solid %2;border-radius: 9px;}")
                         .arg(colorList.at(colorIndex)).arg(colorList.at(colorIndex)));
 
-    labelChannel->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
-    labelChannel->setText(tr("通道")+QString::number(channel));
-    labelChannel->setFont(QFont("楷体",17));
+    //labelChannel->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
+    labelChannel->setText(QString::number(channel));
 
     labelChannel1->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
     labelItem->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
     labelItem->setFont(QFont("楷体",17));
     labelItem11->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
-    labelItem11->setText("R");
+    labelItem11->setText(this->item);
     labelItem11->setFont(QFont("楷体",18));
 
     labelLimit1->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
@@ -70,13 +69,6 @@ void clsHVChannelSettings::updateLabels()
     labelLimit11->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
     labelLimit11->setFont(QFont("楷体",13));
 
-    labelResItem1->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
-    labelResItem1->setFont(QFont("楷体",13));
-    labelRes1->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
-    labelRes1->setFont(QFont("楷体",13));
-
-    labelResStatus1->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
-    labelResStatus1->setFont(QFont("楷体",13));
 
     labelRelay->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
     labelRelay->setFont(QFont("楷体",13));
@@ -86,17 +78,28 @@ void clsHVChannelSettings::updateLabels()
     labelVoltage->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
     labelVoltage->setFont(QFont("楷体",13));
     labelVoltageRes->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
-    labelVoltageRes->setFont(QFont("楷体",13));
-
+    labelResItem1->setText(this->item);
 
     doubleType dt;
-    dt.setData(hiLimit);
+    QString strHiLimit;
+    QString strLowLimit;
+    if(this->suffix == tr("自动"))
+    {
+        dt.setData(hiLimit);
+        strHiLimit = dt.formateToString(6) + publicUtility::getSuffix(item);
+        dt.setData(lowLimit);
+        strLowLimit= dt.formateToString(6) + publicUtility::getSuffix(item);
+        this->labelLimit11->setText(strLowLimit + "--" + strHiLimit);
+    }
+    else
+    {
+        dt.setData(hiLimit);
+        strHiLimit = dt.formateWithUnit(this->suffix,6) +this->suffix+ publicUtility::getSuffix(item);
+        dt.setData(lowLimit);
+        strLowLimit= dt.formateWithUnit(this->suffix,6) + this->suffix+ publicUtility::getSuffix(item);
+        this->labelLimit11->setText(strLowLimit + "--" + strHiLimit);
 
-    QString strHiLimit = dt.formateToString(6) + publicUtility::getSuffix("R");
-    dt.setData(lowLimit);
-    QString strLowLimit = dt.formateToString(6) + publicUtility::getSuffix("R");
-    this->labelLimit11->setText(strLowLimit + "--" + strHiLimit);
-
+    }
     dt.setData(this->voltage);
     this->labelVoltageRes->setText(dt.formateToString(6) + "V");
 
@@ -124,10 +127,15 @@ void clsHVChannelSettings::setCloseEnabled(const bool bl)
 
 void clsHVChannelSettings::updateRes(const QString res)
 {
-    QVariantMap conditionMap;
-    bool resBl;
-    double tmpRes;
+    QVariantMap resMap;
+    QVariantList resList;
+    doubleType dt;
+
+    QString item;
+    bool resStatus;
+    double result;
     QString resUnit;
+
     QJsonParseError error;
     QJsonDocument jsonDocument = QJsonDocument::fromJson(res.toUtf8(), &error);
 
@@ -137,28 +145,31 @@ void clsHVChannelSettings::updateRes(const QString res)
     if(jsonDocument.isEmpty() || jsonDocument.isNull())
         return;
 
-    conditionMap = jsonDocument.toVariant().toMap();
+    resMap = jsonDocument.toVariant().toMap();
 
-    tmpRes=conditionMap["result"].toDouble();
-    resBl=conditionMap["resStatus"].toBool();
-    resUnit=conditionMap["resUnit"].toString();
-    if(resBl)
+    if(resMap["channel"].toInt() != this->channel)
+        return ;
+
+    resList = resMap["data"].toList();
+    if(resList.length()>=1)
     {
-        labelResItem1->setStyleSheet(QString("background-color:#66FF00"));
-        labelRes1->setStyleSheet(QString("background-color:#66FF00"));
-        labelResStatus1->setStyleSheet(QString("background-color:#66FF00"));
-        labelResStatus1->setText(tr("PASS"));
+        QVariantMap tmpMap = resList.at(0).toMap();
+        item = tmpMap["item"].toString();
+        resStatus = tmpMap["status"].toBool();
+        result = tmpMap["result"].toDouble();
+        resUnit = tmpMap["suffix"].toString();
+
+        dt.setData(result);
+        if(resUnit != tr("自动"))
+            labelRes1->setText(dt.formateWithUnit(resUnit,7)+ resUnit + publicUtility::getSuffix(item));
+        else
+            labelRes1->setText(dt.formateToString(7)+ publicUtility::getSuffix(item));
+
+        if(resStatus)
+            labelResStatus1->setPixmap(QPixmap(":/dotGreen.png"));
+        else
+            labelResStatus1->setPixmap(QPixmap(":/dotRed.png"));
     }
-    else
-    {
-        labelResItem1->setStyleSheet(QString("background-color:red"));
-        labelRes1->setStyleSheet(QString("background-color:red"));
-        labelResStatus1->setStyleSheet(QString("background-color:red"));
-        labelResStatus1->setText(tr("FAIL"));
-    }
-    doubleType dt;
-    dt.setData(tmpRes,"");
-    labelRes1->setText(dt.formateToString(6)+resStatus);
 }
 
 void clsHVChannelSettings::setStep(int i)
@@ -175,4 +186,12 @@ int clsHVChannelSettings::getStep() const
 void clsHVChannelSettings::onCloseLabelClicked()
 {
     emit deleteChannelSettings(intStep);
+}
+
+void clsHVChannelSettings::onChannelLabelClicked()
+{
+    int tabs = stackedWidget->count();
+
+    int nextPageIndex = stackedWidget->currentIndex()+1;
+    stackedWidget->setCurrentIndex(nextPageIndex % tabs);
 }

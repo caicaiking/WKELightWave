@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>315</width>
+    <width>400</width>
     <height>224</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>0</width>
+    <width>400</width>
     <height>224</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>332</width>
+    <width>323232</width>
     <height>224</height>
    </size>
   </property>
@@ -38,63 +38,61 @@
 }
 </string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_5">
+  <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,10">
+   <property name="spacing">
+    <number>2</number>
+   </property>
    <property name="leftMargin">
-    <number>3</number>
+    <number>2</number>
    </property>
    <property name="topMargin">
-    <number>3</number>
+    <number>2</number>
    </property>
    <property name="rightMargin">
-    <number>3</number>
+    <number>2</number>
    </property>
    <property name="bottomMargin">
-    <number>3</number>
+    <number>2</number>
    </property>
-   <property name="spacing">
-    <number>1</number>
-   </property>
-   <item row="0" column="0">
-    <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1">
-     <property name="spacing">
-      <number>0</number>
-     </property>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
-       <property name="spacing">
-        <number>0</number>
-       </property>
        <item>
         <widget class="clsLabel" name="labelClose">
          <property name="minimumSize">
           <size>
-           <width>34</width>
-           <height>34</height>
+           <width>30</width>
+           <height>30</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>34</width>
-           <height>34</height>
+           <width>30</width>
+           <height>30</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>楷体</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
          </property>
          <property name="autoFillBackground">
           <bool>false</bool>
          </property>
          <property name="styleSheet">
           <string notr="true">QLabel:hover{  
-    font: 9pt;  
-    font-family:&quot;Vrinda&quot;;  
-    color: rgb(236, 218, 127);  
-    border: 4px solid red;  
-    border-radius: 17px;  
-    padding: 2px;  
-    
+	color: rgb(236, 218, 127);   
+	border: 1px solid red;
+	border-radius:13px
 } 
 
 QLabel
 {
-  border-radius: 17px; 
+	border-radius:13px
 }</string>
          </property>
          <property name="text">
@@ -103,21 +101,86 @@ QLabel
          <property name="pixmap">
           <pixmap resource="../images/res.qrc">:/close.ico</pixmap>
          </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="labelChannel1">
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>10</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>53</width>
+         <height>27</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>10</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="clsLabel" name="labelChannel">
+         <property name="minimumSize">
+          <size>
+           <width>56</width>
+           <height>56</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>56</width>
+           <height>56</height>
+          </size>
+         </property>
          <property name="font">
           <font>
-           <family>楷体</family>
-           <pointsize>14</pointsize>
+           <family>Arial</family>
+           <pointsize>22</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
           </font>
          </property>
+         <property name="toolTip">
+          <string>点击我切换显示</string>
+         </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 0);</string>
+          <string notr="true">border-radius:28px;
+background-color: rgb(150, 150, 251);
+border: 3px solid rgb(252, 255, 74);</string>
          </property>
          <property name="text">
           <string>1</string>
@@ -127,28 +190,62 @@ QLabel
          </property>
         </widget>
        </item>
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>10</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
       </layout>
      </item>
      <item>
-      <widget class="QLabel" name="labelChannel">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelChannel1">
        <property name="minimumSize">
         <size>
-         <width>66</width>
-         <height>81</height>
+         <width>30</width>
+         <height>30</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>88888</width>
-         <height>16777215</height>
+         <width>16777215</width>
+         <height>34</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <family>楷体</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 0);
-font:17pt &quot;楷体&quot;;</string>
+        <string notr="true"/>
        </property>
        <property name="text">
-        <string>通道1</string>
+        <string/>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -157,13 +254,13 @@ font:17pt &quot;楷体&quot;;</string>
      </item>
     </layout>
    </item>
-   <item row="0" column="1">
+   <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="styleSheet">
       <string notr="true">background-color: rgb(150, 150, 251);</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page">
       <layout class="QGridLayout" name="gridLayout_3" rowstretch="0">
@@ -438,32 +535,14 @@ font: 12pt &quot;楷体&quot;;</string>
        <item row="0" column="0">
         <widget class="QGroupBox" name="groupBoxRes">
          <property name="styleSheet">
-          <string notr="true">font: 18pt &quot;楷体&quot;;</string>
+          <string notr="true"/>
          </property>
          <property name="title">
           <string/>
          </property>
-         <layout class="QGridLayout" name="gridLayout_2" rowstretch="0" columnstretch="0">
-          <property name="leftMargin">
-           <number>3</number>
-          </property>
-          <property name="topMargin">
-           <number>3</number>
-          </property>
-          <property name="rightMargin">
-           <number>3</number>
-          </property>
-          <property name="bottomMargin">
-           <number>3</number>
-          </property>
-          <property name="spacing">
-           <number>3</number>
-          </property>
-          <item row="0" column="0">
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
-            <property name="spacing">
-             <number>2</number>
-            </property>
             <item>
              <widget class="QLabel" name="labelResItem1">
               <property name="minimumSize">
@@ -478,11 +557,20 @@ font: 12pt &quot;楷体&quot;;</string>
                 <height>16777215</height>
                </size>
               </property>
+              <property name="font">
+               <font>
+                <family>Arial</family>
+                <pointsize>22</pointsize>
+               </font>
+              </property>
+              <property name="autoFillBackground">
+               <bool>false</bool>
+              </property>
               <property name="styleSheet">
                <string notr="true"/>
               </property>
               <property name="text">
-               <string>R</string>
+               <string>L</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -503,11 +591,23 @@ font: 12pt &quot;楷体&quot;;</string>
                 <height>16777215</height>
                </size>
               </property>
+              <property name="font">
+               <font>
+                <family>Arial</family>
+                <pointsize>28</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="autoFillBackground">
+               <bool>false</bool>
+              </property>
               <property name="styleSheet">
                <string notr="true"/>
               </property>
               <property name="text">
-               <string>--</string>
+               <string>No Data</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -516,17 +616,33 @@ font: 12pt &quot;楷体&quot;;</string>
             </item>
             <item>
              <widget class="QLabel" name="labelResStatus1">
+              <property name="minimumSize">
+               <size>
+                <width>16</width>
+                <height>16</height>
+               </size>
+              </property>
               <property name="maximumSize">
                <size>
-                <width>56</width>
-                <height>16777215</height>
+                <width>16</width>
+                <height>16</height>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true"/>
+               <string notr="true">QLabel#labelResStatus1
+{
+	background-color:rgb(255, 233, 66);
+	border-radius: 8px
+}</string>
               </property>
               <property name="text">
-               <string>--</string>
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap resource="../images/res.qrc">:/dotGreen.png</pixmap>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -552,7 +668,6 @@ font: 12pt &quot;楷体&quot;;</string>
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../images/res.qrc"/>
   <include location="../images/res.qrc"/>
   <include location="../images/res.qrc"/>
  </resources>

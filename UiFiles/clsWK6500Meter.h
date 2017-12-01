@@ -12,7 +12,7 @@ public:
     explicit clsWK6500Meter(QWidget *parent = 0);
 
     QString trig() const;
-    QString getCondtion() const;
+    QString getCondition() const;
     void setCondition(const QString condition);
 
 private slots:

@@ -70,7 +70,7 @@ void clsChannelSettings::updateLabels()
     labelList1<<labelBias1<<labelFreq1<<labelItem11
              <<labelItem22<<labelLimit11<<labelLimit22<<labelSpeed1;
 
-    this->setStyleSheet(QString("QDialog{background-color:%1;border:2px solid %2;border-radius: 9px;}")
+    this->setStyleSheet(QString("QDialog#clsChannelSettings{background-color:%1;border:2px solid %2;border-radius: 9px;}")
                         .arg(colorList.at(colorIndex)).arg(Qt::cyan));
     for(int i=0;i<labelList.length();i++)
     {
@@ -80,19 +80,12 @@ void clsChannelSettings::updateLabels()
         labelList1.at(i)->setFont(QFont("楷体",12));
     }
 
-    labelChannel->setStyleSheet(QString("border:0px solid %1").arg(colorList.at(colorIndex)));
-    labelChannel->setStyleSheet(QString("border-radius: 0px"));
-    labelChannel->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
-    labelChannel->setText(tr("通道")+QString::number(channel));
-    labelChannel->setFont(QFont("楷体",17));
+    labelChannel->setText(QString::number(channel));
 
     labelChannel1->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
-    //labelClose->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
     labelRelay->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
     labelRelaySwitch->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
     labelBias1->setText(QString::number(bias)+biasType+","+biasSwitch);
-    //labelBias1->setFont(QFont("楷体",12));
-    //labelEqucct1->setText(equcct);
     doubleType dt;
     dt.setData(frequency,"");
     labelFreq1->setText(dt.formateToString(6)+"Hz");
@@ -226,7 +219,7 @@ void clsChannelSettings::updateRes(const QString res)
 
         dt.setData(result);
         if(resUnit != tr("自动"))
-            labelRes1->setText(dt.formateWithUnit(resUnit,7)+ publicUtility::getSuffix(item));
+            labelRes1->setText(dt.formateWithUnit(resUnit,7)+ resUnit + publicUtility::getSuffix(item));
         else
             labelRes1->setText(dt.formateToString(7)+ publicUtility::getSuffix(item));
 
@@ -236,8 +229,6 @@ void clsChannelSettings::updateRes(const QString res)
             labelResStatus1->setPixmap(QPixmap(":/dotRed.png"));
 
     }
-
-    qApp->processEvents();
 
     if(resList.length()>=2)
     {
@@ -249,7 +240,7 @@ void clsChannelSettings::updateRes(const QString res)
 
         dt.setData(result);
         if(resUnit != tr("自动"))
-            labelRes2->setText(dt.formateWithUnit(resUnit,7)+ publicUtility::getSuffix(item));
+            labelRes2->setText(dt.formateWithUnit(resUnit,7)+ resUnit + publicUtility::getSuffix(item));
         else
             labelRes2->setText(dt.formateToString(7)+ publicUtility::getSuffix(item));
 
@@ -264,7 +255,6 @@ void clsChannelSettings::updateRes(const QString res)
 
         labelResStatus2->setText("---");
     }
-    qApp->processEvents();
 }
 
 

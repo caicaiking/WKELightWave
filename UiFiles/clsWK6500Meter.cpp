@@ -131,7 +131,7 @@ void clsWK6500Meter::onLabellimit2Clicked()
     }
 }
 
-QString clsWK6500Meter::getCondtion() const
+QString clsWK6500Meter::getCondition() const
 {
     QVariantMap condition;
 
@@ -367,7 +367,7 @@ void clsWK6500Meter::saveSettings()
     clsSettings settings;
 
     QString strNode = "WK6500/";
-    settings.writeSetting(strNode + "latestSettings", this->getCondtion());
+    settings.writeSetting(strNode + "latestSettings", this->getCondition());
 }
 
 void clsWK6500Meter::on_btnItem2Unit_clicked()

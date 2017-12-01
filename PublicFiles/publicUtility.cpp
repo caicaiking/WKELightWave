@@ -90,7 +90,8 @@ QString publicUtility::getSuffix(const QString &value)
         return "V";
     if(value.toUpper()=="TIME" || value.toUpper()==QObject::tr("时间").toUpper())
         return "s";
-
+    if(value.toUpper()=="CURRENT" || value.toUpper()=="CUR")
+        return "A";
     if(value.toUpper()=="BIASI" || value.toUpper()==QObject::tr("偏置电流").toUpper())
         return "A";
     if(value.toUpper()=="LEVELA" || value.toUpper()==QObject::tr("电流信号").toUpper())

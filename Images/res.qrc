@@ -65,5 +65,7 @@
         <file>lightWave.png</file>
         <file>splashScreen2.png</file>
         <file>version.txt</file>
+        <file>close.png</file>
+        <file>run2.png</file>
     </qresource>
 </RCC>
