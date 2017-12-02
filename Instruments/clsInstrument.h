@@ -27,6 +27,7 @@ public:
     virtual void turnOffOutput() =0;            //关闭所有的输出
 signals:
     void setConnectStatus(bool);                //显示连接状态
+    void voltageOutput(bool);                   //电压输出
 public slots:
 };
 

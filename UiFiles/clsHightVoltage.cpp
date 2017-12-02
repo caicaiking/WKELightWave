@@ -101,6 +101,7 @@ void clsHightVoltage::on_btnVoltage_clicked()
 
 void clsHightVoltage::on_btnOK_clicked()
 {
+    saveSettings();
     this->accept();
 }
 

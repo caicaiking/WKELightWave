@@ -20,6 +20,7 @@ public:
     virtual int getStep() const=0;                          //获取步骤
 signals:
     void deleteChannelSettings(int index);                  //删除步骤，通常是指自己本身
+    void editStep(int step);
 };
 
 #endif // CLSMETER_H

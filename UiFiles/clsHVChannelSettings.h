@@ -23,6 +23,8 @@ public:
 public slots:
     void onCloseLabelClicked();
     void onChannelLabelClicked();
+    void setLablChannelToolTip();
+    void showTrigStar(int i);
 private:
     int channel;
     QString condition;
@@ -34,6 +36,7 @@ private:
     QString relaySwitch;
     QString hvStatus;
 
+    bool isEditMode;
     int intStep;
 };
 

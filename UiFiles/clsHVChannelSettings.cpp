@@ -5,14 +5,18 @@
 #include "doubleType.h"
 #include "doubleType.h"
 #include "publicUtility.h"
+#include "clsRunService.h"
 clsHVChannelSettings::clsHVChannelSettings(clsMeter *parent) :
     clsMeter(parent)
 {
     setupUi(this);
 
+    isEditMode = true;
     connect(labelClose,SIGNAL(labelClicked()),this,SLOT(onCloseLabelClicked()));
     connect(labelChannel,SIGNAL(labelClicked()),this,SLOT(onChannelLabelClicked()));
-
+    connect(sngRunService::Ins(),&clsRunService::currentStep,this,&clsHVChannelSettings::showTrigStar);
+    this->lblTrigStar->setText(" ");
+    isEditMode = true;
 }
 
 void clsHVChannelSettings::setCondition(const QString condition)
@@ -57,6 +61,7 @@ void clsHVChannelSettings::updateLabels()
     //labelChannel->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
     labelChannel->setText(QString::number(channel));
 
+    lblTrigStar->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
     labelChannel1->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
     labelItem->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
     labelItem->setFont(QFont("楷体",17));
@@ -109,12 +114,16 @@ void clsHVChannelSettings::updateLabels()
 
 void clsHVChannelSettings::setChannelSettings()
 {
+    setLablChannelToolTip();
     stackedWidget->setCurrentIndex(0);
+    isEditMode = true;
 }
 
 void clsHVChannelSettings::setChannelRunnings()
 {
+    setLablChannelToolTip();
     stackedWidget->setCurrentIndex(1);
+    isEditMode = false;
 }
 
 void clsHVChannelSettings::setCloseEnabled(const bool bl)
@@ -170,6 +179,8 @@ void clsHVChannelSettings::updateRes(const QString res)
         else
             labelResStatus1->setPixmap(QPixmap(":/dotRed.png"));
     }
+
+    this->lblTrigStar->setText(" ");
 }
 
 void clsHVChannelSettings::setStep(int i)
@@ -190,8 +201,31 @@ void clsHVChannelSettings::onCloseLabelClicked()
 
 void clsHVChannelSettings::onChannelLabelClicked()
 {
-    int tabs = stackedWidget->count();
+    if(isEditMode)
+    {
+        emit editStep(this->intStep);
+    }
+    else
+    {
+        int tabs = stackedWidget->count();
 
-    int nextPageIndex = stackedWidget->currentIndex()+1;
-    stackedWidget->setCurrentIndex(nextPageIndex % tabs);
+        int nextPageIndex = stackedWidget->currentIndex()+1;
+        stackedWidget->setCurrentIndex(nextPageIndex % tabs);
+    }
+}
+
+void clsHVChannelSettings::setLablChannelToolTip()
+{
+   if(isEditMode)
+       this->labelChannel->setToolTip(tr("点我修改参数"));
+   else
+       this->labelChannel->setToolTip(tr("点击我切换显示"));
+}
+
+void clsHVChannelSettings::showTrigStar(int i)
+{
+    if(i == intStep)
+        lblTrigStar->setText("*");
+    else
+        lblTrigStar->setText(" ");
 }

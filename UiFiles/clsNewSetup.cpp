@@ -19,6 +19,20 @@ int clsNewSetup::getChannel() const
     return this->channel;
 }
 
+void clsNewSetup::setChannel(int channel)
+{
+    this->cmbChannel->setCurrentIndex(channel-1);
+}
+
+void clsNewSetup::setMeter(QString meter)
+{
+   this->show();
+   if(meter == "WK6500")
+       on_btnLCR_clicked();
+   else
+       on_btnHV_clicked();
+}
+
 QString clsNewSetup::getCondtion() const
 {
     return condition;

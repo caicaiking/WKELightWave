@@ -201,6 +201,7 @@ void clsWK6500Meter::setCondition(const QString condition)
             }
         }
     }
+    updateButtons();
 }
 
 void clsWK6500Meter::on_btnFreq_clicked()

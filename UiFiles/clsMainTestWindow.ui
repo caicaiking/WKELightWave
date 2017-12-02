@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1217</width>
-    <height>607</height>
+    <width>976</width>
+    <height>656</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>WKE 自动化控制器</string>
+   <string>WKE LightWave</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../images/res.qrc">
@@ -47,7 +47,7 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>33</height>
+          <height>40</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -68,7 +68,7 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>33</height>
+          <height>40</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -89,7 +89,7 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>33</height>
+          <height>40</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -110,7 +110,7 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>33</height>
+          <height>40</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -140,7 +140,7 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>33</height>
+          <height>40</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -176,7 +176,7 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>33</height>
+          <height>40</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -202,6 +202,39 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="btnReptive">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 11pt &quot;楷体&quot;;</string>
+        </property>
+        <property name="text">
+         <string>重复
+测试</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../images/res.qrc">
+          <normaloff>:/Auto.png</normaloff>:/Auto.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="shortcut">
+         <string>Return</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -219,7 +252,7 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>33</height>
+          <height>40</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -239,10 +272,10 @@
           <height>20</height>
          </size>
         </property>
-        <property name="shortcut">
-         <string>Return</string>
-        </property>
         <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
          <bool>true</bool>
         </property>
        </widget>
@@ -292,8 +325,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>1009</width>
-              <height>507</height>
+              <width>818</width>
+              <height>556</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -331,13 +364,13 @@
        <widget class="QWidget" name="wgtSignalPannel" native="true">
         <property name="minimumSize">
          <size>
-          <width>200</width>
+          <width>150</width>
           <height>0</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>200</width>
+          <width>150</width>
           <height>16777215</height>
          </size>
         </property>
@@ -355,7 +388,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1217</width>
+     <width>976</width>
      <height>23</height>
     </rect>
    </property>
@@ -452,6 +485,22 @@
     <hint type="destinationlabel">
      <x>1183</x>
      <y>100</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnRunning</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>btnReptive</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>375</x>
+     <y>43</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>542</x>
+     <y>50</y>
     </hint>
    </hints>
   </connection>

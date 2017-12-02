@@ -31,7 +31,6 @@ bool clsLcrCnntWindow::setupConnection()
         return false;
 
     QString strRet = sngLCRCnnt::Ins()->sendCommand("*IDN?", true);
-    qDebug()<< strRet;
     if(strRet.contains("WAYNE KERR"))
         return true;
     else

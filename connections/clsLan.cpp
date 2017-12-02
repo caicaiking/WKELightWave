@@ -64,13 +64,13 @@ QString clsLan::sendCommand(QString strCommand, bool hasReturn, int waitDaly)
 
     if(!blInit)
     {
-        qDebug()<<"Go to init function";
+        qWarning()<<"Go to init function";
         init();
     }
 
     if(socket->state() == QAbstractSocket::UnconnectedState)
     {
-        qDebug()<<"Init function failed, to to init function again";
+        qWarning()<<"Init function failed, to to init function again";
         socket->disconnectFromHost();
         init();
     }

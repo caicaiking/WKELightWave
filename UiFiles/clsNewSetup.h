@@ -10,7 +10,10 @@ class clsNewSetup : public QDialog, private Ui::clsNewSetup
 public:
     explicit clsNewSetup(QWidget *parent = 0);
     int getChannel() const;
+    void setChannel(int channel);
+    void setMeter(QString meter);
     QString getCondtion() const;
+
     QString getMeter() const;
 private slots:
     void on_cmbChannel_currentIndexChanged(int index);

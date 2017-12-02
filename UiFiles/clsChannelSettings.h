@@ -23,10 +23,11 @@ public:
     int getStep() const override;
 
 private slots:
-  void onLabelCloseClicked();
-   void onLblChannelClicked();
+    void onLabelCloseClicked();
+    void onLblChannelClicked();
+    void setLablChannelToolTip();
 
-
+    void showTrigStart(int i);
 private:
     QString condition;
     int channel;
@@ -44,6 +45,8 @@ private:
 
 private:
     int intStep;
+
+    bool isEditMode;
 };
 
 #endif // CLSCHANNELSETTINGS_H

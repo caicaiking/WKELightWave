@@ -9,7 +9,7 @@
 
 #include <QTextStream>
 #include <stdio.h>
-
+#include <QApplication>
 
 clsRunService::clsRunService(QObject *parent) : QObject(parent)
 {
@@ -54,7 +54,7 @@ void clsRunService::switchToRunningMode(bool value)
 
 void clsRunService::trig()
 {
-
+    emit trigSignal(); //发送得到触发信号
     if(!isRunningMode)
         return;
 
@@ -63,9 +63,12 @@ void clsRunService::trig()
 
     //Set busy
     sngFtdiOp::Ins()->setBusy(true);
-
+    emit busyStatus(true);
+    qApp->processEvents();
     for(int i=0; i<steps.length(); i++)
     {
+        emit currentStep(i);
+        qApp->processEvents();
         meter = clsRunningMeterFactory::getMeter(steps.at(i)->meter);
 
         if(meter ==0)
@@ -111,24 +114,32 @@ void clsRunService::trig()
         emit showRes(jsd.toJson());
 
     }
+    emit currentStep(-1);
 
     //set bing PASS Fail
     sngFtdiOp::Ins()->setLcrPassFail(sngSignalStatus::Ins()->getLcrStatus());
+    emit lcrPF(sngSignalStatus::Ins()->getLcrStatus());
     //set binning HV Pass Fail
     sngFtdiOp::Ins()->setHvPassFail(sngSignalStatus::Ins()->getHvStatus());
+    emit hvPF(sngSignalStatus::Ins()->getHvStatus());
     //set binning Busy line down
     sngFtdiOp::Ins()->setBusy(false);
+    emit busyStatus(false);
+    qApp->processEvents();
     goto END;
 
 RESET:
     sngFtdiOp::Ins()->setBusy(false);
-    qDebug()<<"Reset";
+    emit busyStatus(false);
+    qApp->processEvents();
 END:
     return;
 }
 
 void clsRunService::reset()
 {
+    emit resetSignal();
     isReset = true;
     sngFtdiOp::Ins()->setBusy(false);
+    emit busyStatus(false);
 }

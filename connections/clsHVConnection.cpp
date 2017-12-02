@@ -32,7 +32,7 @@ QString clsHVConnection::sendCommand(QString command, bool hasReturn)
 {
     if(!isInit)
     {
-        qDebug()<<"HV connection not setup conrrectly!";
+        qWarning()<<"HV connection not setup conrrectly!";
         emit showMessage("HV设备没有连接");
         return "";
     }

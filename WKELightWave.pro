@@ -31,7 +31,6 @@ DESTDIR =$$PWD/Libs/
 
 RESOURCES += \
     images/res.qrc
-
 HEADERS += \
     PublicFiles/clsMeterLimit.h \
     PublicFiles/doubleType.h \
@@ -77,7 +76,8 @@ HEADERS += \
     UiFiles/clsTestConditon.h \
     UiFiles/clsMeterUnit.h \
     UiFiles/dlgLevelInputBox.h \
-    UiFiles/clsSignalDisplayWidget.h
+    UiFiles/clsSignalDisplayWidget.h \
+    PublicFiles/clsDataStatistics.h
 
 SOURCES += \
     PublicFiles/clsMeterLimit.cpp \
@@ -121,7 +121,8 @@ SOURCES += \
     Instruments/clsHVRunningMode.cpp \
     UiFiles/clsMeterUnit.cpp \
     UiFiles/dlgLevelInputBox.cpp \
-    UiFiles/clsSignalDisplayWidget.cpp
+    UiFiles/clsSignalDisplayWidget.cpp \
+    PublicFiles/clsDataStatistics.cpp
 
 FORMS += \
     UiFiles/clsChannelSettings.ui \
@@ -150,3 +151,8 @@ DISTFILES += \
     Describle.txt
 
 RC_FILE  =Icon.rc
+
+win32: LIBS += -L$$PWD/NLogger/ -lNLogger
+
+INCLUDEPATH += $$PWD/NLogger/include
+DEPENDPATH += $$PWD/NLogger

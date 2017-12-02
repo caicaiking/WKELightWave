@@ -6,6 +6,9 @@
 #include "publicUtility.h"
 void clsRunningThread::run()
 {
+    qDebug()<<strName<< " thread running";
+
+
     blStop = false;
 
     while(!blStop)
@@ -18,6 +21,11 @@ void clsRunningThread::run()
         sleepMs(1);
     }
 
+}
+
+void clsRunningThread::setName(QString name)
+{
+    this->strName = name;
 }
 
 bool clsRunningThread::captrueSignal(int bit)

@@ -15,11 +15,11 @@
 #include "clsRunService.h"
 #include "clsUpdateFtdiDataThread.h"
 #include "clsSettings.h"
+#include "clsWK6500Meter.h"
+#include "clsHightVoltage.h"
 #include <QFile>
 #include <QDir>
-//TODO: 增加信号显示面板
 //TODO: 增加多通道校准界面
-//TODO: 信号模拟
 clsMainTestWindow::clsMainTestWindow(QWidget *parent) :
     QMainWindow(parent)
 {
@@ -33,9 +33,11 @@ clsMainTestWindow::clsMainTestWindow(QWidget *parent) :
     this->itemWidget->setLayout(layout);
 
     trigThread = new clsRunningThread();
+    trigThread->setName("Trig");
     trigThread->setCaptureBit(0);
 
     resetThread = new clsRunningThread();
+    resetThread->setName("Reset");
     resetThread->setCaptureBit(1);
 
 
@@ -44,8 +46,11 @@ clsMainTestWindow::clsMainTestWindow(QWidget *parent) :
 
     sngFtdiData::Ins()->start();
 
+    installSignalDispaly();
+    wgtSignalPannel->setVisible(true);
     connect(sngRunService::Ins(),SIGNAL(showRes(QString)),this,SLOT(showChannelRes(QString)));
 
+    //软件初始化后打开最后一次保存的文件
     QString lastFile = getLastFile();
     if(!lastFile.isEmpty())
     {
@@ -57,9 +62,10 @@ clsMainTestWindow::clsMainTestWindow(QWidget *parent) :
     }
     else
         on_btnSettings_clicked(true);
+
 }
 
-void clsMainTestWindow::updateChannelSettings(const QList<clsTestConditons *> map)
+void clsMainTestWindow::showAllStep()
 {
     QJsonDocument jsDocument;
     QJsonParseError error;
@@ -82,10 +88,10 @@ void clsMainTestWindow::updateChannelSettings(const QList<clsTestConditons *> ma
 
     items.clear();
     //重新开始生成步骤
-    for(int i=0; i<map.length(); i++)
+    for(int i=0; i<steps.length(); i++)
     {
         clsMeter *tmp;
-        clsTestConditons* js = map[i];
+        clsTestConditons* js = steps[i];
 
         tmp = clsMeterFactory::getMeter(js->meter);
 
@@ -106,6 +112,7 @@ void clsMainTestWindow::updateChannelSettings(const QList<clsTestConditons *> ma
         tmp->updateLabels();
         tmp->setStep(i) ; //以0为开始
         connect(tmp,SIGNAL(deleteChannelSettings(int)),this,SLOT(deleteChannel(int)));
+        connect(tmp,SIGNAL(editStep(int)),this,SLOT(editStep(int)));
         items.append(tmp);
         layout->addWidget(tmp);
 
@@ -185,7 +192,7 @@ void clsMainTestWindow::on_btnNewSetup_clicked()
         else
             steps.append(tmp);
 
-        updateChannelSettings(steps);
+        showAllStep();
     }
 }
 
@@ -193,7 +200,7 @@ void clsMainTestWindow::deleteChannel(int index)
 {
     steps.removeAt(index);
 
-    updateChannelSettings(steps);
+    showAllStep();
 }
 
 void clsMainTestWindow::showChannelRes(QString res)
@@ -245,7 +252,40 @@ void clsMainTestWindow::showChannelRes(QString res)
 void clsMainTestWindow::deleteAllSteps()
 {
     steps.clear();
-    updateChannelSettings(steps);
+    showAllStep();
+
+}
+
+void clsMainTestWindow::editStep(int step)
+{
+    clsTestConditons * tmpStep = steps[step];
+    clsTestConditons ts;
+    ts.setJson(tmpStep->condition);
+
+    if(tmpStep->meter == "WK6500")
+    {
+        clsWK6500Meter * dlg = new clsWK6500Meter(this);
+        dlg->setCondition(ts.condition);
+        if(dlg->exec() == QDialog::Accepted)
+        {
+            ts.condition = dlg->getCondition();
+            tmpStep->condition = ts.toJson();
+            showAllStep();
+        }
+    }
+    else
+    {
+        clsHightVoltage * dlg = new clsHightVoltage(this);
+        dlg->setCondition(ts.condition);
+        if(dlg->exec() == QDialog::Accepted)
+        {
+            ts.condition = dlg->getCondition();
+            tmpStep->condition = ts.toJson();
+            showAllStep();
+        }
+
+    }
+
 
 }
 //!
@@ -325,7 +365,7 @@ void clsMainTestWindow::openTaskFile(QString strPath)
     }
     saveLastFile(strPath);
     myStatusBar->showMessage(tr("成功打开步骤文件：%1").arg(strPath),3000);
-    updateChannelSettings(steps);
+    showAllStep();
 }
 
 void clsMainTestWindow::saveTaskFile(QString strPath)
@@ -374,6 +414,7 @@ void clsMainTestWindow::on_btnSettings_clicked(bool checked)
 {
     btnSettings->setChecked(checked);
     btnRunning->setChecked(!checked);
+    btnReptive->setChecked(false);
     if(checked) //Setting Mode
     {
         for(int i=0; i< items.length(); i++)
@@ -405,4 +446,29 @@ void clsMainTestWindow::on_btnSettings_clicked(bool checked)
 void clsMainTestWindow::on_btnRunning_clicked(bool checked)
 {
     btnSettings->clicked(!checked);
+}
+
+void clsMainTestWindow::on_btnReptive_clicked()
+{
+    while(btnReptive->isChecked())
+    {
+        this->btnTrig->clicked();
+        publicUtility::sleepMs(2);
+    }
+}
+
+void clsMainTestWindow::installSignalDispaly()
+{
+    signalWidget = new clsSignalDisplayWidget();
+
+    QVBoxLayout * hLayout = new QVBoxLayout();
+    hLayout->addWidget(signalWidget);
+    hLayout->setContentsMargins(0,0,0,0);
+    wgtSignalPannel->setLayout(hLayout);
+}
+
+void clsMainTestWindow::closeEvent(QCloseEvent *event)
+{
+    btnReptive->setChecked(false);
+
 }

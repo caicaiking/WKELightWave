@@ -23,6 +23,16 @@ public slots:
 public slots:
     void trig();
     void reset();
+
+
+signals:
+    void busyStatus(bool);
+    void lcrPF(bool);
+    void hvPF(bool);
+    void trigSignal();
+    void resetSignal();
+    void currentStep(int i);
+
 private:
     bool isRunningMode;
     bool isReset;

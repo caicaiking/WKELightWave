@@ -5,12 +5,17 @@
 #include "doubleType.h"
 #include <QDebug>
 #include "publicUtility.h"
+#include "clsRunService.h"
+
 clsChannelSettings::clsChannelSettings(clsMeter *parent) :
     clsMeter(parent)
 {
     setupUi(this);
     connect(labelClose,SIGNAL(labelClicked()),this,SLOT(onLabelCloseClicked()));
     connect(labelChannel,SIGNAL(labelClicked()),this,SLOT(onLblChannelClicked()));
+    connect(sngRunService::Ins(),&clsRunService::currentStep,this,&clsChannelSettings::showTrigStart);
+    lblTrigStart->setText(" ");
+    isEditMode = true;
 }
 
 void clsChannelSettings::setChannel(const int channel)
@@ -79,7 +84,7 @@ void clsChannelSettings::updateLabels()
         labelList1.at(i)->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
         labelList1.at(i)->setFont(QFont("楷体",12));
     }
-
+    lblTrigStart->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
     labelChannel->setText(QString::number(channel));
 
     labelChannel1->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
@@ -158,19 +163,45 @@ void clsChannelSettings::onLabelCloseClicked()
 
 void clsChannelSettings::onLblChannelClicked()
 {
-   int tabs = stackedWidget->count();
+    if(isEditMode)
+    {
+        emit editStep(this->intStep);
+    }
+    else
+    {
+        int tabs = stackedWidget->count();
+        int nextPageIndex = stackedWidget->currentIndex()+1;
+        stackedWidget->setCurrentIndex(nextPageIndex % tabs);
+    }
+}
 
-   int nextPageIndex = stackedWidget->currentIndex()+1;
-   stackedWidget->setCurrentIndex(nextPageIndex % tabs);
+void clsChannelSettings::setLablChannelToolTip()
+{
+    if(isEditMode)
+        this->labelChannel->setToolTip(tr("点我修改参数"));
+    else
+        this->labelChannel->setToolTip(tr("点击我切换显示"));
+}
+
+void clsChannelSettings::showTrigStart(int i)
+{
+    if(i == this->intStep)
+        this->lblTrigStart->setText("*");
+    else
+        this->lblTrigStart->setText(" ");
 }
 void clsChannelSettings::setChannelSettings()
 {
     stackedWidget->setCurrentIndex(0);
+    isEditMode = true;
+    setLablChannelToolTip();
 }
 
 void clsChannelSettings::setChannelRunnings()
 {
     stackedWidget->setCurrentIndex(1);
+    isEditMode = false;
+    setLablChannelToolTip();
 }
 
 void clsChannelSettings::setCloseEnabled(bool bl)
@@ -255,6 +286,8 @@ void clsChannelSettings::updateRes(const QString res)
 
         labelResStatus2->setText("---");
     }
+
+    this->lblTrigStart->setText(" ");
 }
 
 

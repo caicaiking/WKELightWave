@@ -24,7 +24,7 @@ public:
 
         QVariantMap map = jsDocument.toVariant().toMap();
         channel = map["channel"].toInt();
-        condition = map["condition"].toString();
+        condition = map["conditions"].toString();
         meter = map["meter"].toString();
 
 
@@ -33,7 +33,7 @@ public:
     {
         QVariantMap map;
         map.insert("channel", this->channel);
-        map.insert("condition", this->condition);
+        map.insert("conditions", this->condition);
         map.insert("meter",this->meter);
         QJsonDocument jsDocument = QJsonDocument::fromVariant(map);
         return jsDocument.toJson(QJsonDocument::Indented);

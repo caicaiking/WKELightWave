@@ -67,5 +67,8 @@
         <file>version.txt</file>
         <file>close.png</file>
         <file>run2.png</file>
+        <file>Auto.png</file>
+        <file>BiasOff.png</file>
+        <file>BiasOn.png</file>
     </qresource>
 </RCC>

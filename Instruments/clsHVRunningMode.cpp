@@ -6,7 +6,7 @@
 #include <QJsonParseError>
 #include <QDebug>
 #include "clsHVConnection.h"
-
+#include "publicUtility.h"
 #include "doubleType.h"
 #include "clsFtdiOperation.h"
 clsHVRunningMode::clsHVRunningMode(clsInstrument *parent): clsInstrument(parent)
@@ -77,6 +77,8 @@ QString clsHVRunningMode::getCondition()
 bool clsHVRunningMode::trig()
 {
     updateGpibCommands(); //更新指令
+    emit voltageOutput(true);
+    publicUtility::sleepMs(200);
 
     QString res = sngHVCnnt::Ins()->sendCommand(HVTRGCMD, true);
     res +=",,";
@@ -104,7 +106,7 @@ bool clsHVRunningMode::getTotleStatus()
     bool status = true;
     for(int i =0; i< getItemsCount(); i++)
     {
-       status &= getItemStatus(i);
+        status &= getItemStatus(i);
     }
     return status;
 }
@@ -118,7 +120,7 @@ QString clsHVRunningMode::getItem(int i)
 
 QString clsHVRunningMode::getItemSuffix(int i)
 {
-     QStringList suffixs;
+    QStringList suffixs;
     suffixs<< suffix << "" << "";
     return suffixs.at(i);
 
@@ -135,11 +137,11 @@ double clsHVRunningMode::getItemValueWithSuffix(int i)
     dt.setData(results.at(i));
     if(suffix == tr("自动"))
     {
-       return getItemValue(i); //如果是自动的话，就返回原始数据
+        return getItemValue(i); //如果是自动的话，就返回原始数据
     }
     else
     {
-       return dt.formateWithUnit(suffix, 7).toDouble();
+        return dt.formateWithUnit(suffix, 7).toDouble();
     }
 }
 
@@ -151,6 +153,7 @@ QString clsHVRunningMode::getInstrumentType()
 void clsHVRunningMode::turnOffOutput()
 {
     sngHVCnnt::Ins()->sendCommand(HVTURNOFFCMD,false);
+    emit voltageOutput(false);
 }
 
 void clsHVRunningMode::updateGpibCommands()

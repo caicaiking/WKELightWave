@@ -37,7 +37,7 @@ QString clsLcrConnection::sendCommand(QString command, bool hasReturn)
         return cnnt->sendCommand(command,hasReturn);
     else
         emit showMessage("LCR设备没有连接");
-        qDebug()<<"The connection does't setup conrrectly!";
+        qWarning()<<"The LCR connection does't setup conrrectly!";
         return "";
 
 }

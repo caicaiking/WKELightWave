@@ -10,6 +10,8 @@
 #include <QJsonDocument>
 #include "clsRunningThread.h"
 #include "clsTestConditon.h"
+#include "clsSignalDisplayWidget.h"
+
 class clsMainTestWindow : public QMainWindow, private Ui::clsMainTestWindow
 {
     Q_OBJECT
@@ -17,8 +19,7 @@ class clsMainTestWindow : public QMainWindow, private Ui::clsMainTestWindow
 public:
     explicit clsMainTestWindow(QWidget *parent = 0);
 
-    void updateChannelSettings(const QList<clsTestConditons *> map);
-
+    void showAllStep();
     QString getTestCondition(void) const;
 
 
@@ -30,6 +31,7 @@ private slots:
     void deleteChannel(int index);
     void showChannelRes(QString res);
     void deleteAllSteps();   //删除所有步骤
+    void editStep(int step);
 
     void saveLastFile(QString file); //保存最后打开的文件的名称 和 路径
     QString getLastFilePath();          //获取最后打开的文件的路径
@@ -38,9 +40,12 @@ private slots:
     void saveTaskFile(QString strPath);
 
     void on_btnSettings_clicked(bool checked);
-
     void on_btnRunning_clicked(bool checked);
+    void on_btnReptive_clicked();
 
+    void installSignalDispaly();
+protected:
+    void closeEvent(QCloseEvent *event);
 signals:
     void switchMode(bool);
 private:
@@ -48,6 +53,7 @@ private:
     QList<clsMeter *> items;
     QFlowLayout *layout;
     clsRunningThread *trigThread, *resetThread;
+    clsSignalDisplayWidget * signalWidget;
 };
 
 #endif // CLSMAINTESTWINDOW_H
