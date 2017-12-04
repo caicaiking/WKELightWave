@@ -11,4 +11,8 @@ clsMeter *clsMeterFactory::getMeter(QString m)
         return new clsChannelSettings;
     else if(m=="HV")
         return new clsHVChannelSettings;
+    else
+    {
+        return (clsMeter *)0;
+    }
 }

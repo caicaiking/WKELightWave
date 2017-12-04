@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 
 
     LogManager logInstance;
-    logInstance.InitLog("./log","WKELightWave",true);
+    logInstance.InitLog("./log","WKELightWave",false);
 
     qDebug()<<logInstance.getLogFilePath();
 
