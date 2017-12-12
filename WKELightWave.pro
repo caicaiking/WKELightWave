@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network
+QT       += core gui network serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -78,7 +78,6 @@ HEADERS += \
     UiFiles/dlgLevelInputBox.h \
     UiFiles/clsSignalDisplayWidget.h \
     PublicFiles/clsDataStatistics.h \
-    Ftdi/FTD2XX.H \
     Ftdi/clsSelectFtdiChip.h
 
 SOURCES += \
@@ -161,5 +160,3 @@ win32: LIBS += -L$$PWD/NLogger/ -lNLogger
 INCLUDEPATH += $$PWD/NLogger/include
 DEPENDPATH += $$PWD/NLogger
 
-win32: LIBS += -L$$PWD/Ftdi/ -lFTD2XX
-DEPENDPATH += $$PWD/Ftdi

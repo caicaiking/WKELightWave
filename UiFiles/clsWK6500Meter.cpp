@@ -108,6 +108,7 @@ void clsWK6500Meter::updateButtons()
 void clsWK6500Meter::onLabellimit1Clicked()
 {
     frmSetLimit *frm=new frmSetLimit(this);
+    frm->setItem(this->item1);
     frm->setLimits(mlItem1);
     if(frm->exec()==QDialog::Accepted)
     {
@@ -121,6 +122,7 @@ void clsWK6500Meter::onLabellimit1Clicked()
 void clsWK6500Meter::onLabellimit2Clicked()
 {
     frmSetLimit *frm=new frmSetLimit(this);
+    frm->setItem(this->item2);
     frm->setLimits(mlItem2);
     if(frm->exec()==QDialog::Accepted)
     {

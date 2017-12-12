@@ -79,6 +79,7 @@ void clsHightVoltage::setCondition(const QString condition)
     this->dblRampUp=conditionMap["dblRampUp"].toDouble();
     this->dblDelay=conditionMap["dblDelay"].toDouble();
     this->dblRampDown=conditionMap["dblRampDown"].toDouble();
+    updateButtons();
 }
 
 void clsHightVoltage::updateButtons()
@@ -141,6 +142,7 @@ void clsHightVoltage::on_btnRelay_clicked()
 void clsHightVoltage::onLabelLimitClicked()
 {
     frmSetLimit *dlg=new frmSetLimit(this);
+    dlg->setItem("I");
     dlg->setLimits(mLimit);
     if(dlg->exec()==QDialog::Accepted)
     {
@@ -154,10 +156,11 @@ void clsHightVoltage::onLabelLimitClicked()
 
 void clsHightVoltage::on_btnItem_clicked()
 {
-    if(item == "R")
+    /*if(item == "R")
         item = "I";
     else
-        item = "R";
+        item = "R";*/
+    item = "I";
     updateButtons();
 }
 

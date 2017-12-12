@@ -1,6 +1,8 @@
 #include "clsHVConnection.h"
 #include "clsSettings.h"
+#include <QMessageBox>
 #include "clsSelectFtdiChip.h"
+#include "publicUtility.h"
 #include <QDebug>
 
 clsHVConnection::clsHVConnection(QObject *parent) : QObject(parent)
@@ -13,6 +15,11 @@ clsHVConnection::clsHVConnection(QObject *parent) : QObject(parent)
 
 }
 
+clsHVConnection::~clsHVConnection()
+{
+    this->closeDevice();
+}
+
 void clsHVConnection::setConnectionType(QString cnntType)
 {
     cnntType = "";
@@ -21,170 +28,86 @@ void clsHVConnection::setConnectionType(QString cnntType)
 void clsHVConnection::setAddress(QString address)
 {
     this->strAddress = address;
-
 }
 
 bool clsHVConnection::setupConnection()
 {
-
     if(false == getDeviceList())
-    {
-        isInit = false;
-        return isInit;
-    }
+        return false;
 
-    QString sn = readSetings();
-    int index =0;
-
-    if(deviceInfo.contains(sn))
+    serialPort = new QSerialPort(this);
+    serialPort->setPortName(portName);
+    serialPort->setBaudRate(QSerialPort::Baud19200);
+    serialPort->setParity(QSerialPort::NoParity);
+    serialPort->setDataBits(QSerialPort::Data8);
+    serialPort->setStopBits(QSerialPort::OneStop);
+    if(!serialPort->open(QIODevice::ReadWrite))
     {
-        index = deviceInfo.indexOf(sn);
-    }
-    else
-    {
-        bool ok;
-        index = clsSelectFtdiChip::selectIndex(deviceInfo, &ok);
-        if(!ok)
-        {
-            isInit = false;
-            return isInit;
-        }
-    }
-
-    ftStatus = FT_Open(index,&devInfo[index].ftHandle);
-
-    if(ftStatus == FT_OK)
-    {
-        ftHandle = devInfo[index].ftHandle;
-        qDebug()<< "Open ftdi chip ok, descriptor: " << deviceInfo.at(index);
-    }
-    else
-    {
-        qWarning()<< "Can not open ftdi chip! " ;
+        serialPort->close();
         isInit = false;
         return false;
-    }
-
-    ftStatus = FT_SetBaudRate(ftHandle,FT_BAUD_19200); //设置波特率
-    if(FT_OK != ftStatus)
-    {
-        qWarning()<< "Set baudrate error!";
-        isInit = false;
-        return false;
-    }
-
-    ftStatus = FT_SetDataCharacteristics(ftHandle,
-                                         FT_BITS_8,
-                                         FT_STOP_BITS_1,
-                                         FT_PARITY_NONE);
-    if(ftStatus != FT_OK)
-    {
-        qWarning()<<"Set data characterisetics error!";
-        isInit = false;
-        return false;
-    }
-
-    ftStatus = FT_SetFlowControl(ftHandle,
-                                 FT_FLOW_NONE,
-                                 NULL,
-                                 NULL);
-    if(ftStatus != FT_OK)
-    {
-        isInit = false;
-        qWarning()<< "Set flow control error!";
     }
 
     isInit = true;
-    qDebug()<< sendCommand("*IDN?", true);
 
+    QString idn = sendCommand("*IDN?", true);
+    qDebug()<< idn;
+    if(idn.contains("ASSOCIATED"))
+        isInit = true;
+    else
+    {
+        QMessageBox::critical(0, tr("硬件连线错误"), tr("请仔细检查串口连线，或者重新插拔！"),QMessageBox::Ok);
+        return false;
+    }
 
-    writeSettings(deviceInfo.at(index));
-
-    if(isInit)
-        emit showMessage(tr("高压设备已经连接"));
-
-    return isInit;
+    return true;
 }
 
 QString clsHVConnection::sendCommand(QString command, bool hasReturn)
 {
-    if(!isInit)
+    if(isInit == false)
     {
-        qWarning()<<"HV connection not setup conrrectly!";
-        emit showMessage("HV设备没有连接");
         return "";
     }
 
-    DWORD noOfBytesWriten =0;
-    QString cmmd = command;
-    cmmd += QChar(10);
-    ftStatus = FT_Write(ftHandle,
-                        (LPVOID*)cmmd.toStdString().c_str(),
-                        cmmd.length(),
-                        &noOfBytesWriten);
-    if(ftStatus != FT_OK)
-    {
-        qWarning()<<"Send command error "<< instrument;
-        return "";
-    }
+    QString commd = command + "\n";
 
-    forceQuit = false;
+    serialPort->write(commd.toStdString().c_str(), commd.length());
+
+    serialPort->waitForBytesWritten(1000);
+
+    bool hasDataBack= serialPort->waitForReadyRead(3000);
+
     timer->start();
 
-    DWORD     RxQueueBytes = 0;			// No Of Bytes in Receive  Queue
-    DWORD     TxQueueBytes = 0;			// No Of Bytes in Transmit Queue
-    DWORD     EventStatus  = 0;			// current state of	the event status
-
-    char      RxBuffer[256];            // Buffer for received data
-    DWORD     BytesReceived = 0;		// number of bytes read from the device(for FT_Read())
-
-
-    Sleep(75);
-    QString tmpRecieved;
+    QString strRes;
+    if(hasDataBack)
+    {
+        publicUtility::sleepMs(80);
 REREAD:
-    ftStatus = FT_GetStatus(ftHandle,
-                            &RxQueueBytes,
-                            &TxQueueBytes,
-                            &EventStatus);
-    qApp->processEvents();
-    Sleep(3);
-    if(RxQueueBytes>0)
-    {
-        ftStatus = FT_Read(ftHandle,
-                           RxBuffer,
-                           RxQueueBytes,
-                           &BytesReceived);
-        tmpRecieved += QString(RxBuffer);
+        char buffer[200];
+        publicUtility::sleepMs(3);
+        int readBack = serialPort->read(buffer, 200);
+        qDebug()<<"Read from HV testor" <<readBack;
         if(forceQuit)
-        {
-            qDebug()<< "Force quit, read time out";
-            timer->stop();
-            return "";
-        }
-        if(!(tmpRecieved.contains("\n") || tmpRecieved.contains(QChar(0x06))))
+            goto END;
+
+        strRes += QString(buffer);
+        if(strRes.contains("\n") || strRes.contains(QChar(0x06)) || strRes.contains(QChar(0x15)))
+            goto END;
+        else
             goto REREAD;
-    }
-    else
-    {
-        if(forceQuit)
-        {
-            qDebug()<< "Force quit, read time out";
-            timer->stop();
-            return "";
-        }
 
-        goto REREAD;
     }
 
-    int length = tmpRecieved.indexOf("\n");
-    tmpRecieved = tmpRecieved.left(length);
-
+END:
     timer->stop();
-    return tmpRecieved;
-
-
-
-
+    if(hasReturn)
+    {
+        int index = strRes.indexOf("\n");
+        return strRes.left(index);
+    }
+    return strRes;
 }
 
 void clsHVConnection::disConnectInstrument()
@@ -229,47 +152,39 @@ void clsHVConnection::timerProc()
 
 bool clsHVConnection::getDeviceList()
 {
-    ftStatus = FT_CreateDeviceInfoList(&numDevs);
+    QList< QSerialPortInfo > info = QSerialPortInfo::availablePorts();
 
-    if(ftStatus != FT_OK)
-        qDebug()<< "Faild to get FTDI device list";
-
-    if(numDevs > 0)
-    {
-        devInfo = (FT_DEVICE_LIST_INFO_NODE *)malloc(sizeof(FT_DEVICE_LIST_INFO_NODE)*numDevs);
-
-        ftStatus = FT_GetDeviceInfoList(devInfo,&numDevs);
-        if(ftStatus == FT_OK)
-        {
-            deviceInfo.clear();
-            for(int i =0; i< numDevs; i++)
-            {
-                deviceInfo.append(devInfo[i].SerialNumber);
-            }
-        }
-        else
-        {
-            qDebug()<<"Failed to get device list";
-            Sleep(1000);
-            return false;
-        }
-        return true;
+    QStringList list;
+    foreach (QSerialPortInfo tmp, info) {
+        list.append(tmp.portName());
     }
-    return false;
 
+    QString lastPortName = readSetings();
+    if(list.length() <=0)
+        return false;
+
+    if(list.contains(lastPortName))
+        portName = lastPortName;
+    else
+    {
+        bool ok;
+        int index = clsSelectFtdiChip::selectIndex(list,&ok);
+
+        if(ok)
+            portName = list.at(index);
+        else
+            return false;
+    }
+    writeSettings(portName);
+    return true;
 }
 
 bool clsHVConnection::closeDevice()
 {
     if(this->isInit)
     {
-        ftStatus = FT_Close(ftHandle);
-
-        if(ftStatus != FT_OK)
-            return false;
-        else
-            return true;
+        serialPort->close();
+        return true;
     }
-
     return true;
 }

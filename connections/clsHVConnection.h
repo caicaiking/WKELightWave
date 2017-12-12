@@ -3,8 +3,8 @@
 
 #include <QObject>
 #include "singleton.h"
-#include <windows.h>
-#include "FTD2XX.H"
+#include <QSerialPort>
+#include <QSerialPortInfo>
 #include <QTimer>
 
 //
@@ -17,6 +17,7 @@ class clsHVConnection : public QObject
     Q_OBJECT
 public:
     explicit clsHVConnection(QObject *parent = nullptr);
+    ~clsHVConnection();
 
     void setConnectionType(QString cnntType);
     void setAddress(QString address);
@@ -34,17 +35,13 @@ private:
     double getRandomNumber(int max, int min);
 
 
-    FT_HANDLE ftHandle;
-    FT_STATUS ftStatus;
-
-    DWORD numDevs;
-    FT_DEVICE_LIST_INFO_NODE *devInfo;
-    QStringList deviceInfo;
-    QStringList outputs;
     QString instrument;
 
     bool forceQuit;
     QTimer *timer;
+
+    QString portName;
+    QSerialPort *serialPort;
 
 private slots:
     QString readSetings();

@@ -83,19 +83,30 @@ bool clsHVRunningMode::trig()
     publicUtility::sleepMs(200);
     QString res = sngHVCnnt::Ins()->sendCommand("TEST", false);
     emit voltageOutput(true);
-
-
     publicUtility::sleepMs((dblRampUp + dblDelay + dblRampDown)* 1000.0);
-    publicUtility::sleepMs(500);
+    publicUtility::sleepMs(100);
+    emit voltageOutput(false);
 
     res = sngHVCnnt::Ins()->sendCommand("TD?", true);
-   qDebug()<< res;
+    qDebug()<< res;
 
     res +=",,,,,,";
-    results.clear();
 
-    QStringList  resList = res.split(",");
-    results.append(resList.at(0).toDouble());
+    QStringList resList = res.split(",");
+
+    resStatus = true;
+    if(resList.at(2)!= "Pass")
+    {
+        resStatus = false;
+        sngHVCnnt::Ins()->sendCommand("RESET",false);
+    }
+    else
+        resStatus = true;
+
+   results.clear();
+   QString testRes = resList.at(4);
+   testRes = testRes.remove("uA");
+   results.append(testRes.toDouble()/1E6);
 
     return true;
 
@@ -108,7 +119,7 @@ int clsHVRunningMode::getItemsCount()
 
 bool clsHVRunningMode::getItemStatus(int i)
 {
-    return limits.at(i)->comparaValue(results.at(i));
+    return resStatus;
 }
 
 bool clsHVRunningMode::getTotleStatus()
@@ -165,7 +176,7 @@ void clsHVRunningMode::turnOffOutput()
     /*
     sngHVCnnt::Ins()->sendCommand("RESET",false);
     emit voltageOutput(false);
-    */
+*/
 }
 
 void clsHVRunningMode::updateGpibCommands()
@@ -181,8 +192,8 @@ void clsHVRunningMode::updateGpibCommands()
     gpibList << "RDN "+ QString::number(dblRampDown);
 
     gpibList << "ARC 0";
-    gpibList << "MAXL " + QString::number(hiLimit *1000);
-    gpibList << "MINL " + QString::number(lowLimit *1000);
+    gpibList << "MAXL " + QString::number(hiLimit *1000000);
+    gpibList << "MINL " + QString::number(lowLimit *1000000);
     gpibList << "CONT 0";
     gpibList << "CMAL 1";
     gpibList << "CMIL 0";
@@ -193,7 +204,7 @@ void clsHVRunningMode::updateGpibCommands()
         for(int i=0; i< gpibList.length(); i++)
         {
             sngHVCnnt::Ins()->sendCommand(gpibList.at(i), false);
-            publicUtility::sleepMs(40);
+            publicUtility::sleepMs(500);
         }
     }
     else
@@ -203,7 +214,7 @@ void clsHVRunningMode::updateGpibCommands()
             if(gpibList.at(i) != this->gpibCommands.at(i))
             {
                 sngHVCnnt::Ins()->sendCommand(gpibList.at(i), false);
-                publicUtility::sleepMs(40);
+                publicUtility::sleepMs(500);
             }
         }
     }

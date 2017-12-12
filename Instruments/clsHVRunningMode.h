@@ -43,6 +43,9 @@ private:
 
     QStringList gpibCommands;
 
+    bool resStatus;
+
+
 };
 typedef Singleton<clsHVRunningMode> sngHVRun;
 #endif // CLSHVRUNNINGMODE_H

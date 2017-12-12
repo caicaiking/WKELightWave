@@ -56,6 +56,8 @@ void clsChannelSettings::setCondition(const QString condition)
                 this->suffix2=conditionMap["suffix2"].toString();
                 this->relaySwitch=conditionMap["relaySwitch"].toString();
 
+               // this->updateLabels();
+
             }
         }
     }
