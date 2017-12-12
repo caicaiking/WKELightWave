@@ -36,6 +36,8 @@ private:
     QString relaySwitch;
     QString hvStatus;
 
+    double dblRampUp, dblDelay, dblRampDown;
+
     bool isEditMode;
     int intStep;
 };

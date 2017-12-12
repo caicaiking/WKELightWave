@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>316</width>
-    <height>233</height>
+    <width>337</width>
+    <height>299</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,7 +25,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QGridLayout" name="gridLayout">
+    <layout class="QGridLayout" name="gridLayout_2">
      <item row="0" column="0">
       <widget class="QLabel" name="label_4">
        <property name="styleSheet">
@@ -36,22 +36,6 @@
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1" colspan="2">
-      <widget class="QPushButton" name="btnItem">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>36</height>
-        </size>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">font: 12pt &quot;楷体&quot;;</string>
-       </property>
-       <property name="text">
-        <string>R</string>
        </property>
       </widget>
      </item>
@@ -95,7 +79,7 @@
         <string notr="true">font: 12pt &quot;楷体&quot;;</string>
        </property>
        <property name="text">
-        <string>R</string>
+        <string>A</string>
        </property>
       </widget>
      </item>
@@ -124,6 +108,163 @@
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label">
+       <property name="styleSheet">
+        <string notr="true">font: 12pt &quot;楷体&quot;;</string>
+       </property>
+       <property name="text">
+        <string>电压大小:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1" colspan="4">
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_8">
+         <property name="maximumSize">
+          <size>
+           <width>888888</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 12pt &quot;楷体&quot;;</string>
+         </property>
+         <property name="text">
+          <string>Ramp Up</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="label_9">
+         <property name="maximumSize">
+          <size>
+           <width>888888</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 12pt &quot;楷体&quot;;</string>
+         </property>
+         <property name="text">
+          <string>Dwell</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="label_10">
+         <property name="maximumSize">
+          <size>
+           <width>888888</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 12pt &quot;楷体&quot;;</string>
+         </property>
+         <property name="text">
+          <string>Ramp DN</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="btnRampUp">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>36</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 12pt &quot;楷体&quot;;</string>
+         </property>
+         <property name="text">
+          <string>0.00s</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="btnDelay">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>36</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 12pt &quot;楷体&quot;;</string>
+         </property>
+         <property name="text">
+          <string>0.4s</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QPushButton" name="btnRampDown">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>36</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 12pt &quot;楷体&quot;;</string>
+         </property>
+         <property name="text">
+          <string>0.0</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_7">
+       <property name="maximumSize">
+        <size>
+         <width>888888</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 12pt &quot;楷体&quot;;</string>
+       </property>
+       <property name="text">
+        <string>时间设置:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1" colspan="4">
+      <widget class="QPushButton" name="btnVoltage">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>36</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 12pt &quot;楷体&quot;;</string>
+       </property>
+       <property name="text">
+        <string>25.00V</string>
        </property>
       </widget>
      </item>
@@ -158,21 +299,8 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label">
-       <property name="styleSheet">
-        <string notr="true">font: 12pt &quot;楷体&quot;;</string>
-       </property>
-       <property name="text">
-        <string>电压大小:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1" colspan="4">
-      <widget class="QPushButton" name="btnVoltage">
+     <item row="0" column="1">
+      <widget class="QPushButton" name="btnItem">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -183,11 +311,11 @@
         <string notr="true">font: 12pt &quot;楷体&quot;;</string>
        </property>
        <property name="text">
-        <string>25.00V</string>
+        <string>I</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
+     <item row="6" column="0">
       <widget class="QLabel" name="label_5">
        <property name="maximumSize">
         <size>
@@ -206,7 +334,7 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="1" colspan="4">
+     <item row="6" column="1" colspan="4">
       <widget class="QPushButton" name="btnRelay">
        <property name="minimumSize">
         <size>

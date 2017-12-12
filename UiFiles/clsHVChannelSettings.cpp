@@ -37,6 +37,9 @@ void clsHVChannelSettings::setCondition(const QString condition)
                 this->lowLimit = conditionMap["lowLimit"].toDouble();
                 this->voltage = conditionMap["voltage"].toDouble();
                 this->relaySwitch = conditionMap["relaySwitch"].toString();
+                this->dblRampUp = conditionMap["dblRampUp"].toDouble();
+                this->dblDelay = conditionMap["dblDelay"].toDouble();
+                this->dblRampDown = conditionMap["dblRampDown"].toDouble();
             }
         }
     }
@@ -105,8 +108,18 @@ void clsHVChannelSettings::updateLabels()
         this->labelLimit11->setText(strLowLimit + "--" + strHiLimit);
 
     }
+
+    QString strRampUp, strDelay, strRampDown;
+    dt.setData(dblRampUp);
+    strRampUp = dt.formateToString(5) + "s";
+    dt.setData(dblDelay);
+    strDelay = dt.formateToString(5) + "s";
+    dt.setData(dblRampDown);
+    strRampDown = dt.formateToString(5) + "s";
+
     dt.setData(this->voltage);
-    this->labelVoltageRes->setText(dt.formateToString(6) + "V");
+
+    this->labelVoltageRes->setText(dt.formateToString(6) + "V" + '\n' + strRampUp + " " + strDelay + " " + strRampDown);
 
     labelRelayRes->setText(relaySwitch);
 

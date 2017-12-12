@@ -6,8 +6,6 @@
 #include "clsHVConnection.h"
 #include "clsMeterLimit.h"
 
-#define HVTRGCMD "\t\t -->HV:TRIG"
-#define HVTURNOFFCMD "\t\t -->HV:TURNOFF"
 
 class clsHVRunningMode :public clsInstrument
 {
@@ -39,9 +37,11 @@ private:
     QString relaySwitch;
     QList<clsMeterLimit *> limits;
     double hiLimit,lowLimit;
-
+    double dblRampUp, dblDelay, dblRampDown;
     bool isConnected;
     QList<double> results;
+
+    QStringList gpibCommands;
 
 };
 typedef Singleton<clsHVRunningMode> sngHVRun;

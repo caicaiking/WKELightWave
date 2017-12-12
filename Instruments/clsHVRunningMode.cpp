@@ -62,6 +62,9 @@ void clsHVRunningMode::setCondition(QString value)
         this->relaySwitch=conditionMap["relaySwitch"].toString();
         this->hiLimit=conditionMap["hiLimit"].toDouble();
         this->lowLimit=conditionMap["lowLimit"].toDouble();
+        this->dblRampDown=conditionMap["dblRampDown"].toDouble();
+        this->dblDelay=conditionMap["dblDelay"].toDouble();
+        this->dblRampDown=conditionMap["dblRampDown"].toDouble();
 
         limits.at(0)->setAbsHi(hiLimit);
         limits.at(0)->setAbsLo(lowLimit);
@@ -77,11 +80,18 @@ QString clsHVRunningMode::getCondition()
 bool clsHVRunningMode::trig()
 {
     updateGpibCommands(); //更新指令
-    emit voltageOutput(true);
     publicUtility::sleepMs(200);
+    QString res = sngHVCnnt::Ins()->sendCommand("TEST", false);
+    emit voltageOutput(true);
 
-    QString res = sngHVCnnt::Ins()->sendCommand(HVTRGCMD, true);
-    res +=",,";
+
+    publicUtility::sleepMs((dblRampUp + dblDelay + dblRampDown)* 1000.0);
+    publicUtility::sleepMs(500);
+
+    res = sngHVCnnt::Ins()->sendCommand("TD?", true);
+   qDebug()<< res;
+
+    res +=",,,,,,";
     results.clear();
 
     QStringList  resList = res.split(",");
@@ -152,14 +162,53 @@ QString clsHVRunningMode::getInstrumentType()
 
 void clsHVRunningMode::turnOffOutput()
 {
-    sngHVCnnt::Ins()->sendCommand(HVTURNOFFCMD,false);
+    /*
+    sngHVCnnt::Ins()->sendCommand("RESET",false);
     emit voltageOutput(false);
+    */
 }
 
 void clsHVRunningMode::updateGpibCommands()
 {
     //仪表的GPIB指令
+    QStringList gpibList;
+    gpibList << "MSS 01";
+    gpibList << "DCW";
+    gpibList << "CONN 0";
+    gpibList << "VOLT " +QString::number(this->voltage/1000);
+    gpibList << "RUP "+ QString::number(dblRampUp);
+    gpibList << "DDT "+ QString::number(dblDelay);
+    gpibList << "RDN "+ QString::number(dblRampDown);
 
+    gpibList << "ARC 0";
+    gpibList << "MAXL " + QString::number(hiLimit *1000);
+    gpibList << "MINL " + QString::number(lowLimit *1000);
+    gpibList << "CONT 0";
+    gpibList << "CMAL 1";
+    gpibList << "CMIL 0";
+    gpibList << "COFF 0";
+
+    if(gpibList.length() != this->gpibCommands.length())
+    {
+        for(int i=0; i< gpibList.length(); i++)
+        {
+            sngHVCnnt::Ins()->sendCommand(gpibList.at(i), false);
+            publicUtility::sleepMs(40);
+        }
+    }
+    else
+    {
+        for(int i=0; i< gpibList.length(); i++)
+        {
+            if(gpibList.at(i) != this->gpibCommands.at(i))
+            {
+                sngHVCnnt::Ins()->sendCommand(gpibList.at(i), false);
+                publicUtility::sleepMs(40);
+            }
+        }
+    }
+
+    this->gpibCommands = gpibList;
 
     //控制盒的开关通断
     sngFtdiOp::Ins()->setRelay(relaySwitch==tr("开")?false:true);

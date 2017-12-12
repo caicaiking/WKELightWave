@@ -11,10 +11,10 @@ clsHVCnntWindow::clsHVCnntWindow(QWidget *parent) :
 bool clsHVCnntWindow::setupConnection()
 {
     clsSettings settings;
-    QString strPath = "HV/";
+    QString strPath = "SerialPort/";
 
     QString tmpStr;
-    settings.readSetting(strPath + "Address" , tmpStr);
+    settings.readSetting(strPath + "HVTest" , tmpStr);
 
 //    tmpStr 还需要后续处理
     sngHVCnnt::Ins()->setAddress(tmpStr);
@@ -23,35 +23,18 @@ bool clsHVCnntWindow::setupConnection()
     return ret;
 }
 
-void clsHVCnntWindow::readSettings()
-{
-    clsSettings settings;
-    QString strPath = "HV/";
-
-    QString tmpStr;
-    settings.readSetting(strPath + "Address" , tmpStr);
-
-    txtAddress->setText(tmpStr);
-}
-
-void clsHVCnntWindow::writeSettings()
-{
-    clsSettings settings;
-    QString strPath = "HV/";
-
-    settings.writeSetting(strPath + "Address" , txtAddress->text());
-
-}
 
 void clsHVCnntWindow::on_btnTest_clicked()
 {
-    sngHVCnnt::Ins()->setAddress(txtAddress->text());
+    sngHVCnnt::Ins()->setAddress("");
     sngHVCnnt::Ins()->setConnectionType("");
 
     bool retValue = sngHVCnnt::Ins()->setupConnection();
 
     btnTest->setEnabled(!retValue);
 
+    if(!retValue)
+        lblInfo->setText(tr("没有发现可用的FTDI连接线!请确认硬件连接."));
     if(retValue)
         this->accept();
 

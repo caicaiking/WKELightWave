@@ -24,12 +24,19 @@ private slots:
     void updateButtons();
     void saveSettings();
     QString readSettings();
+    void on_btnRampUp_clicked();
+
+    void on_btnDelay_clicked();
+
+    void on_btnRampDown_clicked();
+
 private:
     double voltage;
     QString item, suffix;
     QString relaySwitch;
     clsMeterLimit mLimit;
     double hiLimit,lowLimit;
+    double dblRampUp, dblDelay, dblRampDown;
 };
 
 #endif // CLSHIGHTVOLTAGE_H

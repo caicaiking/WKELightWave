@@ -25,7 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-INCLUDEPATH += PublicFiles UiFiles Service Instruments connections
+INCLUDEPATH += PublicFiles UiFiles Service Instruments connections Ftdi
 
 DESTDIR =$$PWD/Libs/
 
@@ -77,7 +77,9 @@ HEADERS += \
     UiFiles/clsMeterUnit.h \
     UiFiles/dlgLevelInputBox.h \
     UiFiles/clsSignalDisplayWidget.h \
-    PublicFiles/clsDataStatistics.h
+    PublicFiles/clsDataStatistics.h \
+    Ftdi/FTD2XX.H \
+    Ftdi/clsSelectFtdiChip.h
 
 SOURCES += \
     PublicFiles/clsMeterLimit.cpp \
@@ -122,7 +124,8 @@ SOURCES += \
     UiFiles/clsMeterUnit.cpp \
     UiFiles/dlgLevelInputBox.cpp \
     UiFiles/clsSignalDisplayWidget.cpp \
-    PublicFiles/clsDataStatistics.cpp
+    PublicFiles/clsDataStatistics.cpp \
+    Ftdi/clsSelectFtdiChip.cpp
 
 FORMS += \
     UiFiles/clsChannelSettings.ui \
@@ -145,7 +148,8 @@ FORMS += \
     UiFiles/clsSelectUpdateStep.ui \
     UiFiles/clsMeterUnit.ui \
     UiFiles/dlgLevelInputBox.ui \
-    UiFiles/clsSignalDisplayWidget.ui
+    UiFiles/clsSignalDisplayWidget.ui \
+    Ftdi/clsSelectFtdiChip.ui
 
 DISTFILES += \
     Describle.txt
@@ -156,3 +160,6 @@ win32: LIBS += -L$$PWD/NLogger/ -lNLogger
 
 INCLUDEPATH += $$PWD/NLogger/include
 DEPENDPATH += $$PWD/NLogger
+
+win32: LIBS += -L$$PWD/Ftdi/ -lFTD2XX
+DEPENDPATH += $$PWD/Ftdi

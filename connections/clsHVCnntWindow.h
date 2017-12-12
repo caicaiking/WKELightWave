@@ -11,9 +11,6 @@ public:
     explicit clsHVCnntWindow(QWidget *parent = 0);
 
     static bool setupConnection();
-private:
-    void readSettings();
-    void writeSettings();
 private slots:
     void on_btnTest_clicked();
 };
