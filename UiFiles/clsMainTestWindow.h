@@ -44,6 +44,7 @@ private slots:
     void on_btnReptive_clicked();
 
     void installSignalDispaly();
+
 protected:
     void closeEvent(QCloseEvent *event);
 signals:

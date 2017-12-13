@@ -18,7 +18,7 @@ public:
     bool trig() ;                      //获取测试数据
 
     int getItemsCount() ;              //获取结果数目
-    bool getItemStatus(int i) ;        //获取单独项目测试结果的状态
+    bool getItemStatus(int) ;        //获取单独项目测试结果的状态
     bool getTotleStatus() ;            //获取所有测试项目的总体状态
     QString getItem(int i);           //获取测试项目
     QString getItemSuffix(int i);       //格式化数据的后缀

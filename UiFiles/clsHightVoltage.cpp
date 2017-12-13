@@ -21,7 +21,7 @@ clsHightVoltage::clsHightVoltage(QWidget *parent) :
         this->suffix ="u";
         this->voltage=100.0;
         this->hiLimit=0.00;
-        this->dblRampUp = 0.0;
+        this->dblRampUp = 0.1;
         this->dblDelay = 0.4;
         this->dblRampDown = 0.0;
         lowLimit=0.00;
@@ -98,8 +98,10 @@ void clsHightVoltage::updateButtons()
     mLimit.setLimitType("Norm");
     labelLimit->setText(mLimit.showLimits(publicUtility::getSuffix(this->item)));
 
+    dblRampUp = dblRampUp< 0.1 ? 0.1 : dblRampUp;
     dt.setData(dblRampUp);
     btnRampUp->setText(dt.formateToString(5)+"s");
+    dblDelay = dblDelay< 0.4 ? 0.4 : dblDelay;
     dt.setData(dblDelay);
     btnDelay->setText(dt.formateToString(5)+"s");
     dt.setData(dblRampDown);

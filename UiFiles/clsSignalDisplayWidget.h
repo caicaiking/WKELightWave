@@ -24,7 +24,8 @@ public slots:
 
     void setCurrentStep(int value);
 protected:
-
+    void showEvent(QShowEvent *);
+    void hideEvent(QHideEvent *);
 private:
     void setLabelPixmap(QLabel *lbl, bool status);
     void setLcdNumberStyle();

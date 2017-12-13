@@ -64,7 +64,13 @@ void clsHVRunningMode::setCondition(QString value)
         this->lowLimit=conditionMap["lowLimit"].toDouble();
         this->dblRampDown=conditionMap["dblRampDown"].toDouble();
         this->dblDelay=conditionMap["dblDelay"].toDouble();
-        this->dblRampDown=conditionMap["dblRampDown"].toDouble();
+        this->dblRampUp=conditionMap["dblRampUp"].toDouble();
+
+        if(dblRampUp<0.1)
+            dblRampUp = 0.1;
+
+        if(dblDelay < 0.4)
+            dblDelay = 0.4;
 
         limits.at(0)->setAbsHi(hiLimit);
         limits.at(0)->setAbsLo(lowLimit);
@@ -80,17 +86,15 @@ QString clsHVRunningMode::getCondition()
 bool clsHVRunningMode::trig()
 {
     updateGpibCommands(); //更新指令
-    publicUtility::sleepMs(200);
+    QTime starTime = QTime::currentTime();
     QString res = sngHVCnnt::Ins()->sendCommand("TEST", false);
     emit voltageOutput(true);
-    publicUtility::sleepMs((dblRampUp + dblDelay + dblRampDown)* 1000.0);
-    publicUtility::sleepMs(100);
+    publicUtility::sleepMs((dblRampUp + dblDelay + dblRampDown)* 1000.0 + 50);
     emit voltageOutput(false);
 
     res = sngHVCnnt::Ins()->sendCommand("TD?", true);
-    qDebug()<< res;
-
     res +=",,,,,,";
+    qDebug()<< "Delay time: " << -1*QTime::currentTime().msecsTo(starTime) << "ms";
 
     QStringList resList = res.split(",");
 
@@ -117,7 +121,7 @@ int clsHVRunningMode::getItemsCount()
     return 1; //只有一个返回值
 }
 
-bool clsHVRunningMode::getItemStatus(int i)
+bool clsHVRunningMode::getItemStatus(int /*i*/)
 {
     return resStatus;
 }
@@ -204,7 +208,7 @@ void clsHVRunningMode::updateGpibCommands()
         for(int i=0; i< gpibList.length(); i++)
         {
             sngHVCnnt::Ins()->sendCommand(gpibList.at(i), false);
-            publicUtility::sleepMs(500);
+            publicUtility::sleepMs(100);
         }
     }
     else
@@ -214,7 +218,7 @@ void clsHVRunningMode::updateGpibCommands()
             if(gpibList.at(i) != this->gpibCommands.at(i))
             {
                 sngHVCnnt::Ins()->sendCommand(gpibList.at(i), false);
-                publicUtility::sleepMs(500);
+                publicUtility::sleepMs(100);
             }
         }
     }

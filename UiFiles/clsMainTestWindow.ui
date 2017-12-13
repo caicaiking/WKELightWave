@@ -325,7 +325,7 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>818</width>
+              <width>803</width>
               <height>556</height>
              </rect>
             </property>
@@ -364,13 +364,13 @@
        <widget class="QWidget" name="wgtSignalPannel" native="true">
         <property name="minimumSize">
          <size>
-          <width>150</width>
+          <width>165</width>
           <height>0</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>150</width>
+          <width>165</width>
           <height>16777215</height>
          </size>
         </property>
@@ -479,12 +479,12 @@
    <slot>setVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1185</x>
-     <y>46</y>
+     <x>972</x>
+     <y>65</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1183</x>
-     <y>100</y>
+     <x>972</x>
+     <y>175</y>
     </hint>
    </hints>
   </connection>

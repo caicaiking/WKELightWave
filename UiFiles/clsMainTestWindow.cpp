@@ -405,9 +405,11 @@ void clsMainTestWindow::on_btnOpenSetup_clicked()
 
 void clsMainTestWindow::on_btnTrig_clicked()
 {
+    QTime startTime = QTime::currentTime();
     btnTrig->setEnabled(false);
     sngRunService::Ins()->trig();
     btnTrig->setEnabled(true);
+    qDebug()<< "Single Test time: "<<-1 * QTime::currentTime().msecsTo(startTime) << "ms";
 }
 
 void clsMainTestWindow::on_btnSettings_clicked(bool checked)
@@ -472,3 +474,4 @@ void clsMainTestWindow::closeEvent(QCloseEvent *event)
     btnReptive->setChecked(false);
 
 }
+

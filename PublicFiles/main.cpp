@@ -18,11 +18,6 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
 
-    LogManager logInstance;
-    logInstance.InitLog("./log","WKELightWave",false);
-
-    qDebug()<<logInstance.getLogFilePath();
-
     //设置Splash 屏幕
     QPixmap pixmap(":/splashScreen2.png");
     QSplashScreen splash(pixmap);

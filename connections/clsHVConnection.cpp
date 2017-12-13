@@ -9,7 +9,7 @@ clsHVConnection::clsHVConnection(QObject *parent) : QObject(parent)
 {
     isInit = false;
     timer = new QTimer(this);
-    timer->setInterval(1000);
+    timer->setInterval(3000);
     this->instrument = "HVTTest";
     connect(timer,&QTimer::timeout,this,&clsHVConnection::timerProc);
 
@@ -37,16 +37,17 @@ bool clsHVConnection::setupConnection()
 
     serialPort = new QSerialPort(this);
     serialPort->setPortName(portName);
-    serialPort->setBaudRate(QSerialPort::Baud19200);
-    serialPort->setParity(QSerialPort::NoParity);
-    serialPort->setDataBits(QSerialPort::Data8);
-    serialPort->setStopBits(QSerialPort::OneStop);
     if(!serialPort->open(QIODevice::ReadWrite))
     {
         serialPort->close();
         isInit = false;
         return false;
     }
+
+    serialPort->setBaudRate(QSerialPort::Baud19200);
+    serialPort->setParity(QSerialPort::NoParity);
+    serialPort->setDataBits(QSerialPort::Data8);
+    serialPort->setStopBits(QSerialPort::OneStop);
 
     isInit = true;
 
@@ -56,6 +57,7 @@ bool clsHVConnection::setupConnection()
         isInit = true;
     else
     {
+        isInit = false;
         QMessageBox::critical(0, tr("硬件连线错误"), tr("请仔细检查串口连线，或者重新插拔！"),QMessageBox::Ok);
         return false;
     }
@@ -65,6 +67,7 @@ bool clsHVConnection::setupConnection()
 
 QString clsHVConnection::sendCommand(QString command, bool hasReturn)
 {
+    qDebug()<<"\t\t\t->"<< command;
     if(isInit == false)
     {
         return "";
@@ -79,29 +82,36 @@ QString clsHVConnection::sendCommand(QString command, bool hasReturn)
     bool hasDataBack= serialPort->waitForReadyRead(3000);
 
     timer->start();
+    forceQuit = false;
+    qDebug()<< "\t\t\t->Timer run";
 
     QString strRes;
     if(hasDataBack)
     {
-        publicUtility::sleepMs(80);
+        publicUtility::sleepMs(30);
 REREAD:
         char buffer[200];
         publicUtility::sleepMs(3);
         int readBack = serialPort->read(buffer, 200);
-        qDebug()<<"Read from HV testor" <<readBack;
-        if(forceQuit)
-            goto END;
+        qDebug()<<"Read from HV: " <<readBack<< " \tDATA: "<< QString(buffer);
 
         strRes += QString(buffer);
+        //                 正常读取                      发送指令结束                     发送指令错误
+        //                  ||                             ||                              ||
         if(strRes.contains("\n") || strRes.contains(QChar(0x06)) || strRes.contains(QChar(0x15)))
             goto END;
         else
             goto REREAD;
 
+        if(forceQuit)
+        {
+            qDebug()<< "\t\t\t->**Force quit**";
+            goto END;
+        }
     }
-
 END:
     timer->stop();
+    qDebug()<< "\t\t\t->Timer stop";
     if(hasReturn)
     {
         int index = strRes.indexOf("\n");
@@ -138,7 +148,7 @@ QString clsHVConnection::readSetings()
 
 }
 
-QString clsHVConnection::writeSettings(QString sn)
+void clsHVConnection::writeSettings(QString sn)
 {
     clsSettings settings;
     QString strNode = "SerialPort/";

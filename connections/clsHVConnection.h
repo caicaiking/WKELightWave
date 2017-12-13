@@ -45,7 +45,7 @@ private:
 
 private slots:
     QString readSetings();
-    QString writeSettings(QString sn);
+    void writeSettings(QString sn);
     void timerProc();
 
     bool getDeviceList();
