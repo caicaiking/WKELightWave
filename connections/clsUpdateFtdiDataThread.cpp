@@ -6,13 +6,13 @@ void clsUpdateFtdiDataThread::run()
 
     while(!blStop)
     {
-        sngFtdiOp::Ins()->updataFTDIdata();
+        clsConnectSWBox::Ins()->updataFTDIdata();
     }
-    sngFtdiOp::Ins()->stop();
+    clsConnectSWBox::Ins()->stop();
 }
 
 void clsUpdateFtdiDataThread::stop()
 {
    this->blStop = true;
-    sngFtdiOp::Ins()->stop();
+    clsConnectSWBox::Ins()->stop();
 }

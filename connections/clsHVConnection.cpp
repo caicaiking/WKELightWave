@@ -20,9 +20,8 @@ clsHVConnection::~clsHVConnection()
     this->closeDevice();
 }
 
-void clsHVConnection::setConnectionType(QString cnntType)
+void clsHVConnection::setConnectionType(QString /*cnntType*/)
 {
-    cnntType = "";
 }
 
 void clsHVConnection::setAddress(QString address)
@@ -83,7 +82,7 @@ QString clsHVConnection::sendCommand(QString command, bool hasReturn)
 
     timer->start();
     forceQuit = false;
-    qDebug()<< "\t\t\t->Timer run";
+    qDebug()<< "\t\t\t->HV Timer run";
 
     QString strRes;
     if(hasDataBack)
@@ -105,13 +104,13 @@ REREAD:
 
         if(forceQuit)
         {
-            qDebug()<< "\t\t\t->**Force quit**";
+            qDebug()<< "\t\t\t->**HV TimerForce quit**";
             goto END;
         }
     }
 END:
     timer->stop();
-    qDebug()<< "\t\t\t->Timer stop";
+    qDebug()<< "\t\t\t->HV Timer stop";
     if(hasReturn)
     {
         int index = strRes.indexOf("\n");
@@ -178,7 +177,7 @@ bool clsHVConnection::getDeviceList()
     else
     {
         bool ok;
-        int index = clsSelectFtdiChip::selectIndex(list,&ok);
+        int index = clsSelectFtdiChip::selectIndex(list,&ok, tr("高压机"));
 
         if(ok)
             portName = list.at(index);

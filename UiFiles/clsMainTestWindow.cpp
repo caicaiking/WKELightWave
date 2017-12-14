@@ -36,13 +36,9 @@ clsMainTestWindow::clsMainTestWindow(QWidget *parent) :
     trigThread->setName("Trig");
     trigThread->setCaptureBit(0);
 
-    resetThread = new clsRunningThread();
-    resetThread->setName("Reset");
-    resetThread->setCaptureBit(1);
 
 
     trigThread->start();
-    resetThread->start();
 
     sngFtdiData::Ins()->start();
 
@@ -427,7 +423,6 @@ void clsMainTestWindow::on_btnSettings_clicked(bool checked)
 
         sngRunService::Ins()->switchToRunningMode(false);
         disconnect(trigThread,SIGNAL(getSignal()),sngRunService::Ins(),SLOT(trig()));
-        disconnect(resetThread,SIGNAL(getSignal()),sngRunService::Ins(),SLOT(reset()));
     }
     else //Running Mode
     {
@@ -441,7 +436,6 @@ void clsMainTestWindow::on_btnSettings_clicked(bool checked)
         sngRunService::Ins()->switchToRunningMode(true);
 
         connect(trigThread,SIGNAL(getSignal()),sngRunService::Ins(),SLOT(trig()));
-        connect(resetThread,SIGNAL(getSignal()),sngRunService::Ins(),SLOT(reset()));
     }
 }
 

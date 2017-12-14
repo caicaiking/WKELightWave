@@ -19,12 +19,12 @@ void clsFtdiOperation::setBusy(bool value)
     if(value)
     {
         qDebug() << BUSYCMMD;
-        sngFtdiCnnt::Ins()->sendCommand(BUSYCMMD, false);
+        sngFtdiCnnt::Ins()->sendCommand("4,6", false);
     }
     else
     {
         qDebug() << IDELCMMD;
-        sngFtdiCnnt::Ins()->sendCommand(IDELCMMD, false);
+        sngFtdiCnnt::Ins()->sendCommand("4,5", false);
     }
 }
 
@@ -35,12 +35,12 @@ void clsFtdiOperation::setLcrPassFail(bool value)
     if(value)
     {
         qDebug()<< LCRPASSCMMD;
-        sngFtdiCnnt::Ins()->sendCommand(LCRPASSCMMD,false);
+        sngFtdiCnnt::Ins()->sendCommand("4,10",false);
     }
     else
     {
         qDebug()<<LCRFAILCMMD;
-        sngFtdiCnnt::Ins()->sendCommand(LCRFAILCMMD,false);
+        sngFtdiCnnt::Ins()->sendCommand("4,11",false);
     }
 }
 
@@ -51,12 +51,12 @@ void clsFtdiOperation::setHvPassFail(bool value)
     if(value)
     {
         qDebug()<<HVPASSCMMD;
-        sngFtdiCnnt::Ins()->sendCommand(HVPASSCMMD,false);
+        sngFtdiCnnt::Ins()->sendCommand("4,10",false);
     }
     else
     {
         qDebug()<<HVFAILCMMD;
-        sngFtdiCnnt::Ins()->sendCommand(HVFAILCMMD,false);
+        sngFtdiCnnt::Ins()->sendCommand("4,9",false);
     }
 
 }
@@ -68,7 +68,7 @@ void clsFtdiOperation::setChannel(int channel)
 
     emit channelChanged(channel);
 
-    QString cmmd = SETCHANNEL + QString::number(channel);
+    QString cmmd = "4," + QString::number(channel);
     qDebug() << SETCHANNEL << QString::number(channel);
 
     sngFtdiCnnt::Ins()->sendCommand( cmmd,false);
@@ -84,24 +84,35 @@ void clsFtdiOperation::setRelay(bool value)
     if(value)
     {
         qDebug()<< SETRELAY;
-        sngFtdiCnnt::Ins()->sendCommand(SETRELAY,false);
+        sngFtdiCnnt::Ins()->sendCommand("4,8",false);
     }
     else
     {
         qDebug()<< OPENRELAY;
-        sngFtdiCnnt::Ins()->sendCommand(OPENRELAY,false);
+        sngFtdiCnnt::Ins()->sendCommand("4,7",false);
     }
     relayStatus = value;
+}
+
+void clsFtdiOperation::turnOffAllLight()
+{
+
+}
+
+void clsFtdiOperation::setOnlyOneOrangeLEDON(int)
+{
+
 }
 
 QString clsFtdiOperation::getValue()
 {
     // qDebug()<< QUERYCMMD;
-    return sngFtdiCnnt::Ins()->sendCommand(QUERYCMMD, true);
+    return sngFtdiCnnt::Ins()->sendCommand("12", true);
 }
 
 void clsFtdiOperation::updataFTDIdata()
 {
+    blStop = false;
     while(!blStop)
     {
         QString  retValue = getValue();

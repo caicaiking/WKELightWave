@@ -31,8 +31,7 @@ int main(int argc, char *argv[])
     a.processEvents();
 
     sngFtdiCnnt::Ins();
-    sngFtdiData::Ins();
-    sngFtdiOp::Ins();
+    clsConnectSWBox::Ins();
     sngRunService::Ins();
 
     //检查默认IP是否能连接到仪器，如果不能弹出连接对话框
@@ -65,12 +64,15 @@ int main(int argc, char *argv[])
     //如果初始化完成的话，Binning初始化。
     if(sngFtdiCnnt::Ins()->hasInitSucess())
     {
-        sngFtdiOp::Ins()->setBusy(false);
-        sngFtdiOp::Ins()->setLcrPassFail(false);
-        sngFtdiOp::Ins()->setHvPassFail(false);
-        sngFtdiOp::Ins()->setChannel(0);
-        sngFtdiOp::Ins()->setReadString("00000000");
+        clsConnectSWBox::Ins()->setBusy(false);
+        clsConnectSWBox::Ins()->setLcrPassFail(false);
+        clsConnectSWBox::Ins()->setHvPassFail(false);
+        clsConnectSWBox::Ins()->setChannel(0);
+        clsConnectSWBox::Ins()->setReadString("00000000");
     }
+
+    //开始更新串口数据
+    sngFtdiData::Ins();
 
     clsMainTestWindow window;
     splash.finish(&window);

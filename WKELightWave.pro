@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network serialport
+QT       += core gui network serialport sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,7 +25,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-INCLUDEPATH += PublicFiles UiFiles Service Instruments connections Ftdi
+INCLUDEPATH += PublicFiles UiFiles Service Instruments connections Ftdi MulitChannel
+
 
 DESTDIR =$$PWD/Libs/
 
@@ -78,7 +79,17 @@ HEADERS += \
     UiFiles/dlgLevelInputBox.h \
     UiFiles/clsSignalDisplayWidget.h \
     PublicFiles/clsDataStatistics.h \
-    Ftdi/clsSelectFtdiChip.h
+    Ftdi/clsSelectFtdiChip.h \
+    MulitChannel/clsCalibration.h \
+    MulitChannel/ClickedLabel.h \
+    MulitChannel/clsCalibrationDbOp.h \
+    MulitChannel/clsDataProcess.h \
+    MulitChannel/clsStandardValueInput.h \
+    PublicFiles/clsComplexOp.h \
+    PublicFiles/complexType.h \
+    MulitChannel/MessageDialog.h \
+    MulitChannel/clsInstrumentCalibration.h \
+    PublicFiles/clsGlobleVarient.h
 
 SOURCES += \
     PublicFiles/clsMeterLimit.cpp \
@@ -124,7 +135,17 @@ SOURCES += \
     UiFiles/dlgLevelInputBox.cpp \
     UiFiles/clsSignalDisplayWidget.cpp \
     PublicFiles/clsDataStatistics.cpp \
-    Ftdi/clsSelectFtdiChip.cpp
+    Ftdi/clsSelectFtdiChip.cpp \
+    MulitChannel/clsCalibration.cpp \
+    MulitChannel/ClickedLabel.cpp \
+    MulitChannel/clsCalibrationDbOp.cpp \
+    MulitChannel/clsDataProcess.cpp \
+    MulitChannel/clsStandardValueInput.cpp \
+    PublicFiles/clsComplexOp.cpp \
+    PublicFiles/complexType.cpp \
+    MulitChannel/MessageDialog.cpp \
+    MulitChannel/clsInstrumentCalibration.cpp \
+    PublicFiles/clsGlobleVarient.cpp
 
 FORMS += \
     UiFiles/clsChannelSettings.ui \
@@ -148,7 +169,10 @@ FORMS += \
     UiFiles/clsMeterUnit.ui \
     UiFiles/dlgLevelInputBox.ui \
     UiFiles/clsSignalDisplayWidget.ui \
-    Ftdi/clsSelectFtdiChip.ui
+    Ftdi/clsSelectFtdiChip.ui \
+    MulitChannel/clsCalibration.ui \
+    MulitChannel/clsStandardValueInput.ui \
+    MulitChannel/MessageDialog.ui
 
 DISTFILES += \
     Describle.txt

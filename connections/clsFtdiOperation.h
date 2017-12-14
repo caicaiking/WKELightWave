@@ -28,6 +28,10 @@ public:
     void setHvPassFail(bool value);
     void setChannel(int channel);       //切换通道，这里是采用互斥的方法
     void setRelay(bool value);          //设置Relay
+
+    void turnOffAllLight();
+    void setOnlyOneOrangeLEDON(int);
+
     QString getValue();                 //主要是为了判定用户是否是输入了Trig 或者reset指令
 
     void updataFTDIdata();              //开始更新串口用户读取的数据
@@ -54,5 +58,5 @@ private:
     QReadWriteLock locker;
 };
 
-typedef Singleton<clsFtdiOperation> sngFtdiOp;
+typedef Singleton<clsFtdiOperation> clsConnectSWBox;
 #endif // CLSSIGNALPROCESS_H

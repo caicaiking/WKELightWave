@@ -226,5 +226,5 @@ void clsHVRunningMode::updateGpibCommands()
     this->gpibCommands = gpibList;
 
     //控制盒的开关通断
-    sngFtdiOp::Ins()->setRelay(relaySwitch==tr("开")?false:true);
+    clsConnectSWBox::Ins()->setRelay(relaySwitch==tr("开")?false:true);
 }

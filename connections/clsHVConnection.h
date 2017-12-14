@@ -19,7 +19,7 @@ public:
     explicit clsHVConnection(QObject *parent = nullptr);
     ~clsHVConnection();
 
-    void setConnectionType(QString cnntType);
+    void setConnectionType(QString);
     void setAddress(QString address);
 
     bool setupConnection();

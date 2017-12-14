@@ -12,10 +12,11 @@ void clsSelectFtdiChip::setItems(QStringList items)
     this->cmbDiscriptor->addItems(items);
 }
 
-int clsSelectFtdiChip::selectIndex(const QStringList& items, bool *res, QWidget *parent)
+int clsSelectFtdiChip::selectIndex(const QStringList& items, bool *res,const QString text, QWidget *parent)
 {
     clsSelectFtdiChip *dlg = new clsSelectFtdiChip(parent) ;
     dlg->setItems(items);
+    dlg->label->setText(text);
     if(dlg->exec() == QDialog::Accepted)
     {
        *res = true;

@@ -282,7 +282,7 @@ void clsWK6500RunningMode::updateGpibCommand()
         this->biasCommand == tmpBiasStatusCmd;
     }
 
-    sngFtdiOp::Ins()->setRelay(relaySwitch==tr("开")?false:true);
+    clsConnectSWBox::Ins()->setRelay(relaySwitch==tr("开")?false:true);
 
 }
 

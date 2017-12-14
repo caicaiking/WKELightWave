@@ -53,7 +53,7 @@ private:
     QList<clsTestConditons*> steps;
     QList<clsMeter *> items;
     QFlowLayout *layout;
-    clsRunningThread *trigThread, *resetThread;
+    clsRunningThread *trigThread ;
     clsSignalDisplayWidget * signalWidget;
 };
 

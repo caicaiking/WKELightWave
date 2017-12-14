@@ -7,56 +7,35 @@ clsFtdiCnntWindow::clsFtdiCnntWindow(QWidget *parent) :
 {
     setupUi(this);
     setWindowFlags(windowFlags()&~Qt::WindowContextHelpButtonHint);
-    readSettings();
 }
 
 bool clsFtdiCnntWindow::setupConnection()
 {
     clsSettings settings;
-    QString strPath = "WKEC/";
+    QString strPath = "SerialPort/";
 
     QString strTmp;
 
-    settings.readSetting(strPath + "Address", strTmp);
+    settings.readSetting(strPath + "WKEC", strTmp);
 
     sngFtdiCnnt::Ins()->setAddress(strTmp);
+    sngFtdiCnnt::Ins()->setConnectionType("");
     bool blRet = sngFtdiCnnt::Ins()->setupConnection();
 
     return blRet;
 }
 
-void clsFtdiCnntWindow::readSettings()
-{
-    clsSettings settings;
-    QString strPath = "WKEC/";
-
-    QString strTmp;
-
-    settings.readSetting(strPath + "Address", strTmp);
-    this->txtAddress->setText(strTmp);
-
-}
-
-void clsFtdiCnntWindow::writeSettings()
-{
-    clsSettings settings;
-    QString strPath = "WKEC/";
-
-    QString strTmp;
-
-    settings.writeSetting(strPath + "Address", strTmp);
-
-}
 
 void clsFtdiCnntWindow::on_btnTest_clicked()
 {
-    sngFtdiCnnt::Ins()->setAddress(txtAddress->text());
+    sngFtdiCnnt::Ins()->setAddress("");
+    sngFtdiCnnt::Ins()->setConnectionType("");
+    sngFtdiCnnt::Ins()->setupConnection();
     bool blRet = sngFtdiCnnt::Ins()->setupConnection();
     btnTest->setEnabled(!blRet);
 
     if(blRet)
-    {
-        writeSettings();
         this->accept();
-    }
+    else
+        lblInfo->setText(tr("没有发现可用的FTDI连接线!请确认硬件连接."));
 }

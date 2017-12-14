@@ -35,7 +35,7 @@ void clsHVCnntWindow::on_btnTest_clicked()
 
     if(!retValue)
         lblInfo->setText(tr("没有发现可用的FTDI连接线!请确认硬件连接."));
-    if(retValue)
+    else
         this->accept();
 
 }

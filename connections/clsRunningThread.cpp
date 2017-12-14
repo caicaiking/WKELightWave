@@ -18,7 +18,7 @@ void clsRunningThread::run()
             emit getSignal();
         }
         qApp->processEvents();
-        sleepMs(1);
+        sleepMs(5);
     }
 
 }
@@ -92,7 +92,7 @@ void clsRunningThread::sleepMs(int svalue)
 
 QString clsRunningThread::getInput(int bit)
 {
-    QString statusString = sngFtdiOp::Ins()->getReadString();
+    QString statusString = clsConnectSWBox::Ins()->getReadString();
 
     if(statusString.length()>bit)
         return QString(statusString.at(bit));

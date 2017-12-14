@@ -6,7 +6,7 @@
 #include "clsRunningMeterFactory.h"
 #include "clsSignalStatus.h"
 #include "clsFtdiOperation.h"
-
+#include "clsUpdateFtdiDataThread.h"
 #include <QTextStream>
 #include <stdio.h>
 #include <QApplication>
@@ -54,6 +54,8 @@ void clsRunService::switchToRunningMode(bool value)
 
 void clsRunService::trig()
 {
+    sngFtdiData::Ins()->stop();
+
     emit trigSignal(); //发送得到触发信号
     if(!isRunningMode)
         return;
@@ -62,7 +64,7 @@ void clsRunService::trig()
     sngSignalStatus::Ins()->resetLCRStatus();//恢复原始值
 
     //Set busy
-    sngFtdiOp::Ins()->setBusy(true);
+    clsConnectSWBox::Ins()->setBusy(true);
     emit busyStatus(true);
     qApp->processEvents();
     for(int i=0; i<steps.length(); i++)
@@ -80,7 +82,7 @@ void clsRunService::trig()
         clsTestConditons *tmpStep = steps.at(i);
 
         //切换通道
-        sngFtdiOp::Ins()->setChannel(tmpStep->channel);
+        clsConnectSWBox::Ins()->setChannel(tmpStep->channel);
         //更新仪表的测试条件
         meter->setCondition(tmpStep->condition);
         //仪表测试
@@ -117,22 +119,23 @@ void clsRunService::trig()
     emit currentStep(-1);
 
     //set bing PASS Fail
-    sngFtdiOp::Ins()->setLcrPassFail(sngSignalStatus::Ins()->getLcrStatus());
+    clsConnectSWBox::Ins()->setLcrPassFail(sngSignalStatus::Ins()->getLcrStatus());
     emit lcrPF(sngSignalStatus::Ins()->getLcrStatus());
     //set binning HV Pass Fail
-    sngFtdiOp::Ins()->setHvPassFail(sngSignalStatus::Ins()->getHvStatus());
+    clsConnectSWBox::Ins()->setHvPassFail(sngSignalStatus::Ins()->getHvStatus());
     emit hvPF(sngSignalStatus::Ins()->getHvStatus());
     //set binning Busy line down
-    sngFtdiOp::Ins()->setBusy(false);
+    clsConnectSWBox::Ins()->setBusy(false);
     emit busyStatus(false);
     qApp->processEvents();
     goto END;
 
 RESET:
-    sngFtdiOp::Ins()->setBusy(false);
+    clsConnectSWBox::Ins()->setBusy(false);
     emit busyStatus(false);
     qApp->processEvents();
 END:
+    sngFtdiData::Ins()->start(QThread::HighestPriority);
     return;
 }
 
@@ -140,6 +143,6 @@ void clsRunService::reset()
 {
     emit resetSignal();
     isReset = true;
-    sngFtdiOp::Ins()->setBusy(false);
+    clsConnectSWBox::Ins()->setBusy(false);
     emit busyStatus(false);
 }
