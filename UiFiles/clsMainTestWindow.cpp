@@ -13,12 +13,12 @@
 #include "clsWarningBox.h"
 #include "clsSelectUpdateStep.h"
 #include "clsRunService.h"
-#include "clsUpdateFtdiDataThread.h"
 #include "clsSettings.h"
 #include "clsWK6500Meter.h"
 #include "clsHightVoltage.h"
 #include <QFile>
 #include <QDir>
+#include "clsRunningThread.h"
 //TODO: 增加多通道校准界面
 clsMainTestWindow::clsMainTestWindow(QWidget *parent) :
     QMainWindow(parent)
@@ -31,16 +31,6 @@ clsMainTestWindow::clsMainTestWindow(QWidget *parent) :
     layout = new QFlowLayout(6,6,6);
 
     this->itemWidget->setLayout(layout);
-
-    trigThread = new clsRunningThread();
-    trigThread->setName("Trig");
-    trigThread->setCaptureBit(0);
-
-
-
-    trigThread->start();
-
-    sngFtdiData::Ins()->start();
 
     installSignalDispaly();
     wgtSignalPannel->setVisible(true);
@@ -59,6 +49,13 @@ clsMainTestWindow::clsMainTestWindow(QWidget *parent) :
     else
         on_btnSettings_clicked(true);
 
+    trigThread = sngTrigThread::Ins();
+    trigThread->setName("Trig");
+    trigThread->setCaptureBit(1);
+    connect(trigThread,SIGNAL(getSignal()),this,SLOT(trig()));
+
+
+    trigThread->start();
 }
 
 void clsMainTestWindow::showAllStep()
@@ -399,13 +396,22 @@ void clsMainTestWindow::on_btnOpenSetup_clicked()
     openTaskFile(strPath);
 }
 
+void clsMainTestWindow::trig()
+{
+    trigThread->stop();
+    publicUtility::sleepMs(70);
+    QTime startTime = QTime::currentTime();
+    sngRunService::Ins()->trig();
+    qDebug()<< "Single Test time: "<<-1 * QTime::currentTime().msecsTo(startTime) << "ms";
+    trigThread->start();
+
+}
+
 void clsMainTestWindow::on_btnTrig_clicked()
 {
-    QTime startTime = QTime::currentTime();
     btnTrig->setEnabled(false);
-    sngRunService::Ins()->trig();
+    trig();
     btnTrig->setEnabled(true);
-    qDebug()<< "Single Test time: "<<-1 * QTime::currentTime().msecsTo(startTime) << "ms";
 }
 
 void clsMainTestWindow::on_btnSettings_clicked(bool checked)
@@ -422,7 +428,6 @@ void clsMainTestWindow::on_btnSettings_clicked(bool checked)
         }
 
         sngRunService::Ins()->switchToRunningMode(false);
-        disconnect(trigThread,SIGNAL(getSignal()),sngRunService::Ins(),SLOT(trig()));
     }
     else //Running Mode
     {
@@ -434,8 +439,6 @@ void clsMainTestWindow::on_btnSettings_clicked(bool checked)
 
         sngRunService::Ins()->setTestConditon(getTestCondition());
         sngRunService::Ins()->switchToRunningMode(true);
-
-        connect(trigThread,SIGNAL(getSignal()),sngRunService::Ins(),SLOT(trig()));
     }
 }
 
@@ -466,6 +469,10 @@ void clsMainTestWindow::installSignalDispaly()
 void clsMainTestWindow::closeEvent(QCloseEvent *event)
 {
     btnReptive->setChecked(false);
-
+    sngTrigThread::Ins()->stop();
+    qApp->processEvents();
+    publicUtility::sleepMs(10);
+    event->accept();
 }
+
 

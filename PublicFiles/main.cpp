@@ -6,8 +6,6 @@
 #include "clsFtdiCnntWindow.h"
 #include "clsFtdiConnection.h"
 #include "clsFtdiOperation.h"
-#include "clsUpdateFtdiDataThread.h"
-#include "clsAbamaTestWindow.h"
 #include <QSplashScreen>
 #include <QPixmap>
 #include "publicUtility.h"
@@ -71,12 +69,16 @@ int main(int argc, char *argv[])
         clsConnectSWBox::Ins()->setReadString("00000000");
     }
 
-    //开始更新串口数据
-    sngFtdiData::Ins();
-
     clsMainTestWindow window;
     splash.finish(&window);
     window.show();
+
+//    sngTrigThread::Ins()->setName("Trig");
+//    sngTrigThread::Ins()->setCaptureBit(1);
+//    sngTrigThread::Ins()->start();
+
+
+
 
     return a.exec();
 }

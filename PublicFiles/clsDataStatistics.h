@@ -24,7 +24,6 @@ private:
     int totle, pass, fail;
     QTime t1,t2;
     int trigMs;
-    QTimer *timer;
 };
 
 #endif // CLSDATASTATISTICS_H

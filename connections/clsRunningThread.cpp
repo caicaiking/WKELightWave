@@ -1,26 +1,27 @@
 #include "clsRunningThread.h"
+#include <QTime>
 #include <QApplication>
 #include <QDebug>
 #include "clsFtdiOperation.h"
 #include <QTime>
 #include "publicUtility.h"
+#include <QDebug>
+
 void clsRunningThread::run()
 {
     qDebug()<<strName<< " thread running";
-
-
     blStop = false;
-
     while(!blStop)
     {
         if(captrueSignal(bit))
         {
             emit getSignal();
+            qDebug()<< "Get Trig signal";
+            blStop = true;
         }
         qApp->processEvents();
         sleepMs(5);
     }
-
 }
 
 void clsRunningThread::setName(QString name)
@@ -76,7 +77,7 @@ bool clsRunningThread::captrueSignal(int bit)
 
 void clsRunningThread::setCaptureBit(int bit)
 {
-   this->bit = bit;
+    this->bit = bit;
 }
 
 void clsRunningThread::stop()
@@ -87,15 +88,23 @@ void clsRunningThread::stop()
 
 void clsRunningThread::sleepMs(int svalue)
 {
-   publicUtility::sleepMs(svalue);
+    publicUtility::sleepMs(svalue);
 }
 
 QString clsRunningThread::getInput(int bit)
 {
+    //QTime t1 = QTime::currentTime();
     QString statusString = clsConnectSWBox::Ins()->getReadString();
+    //qDebug()<<statusString;
+    //qDebug()<< "Get status need time: " << t1.msecsTo(QTime::currentTime()) <<"ms";
 
-    if(statusString.length()>bit)
-        return QString(statusString.at(bit));
-    else
-        return "0";
+    int  recValue = statusString.toInt();
+
+    int xAnd = 1<< bit;
+
+    int retValue = (recValue & xAnd)>>bit;
+
+    return QString::number(retValue);
+
+
 }

@@ -5,7 +5,6 @@
 #include "singleton.h"
 #include <QSerialPort>
 #include <QSerialPortInfo>
-#include <QTimer>
 
 //
 /// \brief 这是个假的类，用来实现和高压设备的连接。
@@ -38,7 +37,6 @@ private:
     QString instrument;
 
     bool forceQuit;
-    QTimer *timer;
 
     QString portName;
     QSerialPort *serialPort;

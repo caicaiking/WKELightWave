@@ -7,8 +7,10 @@
 #include <QReadWriteLock>
 #include <QSerialPort>
 #include <QSerialPortInfo>
-#include <QTimer>
 #include "clsSettings.h"
+
+#include "Qextserial/qextserialport.h"
+
 class clsFtdiConnection : public QObject
 {
     Q_OBJECT
@@ -25,21 +27,19 @@ public:
 private:
     QString strAddress;
     bool isInit;
-
-    QSerialPort *serialPort;
+    QextSerialPort *serialPort;
     QString portName;
-
-    QMutex mutex;
-    bool forceQuit;
     QString instrument;
-    QReadWriteLock lock;
+
+   QString readData;
 signals:
     void commandMsg(QString);
     void showMessage(QString);
+    void recievFinished(QString);
 
 private slots:
+    void readCom();
     bool closeDevice();
-    void timerProc();
     bool getDeviceList();
     void writeSettings(QString sn);
     QString readSetings();

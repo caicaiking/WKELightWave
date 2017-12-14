@@ -1,4 +1,5 @@
 #include "clsRunService.h"
+#include "publicUtility.h"
 #include <QDebug>
 #include <QJsonDocument>
 #include <QJsonParseError>
@@ -6,11 +7,10 @@
 #include "clsRunningMeterFactory.h"
 #include "clsSignalStatus.h"
 #include "clsFtdiOperation.h"
-#include "clsUpdateFtdiDataThread.h"
 #include <QTextStream>
 #include <stdio.h>
 #include <QApplication>
-
+#include "clsRunningThread.h"
 clsRunService::clsRunService(QObject *parent) : QObject(parent)
 {
     isRunningMode = false;
@@ -54,12 +54,10 @@ void clsRunService::switchToRunningMode(bool value)
 
 void clsRunService::trig()
 {
-    sngFtdiData::Ins()->stop();
 
     emit trigSignal(); //发送得到触发信号
     if(!isRunningMode)
         return;
-
     sngSignalStatus::Ins()->resetHVStatus(); //恢复原始值
     sngSignalStatus::Ins()->resetLCRStatus();//恢复原始值
 
@@ -135,7 +133,6 @@ RESET:
     emit busyStatus(false);
     qApp->processEvents();
 END:
-    sngFtdiData::Ins()->start(QThread::HighestPriority);
     return;
 }
 

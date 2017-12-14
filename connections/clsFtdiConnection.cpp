@@ -1,13 +1,17 @@
 #include "clsFtdiConnection.h"
+#include <QTime>
 #include "clsTestClass.h"
 #include "clsSelectFtdiChip.h"
+#include <QMessageBox>
 #include "publicUtility.h"
 #include <QDebug>
+#include "clsRunningThread.h"
 clsFtdiConnection::clsFtdiConnection(QObject *parent) : QObject(parent)
 {
     isInit = false;
     this->instrument = "WKEC";
 
+    this->moveToThread(sngTrigThread::Ins()->thread());
 }
 
 clsFtdiConnection::~clsFtdiConnection()
@@ -32,8 +36,15 @@ bool clsFtdiConnection::setupConnection()
         return false;
     }
 
-    serialPort = new QSerialPort(this);
+    serialPort = new QextSerialPort(QextSerialPort::EventDriven, this->parent());
     serialPort->setPortName(portName);
+
+
+    serialPort->setBaudRate(BAUD9600);
+    serialPort->setParity(PAR_NONE);
+    serialPort->setDataBits(DATA_8);
+    serialPort->setStopBits(STOP_1);
+    serialPort->setFlowControl(FLOW_OFF);
 
     if(!serialPort->open(QIODevice::ReadWrite))
     {
@@ -41,67 +52,53 @@ bool clsFtdiConnection::setupConnection()
         isInit = false;
         return false;
     }
-
-    serialPort->setBaudRate(QSerialPort::Baud9600);
-    serialPort->setParity(QSerialPort::NoParity);
-    serialPort->setDataBits(QSerialPort::Data8);
-    serialPort->setStopBits(QSerialPort::OneStop);
-
+    connect(serialPort, &QextSerialPort::readyRead,this,&clsFtdiConnection::readCom);
     isInit = true;
+    QTime t1 = QTime::currentTime();
+    QString idn = sendCommand("1", true);
+    qDebug()<< idn;
+    qDebug()<<"Read id need time: " << t1.msecsTo(QTime::currentTime())<<"ms";
+    if(idn.contains("Scan"))
+        isInit = true;
+    else
+    {
+        isInit = false;
+        QMessageBox::critical(0, tr("WKE控制箱连线错误"), tr("请仔细检查串口连线，或者重新插拔！"),QMessageBox::Ok);
+        return false;
+    }
     return true;
-
 }
 
 QString clsFtdiConnection::sendCommand(QString command, bool hasReturn)
 {
     if(!isInit)
-        return "0";
+        return "";
 
-    QString strRes;
-    mutex.lock();
-    const bool isLocked = lock.tryLockForWrite();
-    if(isLocked)
+    if(isInit)
+        emit commandMsg(command);
+
+    readData.clear();
+    disconnect(serialPort, &QextSerialPort::readyRead,this,&clsFtdiConnection::readCom);
+    QString cmd = command + "\r";
+    serialPort->write(cmd.toUtf8(), cmd.length());
+    serialPort->waitForBytesWritten(1000);
+
+    if(!hasReturn)
+        return "";
+
+    connect(serialPort, &QextSerialPort::readyRead,this,&clsFtdiConnection::readCom);
+    int i=0;
+    forever
     {
-        //在此处插入代码
-        if(isInit)
-            emit commandMsg(command);
+        if(!readData.isEmpty())
+            break;
 
-        QString commd = command + "\r";
-        serialPort->write(commd.toStdString().c_str(), commd.length());
-        serialPort->waitForBytesWritten(1000);
-
-        bool hasDataBack = serialPort->waitForReadyRead(3000);
-
-        if(hasDataBack)
-        {
-            publicUtility::sleepMs(40);
-REREAD:
-            char buffer[200];
-            publicUtility::sleepMs(3);
-            int readBack = serialPort->read(buffer,200);
-            qDebug()<<"Read from WKEC: " <<readBack<< " \tDATA: "<< QString(buffer);
-
-            strRes += QString(buffer);
-            if(strRes.contains("\r"))
-                goto END;
-            else
-                goto REREAD;
-
-        }
-END:
-        //在此处插入代码结束
-        lock.unlock();
+        if(i>1000)
+            break;
+        publicUtility::sleepMs(3);
+        i++;
     }
-    mutex.unlock();
-
-    if(hasReturn)
-    {
-        int index = strRes.indexOf("\r");
-        return strRes.left(index);
-        //  return sngTest::Ins()->getFtdiReadString(); //For demo test use.
-    }
-    else
-        return strRes;
+    return readData;
 }
 
 void clsFtdiConnection::disConnectInstrument()
@@ -113,6 +110,20 @@ void clsFtdiConnection::disConnectInstrument()
 bool clsFtdiConnection::hasInitSucess()
 {
     return isInit;
+}
+
+void clsFtdiConnection::readCom()
+{
+    publicUtility::sleepMs(45);
+REREAD:
+    publicUtility::sleepMs(3);
+    readData += serialPort->readAll();
+
+    if(readData.contains("\r"))
+        emit recievFinished(readData);
+    else
+        goto REREAD;
+
 }
 
 bool clsFtdiConnection::closeDevice()
@@ -144,9 +155,6 @@ void clsFtdiConnection::writeSettings(QString sn)
     settings.writeSetting(strNode + instrument, sn);
 }
 
-void clsFtdiConnection::timerProc()
-{
-}
 
 bool clsFtdiConnection::getDeviceList()
 {

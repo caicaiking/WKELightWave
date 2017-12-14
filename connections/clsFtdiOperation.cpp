@@ -104,22 +104,9 @@ void clsFtdiOperation::setOnlyOneOrangeLEDON(int)
 
 }
 
-QString clsFtdiOperation::getValue()
+QString clsFtdiOperation::getValue() const
 {
-    // qDebug()<< QUERYCMMD;
     return sngFtdiCnnt::Ins()->sendCommand("12", true);
-}
-
-void clsFtdiOperation::updataFTDIdata()
-{
-    blStop = false;
-    while(!blStop)
-    {
-        QString  retValue = getValue();
-        setReadString(retValue);
-        qApp->processEvents();
-        sleepMs(1);
-    }
 }
 
 void clsFtdiOperation::stop()
@@ -129,20 +116,12 @@ void clsFtdiOperation::stop()
 
 QString clsFtdiOperation::getReadString() const
 {
-    return readString;
+    return getValue();
 }
 
 void clsFtdiOperation::setReadString(const QString &value)
 {
-    mutex.lock();
-    const bool isLocked = locker.tryLockForWrite();
-    if(isLocked)
-    {
-        readString = value;
-        // qDebug()<< value;
-        locker.unlock();
-    }
-    mutex.unlock();
+      readString = value;
 }
 
 void clsFtdiOperation::sleepMs(int svalue)

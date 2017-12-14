@@ -25,7 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-INCLUDEPATH += PublicFiles UiFiles Service Instruments connections Ftdi MulitChannel
+INCLUDEPATH += PublicFiles UiFiles Service Instruments connections Ftdi MulitChannel Qextseial
 
 
 DESTDIR =$$PWD/Libs/
@@ -50,7 +50,6 @@ HEADERS += \
     UiFiles/clsMeterFactory.h \
     UiFiles/clsMeter.h \
     Service/clsSignalStatus.h \
-    Service/clsAbamaTestWindow.h \
     Service/singleton.h \
     Service/clsRunService.h \
     Instruments/clsInstrument.h \
@@ -65,7 +64,6 @@ HEADERS += \
     connections/clsFtdiCnntWindow.h \
     connections/clsTestClass.h \
     connections/clsRunningThread.h \
-    connections/clsUpdateFtdiDataThread.h \
     connections/clsFtdiOperation.h \
     UiFiles/QFlowLayout.h \
     UiFiles/clsMainTestWindow.h \
@@ -89,7 +87,10 @@ HEADERS += \
     PublicFiles/complexType.h \
     MulitChannel/MessageDialog.h \
     MulitChannel/clsInstrumentCalibration.h \
-    PublicFiles/clsGlobleVarient.h
+    PublicFiles/clsGlobleVarient.h \
+    Qextserial/qextserialport.h \
+    Qextserial/qextserialport_global.h \
+    Qextserial/qextserialport_p.h
 
 SOURCES += \
     PublicFiles/clsMeterLimit.cpp \
@@ -110,7 +111,6 @@ SOURCES += \
     UiFiles/clsMeterFactory.cpp \
     UiFiles/clsMeter.cpp \
     Service/clsSignalStatus.cpp \
-    Service/clsAbamaTestWindow.cpp \
     Service/clsRunService.cpp \
     connections/clsConnection.cpp \
     connections/clsLan.cpp \
@@ -123,7 +123,6 @@ SOURCES += \
     connections/clsFtdiCnntWindow.cpp \
     connections/clsRunningThread.cpp \
     connections/clsTestClass.cpp \
-    connections/clsUpdateFtdiDataThread.cpp \
     connections/clsFtdiOperation.cpp \
     UiFiles/QFlowLayout.cpp \
     UiFiles/clsMainTestWindow.cpp \
@@ -145,7 +144,9 @@ SOURCES += \
     PublicFiles/complexType.cpp \
     MulitChannel/MessageDialog.cpp \
     MulitChannel/clsInstrumentCalibration.cpp \
-    PublicFiles/clsGlobleVarient.cpp
+    PublicFiles/clsGlobleVarient.cpp \
+    Qextserial/qextserialport.cpp \
+    Qextserial/qextserialport_win.cpp
 
 FORMS += \
     UiFiles/clsChannelSettings.ui \
@@ -159,7 +160,6 @@ FORMS += \
     UiFiles/frmSetLimit.ui \
     UiFiles/NumberInput.ui \
     UiFiles/clsHVChannelSettings.ui \
-    Service/clsAbamaTestWindow.ui \
     connections/clsLcrCnntWindow.ui \
     connections/clsHVCnntWindow.ui \
     connections/clsFtdiCnntWindow.ui \

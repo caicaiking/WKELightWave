@@ -11,11 +11,11 @@
 #include "clsRunningThread.h"
 #include "clsTestConditon.h"
 #include "clsSignalDisplayWidget.h"
-
+#include <QThread>
+#include "clsRunningThread.h"
 class clsMainTestWindow : public QMainWindow, private Ui::clsMainTestWindow
 {
     Q_OBJECT
-
 public:
     explicit clsMainTestWindow(QWidget *parent = 0);
 
@@ -45,6 +45,8 @@ private slots:
 
     void installSignalDispaly();
 
+
+    void trig();
 protected:
     void closeEvent(QCloseEvent *event);
 signals:
@@ -53,8 +55,8 @@ private:
     QList<clsTestConditons*> steps;
     QList<clsMeter *> items;
     QFlowLayout *layout;
-    clsRunningThread *trigThread ;
     clsSignalDisplayWidget * signalWidget;
+    clsRunningThread *trigThread;
 };
 
 #endif // CLSMAINTESTWINDOW_H

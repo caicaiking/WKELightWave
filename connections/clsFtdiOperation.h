@@ -32,9 +32,7 @@ public:
     void turnOffAllLight();
     void setOnlyOneOrangeLEDON(int);
 
-    QString getValue();                 //主要是为了判定用户是否是输入了Trig 或者reset指令
-
-    void updataFTDIdata();              //开始更新串口用户读取的数据
+    QString getValue() const;                 //主要是为了判定用户是否是输入了Trig 或者reset指令
     void stop();
 
     QString getReadString() const;
