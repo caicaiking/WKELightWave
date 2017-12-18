@@ -38,8 +38,8 @@ clsWK6500Meter::clsWK6500Meter(QWidget *parent) :
         biasType="V";
         biasSwitch="关";
         levelUnit="V";
-        suffix1="H";
-        suffix2="Q";
+        suffix1="自动";
+        suffix2="自动";
         item1HiLimit=0.00;
         item1LowLimit=0.000;
         item2HiLimit=0.0;

@@ -47,6 +47,8 @@ private slots:
 
 
     void trig();
+    void on_btnChannelCalibration_clicked();
+
 protected:
     void closeEvent(QCloseEvent *event);
 signals:
@@ -57,6 +59,7 @@ private:
     QFlowLayout *layout;
     clsSignalDisplayWidget * signalWidget;
     clsRunningThread *trigThread;
+    void initDataBase();
 };
 
 #endif // CLSMAINTESTWINDOW_H

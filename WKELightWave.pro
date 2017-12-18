@@ -12,7 +12,7 @@ TARGET = WKELightWave
 TEMPLATE = app
 
 #当发布产品的时候一定要将此行注释去掉
-#DEFINES += USE_MULTI_CHANNEL
+DEFINES += USE_MULTI_CHANNEL
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
@@ -90,7 +90,10 @@ HEADERS += \
     PublicFiles/clsGlobleVarient.h \
     Qextserial/qextserialport.h \
     Qextserial/qextserialport_global.h \
-    Qextserial/qextserialport_p.h
+    Qextserial/qextserialport_p.h \
+    MulitChannel/clsWK6500CalibrationMeter.h \
+    MulitChannel/clsSingleTrig.h \
+    MulitChannel/clsSampleTest.h
 
 SOURCES += \
     PublicFiles/clsMeterLimit.cpp \
@@ -146,7 +149,10 @@ SOURCES += \
     MulitChannel/clsInstrumentCalibration.cpp \
     PublicFiles/clsGlobleVarient.cpp \
     Qextserial/qextserialport.cpp \
-    Qextserial/qextserialport_win.cpp
+    Qextserial/qextserialport_win.cpp \
+    MulitChannel/clsWK6500CalibrationMeter.cpp \
+    MulitChannel/clsSingleTrig.cpp \
+    MulitChannel/clsSampleTest.cpp
 
 FORMS += \
     UiFiles/clsChannelSettings.ui \
@@ -172,7 +178,8 @@ FORMS += \
     Ftdi/clsSelectFtdiChip.ui \
     MulitChannel/clsCalibration.ui \
     MulitChannel/clsStandardValueInput.ui \
-    MulitChannel/MessageDialog.ui
+    MulitChannel/MessageDialog.ui \
+    MulitChannel/clsSampleTest.ui
 
 DISTFILES += \
     Describle.txt

@@ -70,5 +70,6 @@
         <file>Auto.png</file>
         <file>BiasOff.png</file>
         <file>BiasOn.png</file>
+        <file>Channel.png</file>
     </qresource>
 </RCC>

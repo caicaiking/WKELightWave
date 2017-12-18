@@ -1,4 +1,7 @@
 #include "clsMainTestWindow.h"
+#include "clsCalibrationDbOp.h"
+#include "clsWK6500CalibrationMeter.h"
+#include "clsInstrumentCalibration.h"
 #include "clsNewSetup.h"
 #include "clsChannelSettings.h"
 #include <QGridLayout>
@@ -19,7 +22,7 @@
 #include <QFile>
 #include <QDir>
 #include "clsRunningThread.h"
-//TODO: 增加多通道校准界面
+#include "clsCalibration.h"
 clsMainTestWindow::clsMainTestWindow(QWidget *parent) :
     QMainWindow(parent)
 {
@@ -29,9 +32,9 @@ clsMainTestWindow::clsMainTestWindow(QWidget *parent) :
     // this->showMaximized();
 
     layout = new QFlowLayout(6,6,6);
-
     this->itemWidget->setLayout(layout);
 
+    this->initDataBase();
     installSignalDispaly();
     wgtSignalPannel->setVisible(true);
     connect(sngRunService::Ins(),SIGNAL(showRes(QString)),this,SLOT(showChannelRes(QString)));
@@ -49,14 +52,25 @@ clsMainTestWindow::clsMainTestWindow(QWidget *parent) :
     else
         on_btnSettings_clicked(true);
 
+
+
     trigThread = sngTrigThread::Ins();
     trigThread->setName("Trig");
     trigThread->setCaptureBit(1);
     connect(trigThread,SIGNAL(getSignal()),this,SLOT(trig()));
 
-
     trigThread->start();
 }
+/*!
+     * \brief  初始化数据库文件。
+     */
+void clsMainTestWindow::initDataBase()
+{
+    clsCalDb::getInst()->setStrDataBaseName(QString("./McbCal.db"));
+    clsCalDb::getInst()->openDataBase();
+    clsCalDb::getInst()->initTable();
+}
+
 
 void clsMainTestWindow::showAllStep()
 {
@@ -278,8 +292,6 @@ void clsMainTestWindow::editStep(int step)
         }
 
     }
-
-
 }
 //!
 //! \param file 文件的全路径包含文件名称
@@ -476,3 +488,17 @@ void clsMainTestWindow::closeEvent(QCloseEvent *event)
 }
 
 
+
+void clsMainTestWindow::on_btnChannelCalibration_clicked()
+{
+    clsCalibration * dlg = new clsCalibration(this);
+    dlg->setWindowTitle(tr("通道校准"));
+
+    clsInstrumentCalibration * meter = new clsWK6500CalibrationMeter();
+    dlg->setMeter(meter);
+
+    dlg->setSteps(steps);
+
+    dlg->exec();
+    //QList<clsTestConditons*> steps;
+}

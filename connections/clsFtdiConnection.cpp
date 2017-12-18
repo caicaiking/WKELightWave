@@ -63,6 +63,7 @@ bool clsFtdiConnection::setupConnection()
     else
     {
         isInit = false;
+        serialPort->close();
         QMessageBox::critical(0, tr("WKE控制箱连线错误"), tr("请仔细检查串口连线，或者重新插拔！"),QMessageBox::Ok);
         return false;
     }
@@ -78,7 +79,7 @@ QString clsFtdiConnection::sendCommand(QString command, bool hasReturn)
         emit commandMsg(command);
 
     readData.clear();
-    disconnect(serialPort, &QextSerialPort::readyRead,this,&clsFtdiConnection::readCom);
+   // disconnect(serialPort, &QextSerialPort::readyRead,this,&clsFtdiConnection::readCom);
     QString cmd = command + "\r";
     serialPort->write(cmd.toUtf8(), cmd.length());
     serialPort->waitForBytesWritten(1000);
@@ -86,7 +87,7 @@ QString clsFtdiConnection::sendCommand(QString command, bool hasReturn)
     if(!hasReturn)
         return "";
 
-    connect(serialPort, &QextSerialPort::readyRead,this,&clsFtdiConnection::readCom);
+    //connect(serialPort, &QextSerialPort::readyRead,this,&clsFtdiConnection::readCom);
     int i=0;
     forever
     {

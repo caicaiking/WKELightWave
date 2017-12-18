@@ -58,6 +58,7 @@ private:
 
     QString strConditon;
     QList<clsMeterLimit* > limits;
+    int channel;
 
 };
 typedef Singleton<clsWK6500RunningMode> sngWK6500Run;

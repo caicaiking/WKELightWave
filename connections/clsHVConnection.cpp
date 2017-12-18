@@ -54,6 +54,7 @@ bool clsHVConnection::setupConnection()
     else
     {
         isInit = false;
+        serialPort->close();
         QMessageBox::critical(0, tr("高压机连线错误"), tr("请仔细检查串口连线，或者重新插拔！"),QMessageBox::Ok);
         return false;
     }

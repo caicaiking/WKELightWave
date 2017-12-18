@@ -248,6 +248,39 @@
        </spacer>
       </item>
       <item>
+       <widget class="QPushButton" name="btnChannelCalibration">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 11pt &quot;楷体&quot;;</string>
+        </property>
+        <property name="text">
+         <string>通道
+校准</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../images/res.qrc">
+          <normaloff>:/Channel.png</normaloff>:/Channel.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="shortcut">
+         <string>Return</string>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="btnSignal">
         <property name="minimumSize">
          <size>
@@ -403,7 +436,6 @@
   </widget>
  </widget>
  <resources>
-  <include location="../images/res.qrc"/>
   <include location="../images/res.qrc"/>
   <include location="../images/res.qrc"/>
  </resources>

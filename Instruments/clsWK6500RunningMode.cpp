@@ -1,6 +1,7 @@
 #include "clsWK6500RunningMode.h"
 #include "clsLcrConnection.h"
 #include <QJsonDocument>
+#include "clsSingleTrig.h"
 #include <QJsonParseError>
 #include <QVariantMap>
 #include "doubleType.h"
@@ -43,6 +44,11 @@ void clsWK6500RunningMode::setCondition(QString value)
 
     if(tmpMap["meter"].toString() != getInstrumentType()) //判断是否为当前的仪表设置条件
         return;
+
+    if(tmpMap["channel"].toInt()==0)
+        return;
+    else
+        this->channel=  tmpMap["channel"].toInt();
 
     QString tmpConditon = tmpMap["conditions"].toString();
     if(tmpConditon.isEmpty())
@@ -102,11 +108,25 @@ bool clsWK6500RunningMode::trig()
     QString res = sngLCRCnnt::Ins()->sendCommand(":METER:TRIG",true);
     res +=",,";
 
-    results.clear();
     QStringList resList = res.split(",");
 
-    results.append(resList.at(0).toDouble());
-    results.append(resList.at(1).toDouble());
+    double res1, res2;
+    res1 = resList.at(0).toDouble();
+    res2 = resList.at(1).toDouble();
+
+    clsSingleTrig d;
+    d.setZm(res1);
+    d.setAm(res2);
+
+    d.setFrequency(this->frequency);
+    d.setChannel(this->channel);
+
+    d.doRCCalibration();
+
+
+    results.clear();
+    results.append(d.getItem(item1, this->equcct));
+    results.append(d.getItem(item2, this->equcct));
     return true;
 }
 

@@ -8,7 +8,6 @@ class clsInstrumentCalibration
 public:
     clsInstrumentCalibration();
 
-    virtual void calibration()=0;
     virtual void set10KHz()=0;                  //设置10kHz为了校准
     virtual void setChannel(int value)=0;       //通道测试
     virtual void setUseLoad(bool value)=0;      //使用Load数据
