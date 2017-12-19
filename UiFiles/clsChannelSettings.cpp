@@ -197,6 +197,7 @@ void clsChannelSettings::setChannelSettings()
     stackedWidget->setCurrentIndex(0);
     isEditMode = true;
     setLablChannelToolTip();
+   labelClose->setVisible(true);
 }
 
 void clsChannelSettings::setChannelRunnings()
@@ -204,6 +205,7 @@ void clsChannelSettings::setChannelRunnings()
     stackedWidget->setCurrentIndex(1);
     isEditMode = false;
     setLablChannelToolTip();
+   labelClose->setVisible(false);
 }
 
 void clsChannelSettings::setCloseEnabled(bool bl)

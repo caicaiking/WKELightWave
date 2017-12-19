@@ -46,12 +46,10 @@ clsMainTestWindow::clsMainTestWindow(QWidget *parent) :
         this->deleteAllSteps();
         openTaskFile(lastFile);
 
-        btnRunning->clicked(true);
-        on_btnSettings_clicked(false);
     }
-    else
-        on_btnSettings_clicked(true);
 
+    btnTrig->setVisible(false);
+    btnReptive->setVisible(false);
 
 
     trigThread = sngTrigThread::Ins();

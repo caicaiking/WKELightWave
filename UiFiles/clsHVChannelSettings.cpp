@@ -130,6 +130,7 @@ void clsHVChannelSettings::setChannelSettings()
     setLablChannelToolTip();
     stackedWidget->setCurrentIndex(0);
     isEditMode = true;
+    labelClose->setVisible(true);
 }
 
 void clsHVChannelSettings::setChannelRunnings()
@@ -137,6 +138,7 @@ void clsHVChannelSettings::setChannelRunnings()
     setLablChannelToolTip();
     stackedWidget->setCurrentIndex(1);
     isEditMode = false;
+    labelClose->setVisible(false);
 }
 
 void clsHVChannelSettings::setCloseEnabled(const bool bl)

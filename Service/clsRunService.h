@@ -5,13 +5,15 @@
 #include "singleton.h"
 #include "clsInstrument.h"
 #include "clsTestConditon.h"
+#include <QTextStream>
+#include <QFile>
 
 class clsRunService : public QObject
 {
     Q_OBJECT
 public:
     explicit clsRunService(QObject *parent = nullptr);
-
+~clsRunService();
 signals:
     void showRes(QString);
     void showMsg(QString);
@@ -39,6 +41,9 @@ private:
     QString strCondition;
     QList<clsTestConditons* > steps;
     clsInstrument *meter;
+    QFile * file;
+    QString sep;
+    QString getLastFilePath();
 };
 
 typedef Singleton<clsRunService> sngRunService;

@@ -1,4 +1,7 @@
 #include "clsRunService.h"
+#include <QDir>
+#include "clsSettings.h"
+#include <QDate>
 #include "publicUtility.h"
 #include <QDebug>
 #include <QJsonDocument>
@@ -15,6 +18,17 @@ clsRunService::clsRunService(QObject *parent) : QObject(parent)
 {
     isRunningMode = false;
     isReset = false;
+    file =0;
+
+}
+
+clsRunService::~clsRunService()
+{
+    if(file != nullptr && file->isOpen())
+    {
+        file->flush();
+        file->close();
+    }
 
 }
 
@@ -53,6 +67,75 @@ void clsRunService::switchToRunningMode(bool value)
 {
     this->isRunningMode = value;
     this->isReset = false;
+
+
+    if(isRunningMode)
+    {
+        if(file != nullptr)
+        {
+            file->flush();
+            file->close();
+        }
+
+        QDir d(getLastFilePath() + "/AutoSaveData");
+        if(!d.exists())
+            d.mkdir(getLastFilePath() + "/AutoSaveData");
+
+        file = new QFile(getLastFilePath() + "/AutoSaveData/" + QDate::currentDate().toString("yyyy_MM_dd")+" "+
+                         QTime::currentTime().toString("HH_mm_ss") +".csv");
+        if(!file->open(QIODevice::Append |QIODevice::Text))
+        {
+            qDebug()<<"Open Data file error!";
+            return ;
+        }
+
+        QTextStream out(file);
+        QStringList title ;     //写入数据文件标题
+        for(int i=0; i< steps.length(); i++)
+        {
+            meter = clsRunningMeterFactory::getMeter(steps.at(i)->meter);
+
+            clsTestConditons * tmpStep = steps.at(i);
+            meter->setCondition(tmpStep->condition);
+            title.append(QString::number(tmpStep->channel));
+
+            for(int j=0; j< meter->getItemsCount(); j++)
+            {
+                title.append(meter->getItem(j));
+            }
+            title.append("Status");
+        }
+
+        if(QLocale::c().decimalPoint() =='.')
+            sep = ",";
+        else
+            sep = ";";
+
+        QString strTitle = title.join(sep) +"\n";
+        out<<strTitle.toUtf8();
+        out.flush();
+    }
+    else
+    {
+        if(file != nullptr)
+        {
+            file->flush();
+            file->close();
+            file =0;
+        }
+    }
+}
+QString clsRunService::getLastFilePath()
+{
+    clsSettings settings;
+    QString strNode = "File/";
+    QString filePath;
+    settings.readSetting(strNode + "lastDir", filePath);
+    QDir d;
+    if(d.exists(filePath))
+        return filePath;
+    else
+        return ".";
 }
 
 void clsRunService::trig()
@@ -61,6 +144,10 @@ void clsRunService::trig()
     emit trigSignal(); //发送得到触发信号
     if(!isRunningMode)
         return;
+
+    QList<QString> results;
+
+
     sngSignalStatus::Ins()->resetHVStatus(); //恢复原始值
     sngSignalStatus::Ins()->resetLCRStatus();//恢复原始值
 
@@ -84,6 +171,9 @@ void clsRunService::trig()
 
         //切换通道
         clsConnectSWBox::Ins()->setChannel(tmpStep->channel);
+        //数据记录
+        results.append(QString::number(tmpStep->channel));
+
         //更新仪表的测试条件
         meter->setCondition(tmpStep->condition);
         //仪表测试
@@ -101,20 +191,26 @@ void clsRunService::trig()
         tmpMap.insert("channel", tmpStep->channel);
 
         QVariantList res;
-        for(int i=0; i< meter->getItemsCount(); i++)
+        for(int j=0; j< meter->getItemsCount(); j++)
         {
             QVariantMap tmpRes;
-            tmpRes.insert("item", meter->getItem(i));
-            tmpRes.insert("result", meter->getItemValue(i));
-            tmpRes.insert("suffix", meter->getItemSuffix(i));
-            tmpRes.insert("status", meter->getItemStatus(i));
+            tmpRes.insert("item", meter->getItem(j));
+            tmpRes.insert("result", meter->getItemValue(j));
+            tmpRes.insert("suffix", meter->getItemSuffix(j));
+            tmpRes.insert("status", meter->getItemStatus(j));
 
             res.append(tmpRes);
+
+            results.append(QLocale::c().toString( meter->getItemValue(j)));
         }
+        results.append(meter->getTotleStatus()?"PASS": "FAIL");
+
 
         tmpMap.insert("data", res);
         QJsonDocument jsd = QJsonDocument::fromVariant(tmpMap);
         emit showRes(jsd.toJson());
+        if(meter->getTotleStatus()== false)
+            break;
 
     }
     emit currentStep(-1);
@@ -129,6 +225,15 @@ void clsRunService::trig()
     clsConnectSWBox::Ins()->setBusy(false);
     emit busyStatus(false);
     qApp->processEvents();
+
+    if(file->isOpen())
+    {
+        QTextStream out(file);
+        QString strRes = results.join(sep) +"\n";
+        out<<strRes.toUtf8();
+        out.flush();
+    }
+
     goto END;
 
 RESET:
