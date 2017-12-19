@@ -169,6 +169,15 @@ bool clsCalDb::insertRecord(double freq, int channal,
     }
 }
 
+bool clsCalDb::removeAllData()
+{
+    QString strSql = QString("DELETE From %1").arg(getTableName());
+
+    QSqlQuery query;
+    query.prepare(strSql);
+    return query.exec();
+}
+
 QString clsCalDb::getTableName()
 {
     return QString("MTC_%1").arg(clsRS::Ins()->meterSeries);

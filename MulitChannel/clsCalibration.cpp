@@ -137,12 +137,6 @@ void clsCalibration::on_btnDone_clicked()
     this->close();
 }
 
-void clsCalibration::on_btnCancel_clicked()
-{
-    saveSettings();
-    this->close();
-}
-
 
 void clsCalibration::on_btnOpenTrim_clicked()
 {
@@ -248,29 +242,6 @@ void clsCalibration::on_btnShortTrim_clicked()
     setCalLabelInfo(lblShortTrim,tr("短路校准"));
 }
 
-QList<double> clsCalibration::getCalFrequencys()
-{
-
-
-    if(freqList.empty())
-    {
-        QList<double> tmp;
-        tmp.append(meter->getFreqency(0));
-        if(false)
-            tmp.append(meter->getFreqency(1));
-        return tmp;
-    }
-    else
-    {
-        if(!freqList.contains(meter->getFreqency(0)))
-            freqList.append(meter->getFreqency(0));
-        if(!freqList.contains(meter->getFreqency(1)))
-            freqList.append(meter->getFreqency(1));
-        qSort(freqList);
-        return freqList;
-    }
-
-}
 QList<int> clsCalibration::getCalChannels()
 {
     QList<int> tmp;
@@ -430,7 +401,7 @@ void clsCalibration::on_btnRCLoadCalibration_clicked()
         //不对100P校准数据进行开路校准
         clsCalDb::getInst()->insertRecord(10000,currentChannel,Zm_100P_10K,A_100P_10k,"HF_100PRef");
 
-        QList<double> calFrequencys = getCalFrequencys();
+        QList<double> calFrequencys = calFreq[calChannels.at(c)];
         for(int f=0; f<calFrequencys.length(); f++)
         {
             showCalMessage(tr("100P校准"),calFrequencys.at(f),currentChannel);
@@ -475,4 +446,12 @@ void clsCalibration::on_btnMultiFreq_clicked()
     file.close();
 
     qDebug()<<freqList;
+}
+
+void clsCalibration::on_btnClearCalData_clicked()
+{
+   clsCalDb::getInst()->removeAllData();
+   lblOpenTrim->setText(tr("没有校准数据"));
+   lblShortTrim->setText(tr("没有校准数据"));
+   lblRCTrime->setText(tr("没有校准数据"));
 }

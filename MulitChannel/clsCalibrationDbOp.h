@@ -16,6 +16,7 @@ public:
     bool openDataBase();
     bool initTable();
     bool insertRecord(double freq, int channal, double z, double a, QString type);
+    bool removeAllData();
     QString getTableName();
     bool deleteRecord(double freq, int channel, QString type);
 

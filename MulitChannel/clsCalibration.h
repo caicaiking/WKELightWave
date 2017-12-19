@@ -22,9 +22,10 @@ private slots:
     void on_btnRCLoadCalibration_clicked();
     void on_btnDone_clicked();
     void on_btnMultiFreq_clicked();
-    void on_btnCancel_clicked();
     void  on_btnOpenTrim_clicked();
     void on_btnShortTrim_clicked();
+    void on_btnClearCalData_clicked();
+
 private:
     double ocZ,ocA,scZ,scA,loadZ,loadA, stdA,stdZ;
     double freq;
@@ -34,7 +35,6 @@ private:
     QMap<int, QList<double> > calFreq;
     QList<double> getCalDataFromDb(double freq, int channal, QString type);
     void getAllDataFromDb(double freq, int channel);
-    QList<double> getCalFrequencys();
     QList<int> getCalChannels();
     int showCalMessage(QString calType, double calFreq, int channel);
     int showCalMessage(QString calType, int channel);
