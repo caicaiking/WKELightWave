@@ -23,6 +23,11 @@
 #include <QDir>
 #include "clsRunningThread.h"
 #include "clsCalibration.h"
+
+//TODO: 主界面增加运行时候的设定
+//TODO: 增加服务器设置，端口号2001
+//TODO: 增加软件自动更新功能
+
 clsMainTestWindow::clsMainTestWindow(QWidget *parent) :
     QMainWindow(parent)
 {
@@ -50,6 +55,9 @@ clsMainTestWindow::clsMainTestWindow(QWidget *parent) :
 
     btnTrig->setVisible(false);
     btnReptive->setVisible(false);
+    btnSettings->setVisible(false);
+    btnChannelCalibration->setVisible(false);
+    btnRunSettings->setVisible(false);
 
 
     trigThread = sngTrigThread::Ins();
@@ -450,11 +458,16 @@ void clsMainTestWindow::on_btnSettings_clicked(bool checked)
         sngRunService::Ins()->setTestConditon(getTestCondition());
         sngRunService::Ins()->switchToRunningMode(true);
     }
+
+    btnSettings->setVisible(!checked);
+    btnRunning->setVisible(checked);
 }
 
 void clsMainTestWindow::on_btnRunning_clicked(bool checked)
 {
     btnSettings->clicked(!checked);
+    btnRunning->setVisible(!checked);
+    btnSettings->setVisible(checked);
 }
 
 void clsMainTestWindow::on_btnReptive_clicked()
@@ -498,6 +511,9 @@ void clsMainTestWindow::on_btnChannelCalibration_clicked()
     dlg->setSteps(steps);
 
     dlg->exec();
+
+    sngRunService::Ins()->setTestConditon(getTestCondition());
+
     //QList<clsTestConditons*> steps;
 }
 

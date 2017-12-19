@@ -71,5 +71,9 @@
         <file>BiasOff.png</file>
         <file>BiasOn.png</file>
         <file>Channel.png</file>
+        <file>settings.png</file>
+        <file>Settings2.png</file>
+        <file>settings3.png</file>
+        <file>Start1.png</file>
     </qresource>
 </RCC>

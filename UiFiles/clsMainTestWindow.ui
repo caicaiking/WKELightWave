@@ -10,6 +10,11 @@
     <height>639</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>9</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>WKE LightWave</string>
   </property>
@@ -46,12 +51,21 @@
        <widget class="QPushButton" name="btnNewSetup">
         <property name="minimumSize">
          <size>
-          <width>0</width>
-          <height>40</height>
+          <width>80</width>
+          <height>50</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>楷体</family>
+          <pointsize>13</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="styleSheet">
-         <string notr="true">font: 11pt &quot;楷体&quot;;</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>新建
@@ -61,18 +75,33 @@
          <iconset resource="../images/res.qrc">
           <normaloff>:/new.png</normaloff>:/new.png</iconset>
         </property>
+        <property name="iconSize">
+         <size>
+          <width>26</width>
+          <height>26</height>
+         </size>
+        </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="btnOpenSetup">
         <property name="minimumSize">
          <size>
-          <width>0</width>
-          <height>40</height>
+          <width>80</width>
+          <height>50</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>楷体</family>
+          <pointsize>13</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="styleSheet">
-         <string notr="true">font: 11pt &quot;楷体&quot;;</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>打开
@@ -82,18 +111,33 @@
          <iconset resource="../images/res.qrc">
           <normaloff>:/open.png</normaloff>:/open.png</iconset>
         </property>
+        <property name="iconSize">
+         <size>
+          <width>26</width>
+          <height>26</height>
+         </size>
+        </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="btnSaveSetup">
         <property name="minimumSize">
          <size>
-          <width>0</width>
-          <height>40</height>
+          <width>80</width>
+          <height>50</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>楷体</family>
+          <pointsize>13</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="styleSheet">
-         <string notr="true">font: 11pt &quot;楷体&quot;;</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>保存
@@ -103,71 +147,11 @@
          <iconset resource="../images/res.qrc">
           <normaloff>:/stepSave.png</normaloff>:/stepSave.png</iconset>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btnSettings">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">font: 11pt &quot;楷体&quot;;</string>
-        </property>
-        <property name="text">
-         <string>步骤
-设置</string>
-        </property>
-        <property name="icon">
-         <iconset resource="../images/res.qrc">
-          <normaloff>:/chennal.png</normaloff>:/chennal.png</iconset>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-        <property name="autoExclusive">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btnRunning">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">font: 11pt &quot;楷体&quot;;</string>
-        </property>
-        <property name="text">
-         <string>开始
-测试</string>
-        </property>
-        <property name="icon">
-         <iconset resource="../images/res.qrc">
-          <normaloff>:/run2.png</normaloff>:/run2.png</iconset>
-        </property>
         <property name="iconSize">
          <size>
-          <width>20</width>
-          <height>20</height>
+          <width>26</width>
+          <height>26</height>
          </size>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-        <property name="checked">
-         <bool>false</bool>
-        </property>
-        <property name="autoExclusive">
-         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -175,12 +159,21 @@
        <widget class="QPushButton" name="btnTrig">
         <property name="minimumSize">
          <size>
-          <width>0</width>
-          <height>40</height>
+          <width>80</width>
+          <height>50</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>楷体</family>
+          <pointsize>13</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="styleSheet">
-         <string notr="true">font: 11pt &quot;楷体&quot;;</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>手动
@@ -192,12 +185,12 @@
         </property>
         <property name="iconSize">
          <size>
-          <width>20</width>
-          <height>20</height>
+          <width>26</width>
+          <height>26</height>
          </size>
         </property>
         <property name="shortcut">
-         <string>Return</string>
+         <string>Space</string>
         </property>
        </widget>
       </item>
@@ -205,12 +198,21 @@
        <widget class="QPushButton" name="btnReptive">
         <property name="minimumSize">
          <size>
-          <width>0</width>
-          <height>40</height>
+          <width>80</width>
+          <height>50</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>楷体</family>
+          <pointsize>13</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="styleSheet">
-         <string notr="true">font: 11pt &quot;楷体&quot;;</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>重复
@@ -222,8 +224,8 @@
         </property>
         <property name="iconSize">
          <size>
-          <width>20</width>
-          <height>20</height>
+          <width>26</width>
+          <height>26</height>
          </size>
         </property>
         <property name="shortcut">
@@ -248,15 +250,120 @@
        </spacer>
       </item>
       <item>
+       <widget class="QPushButton" name="btnRunning">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>楷体</family>
+          <pointsize>13</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>编辑
+模式</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../images/res.qrc">
+          <normaloff>:/settings3.png</normaloff>:/settings3.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>26</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="shortcut">
+         <string>Ctrl+R</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnSettings">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>楷体</family>
+          <pointsize>13</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>运行
+模式</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../images/res.qrc">
+          <normaloff>:/Start1.png</normaloff>:/Start1.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>26</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="shortcut">
+         <string>Ctrl+E</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="btnChannelCalibration">
         <property name="minimumSize">
          <size>
-          <width>0</width>
-          <height>40</height>
+          <width>80</width>
+          <height>50</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>楷体</family>
+          <pointsize>13</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="styleSheet">
-         <string notr="true">font: 11pt &quot;楷体&quot;;</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>通道
@@ -264,12 +371,54 @@
         </property>
         <property name="icon">
          <iconset resource="../images/res.qrc">
-          <normaloff>:/Channel.png</normaloff>:/Channel.png</iconset>
+          <normaloff>:/settings.png</normaloff>:/settings.png</iconset>
         </property>
         <property name="iconSize">
          <size>
-          <width>20</width>
-          <height>20</height>
+          <width>26</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="shortcut">
+         <string>Return</string>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnRunSettings">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>楷体</family>
+          <pointsize>13</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>运行
+设置</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../images/res.qrc">
+          <normaloff>:/Settings2.png</normaloff>:/Settings2.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>26</width>
+          <height>26</height>
          </size>
         </property>
         <property name="shortcut">
@@ -284,12 +433,21 @@
        <widget class="QPushButton" name="btnSignal">
         <property name="minimumSize">
          <size>
-          <width>0</width>
-          <height>40</height>
+          <width>80</width>
+          <height>50</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>楷体</family>
+          <pointsize>13</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="styleSheet">
-         <string notr="true">font: 11pt &quot;楷体&quot;;</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>显示
@@ -301,8 +459,8 @@
         </property>
         <property name="iconSize">
          <size>
-          <width>20</width>
-          <height>20</height>
+          <width>26</width>
+          <height>26</height>
          </size>
         </property>
         <property name="checkable">
@@ -359,7 +517,7 @@
               <x>0</x>
               <y>0</y>
               <width>1302</width>
-              <height>539</height>
+              <height>529</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -438,6 +596,7 @@
  <resources>
   <include location="../images/res.qrc"/>
   <include location="../images/res.qrc"/>
+  <include location="../images/res.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -447,12 +606,12 @@
    <slot>setVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>392</x>
-     <y>48</y>
+     <x>1127</x>
+     <y>74</y>
     </hint>
     <hint type="destinationlabel">
-     <x>482</x>
-     <y>65</y>
+     <x>340</x>
+     <y>75</y>
     </hint>
    </hints>
   </connection>
@@ -463,8 +622,8 @@
    <slot>setVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>299</x>
-     <y>59</y>
+     <x>1213</x>
+     <y>75</y>
     </hint>
     <hint type="destinationlabel">
      <x>69</x>
@@ -479,8 +638,8 @@
    <slot>setVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>299</x>
-     <y>42</y>
+     <x>1213</x>
+     <y>68</y>
     </hint>
     <hint type="destinationlabel">
      <x>225</x>
@@ -495,8 +654,8 @@
    <slot>setVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>302</x>
-     <y>50</y>
+     <x>1213</x>
+     <y>75</y>
     </hint>
     <hint type="destinationlabel">
      <x>147</x>
@@ -511,12 +670,12 @@
    <slot>setVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>972</x>
-     <y>65</y>
+     <x>1471</x>
+     <y>75</y>
     </hint>
     <hint type="destinationlabel">
-     <x>972</x>
-     <y>175</y>
+     <x>1471</x>
+     <y>260</y>
     </hint>
    </hints>
   </connection>
@@ -527,12 +686,44 @@
    <slot>setVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>375</x>
-     <y>43</y>
+     <x>1127</x>
+     <y>69</y>
     </hint>
     <hint type="destinationlabel">
-     <x>542</x>
+     <x>426</x>
+     <y>75</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnRunning</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>btnChannelCalibration</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1087</x>
      <y>50</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1275</x>
+     <y>54</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnRunning</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>btnRunSettings</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1078</x>
+     <y>40</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1367</x>
+     <y>56</y>
     </hint>
    </hints>
   </connection>

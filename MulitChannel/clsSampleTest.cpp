@@ -13,7 +13,7 @@ clsSampleTest::clsSampleTest(clsInstrumentCalibration *value, QWidget *parent) :
     lblTest1->setText("");
     lblTest2->setText("");
     timer = new QTimer(this);
-    timer->setInterval(1000);
+    timer->setInterval(500);
     connect(timer,SIGNAL(timeout()),this,SLOT(on_btnTrig_clicked()));
 
 }
@@ -72,7 +72,7 @@ void clsSampleTest::on_btnTrig_clicked()
             }
             break;
         case 3:
-            if(res.at(1)>= -130 && res.at(1)<=-80)
+            if(res.at(1)>= -132 && res.at(1)<=-80)
             {
                 timer->stop();
                 this->accept();
@@ -85,7 +85,6 @@ void clsSampleTest::on_btnTrig_clicked()
 
     btnTrig->setEnabled(true);
     btnTrig->setFocus();
-
 }
 
 void clsSampleTest::on_btnOk_clicked()

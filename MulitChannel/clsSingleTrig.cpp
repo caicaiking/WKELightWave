@@ -165,7 +165,7 @@ void clsSingleTrig::doRCCalibration()
             double realMagRange = abs(_100PRef.first() *10E3 / frequency - 100.0);
             Zm = 100.0+ (__Dut.first()- _100R.first()) / magRange * realMagRange;
         }
-        else 				   // <100 Ohm
+        else 				   // <=100 Ohm
         {
             double magRange = abs(_100R.first());
             double realMagRange = 100.0-0.0;

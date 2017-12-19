@@ -104,7 +104,7 @@ QString clsWK6500RunningMode::getCondition()
 bool clsWK6500RunningMode::trig()
 {
     updateGpibCommand(); //更新GPIB 指令
-    //TODO: 将来这儿会加入多通道的数值计算，如果没有使用多通道则使用仪器的原始数据
+    //将来这儿会加入多通道的数值计算，如果没有使用多通道则使用仪器的原始数据
     QString res = sngLCRCnnt::Ins()->sendCommand(":METER:TRIG",true);
     res +=",,";
 
@@ -113,7 +113,7 @@ bool clsWK6500RunningMode::trig()
     double res1, res2;
     res1 = resList.at(0).toDouble();
     res2 = resList.at(1).toDouble();
-
+    //数据加工
     clsSingleTrig d;
     d.setZm(res1);
     d.setAm(res2);
@@ -123,7 +123,7 @@ bool clsWK6500RunningMode::trig()
 
     d.doRCCalibration();
 
-
+    //输出数据
     results.clear();
     results.append(d.getItem(item1, this->equcct));
     results.append(d.getItem(item2, this->equcct));
