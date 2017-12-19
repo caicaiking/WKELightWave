@@ -43,6 +43,9 @@ void clsRunService::setTestConditon(QString value)
         steps.append(tmp);
     }
 
+    sngWK6500Run::Ins()->clearGpibCommands();
+    sngHVRun::Ins()->clearGpibCommands();
+
     emit showMsg(tr("步骤总数 %1 ").arg(steps.length()));
 }
 

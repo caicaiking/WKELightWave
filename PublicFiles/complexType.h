@@ -31,6 +31,7 @@ public:
     complexType operator -(complexType value);
     complexType operator *(complexType value);
     complexType operator /(complexType value);
+
     QString toString();
 
 private:

@@ -94,62 +94,88 @@ void clsSingleTrig::doLoadCalibration()
 
 void clsSingleTrig::doRCCalibration()
 {
-    Zm = Zm +(Zm==0? 1.0E-9:0.0);
-    Am = Am +(Am==0? 1.0E-9:0.0);
+    Zm = Zm +(Zm==0? 1.0E-9:0.0); //防止Zm =0
+    Am = Am +(Am==0? 1.0E-9:0.0); //防止AM =0
 
-    QList<double> openData = clsCalDb::getInst()->getCalData(frequency,channel,"O");
-    QList<double> shortData = clsCalDb::getInst()->getCalData(frequency,channel,"S");
-    QList<double> z100Rref = clsCalDb::getInst()->getCalData(10000.0,channel,"HF_100RRef");
-    QList<double> z100CR = clsCalDb::getInst()->getCalData(frequency,channel,"HF_C100R");
-    QList<double> z100Pref = clsCalDb::getInst()->getCalData(10000.0,channel,"HF_100PRef");
-    QList<double> z100CP = clsCalDb::getInst()->getCalData(frequency,channel,"HF_C100P");
+    QList<double> openData = clsCalDb::getInst()->getCalData(frequency,channel,"O"); //开路
+    QList<double> shortData = clsCalDb::getInst()->getCalData(frequency,channel,"S"); //短路
+    QList<double> openData_10K = clsCalDb::getInst()->getCalData(10E3,channel,"OC_10k"); //短路
+    QList<double> shortData_10K = clsCalDb::getInst()->getCalData(10E3,channel,"SC_10k"); //短路
 
-//    QList<double> zLoads = clsCalDb::getInst()->getCalData(frequency,channel,"Ls");
-//    QList<double> zLoadm = clsCalDb::getInst()->getCalData(frequency,channel,"Lm");
+    QList<double> z100Rref = clsCalDb::getInst()->getCalData(10000.0,channel,"HF_100RRef"); //10KHz 100R 参考值
+    QList<double> z100CR = clsCalDb::getInst()->getCalData(frequency,channel,"HF_C100R");   //100R量测值
+    QList<double> z100Pref = clsCalDb::getInst()->getCalData(10000.0,channel,"HF_100PRef"); //10KHz 100P参考值
+    QList<double> z100CP = clsCalDb::getInst()->getCalData(frequency,channel,"HF_C100P");  //100P测试频率量测值
+
 
 
     if((openData.length() !=2) ||(shortData.length() !=2))
         return;
-    clsDataProcess zop(Zm,Am,frequency);
 
-    zop.applyOpenData(openData.at(0),openData.at(1));
-    zop.applyShortData(shortData.at(0),shortData.at(1));
-    zop.useLoadData(false);
-    zop.doCalibration();
+    if(z100Rref.length() !=2 || z100Pref.length() !=2) //只对数据进行开路短路校准
+    {
 
-    Zm=zop.getItem("Z",QObject::tr("串联")) ;
-    Am=zop.getItem("A",QObject::tr("串联"));
+        clsDataProcess zop(Zm,Am,frequency);
 
+        zop.applyOpenData(openData.at(0),openData.at(1));
+        zop.applyShortData(shortData.at(0),shortData.at(1));
+        zop.useLoadData(false);
+        zop.doCalibration();
 
-    if((z100Rref.length() !=2) || (z100CR.length() !=2) || (z100Pref.length() !=2) || (z100CP.length() !=2 ))
-        return;
+        Zm=zop.getItem("Z",QObject::tr("串联")) ;
+        Am=zop.getItem("A",QObject::tr("串联"));
+        return ;
 
-    clsDataProcess z100CRTrimed(z100CR.first(),z100CR.last(),frequency);
+    }
+    else
+    {
+        //先对100R 100P 10kHz的数据进行开路校准
 
-    z100CRTrimed.applyOpenData(openData.at(0),openData.at(1));
-    z100CRTrimed.applyShortData(shortData.at(0),shortData.at(1));
-    z100CRTrimed.useLoadData(false);
-    z100CRTrimed.doCalibration();
+        auto applyOpenShort =[](
+                QList<double> op, QList<double> st, QList<double> meas, double frequeny)
+        {
+            clsDataProcess tmp(meas.first(),meas.last(), frequeny);
+            tmp.applyOpenData(op.first(),op.last());
+            tmp.applyShortData(st.first(),st.last());
+            tmp.useLoadData(false);
+            tmp.doCalibration();
+            double z = tmp.getItem("Z", QObject::tr("串联"));
+            double a = tmp.getItem("A", QObject::tr("串联"));
 
-    clsDataProcess z100CPTrimed(z100CP.first(),z100CP.last(),frequency);
+            return QList<double>()<<z<<a;
+        };
 
-    z100CPTrimed.applyOpenData(openData.at(0),openData.at(1));
-    z100CPTrimed.applyShortData(shortData.at(0),shortData.at(1));
-    z100CPTrimed.useLoadData(false);
-    z100CPTrimed.doCalibration();
+        QList<double> meas;
+        meas<< Zm<<Am;
 
-    double zFactor = z100CRTrimed.getItem("Z",QObject::tr("串联")) / z100Rref.first();
-    Zm = Zm/zFactor;
+        QList<double> _100R = applyOpenShort(openData,shortData,z100CR, frequency);
+        QList<double> _100P = applyOpenShort(openData,shortData,z100CP, frequency);
+        QList<double> __Dut = applyOpenShort(openData,shortData, meas, frequency);
+        QList<double> _100PRef = applyOpenShort(openData_10K,shortData_10K,z100Pref,10E3);
 
-    double aFactor = z100CPTrimed.getItem("A",QObject::tr("串联"))  - z100Pref.last();
-    Am = Am - aFactor-(z100Pref.last()+90.000);
-    if(Am > 180)
-        Am =Am - 360.0;
-    else if(Am < -180.0)
-        Am += 360.0;
+        //角度适配
+        double angleRange = abs(_100P.last() - _100R.last());
+        double diffA = __Dut.last() - _100P.last();
+        Am = diffA/angleRange *90 -90;
+
+        //幅值适配
+        if(Zm > _100R.first()) //> 100 Ohm
+        {
+            double magRange = abs(_100P.first() - _100R.first());
+            double realMagRange = abs(_100PRef.first() *10E3 / frequency - 100.0);
+            Zm = 100.0+ (__Dut.first()- _100R.first()) / magRange * realMagRange;
+        }
+        else 				   // <100 Ohm
+        {
+            double magRange = abs(_100R.first());
+            double realMagRange = 100.0-0.0;
+
+            Zm = 0.0+ __Dut.first() /magRange * realMagRange;
+        }
+
+    }
 
     clsDataProcess end(Zm,Am,frequency);
-
     Zm=end.getItem("Z",QObject::tr("串联"));
     Am=end.getItem("A",QObject::tr("串联"));
 

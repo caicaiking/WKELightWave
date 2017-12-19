@@ -22,7 +22,7 @@ void complexType::convertRxToZa()
 {
     mZ = sqrt(mR*mR + mX* mX);
 
-    if(mR> 0)
+   /* if(mR> 0)
     {
         mA = atan(mX/mR)*180.0/3.1415926;
     }
@@ -32,7 +32,9 @@ void complexType::convertRxToZa()
             mA = 180.0- atan(mX/-mR)*180.0/3.1415926;
         else
             mA = -180 - atan(mX/-mR)*180.0/3.1415926;
-    }
+    }*/
+
+    mA = atan2(mX,mR)*180/3.1415926;
 }
 
 void complexType::convertZaToRx()
@@ -128,6 +130,7 @@ complexType complexType::operator /(complexType value)
     tmp.setRX(c.real(),c.imag());
     return tmp;
 }
+
 
 QString complexType::toString()
 {

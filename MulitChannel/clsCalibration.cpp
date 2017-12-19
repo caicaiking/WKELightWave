@@ -27,13 +27,14 @@ clsCalibration::clsCalibration(QWidget *parent) :
 
     readSettings();
     //  this->layout()->setSizeConstraint(QLayout::SetFixedSize);
+    this->btnMultiFreq->setVisible(false);
 }
 
 void clsCalibration::setMeter(clsInstrumentCalibration *meter)
 {
     this->meter = meter;
-    meter->setConditionForCalibration(0);
     meter->setFreqencyForCal(0);
+    meter->setConditionForCalibration(0);
     freq = meter->getFreqency(0);
 }
 
@@ -150,13 +151,13 @@ void clsCalibration::on_btnOpenTrim_clicked()
 
     meter->setConditionForCalibration(0);
     clsSampleTest * sample = new clsSampleTest(meter,this);
-    if(sample->exec() !=QDialog::Accepted)
-        return;
-
-
 
     for(int c=0; c< calChannels.length(); c++)
     {
+        sample->setOption(0);
+        if(sample->exec() !=QDialog::Accepted)
+            return;
+
         int currentChannel = calChannels.at(c);
         clsConnectSWBox::Ins()->setChannel(currentChannel);
         clsConnectSWBox::Ins()->turnOffAllLight();
@@ -202,11 +203,12 @@ void clsCalibration::on_btnShortTrim_clicked()
     meter->setConditionForCalibration(0);
 
     clsSampleTest * sample = new clsSampleTest(meter,this);
-    if(sample->exec() !=QDialog::Accepted)
-        return;
-
     for(int c=0; c< calChannels.length(); c++)
     {
+        sample->setOption(1);
+        if(sample->exec() !=QDialog::Accepted)
+            return;
+
         int currentChannel = calChannels.at(c);
         clsConnectSWBox::Ins()->setChannel(currentChannel);
         clsConnectSWBox::Ins()->turnOffAllLight();
@@ -354,14 +356,15 @@ void clsCalibration::on_btnRCLoadCalibration_clicked()
     if(dlg->result()!=QDialog::Accepted)
         return;
 
-     clsSampleTest * sample = new clsSampleTest(meter,this);
-    if(sample->exec() !=QDialog::Accepted)
-        return;
-
+    clsSampleTest * sample = new clsSampleTest(meter,this);
     QList<int> calChannels = this->getCalChannels();
 
     for(int c=0; c< calChannels.length(); c++)
     {
+        sample->setOption(2);
+        if(sample->exec() !=QDialog::Accepted)
+            return;
+
         int currentChannel = calChannels.at(c);
         clsConnectSWBox::Ins()->setChannel(currentChannel);
         clsConnectSWBox::Ins()->turnOffAllLight();
@@ -377,26 +380,9 @@ void clsCalibration::on_btnRCLoadCalibration_clicked()
         double Zm_100R_10K = res.at(0);
         double A_100R_10k = res.at(1);
 
-        //获取开路和短路值
-        //获取开路值
-        QList<double> oc_10k = clsCalDb::getInst()->getCalData(10000.0,currentChannel,"OC_10k");
-        //获取短路值
-        QList<double> sc_10k = clsCalDb::getInst()->getCalData(10000.0,currentChannel,"SC_10k");
 
-        clsDataProcess c100R(Zm_100R_10K,A_100R_10k,10000);
-        if((oc_10k.length()==2)&&(sc_10k.length()==2))
-        {
-            c100R.applyOpenData(oc_10k.at(0),oc_10k.at(1));
-            c100R.applyShortData(sc_10k.at(0),sc_10k.at(1));
-            c100R.useLoadData(false);
-            c100R.doCalibration();
-        }
-
-        double z100R = c100R.getItem("Z",tr("串联"));
-        double a100R = c100R.getItem("A",tr("串联"));
-
-        clsCalDb::getInst()->insertRecord(10000,currentChannel,z100R,a100R,"HF_100RRef");
-
+        //不对100R校准数据进行开路校准
+        clsCalDb::getInst()->insertRecord(10000,currentChannel,Zm_100R_10K,A_100R_10k,"HF_100RRef");
 
         QList<double> calFrequencys =  calFreq[calChannels.at(c)];
         for(int f=0; f<calFrequencys.length(); f++)
@@ -419,12 +405,13 @@ void clsCalibration::on_btnRCLoadCalibration_clicked()
     if(dlg->result()!=QDialog::Accepted)
         return;
 
-        meter->setConditionForCalibration(0);
-    if(sample->exec() !=QDialog::Accepted) //Sample 检测
-        return;
-
+    meter->setConditionForCalibration(0);
     for(int c=0; c< calChannels.length(); c++)
     {
+        sample->setOption(3);
+        if(sample->exec() !=QDialog::Accepted) //Sample 检测
+            return;
+
         int currentChannel = calChannels.at(c);
         clsConnectSWBox::Ins()->setChannel(currentChannel);
         clsConnectSWBox::Ins()->turnOffAllLight();
@@ -439,25 +426,9 @@ void clsCalibration::on_btnRCLoadCalibration_clicked()
         double Zm_100P_10K = res.at(0);
         double A_100P_10k = res.at(1);
 
-        //获取开路和短路值
-        //获取开路值
-        QList<double> oc_10k = clsCalDb::getInst()->getCalData(10000.0,currentChannel,"OC_10k");
-        //获取短路值
-        QList<double> sc_10k = clsCalDb::getInst()->getCalData(10000.0,currentChannel,"SC_10k");
 
-        clsDataProcess c100P(Zm_100P_10K,A_100P_10k,10000);
-        if((oc_10k.length()==2)&&(sc_10k.length()==2))
-        {
-            c100P.applyOpenData(oc_10k.at(0),oc_10k.at(1));
-            c100P.applyShortData(sc_10k.at(0),sc_10k.at(1));
-            c100P.useLoadData(false);
-            c100P.doCalibration();
-        }
-
-        double z100P = c100P.getItem("Z",tr("串联"));
-        double a100P = c100P.getItem("A",tr("串联"));
-
-        clsCalDb::getInst()->insertRecord(10000,currentChannel,z100P,a100P,"HF_100PRef");
+        //不对100P校准数据进行开路校准
+        clsCalDb::getInst()->insertRecord(10000,currentChannel,Zm_100P_10K,A_100P_10k,"HF_100PRef");
 
         QList<double> calFrequencys = getCalFrequencys();
         for(int f=0; f<calFrequencys.length(); f++)

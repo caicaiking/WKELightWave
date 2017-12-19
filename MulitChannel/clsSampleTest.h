@@ -3,6 +3,8 @@
 
 #include "ui_clsSampleTest.h"
 #include "clsInstrumentCalibration.h"
+#include <QTimer>
+
 class clsSampleTest : public QDialog, private Ui::clsSampleTest
 {
     Q_OBJECT
@@ -10,6 +12,7 @@ class clsSampleTest : public QDialog, private Ui::clsSampleTest
 public:
     explicit clsSampleTest(clsInstrumentCalibration *value,QWidget *parent = 0);
 
+    void setOption(int opt);
 private slots:
     void on_btnClose_clicked();
 
@@ -19,6 +22,8 @@ private slots:
 
 private:
     clsInstrumentCalibration *meter;
+    QTimer *timer;
+    int opt;
 };
 
 #endif // CLSSAMPLETEST_H

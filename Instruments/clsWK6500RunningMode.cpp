@@ -199,6 +199,12 @@ void clsWK6500RunningMode::turnOffOutput()
     this->biasCommand = tmpBiasStatusCmd;
 
 }
+
+void clsWK6500RunningMode::clearGpibCommands()
+{
+    this->normCommands.clear();
+    this->biasCommand.clear();
+}
 QString clsWK6500RunningMode::changeItemToGpib(QString value)
 {
     if(value == "E'r")

@@ -28,6 +28,7 @@ public:
     double getItemValueWithSuffix(int i) ; //获取每个项目的测试值具有格式 如： 1.000k
     QString getInstrumentType() ;      //获取仪器的类型
     void turnOffOutput()  ;            //关闭所有的输出
+    void clearGpibCommands();
 protected slots:
     QString changeItemToGpib(QString value);
 private slots:

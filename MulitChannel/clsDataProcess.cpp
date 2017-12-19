@@ -65,13 +65,13 @@ void clsDataProcess::doCalibration()
     }
     else
     {
-//        complexType one;
-//        one.setRX(1.0,0.0);
+        /*complexType one;
+        one.setRX(1.0,0.0);
 
-//        complexType Yo;
-//        Yo.setZA(1.0/Zo.getZ(),-1.0*Zo.getA());
+        complexType Yo;
+        Yo.setZA(1.0/Zo.getZ(),-1.0*Zo.getA());
 
-//        Zdut =(Zxm - Zs)/(one-Yo*(Zxm-Zs));
+        Zdut =(Zxm - Zs)/(one-Yo*(Zxm-Zs));*/
 
         Zdut =(Zs-Zxm)/(Zxm-Zo)*Zo;
     }

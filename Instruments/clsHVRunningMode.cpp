@@ -183,6 +183,11 @@ void clsHVRunningMode::turnOffOutput()
 */
 }
 
+void clsHVRunningMode::clearGpibCommands()
+{
+   this->gpibCommands.clear();
+}
+
 void clsHVRunningMode::updateGpibCommands()
 {
     //仪表的GPIB指令

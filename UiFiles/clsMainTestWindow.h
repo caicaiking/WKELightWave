@@ -49,6 +49,7 @@ private slots:
     void trig();
     void on_btnChannelCalibration_clicked();
 
+
 protected:
     void closeEvent(QCloseEvent *event);
 signals:

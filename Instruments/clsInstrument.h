@@ -25,6 +25,7 @@ public:
     virtual double getItemValueWithSuffix(int i)=0; //获取每个项目的测试值具有格式 如： 1.000k
     virtual QString getInstrumentType()=0;      //获取仪器的类型
     virtual void turnOffOutput() =0;            //关闭所有的输出
+    virtual void clearGpibCommands(){}
 signals:
     void setConnectStatus(bool);                //显示连接状态
     void voltageOutput(bool);                   //电压输出

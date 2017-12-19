@@ -502,3 +502,4 @@ void clsMainTestWindow::on_btnChannelCalibration_clicked()
     dlg->exec();
     //QList<clsTestConditons*> steps;
 }
+
