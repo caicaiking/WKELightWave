@@ -105,8 +105,10 @@ void clsRunService::switchToRunningMode(bool value)
             }
             title.append("Status");
         }
+        title.append("Date");
+        title.append("Time");
 
-        if(QLocale::c().decimalPoint() =='.')
+        if(QLocale::system().decimalPoint() =='.')
             sep = ",";
         else
             sep = ";";
@@ -201,7 +203,7 @@ void clsRunService::trig()
 
             res.append(tmpRes);
 
-            results.append(QLocale::c().toString( meter->getItemValue(j)));
+            results.append(QLocale::system().toString( meter->getItemValue(j)));
         }
         results.append(meter->getTotleStatus()?"PASS": "FAIL");
 
@@ -229,7 +231,8 @@ void clsRunService::trig()
     if(file->isOpen())
     {
         QTextStream out(file);
-        QString strRes = results.join(sep) +"\n";
+        QString timeDate = QDate::currentDate().toString("yyyy/MM/dd")+sep + QTime::currentTime().toString("HH:mm:ss");
+        QString strRes = results.join(sep)+ sep+ timeDate +"\n";
         out<<strRes.toUtf8();
         out.flush();
     }

@@ -280,7 +280,10 @@ QString doubleType::formateToString(int length)
     setData(exValue,exUnit);
 
 
-    QString strForFormat=QString::number(this->value,'f',7);
+    QString strForFormat=QLocale::system().toString(this->value,'f',7);
+
+    if(value<0)
+        length++;
 
     if(strForFormat.length ()>length)
         strForFormat = strForFormat.left (length);
@@ -296,7 +299,10 @@ QString doubleType::formateWithUnit(QString unit, int length)
 
     data=data/pow(10.0,Exx);
 
-    QString strForFormat=QString::number(data,'f',7);
+    QString strForFormat= QLocale::system().toString(data,'f',7);
+
+    if(data<0)
+        length++;
 
     if(strForFormat.length ()>length)
         strForFormat = strForFormat.left (length);
