@@ -13,10 +13,7 @@ os.system("mingw32-make -j -f Makefile.Release")
 #os.system("..\Libs\WKELightWave.exe")
 
 #读取Version.txt 文件 获取编译后的版本号
-version_file = open('../Images/version.txt','r')
-version_str = version_file.readline()
-
-print(version_str)
+version_file = open('../Images/version.txt', 'r')
 
 i=0
 change_log = ""
