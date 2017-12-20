@@ -430,6 +430,48 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="btnAboutMe">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>楷体</family>
+          <pointsize>13</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>软件
+信息</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../images/res.qrc">
+          <normaloff>:/lightWave.png</normaloff>:/lightWave.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>26</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="shortcut">
+         <string>Return</string>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="btnSignal">
         <property name="minimumSize">
          <size>

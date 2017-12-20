@@ -1,3 +1,11 @@
+0.4.0.0
+2017/12/21 进行新的版本开发，更新程序变得更好用。
+1 停止了出发线信号在版本更新的时候工作
+2 优化了更新的信息
+
+0.3
+2017/12/21 主要更新了更新程序，让他工作起来更加的流畅。
+
 0.2
 2017/12/20  Add the update function to the software make it can downlaod the update from the internet.
 1 update function

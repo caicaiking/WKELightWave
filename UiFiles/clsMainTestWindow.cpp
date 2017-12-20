@@ -23,6 +23,7 @@
 #include <QDir>
 #include "clsRunningThread.h"
 #include "clsCalibration.h"
+#include "clsWKUpdateWindow.h"
 
 //TODO: 主界面增加运行时候的设定
 //TODO: 增加服务器设置，端口号2001
@@ -517,3 +518,11 @@ void clsMainTestWindow::on_btnChannelCalibration_clicked()
     //QList<clsTestConditons*> steps;
 }
 
+
+void clsMainTestWindow::on_btnAboutMe_clicked()
+{
+    trigThread->stop();
+    clsWKUpdateWindow* dlgUpdate = new clsWKUpdateWindow(this);
+    dlgUpdate->exec();
+    trigThread->start();
+}

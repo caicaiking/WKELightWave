@@ -27,7 +27,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-INCLUDEPATH += PublicFiles UiFiles Service Instruments connections Ftdi MulitChannel Qextseial
+INCLUDEPATH += PublicFiles UiFiles Service Instruments connections Ftdi MulitChannel Qextseial update
 
 
 DESTDIR =$$PWD/Libs/
@@ -95,7 +95,8 @@ HEADERS += \
     Qextserial/qextserialport_p.h \
     MulitChannel/clsWK6500CalibrationMeter.h \
     MulitChannel/clsSingleTrig.h \
-    MulitChannel/clsSampleTest.h
+    MulitChannel/clsSampleTest.h \
+    update/clsWKUpdateWindow.h
 
 SOURCES += \
     PublicFiles/clsMeterLimit.cpp \
@@ -154,7 +155,8 @@ SOURCES += \
     Qextserial/qextserialport_win.cpp \
     MulitChannel/clsWK6500CalibrationMeter.cpp \
     MulitChannel/clsSingleTrig.cpp \
-    MulitChannel/clsSampleTest.cpp
+    MulitChannel/clsSampleTest.cpp \
+    update/clsWKUpdateWindow.cpp
 
 FORMS += \
     UiFiles/clsChannelSettings.ui \
@@ -181,7 +183,8 @@ FORMS += \
     MulitChannel/clsCalibration.ui \
     MulitChannel/clsStandardValueInput.ui \
     MulitChannel/MessageDialog.ui \
-    MulitChannel/clsSampleTest.ui
+    MulitChannel/clsSampleTest.ui \
+    update/clsWKUpdateWindow.ui
 
 DISTFILES += \
     Describle.txt

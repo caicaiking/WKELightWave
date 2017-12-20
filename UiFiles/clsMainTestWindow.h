@@ -50,6 +50,8 @@ private slots:
     void on_btnChannelCalibration_clicked();
 
 
+    void on_btnAboutMe_clicked();
+
 protected:
     void closeEvent(QCloseEvent *event);
 signals:
