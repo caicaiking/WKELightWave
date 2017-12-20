@@ -1,9 +1,9 @@
 {
     "updates":{
         "windows":{
-            "changelog":"2017/12/21 \u8fdb\u884c\u65b0\u7684\u7248\u672c\u5f00\u53d1\uff0c\u66f4\u65b0\u7a0b\u5e8f\u53d8\u5f97\u66f4\u597d\u7528\u3002\n1 \u505c\u6b62\u4e86\u51fa\u53d1\u7ebf\u4fe1\u53f7\u5728\u7248\u672c\u66f4\u65b0\u7684\u65f6\u5019\u5de5\u4f5c\n2 \u4f18\u5316\u4e86\u66f4\u65b0\u7684\u4fe1\u606f\n",
+            "changelog":"2017/12/21 \u66f4\u65b0\u6d4b\u8bd5\n",
             "download-url":"https://raw.githubusercontent.com/Leroy888/DelphiTestSystem/abama/Installer/WKELightWave.exe",
-            "latest-version":"0.4.0.0\n",
+            "latest-version":"0.4.0.1\n",
             "open-url":""
         }
     }
