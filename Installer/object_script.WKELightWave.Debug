@@ -59,6 +59,7 @@ INPUT(
 ./debug/clsWK6500CalibrationMeter.o
 ./debug/clsSingleTrig.o
 ./debug/clsSampleTest.o
+./debug/Window.o
 ./debug/qrc_qsimpleupdater.o
 ./debug/qrc_res.o
 ./debug/moc_QSimpleUpdater.o
@@ -104,4 +105,5 @@ INPUT(
 ./debug/moc_clsStandardValueInput.o
 ./debug/moc_MessageDialog.o
 ./debug/moc_clsSampleTest.o
+./debug/moc_Window.o
 );
