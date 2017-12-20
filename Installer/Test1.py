@@ -1,3 +1,4 @@
 import os
-os.system('/c/Program Files (x86)/Inno Setup 5/ISCC.exe' + " " + "-v")
+os.chdir("../Setup")
+os.system("ISCC.exe mySetupV1.1.iss")
 

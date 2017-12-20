@@ -48,13 +48,14 @@ jsonContent = {
 str_content =json.dumps(jsonContent, sort_keys=True, indent=4, separators=(",", ':'))
 print(str_content)
 
-#os.remove("./WKELightWave.exe")
 print("删除了WKELightWave.exe文件")
-os.system('/c/Program Files (x86)/Inno Setup 5/ISCC.exe' + " " + "-v")
-print("拷贝了WKELightWave.exe文件")
+os.chdir("../Setup")
+os.system("ISCC.exe mySetupV1.1.iss")
+
+print("生成了WKELightWave.exe文件")
 
 #写入新的Json文件
-
+os.chdir("../Installer")
 update_json = open("./updates.json", 'w')
 update_json.write(str_content)
 update_json.close()
