@@ -2,7 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3274f61-458a-49aa-9931-8d7a8979d0d9" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/../update/clsWKUpdateWindow.cpp" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../update/clsWKUpdateWindow.h" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../update/clsWKUpdateWindow.ui" />
       <change beforePath="$PROJECT_DIR$/../3rd-party/QSimpleUpdater" afterPath="$PROJECT_DIR$/../3rd-party/QSimpleUpdater" />
+      <change beforePath="$PROJECT_DIR$/../Images/version.txt" afterPath="$PROJECT_DIR$/../Images/version.txt" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/Build.py" afterPath="$PROJECT_DIR$/Build.py" />
+      <change beforePath="$PROJECT_DIR$/WKELightWave.exe" afterPath="$PROJECT_DIR$/WKELightWave.exe" />
+      <change beforePath="$PROJECT_DIR$/object_script.WKELightWave.Debug" afterPath="$PROJECT_DIR$/object_script.WKELightWave.Debug" />
+      <change beforePath="$PROJECT_DIR$/object_script.WKELightWave.Release" afterPath="$PROJECT_DIR$/object_script.WKELightWave.Release" />
+      <change beforePath="$PROJECT_DIR$/../PublicFiles/main.cpp" afterPath="$PROJECT_DIR$/../PublicFiles/main.cpp" />
+      <change beforePath="$PROJECT_DIR$/../Run/McbCal.db" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../Run/Settings.ini" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../UiFiles/clsMainTestWindow.cpp" afterPath="$PROJECT_DIR$/../UiFiles/clsMainTestWindow.cpp" />
+      <change beforePath="$PROJECT_DIR$/../UiFiles/clsMainTestWindow.h" afterPath="$PROJECT_DIR$/../UiFiles/clsMainTestWindow.h" />
+      <change beforePath="$PROJECT_DIR$/../UiFiles/clsMainTestWindow.ui" afterPath="$PROJECT_DIR$/../UiFiles/clsMainTestWindow.ui" />
+      <change beforePath="$PROJECT_DIR$/../WKELightWave.pro" afterPath="$PROJECT_DIR$/../WKELightWave.pro" />
+      <change beforePath="$PROJECT_DIR$/../update/Window.cpp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../update/Window.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../update/Window.ui" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,8 +35,8 @@
       <file leaf-file-name="Build.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Build.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-552">
-              <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+            <state relative-caret-position="216">
+              <caret line="15" column="65" lean-forward="false" selection-start-line="15" selection-start-column="65" selection-end-line="15" selection-end-column="65" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -45,9 +64,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1036" />
+    <option name="y" value="354" />
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
@@ -69,7 +88,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -81,7 +100,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -99,7 +118,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Test1">
+  <component name="RunManager" selected="Python.Build">
     <configuration name="Build" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -164,13 +183,12 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
-    <editor active="true" />
+    <frame x="1036" y="354" width="1400" height="1000" extended-state="0" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13396375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2496329" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37216577" sideWeight="0.5043341" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39796716" sideWeight="0.49566588" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.58980304" sideWeight="0.49566588" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -196,6 +214,26 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Build.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Build.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Build.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -247,14 +285,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
           <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Build.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-552">
-          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        <state relative-caret-position="216">
+          <caret line="15" column="65" lean-forward="false" selection-start-line="15" selection-start-column="65" selection-end-line="15" selection-end-column="65" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>

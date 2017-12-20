@@ -1,9 +1,9 @@
 {
     "updates":{
         "windows":{
-            "changelog":"2017/12/20  Add the update function to the software make it can downlaod the update from the internet.\n1 update function\n2 Generate the auto complie script, let it work at the backend.\n",
+            "changelog":"2017/12/21 \u4e3b\u8981\u66f4\u65b0\u4e86\u66f4\u65b0\u7a0b\u5e8f\uff0c\u8ba9\u4ed6\u5de5\u4f5c\u8d77\u6765\u66f4\u52a0\u7684\u6d41\u7545\u3002\n",
             "download-url":"https://raw.githubusercontent.com/Leroy888/DelphiTestSystem/abama/Installer/WKELightWave.exe",
-            "latest-version":"0.2\n",
+            "latest-version":"0.3\n",
             "open-url":""
         }
     }
