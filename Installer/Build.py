@@ -50,7 +50,7 @@ print(str_content)
 
 #os.remove("./WKELightWave.exe")
 print("删除了WKELightWave.exe文件")
-os.system(" '/c/Program Files (x86)/Inno Setup 5/ISCC.exe' " + " " + "../Setup/mySetupV1.1.iss")
+os.system(" '/c/Program Files (x86)/Inno Setup 5/ISCC.exe' " + " " + "-v")
 print("拷贝了WKELightWave.exe文件")
 
 #写入新的Json文件
