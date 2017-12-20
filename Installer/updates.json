@@ -3,7 +3,7 @@
     "windows": {
       "open-url": "",
       "latest-version": "1.0",
-      "download-url": "https://github.com/Leroy888/DelphiTestSystem/blob/abama/Installer/WKELightWaveV0.1-Beta.exe",
+      "download-url": "https://raw.githubusercontent.com/Leroy888/DelphiTestSystem/abama/Installer/WKELightWaveV0.1-Beta.exe",
       "changelog": "The first test version"
     }
   }
