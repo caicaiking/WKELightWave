@@ -1,7 +1,4 @@
-V0.0001 - Beta
-第一个版本，基本完善了功能，但是多通道继电器的控制指令没有添加，增加了一下功能
-1 信号面板的显示
-2 修改了运行模式，不显示关闭按钮
-
-V0.0000
-XXX
+0.2
+2017/12/20  Add the update function to the software make it can downlaod the update from the internet.
+1 update function
+2 Generate the auto complie script, let it work at the backend.

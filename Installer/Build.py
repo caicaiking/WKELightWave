@@ -50,7 +50,7 @@ print(str_content)
 
 os.remove("./WKELightWave.exe")
 print("删除了WKELightWave.exe文件")
-shutil.copy2("../Libs/WKELightWave.exe", ".") #拷贝编译文件到当前目录
+os.system("'/c/Program Files (x86)/Inno Setup 5/ISCC.exe'" + " " + "../Setup/mySetupV1.1.iss")
 print("拷贝了WKELightWave.exe文件")
 
 #写入新的Json文件
@@ -60,6 +60,9 @@ update_json.write(str_content)
 update_json.close()
 
 print(r"写入新的Json文件")
+
+
+
 
 os.chdir("../")
 os.system("git status")
