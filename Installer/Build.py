@@ -6,7 +6,7 @@ import shutil
 os.environ["path"] += ";C:/Qt/Qt5.9.1/5.9.1/mingw53_32/bin;C:/Qt/Qt5.9.1/Tools/mingw530_32/bin;"
 #生成MAKEFILE
 os.system("qmake.exe -o Makefile ..\..\WKELightWave\WKELightWave.pro -spec win32-g++ ")
-#os.system("mingw32-make -f Makefile.Release clean")
+os.system("mingw32-make -f Makefile.Release clean")
 #编译程序
 os.system("mingw32-make -j -f Makefile.Release")
 #执行文件

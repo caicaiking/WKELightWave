@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3274f61-458a-49aa-9931-8d7a8979d0d9" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/../update/clsWKUpdateWindow.cpp" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../update/clsWKUpdateWindow.h" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../update/clsWKUpdateWindow.ui" />
       <change beforePath="$PROJECT_DIR$/../3rd-party/QSimpleUpdater" afterPath="$PROJECT_DIR$/../3rd-party/QSimpleUpdater" />
       <change beforePath="$PROJECT_DIR$/../Images/version.txt" afterPath="$PROJECT_DIR$/../Images/version.txt" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/Build.py" afterPath="$PROJECT_DIR$/Build.py" />
-      <change beforePath="$PROJECT_DIR$/WKELightWave.exe" afterPath="$PROJECT_DIR$/WKELightWave.exe" />
-      <change beforePath="$PROJECT_DIR$/object_script.WKELightWave.Debug" afterPath="$PROJECT_DIR$/object_script.WKELightWave.Debug" />
-      <change beforePath="$PROJECT_DIR$/object_script.WKELightWave.Release" afterPath="$PROJECT_DIR$/object_script.WKELightWave.Release" />
       <change beforePath="$PROJECT_DIR$/../PublicFiles/main.cpp" afterPath="$PROJECT_DIR$/../PublicFiles/main.cpp" />
       <change beforePath="$PROJECT_DIR$/../Run/McbCal.db" afterPath="" />
       <change beforePath="$PROJECT_DIR$/../Run/Settings.ini" afterPath="" />
@@ -19,9 +12,9 @@
       <change beforePath="$PROJECT_DIR$/../UiFiles/clsMainTestWindow.h" afterPath="$PROJECT_DIR$/../UiFiles/clsMainTestWindow.h" />
       <change beforePath="$PROJECT_DIR$/../UiFiles/clsMainTestWindow.ui" afterPath="$PROJECT_DIR$/../UiFiles/clsMainTestWindow.ui" />
       <change beforePath="$PROJECT_DIR$/../WKELightWave.pro" afterPath="$PROJECT_DIR$/../WKELightWave.pro" />
-      <change beforePath="$PROJECT_DIR$/../update/Window.cpp" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../update/Window.h" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../update/Window.ui" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../update/clsWKUpdateWindow.cpp" afterPath="$PROJECT_DIR$/../update/clsWKUpdateWindow.cpp" />
+      <change beforePath="$PROJECT_DIR$/../update/clsWKUpdateWindow.h" afterPath="$PROJECT_DIR$/../update/clsWKUpdateWindow.h" />
+      <change beforePath="$PROJECT_DIR$/../update/clsWKUpdateWindow.ui" afterPath="$PROJECT_DIR$/../update/clsWKUpdateWindow.ui" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,8 +28,8 @@
       <file leaf-file-name="Build.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Build.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="15" column="65" lean-forward="false" selection-start-line="15" selection-start-column="65" selection-end-line="15" selection-end-column="65" />
+            <state relative-caret-position="168">
+              <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -184,11 +177,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1036" y="354" width="1400" height="1000" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2496329" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37216577" sideWeight="0.5043341" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.58980304" sideWeight="0.49566588" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.58980304" sideWeight="0.49566588" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -290,8 +284,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Build.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="15" column="65" lean-forward="false" selection-start-line="15" selection-start-column="65" selection-end-line="15" selection-end-column="65" />
+        <state relative-caret-position="168">
+          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
