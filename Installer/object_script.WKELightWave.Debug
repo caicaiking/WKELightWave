@@ -56,7 +56,6 @@ INPUT(
 ./debug/clsWK6500CalibrationMeter.o
 ./debug/clsSingleTrig.o
 ./debug/clsSampleTest.o
-./debug/clsWKUpdateWindow.o
 ./debug/qrc_res.o
 ./debug/moc_clsChannelSettings.o
 ./debug/moc_clsHightVoltage.o
@@ -98,5 +97,4 @@ INPUT(
 ./debug/moc_clsStandardValueInput.o
 ./debug/moc_MessageDialog.o
 ./debug/moc_clsSampleTest.o
-./debug/moc_clsWKUpdateWindow.o
 );
