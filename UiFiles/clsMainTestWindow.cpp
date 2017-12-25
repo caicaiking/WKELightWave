@@ -23,7 +23,8 @@
 #include <QDir>
 #include "clsRunningThread.h"
 #include "clsCalibration.h"
-#include "clsWKUpdateWindow.h"
+#include <QDesktopServices>
+#include <QProcess>
 
 //TODO: 主界面增加运行时候的设定
 //TODO: 增加服务器设置，端口号2001
@@ -521,8 +522,7 @@ void clsMainTestWindow::on_btnChannelCalibration_clicked()
 
 void clsMainTestWindow::on_btnAboutMe_clicked()
 {
-    trigThread->stop();
-    clsWKUpdateWindow* dlgUpdate = new clsWKUpdateWindow(this);
-    dlgUpdate->exec();
-    trigThread->start();
+    QString DEFT_URL= "https://raw.githubusercontent.com/Leroy888/DelphiTestSystem/abama/Installer/updates.json";
+    QDesktopServices::openUrl (QUrl::fromLocalFile (QString("./WKEProgramUpdater.exe")));
+
 }

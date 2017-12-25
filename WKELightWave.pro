@@ -14,8 +14,6 @@ TEMPLATE = app
 #当发布产品的时候一定要将此行注释去掉
 DEFINES += USE_MULTI_CHANNEL
 
-include($$PWD/3rd-party/QSimpleUpdater/QSimpleUpdater.pri)
-
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -95,8 +93,7 @@ HEADERS += \
     Qextserial/qextserialport_p.h \
     MulitChannel/clsWK6500CalibrationMeter.h \
     MulitChannel/clsSingleTrig.h \
-    MulitChannel/clsSampleTest.h \
-    update/clsWKUpdateWindow.h
+    MulitChannel/clsSampleTest.h
 
 SOURCES += \
     PublicFiles/clsMeterLimit.cpp \
@@ -155,8 +152,7 @@ SOURCES += \
     Qextserial/qextserialport_win.cpp \
     MulitChannel/clsWK6500CalibrationMeter.cpp \
     MulitChannel/clsSingleTrig.cpp \
-    MulitChannel/clsSampleTest.cpp \
-    update/clsWKUpdateWindow.cpp
+    MulitChannel/clsSampleTest.cpp
 
 FORMS += \
     UiFiles/clsChannelSettings.ui \
@@ -183,8 +179,7 @@ FORMS += \
     MulitChannel/clsCalibration.ui \
     MulitChannel/clsStandardValueInput.ui \
     MulitChannel/MessageDialog.ui \
-    MulitChannel/clsSampleTest.ui \
-    update/clsWKUpdateWindow.ui
+    MulitChannel/clsSampleTest.ui
 
 DISTFILES += \
     Describle.txt
