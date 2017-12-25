@@ -68,7 +68,7 @@ copyfile("./updates.json", "../Run/update.json")
 print(r"写入新的Json文件")
 
 os.system("git status")
-os.system("git add .")
+os.system("git add -A")
 os.system('git commit -m "%s"' % (change_log))
 os.system("git push origin abama")
 
