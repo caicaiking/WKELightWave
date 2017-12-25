@@ -1,7 +1,4 @@
 INPUT(
-./debug/Updater.o
-./debug/Downloader.o
-./debug/QSimpleUpdater.o
 ./debug/clsMeterLimit.o
 ./debug/doubleType.o
 ./debug/main.o
@@ -60,11 +57,7 @@ INPUT(
 ./debug/clsSingleTrig.o
 ./debug/clsSampleTest.o
 ./debug/clsWKUpdateWindow.o
-./debug/qrc_qsimpleupdater.o
 ./debug/qrc_res.o
-./debug/moc_QSimpleUpdater.o
-./debug/moc_Updater.o
-./debug/moc_Downloader.o
 ./debug/moc_clsChannelSettings.o
 ./debug/moc_clsHightVoltage.o
 ./debug/moc_clsLabel.o

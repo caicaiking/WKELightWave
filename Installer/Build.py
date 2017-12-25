@@ -1,6 +1,6 @@
 import json
 import os.path
-import shutil
+from shutil import copyfile
 
 #添加环境变量
 os.environ["path"] += ";C:/Qt/Qt5.9.1/5.9.1/mingw53_32/bin;C:/Qt/Qt5.9.1/Tools/mingw530_32/bin;"
@@ -59,6 +59,9 @@ os.chdir("../Installer")
 update_json = open("./updates.json", 'w')
 update_json.write(str_content)
 update_json.close()
+
+copyfile("./updates.json", "../Run/update.json")
+
 
 print(r"写入新的Json文件")
 

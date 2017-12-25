@@ -1,7 +1,4 @@
 INPUT(
-./release/Updater.o
-./release/Downloader.o
-./release/QSimpleUpdater.o
 ./release/clsMeterLimit.o
 ./release/doubleType.o
 ./release/main.o
@@ -60,11 +57,7 @@ INPUT(
 ./release/clsSingleTrig.o
 ./release/clsSampleTest.o
 ./release/clsWKUpdateWindow.o
-./release/qrc_qsimpleupdater.o
 ./release/qrc_res.o
-./release/moc_QSimpleUpdater.o
-./release/moc_Updater.o
-./release/moc_Downloader.o
 ./release/moc_clsChannelSettings.o
 ./release/moc_clsHightVoltage.o
 ./release/moc_clsLabel.o
