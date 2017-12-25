@@ -39,6 +39,7 @@ jsonContent = {
         "windows":{
             "open-url":"",
             "download-url":"https://raw.githubusercontent.com/Leroy888/DelphiTestSystem/abama/Installer/WKELightWave.exe",
+            "defs-url":"https://raw.githubusercontent.com/Leroy888/DelphiTestSystem/abama/Installer/updates.json", #本Json文件放的网络地址
             "latest-version":version_str,
             "changelog": change_log
         }
@@ -60,6 +61,7 @@ update_json = open("./updates.json", 'w')
 update_json.write(str_content)
 update_json.close()
 
+#讲update.json 拷贝到Run目录里面
 copyfile("./updates.json", "../Run/update.json")
 
 
