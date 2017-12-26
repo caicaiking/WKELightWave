@@ -19,12 +19,12 @@ int main(int argc, char *argv[])
     a.setApplicationVersion(publicUtility::getVersion());
 
     //设置Splash 屏幕
-    QPixmap pixmap(":/splashScreen2.png");
+    QPixmap pixmap(":/Background3.png");
     QSplashScreen splash(pixmap);
 
     splash.show();
     splash.setFont(QFont("楷体",12, QFont::Normal));
-    splash.showMessage(QObject::tr("版本号：V%1 正在初始化测试窗口，请稍等...").arg(publicUtility::getVersion()),Qt::AlignBottom |Qt::AlignRight,Qt::red);
+    splash.showMessage(QObject::tr("版本号：V%1  正在初始化测试窗口，请稍等...").arg(publicUtility::getVersion()),Qt::AlignBottom |Qt::AlignRight,Qt::red);
     splash.show();
     publicUtility::sleepMs(2000);
 

@@ -75,5 +75,7 @@
         <file>Settings2.png</file>
         <file>settings3.png</file>
         <file>Start1.png</file>
+        <file>Background.jpg</file>
+        <file>Background3.png</file>
     </qresource>
 </RCC>
