@@ -1,10 +1,10 @@
 {
     "updates":{
         "windows":{
-            "changelog":"2017/12/26 \u66f4\u65b0\u4e86\u5f00\u59cb\u754c\u9762\n",
+            "changelog":"2017/12/26 \u589e\u52a0\u4e86\u4f7f\u7528\u8bf4\u660e\u4e66\n",
             "defs-url":"https://raw.githubusercontent.com/Leroy888/DelphiTestSystem/abama/Installer/updates.json",
             "download-url":"https://raw.githubusercontent.com/Leroy888/DelphiTestSystem/abama/Installer/WKELightWave.exe",
-            "latest-version":"0.4.0.4\n",
+            "latest-version":"0.4.0.5\n",
             "open-url":""
         }
     }
