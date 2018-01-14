@@ -3,6 +3,7 @@
 #include <QStringListIterator>
 #include "clsRunService.h"
 
+#include "publicUtility.h"
 clsWKCommandProcess::clsWKCommandProcess(QObject *parent) : QObject(parent)
 {
     //注册所有的函数，用其GPIB指令注册其Key
@@ -127,8 +128,10 @@ void clsWKCommandProcess::setGpibCommand(QString str)
 
 void clsWKCommandProcess::queryId()
 {
-
-    writeToClient("WAYNE KERR, LightWave, Lan Remote, 0.1");
+    QString version = publicUtility::getVersion();
+    version = version.remove("\r");
+    version = version.remove("\n");
+    writeToClient("WAYNE KERR, LightWave, Lan Remote, " + version);
 }
 
 void clsWKCommandProcess::trig(const QString &/*empty*/ )

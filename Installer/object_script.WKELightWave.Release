@@ -56,6 +56,11 @@ INPUT(
 ./release/clsWK6500CalibrationMeter.o
 ./release/clsSingleTrig.o
 ./release/clsSampleTest.o
+./release/clsTcpIpThread.o
+./release/clsWKServer.o
+./release/clsWKCommandProcess.o
+./release/clsRunningSettings.o
+./release/clsRunSettings.o
 ./release/qrc_res.o
 ./release/moc_clsChannelSettings.o
 ./release/moc_clsHightVoltage.o
@@ -97,4 +102,9 @@ INPUT(
 ./release/moc_clsStandardValueInput.o
 ./release/moc_MessageDialog.o
 ./release/moc_clsSampleTest.o
+./release/moc_clsTcpIpThread.o
+./release/moc_clsWKServer.o
+./release/moc_clsWKCommandProcess.o
+./release/moc_clsRunningSettings.o
+./release/moc_clsRunSettings.o
 );

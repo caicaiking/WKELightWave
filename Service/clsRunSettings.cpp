@@ -63,7 +63,7 @@ void clsRunSettings::setRemoteControlType(TrigSource value)
         sngTrigThread::Ins()->stop();
         sngWKServer::Ins()->startServer();
 
-        emit remoteType(tr("网口"));
+        emit remoteType(tr("网络"));
         break;
     default:
         break;
