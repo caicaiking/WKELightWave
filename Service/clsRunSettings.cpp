@@ -7,7 +7,6 @@
 
 clsRunSettings::clsRunSettings(QObject *parent): QObject(parent)
 {
-    readSettings();
 }
 
 void clsRunSettings::readSettings()

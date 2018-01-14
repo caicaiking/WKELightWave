@@ -27,7 +27,7 @@
 #include <QProcess>
 #include "clsRunningSettings.h"
 #include "clsRunSettings.h"
-
+#include "clsWKServer.h"
 //TODO: 主界面增加运行时候的设定
 //TODO: 增加服务器设置，端口号2018
 //TODO: 增加软件自动更新功能
@@ -56,11 +56,29 @@ clsMainTestWindow::clsMainTestWindow(QWidget *parent) :
         openTaskFile(lastFile);
 
     }
+    if(lastFile.isEmpty())
+    {
+        runningMode = true;
+        setRunningMode(false);
+    }
+    else
+    {
+        runningMode = false;
+        setRunningMode(true);
+    }
 
-    runningMode = true;
-    setRunningMode(false);
+    connect(sngWKServer::Ins(),&clsWKServer::lanRemote, this, &clsMainTestWindow::setLanRemote);
 
+    connect(sngRunSettings::Ins(), &clsRunSettings::remoteType, [=](QString value)
+    {
+        this->lblTrigType->setText(value);
+    });
     sngRunSettings::Ins()->readSettings();
+
+
+
+    connect(sngRunService::Ins(),SIGNAL(controlStatus(QString)),this,SLOT(setRemote(QString)));
+
     btnReptive->setEnabled(sngRunSettings::Ins()->getRemoteControlType() == clsRunSettings::ManualTrig);
 }
 
@@ -538,4 +556,40 @@ void clsMainTestWindow::on_btnRunSettings_clicked()
     dlg->exec();
     btnReptive->setChecked(false);
     btnReptive->setEnabled(sngRunSettings::Ins()->getRemoteControlType() == clsRunSettings::ManualTrig);
+}
+
+
+void clsMainTestWindow::on_btnExitRemote_clicked()
+{
+    this->menuStack->setCurrentIndex(0);
+}
+
+void clsMainTestWindow::setRemoteType(QString str)
+{
+    this->lblTrigType->setText(str);
+}
+
+void clsMainTestWindow::setRemote(QString str)
+{
+    if(!str.isEmpty())
+    {
+        this->menuStack->setCurrentIndex(1);
+        lblRemote->setText(str);
+    }
+    else
+    {
+        this->menuStack->setCurrentIndex(0);
+    }
+}
+void clsMainTestWindow::setLanRemote(bool value)
+{
+    if(value)
+    {
+        this->menuStack->setCurrentIndex(1);
+        lblRemote->setText("LAN Remote");
+    }
+    else
+    {
+        this->menuStack->setCurrentIndex(0);
+    }
 }

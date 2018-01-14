@@ -50,6 +50,12 @@ private slots:
     void on_btnAboutMe_clicked();
     void on_btnRunSettings_clicked();
 
+
+    void on_btnExitRemote_clicked();
+
+    void setRemote(QString str);
+    void setRemoteType(QString str);
+    void setLanRemote(bool value);
 protected:
     void closeEvent(QCloseEvent *event);
 signals:

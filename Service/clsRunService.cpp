@@ -170,6 +170,8 @@ QString clsRunService::lanTrig()
     if(!isRunningMode)
         return "Err 1";
 
+    emit controlStatus(tr("Lan Remote"));
+
     emit trigSignal();
 
     trig();
@@ -184,7 +186,6 @@ QString clsRunService::lanTrig()
 
     QString strTotleStatus = totleStatus.join(",");
 
-    emit controlStatus(tr("Lan Remote"));
     return strTotleStatus;
 }
 
