@@ -1,7 +1,7 @@
 #ifndef CLSCHANNELSETTINGS_H
 #define CLSCHANNELSETTINGS_H
 
-#include "ui_clsChannelSettings.h"
+#include "ui_clsMeterChannelSettings.h"
 #include "clsMeter.h"
 
 class clsChannelSettings : public clsMeter, private Ui::clsChannelSettings

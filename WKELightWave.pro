@@ -191,7 +191,8 @@ FORMS += \
     MulitChannel/MessageDialog.ui \
     MulitChannel/clsSampleTest.ui \
     UiFiles/clsRunningSettings.ui \
-    UiFiles/clsMeterChannelSettings.ui
+    UiFiles/clsMeterChannelSettings.ui \
+    UiFiles/clsRunningStatus.ui
 
 DISTFILES += \
     Describle.txt
