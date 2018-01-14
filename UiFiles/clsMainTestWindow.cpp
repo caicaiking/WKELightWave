@@ -25,9 +25,11 @@
 #include "clsCalibration.h"
 #include <QDesktopServices>
 #include <QProcess>
+#include "clsRunningSettings.h"
+#include "clsRunSettings.h"
 
 //TODO: 主界面增加运行时候的设定
-//TODO: 增加服务器设置，端口号2001
+//TODO: 增加服务器设置，端口号2018
 //TODO: 增加软件自动更新功能
 
 clsMainTestWindow::clsMainTestWindow(QWidget *parent) :
@@ -55,20 +57,14 @@ clsMainTestWindow::clsMainTestWindow(QWidget *parent) :
 
     }
 
-    btnTrig->setVisible(false);
-    btnReptive->setVisible(false);
-    btnSettings->setVisible(false);
-    btnChannelCalibration->setVisible(false);
-    btnRunSettings->setVisible(false);
+    runningMode = true;
+    setRunningMode(false);
 
-
-    trigThread = sngTrigThread::Ins();
-    trigThread->setName("Trig");
-    trigThread->setCaptureBit(1);
-    connect(trigThread,SIGNAL(getSignal()),this,SLOT(trig()));
-
-    trigThread->start();
+    sngRunSettings::Ins()->readSettings();
+    btnReptive->setEnabled(sngRunSettings::Ins()->getRemoteControlType() == clsRunSettings::ManualTrig);
 }
+
+
 /*!
      * \brief  初始化数据库文件。
      */
@@ -416,29 +412,24 @@ void clsMainTestWindow::on_btnOpenSetup_clicked()
     openTaskFile(strPath);
 }
 
-void clsMainTestWindow::trig()
-{
-    trigThread->stop();
-    publicUtility::sleepMs(70);
-    QTime startTime = QTime::currentTime();
-    sngRunService::Ins()->trig();
-    qDebug()<< "Single Test time: "<<-1 * QTime::currentTime().msecsTo(startTime) << "ms";
-    trigThread->start();
-
-}
 
 void clsMainTestWindow::on_btnTrig_clicked()
 {
     btnTrig->setEnabled(false);
-    trig();
+
+    sngRunService::Ins()->trig();
+
     btnTrig->setEnabled(true);
 }
 
-void clsMainTestWindow::on_btnSettings_clicked(bool checked)
+void clsMainTestWindow::setRunningMode(bool value)
 {
-    btnSettings->setChecked(checked);
-    btnRunning->setChecked(!checked);
-    btnReptive->setChecked(false);
+    if(runningMode == value)
+        return ;
+
+    runningMode = value;
+
+    bool checked = !value;
     if(checked) //Setting Mode
     {
         for(int i=0; i< items.length(); i++)
@@ -461,15 +452,27 @@ void clsMainTestWindow::on_btnSettings_clicked(bool checked)
         sngRunService::Ins()->switchToRunningMode(true);
     }
 
-    btnSettings->setVisible(!checked);
+    btnNewSetup->setVisible(checked);
+    btnOpenSetup->setVisible(checked);
+    btnSaveSetup->setVisible(checked);
+    btnTrig->setVisible(!checked);
+    btnReptive->setVisible(!checked);
     btnRunning->setVisible(checked);
+    btnSettings->setVisible(!checked);
+    btnChannelCalibration->setVisible(!checked);
+    btnRunSettings->setVisible(!checked);
+    btnReptive->setChecked(false);
+
 }
 
-void clsMainTestWindow::on_btnRunning_clicked(bool checked)
+void clsMainTestWindow::on_btnSettings_clicked()
 {
-    btnSettings->clicked(!checked);
-    btnRunning->setVisible(!checked);
-    btnSettings->setVisible(checked);
+    this->setRunningMode(false);
+}
+
+void clsMainTestWindow::on_btnRunning_clicked()
+{
+    this->setRunningMode(true);
 }
 
 void clsMainTestWindow::on_btnReptive_clicked()
@@ -525,4 +528,14 @@ void clsMainTestWindow::on_btnAboutMe_clicked()
     QString DEFT_URL= "https://raw.githubusercontent.com/Leroy888/DelphiTestSystem/abama/Installer/updates.json";
     QDesktopServices::openUrl (QUrl::fromLocalFile (QString("./WKEProgramUpdater.exe")));
 
+}
+
+
+void clsMainTestWindow::on_btnRunSettings_clicked()
+{
+    clsRunningSettings *dlg = new clsRunningSettings(this);
+    dlg->setWindowTitle(tr("运行设定"));
+    dlg->exec();
+    btnReptive->setChecked(false);
+    btnReptive->setEnabled(sngRunSettings::Ins()->getRemoteControlType() == clsRunSettings::ManualTrig);
 }

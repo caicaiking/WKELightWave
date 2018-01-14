@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <QApplication>
 #include "clsRunningThread.h"
+#include "clsRunSettings.h"
 clsRunService::clsRunService(QObject *parent) : QObject(parent)
 {
     isRunningMode = false;
@@ -140,21 +141,59 @@ QString clsRunService::getLastFilePath()
         return ".";
 }
 
-void clsRunService::trig()
+void clsRunService::handlerTrig()
 {
-
-    emit trigSignal(); //发送得到触发信号
     if(!isRunningMode)
         return;
+    emit trigSignal();
 
+    sngTrigThread::Ins()->stop();
+    publicUtility::sleepMs(70);
+    //Set busy
+    clsConnectSWBox::Ins()->setBusy(true);
+
+    //触发测试
+    trig();
+
+    //set bing PASS Fail
+    clsConnectSWBox::Ins()->setLcrPassFail(sngSignalStatus::Ins()->getLcrStatus());
+    //set binning HV Pass Fail
+    clsConnectSWBox::Ins()->setHvPassFail(sngSignalStatus::Ins()->getHvStatus());
+    //set binning Busy line down
+    clsConnectSWBox::Ins()->setBusy(false);
+    emit controlStatus(tr("Handler Remote"));
+    sngTrigThread::Ins()->start();
+}
+
+QString clsRunService::lanTrig()
+{
+    if(!isRunningMode)
+        return "Err 1";
+
+    emit trigSignal();
+
+    trig();
+
+    bool lcrStatus = sngSignalStatus::Ins()->getLcrStatus();
+    bool hvStatus = sngSignalStatus::Ins()->getHvStatus();
+
+    QStringList totleStatus;
+    totleStatus.append((lcrStatus && hvStatus) ? "1":"0");
+    totleStatus.append((lcrStatus) ? "1":"0");
+    totleStatus.append((hvStatus) ? "1":"0");
+
+    QString strTotleStatus = totleStatus.join(",");
+
+    emit controlStatus(tr("Lan Remote"));
+    return strTotleStatus;
+}
+
+void clsRunService::trig()
+{
     QList<QString> results;
-
-
     sngSignalStatus::Ins()->resetHVStatus(); //恢复原始值
     sngSignalStatus::Ins()->resetLCRStatus();//恢复原始值
 
-    //Set busy
-    clsConnectSWBox::Ins()->setBusy(true);
     emit busyStatus(true);
     qApp->processEvents();
     for(int i=0; i<steps.length(); i++)
@@ -210,21 +249,15 @@ void clsRunService::trig()
 
         tmpMap.insert("data", res);
         QJsonDocument jsd = QJsonDocument::fromVariant(tmpMap);
-        emit showRes(jsd.toJson());
-        if(meter->getTotleStatus()== false)
-            break;
+        emit showRes(jsd.toJson()); //显示测试结果
 
+        if(meter->getTotleStatus()== false && sngRunSettings::Ins()->getJumpOut()) //当测试当前步骤失败就跳出循环
+            break;
     }
     emit currentStep(-1);
 
-    //set bing PASS Fail
-    clsConnectSWBox::Ins()->setLcrPassFail(sngSignalStatus::Ins()->getLcrStatus());
     emit lcrPF(sngSignalStatus::Ins()->getLcrStatus());
-    //set binning HV Pass Fail
-    clsConnectSWBox::Ins()->setHvPassFail(sngSignalStatus::Ins()->getHvStatus());
     emit hvPF(sngSignalStatus::Ins()->getHvStatus());
-    //set binning Busy line down
-    clsConnectSWBox::Ins()->setBusy(false);
     emit busyStatus(false);
     qApp->processEvents();
 
@@ -236,11 +269,8 @@ void clsRunService::trig()
         out<<strRes.toUtf8();
         out.flush();
     }
-
     goto END;
-
 RESET:
-    clsConnectSWBox::Ins()->setBusy(false);
     emit busyStatus(false);
     qApp->processEvents();
 END:

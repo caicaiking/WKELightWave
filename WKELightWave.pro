@@ -25,7 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-INCLUDEPATH += PublicFiles UiFiles Service Instruments connections Ftdi MulitChannel Qextseial update
+INCLUDEPATH += PublicFiles UiFiles Service Instruments connections Ftdi MulitChannel Qextseial update Server
 
 
 DESTDIR =$$PWD/Libs/
@@ -93,7 +93,14 @@ HEADERS += \
     Qextserial/qextserialport_p.h \
     MulitChannel/clsWK6500CalibrationMeter.h \
     MulitChannel/clsSingleTrig.h \
-    MulitChannel/clsSampleTest.h
+    MulitChannel/clsSampleTest.h \
+    Service/clsRunService.h \
+    Service/singleton.h \
+    Server/clsTcpIpThread.h \
+    Server/clsWKServer.h \
+    Server/clsWKCommandProcess.h \
+    UiFiles/clsRunningSettings.h \
+    Service/clsRunSettings.h
 
 SOURCES += \
     PublicFiles/clsMeterLimit.cpp \
@@ -152,14 +159,17 @@ SOURCES += \
     Qextserial/qextserialport_win.cpp \
     MulitChannel/clsWK6500CalibrationMeter.cpp \
     MulitChannel/clsSingleTrig.cpp \
-    MulitChannel/clsSampleTest.cpp
+    MulitChannel/clsSampleTest.cpp \
+    Server/clsTcpIpThread.cpp \
+    Server/clsWKServer.cpp \
+    Server/clsWKCommandProcess.cpp \
+    UiFiles/clsRunningSettings.cpp \
+    Service/clsRunSettings.cpp
 
 FORMS += \
-    UiFiles/clsChannelSettings.ui \
     UiFiles/clsHightVoltage.ui \
     UiFiles/clsNewSetup.ui \
     UiFiles/clsRangeDialog.ui \
-    UiFiles/clsRunningStatus.ui \
     UiFiles/clsSpeedDialog.ui \
     UiFiles/clsWK6500Items.ui \
     UiFiles/clsWK6500Meter.ui \
@@ -179,7 +189,9 @@ FORMS += \
     MulitChannel/clsCalibration.ui \
     MulitChannel/clsStandardValueInput.ui \
     MulitChannel/MessageDialog.ui \
-    MulitChannel/clsSampleTest.ui
+    MulitChannel/clsSampleTest.ui \
+    UiFiles/clsRunningSettings.ui \
+    UiFiles/clsMeterChannelSettings.ui
 
 DISTFILES += \
     Describle.txt

@@ -23,6 +23,8 @@ public:
     QString getTestCondition(void) const;
 
 
+public slots:
+    void setRunningMode(bool value);
 private slots:
     void on_btnNewSetup_clicked();
     void on_btnSaveSetup_clicked();
@@ -39,18 +41,14 @@ private slots:
     void openTaskFile(QString strPath);
     void saveTaskFile(QString strPath);
 
-    void on_btnSettings_clicked(bool checked);
-    void on_btnRunning_clicked(bool checked);
+    void on_btnSettings_clicked();
+    void on_btnRunning_clicked();
     void on_btnReptive_clicked();
 
     void installSignalDispaly();
-
-
-    void trig();
     void on_btnChannelCalibration_clicked();
-
-
     void on_btnAboutMe_clicked();
+    void on_btnRunSettings_clicked();
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -63,6 +61,7 @@ private:
     clsSignalDisplayWidget * signalWidget;
     clsRunningThread *trigThread;
     void initDataBase();
+    bool runningMode;
 };
 
 #endif // CLSMAINTESTWINDOW_H

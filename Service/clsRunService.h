@@ -26,7 +26,8 @@ public slots:
     void trig();
     void reset();
 
-
+    void handlerTrig();
+    QString lanTrig();
 signals:
     void busyStatus(bool);
     void lcrPF(bool);
@@ -34,6 +35,7 @@ signals:
     void trigSignal();
     void resetSignal();
     void currentStep(int i);
+    void controlStatus(QString);
 
 private:
     bool isRunningMode;

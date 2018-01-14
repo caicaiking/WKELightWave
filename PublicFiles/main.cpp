@@ -10,7 +10,8 @@
 #include <QPixmap>
 #include "publicUtility.h"
 #include "logmanager.h"
-
+#include "Server/clsWKServer.h"
+#include "clsWKCommandProcess.h"
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -74,13 +75,6 @@ int main(int argc, char *argv[])
     clsMainTestWindow window;
     splash.finish(&window);
     window.show();
-
-//    sngTrigThread::Ins()->setName("Trig");
-//    sngTrigThread::Ins()->setCaptureBit(1);
-//    sngTrigThread::Ins()->start();
-
-
-
 
     return a.exec();
 }
