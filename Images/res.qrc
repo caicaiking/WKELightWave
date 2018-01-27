@@ -77,5 +77,7 @@
         <file>Start1.png</file>
         <file>Background.jpg</file>
         <file>Background3.png</file>
+        <file>Translation/WKEFV_EN.qm</file>
+        <file>Translation/WKEFV_Zh.qm</file>
     </qresource>
 </RCC>

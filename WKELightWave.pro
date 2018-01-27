@@ -204,3 +204,8 @@ win32: LIBS += -L$$PWD/NLogger/ -lNLogger
 INCLUDEPATH += $$PWD/NLogger/include
 DEPENDPATH += $$PWD/NLogger
 
+TRANSLATIONS = images\Translation/WKEFV_EN.ts \
+               images\Translation/WKEFV_Zh.ts \
+               images\Translation/WKEFV_Tw.ts \
+               images\Translation/WKEFV_GM.ts \
+               images\Translation/WKEFV_JP.ts

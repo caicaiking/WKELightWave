@@ -12,12 +12,17 @@
 #include "logmanager.h"
 #include "Server/clsWKServer.h"
 #include "clsWKCommandProcess.h"
+#include <QTranslator>
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
     a.setApplicationName("WKE LightWave");
     a.setApplicationVersion(publicUtility::getVersion());
+
+    QTranslator translator;
+    translator.load(":/Translation/WKEFV_EN.qm");
+    a.installTranslator(&translator);
 
     //设置Splash 屏幕
     QPixmap pixmap(":/Background3.png");
