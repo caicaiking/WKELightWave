@@ -9,7 +9,7 @@ class clsSelectUpdateStep : public QDialog, private Ui::clsSelectUpdateStep
 
 public:
     explicit clsSelectUpdateStep(QWidget *parent = 0);
-    static int selectStep(QWidget *parent, QList<int> steps);
+    static int selectStep(QWidget *parent, QList<QPoint> steps);
 private slots:
     void on_btnOk_clicked();
 };

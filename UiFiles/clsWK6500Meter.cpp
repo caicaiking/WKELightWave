@@ -31,20 +31,20 @@ clsWK6500Meter::clsWK6500Meter(QWidget *parent) :
         this->level=1;
         range=tr("自动");
         speed=tr("快速");
-        equcct="串联";
+        equcct=tr("串联");
         bias=0;
         biasA =0;
         biasV=0;
         biasType="V";
-        biasSwitch="关";
+        biasSwitch=tr("关");
         levelUnit="V";
-        suffix1="自动";
-        suffix2="自动";
+        suffix1=tr("自动");
+        suffix2=tr("自动");
         item1HiLimit=0.00;
         item1LowLimit=0.000;
         item2HiLimit=0.0;
         item2LowLimit=0.0;
-        relaySwitch="开";
+        relaySwitch=tr("开");
     }
     else
     {
@@ -101,6 +101,7 @@ void clsWK6500Meter::updateButtons()
     mlItem1.setAbsLo(item1LowLimit);
     mlItem2.setAbsHi(item2HiLimit);
     mlItem2.setAbsLo(item2LowLimit);
+    this->btnRelay->setText(this->relaySwitch);
     labelLimit1->setText(mlItem1.showLimits(publicUtility::getSuffix(item1)));
     labelLimit2->setText(mlItem2.showLimits(publicUtility::getSuffix(item2)));
 }
@@ -324,12 +325,12 @@ void clsWK6500Meter::on_btnRelay_clicked()
 {
     if(btnRelay->text()==tr("开"))
     {
-        relaySwitch="关";
+        relaySwitch=tr("关");
         btnRelay->setText(tr("关"));
     }
     else if(btnRelay->text()==tr("关"))
     {
-        relaySwitch="开";
+        relaySwitch=tr("开");
         btnRelay->setText(tr("开"));
     }
 }

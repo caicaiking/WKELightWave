@@ -20,9 +20,9 @@ int main(int argc, char *argv[])
     a.setApplicationName("WKE LightWave");
     a.setApplicationVersion(publicUtility::getVersion());
 
-    QTranslator translator;
-    translator.load(":/Translation/WKEFV_EN.qm");
-    a.installTranslator(&translator);
+//    QTranslator translator;
+//    translator.load(":/Translation/WKEFV_EN.qm");
+//    a.installTranslator(&translator);
 
     //设置Splash 屏幕
     QPixmap pixmap(":/Background3.png");
@@ -73,8 +73,7 @@ int main(int argc, char *argv[])
         clsConnectSWBox::Ins()->setBusy(false);
         clsConnectSWBox::Ins()->setLcrPassFail(false);
         clsConnectSWBox::Ins()->setHvPassFail(false);
-        clsConnectSWBox::Ins()->setChannel(0);
-        clsConnectSWBox::Ins()->setReadString("00000000");
+        clsConnectSWBox::Ins()->setChannel(QPoint(0,0),"WK6500");
     }
 
     clsMainTestWindow window;

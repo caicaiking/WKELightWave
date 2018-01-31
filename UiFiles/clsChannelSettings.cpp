@@ -18,7 +18,7 @@ clsChannelSettings::clsChannelSettings(clsMeter *parent) :
     isEditMode = true;
 }
 
-void clsChannelSettings::setChannel(const int channel)
+void clsChannelSettings::setChannel(const QPoint channel)
 {
     this->channel=channel;
 }
@@ -51,7 +51,10 @@ void clsChannelSettings::setCondition(const QString condition)
                 this->item1LowLimit=conditionMap["item1LowLimit"].toDouble();
                 this->item2HiLimit=conditionMap["item2HiLimit"].toDouble();
                 this->item2LowLimit=conditionMap["item2LowLimit"].toDouble();
-                this->channel=conditionMap["channel"].toInt();
+                int st=conditionMap["channelStart"].toInt();
+                int stp=conditionMap["channelStop"].toInt();
+                this->channel.setX(st);
+                this->channel.setY(stp);
                 this->suffix1=conditionMap["suffix1"].toString();
                 this->suffix2=conditionMap["suffix2"].toString();
                 this->relaySwitch=conditionMap["relaySwitch"].toString();
@@ -69,7 +72,7 @@ void clsChannelSettings::updateLabels()
     colorList<<"#D891EF"<<"#FFBF00"<<"#00FFFF"<<"#FDEE00"<<"#D0FF14"<<"#D19FE8"
             <<"#FA6E79"<<"#FE6F5E"<<"#ACE5EE"<<"#66FF00"<<"#FF007F"<<"#84DE02"<<"#1F75FE"
            <<"#08E8DE"<<"#FFAA1D"<<"#FF55A3"<<"#FF033E"<<"#FF2052"<<"#E0218A"<<"#ACE5EE";
-    int colorIndex = (channel-1) % colorList.length();
+    int colorIndex = (channel.x()-1) % colorList.length();
     QList<QLabel*> labelList;
     QList<QLabel*> labelList1;
     labelList<<labelBias<<labelFreq<<labelItem1
@@ -87,7 +90,7 @@ void clsChannelSettings::updateLabels()
         labelList1.at(i)->setFont(QFont("楷体",12));
     }
     lblTrigStart->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
-    labelChannel->setText(QString::number(channel));
+    labelChannel->setText(QString("%1-%2").arg(channel.x()).arg(channel.y()));
 
     labelChannel1->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
     labelRelay->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
@@ -239,7 +242,9 @@ void clsChannelSettings::updateRes(const QString res)
 
     resMap = jsonDocument.toVariant().toMap();
 
-    if(resMap["channel"].toInt() != this->channel)
+    if(resMap["channelStart"].toInt() != this->channel.x())
+        return;
+    if(resMap["channelStop"].toInt() != this->channel.y())
         return;
 
     resList = resMap["data"].toList();

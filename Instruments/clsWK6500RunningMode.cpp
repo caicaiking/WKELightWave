@@ -2,6 +2,7 @@
 #include "clsLcrConnection.h"
 #include <QJsonDocument>
 #include "clsSingleTrig.h"
+#include "clsTestConditon.h"
 #include <QJsonParseError>
 #include <QVariantMap>
 #include "doubleType.h"
@@ -34,23 +35,18 @@ void clsWK6500RunningMode::setCondition(QString value)
 {
     this->strConditon = value;
     QJsonParseError error;
-    QJsonDocument jsondocument=QJsonDocument::fromJson(strConditon.toUtf8(),&error);
-    if(error.error!=QJsonParseError::NoError)
-        return;
-    if(jsondocument.isNull() || jsondocument.isEmpty())
-        return;
+    QJsonDocument jsondocument;
 
-    QVariantMap tmpMap = jsondocument.toVariant().toMap();
+    clsTestConditons tc;
+    tc.setJson(value);
 
-    if(tmpMap["meter"].toString() != getInstrumentType()) //判断是否为当前的仪表设置条件
+    if(tc.meter != getInstrumentType()) //判断是否为当前的仪表设置条件
         return;
 
-    if(tmpMap["channel"].toInt()==0)
-        return;
-    else
-        this->channel=  tmpMap["channel"].toInt();
+    this->channel= tc.channel;
 
-    QString tmpConditon = tmpMap["conditions"].toString();
+    QString tmpConditon = tc.condition;
+
     if(tmpConditon.isEmpty())
         return;
 

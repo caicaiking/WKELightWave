@@ -63,7 +63,6 @@ HEADERS += \
     connections/clsFtdiConnection.h \
     connections/clsFtdiCnntWindow.h \
     connections/clsTestClass.h \
-    connections/clsRunningThread.h \
     connections/clsFtdiOperation.h \
     UiFiles/QFlowLayout.h \
     UiFiles/clsMainTestWindow.h \
@@ -131,7 +130,6 @@ SOURCES += \
     connections/clsHVCnntWindow.cpp \
     connections/clsFtdiConnection.cpp \
     connections/clsFtdiCnntWindow.cpp \
-    connections/clsRunningThread.cpp \
     connections/clsTestClass.cpp \
     connections/clsFtdiOperation.cpp \
     UiFiles/QFlowLayout.cpp \

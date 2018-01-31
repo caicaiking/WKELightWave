@@ -8,120 +8,115 @@
 clsFtdiOperation::clsFtdiOperation(QObject *parent) : QObject(parent)
 {
 
-    this->channel =99;
-    blStop = false;
+    connect(sngFtdiCnnt::Ins(),&clsFtdiConnection::trigSingal,this,&clsFtdiOperation::trigSignal);
+    connect(sngFtdiCnnt::Ins(),&clsFtdiConnection::resetSignal,this,&clsFtdiOperation::resetSignal);
+
+    portValue =0;
+    relayStatus = false;
 }
 
 void clsFtdiOperation::setBusy(bool value)
 {
-    emit busyStatusChanged(value);
 
+    int mask;
     if(value)
     {
         qDebug() << BUSYCMMD;
-        sngFtdiCnnt::Ins()->sendCommand("4,6", false);
+        mask = 0x01<< 0;
+        portValue |= mask;
     }
     else
     {
         qDebug() << IDELCMMD;
-        sngFtdiCnnt::Ins()->sendCommand("4,5", false);
+        mask = 0xFF-(1<<0);
+        portValue &= mask;
     }
+    emit busyStatusChanged(value);
+    sngFtdiCnnt::Ins()->sendCommand("3,"+ QString::number(portValue));
 }
 
 void clsFtdiOperation::setLcrPassFail(bool value)
 {
-    emit lcrStatusChanged(value);
 
+    int mask;
     if(value)
     {
-        qDebug()<< LCRPASSCMMD;
-        sngFtdiCnnt::Ins()->sendCommand("4,10",false);
+        qDebug() << LCRPASSCMMD;
+        mask = 0x01<< 1;
+        portValue |= mask;
     }
     else
     {
-        qDebug()<<LCRFAILCMMD;
-        sngFtdiCnnt::Ins()->sendCommand("4,11",false);
+        qDebug() << LCRFAILCMMD;
+        mask = 0xFF-(1<<1);
+        portValue &= mask;
     }
+    emit lcrStatusChanged(value);
+    sngFtdiCnnt::Ins()->sendCommand("3,"+ QString::number(portValue));
 }
 
 void clsFtdiOperation::setHvPassFail(bool value)
 {
-    emit hvStatusChanged(value);
 
+    int mask;
     if(value)
     {
-        qDebug()<<HVPASSCMMD;
-        sngFtdiCnnt::Ins()->sendCommand("4,10",false);
+        qDebug() << HVFAILCMMD;
+        mask = 0x01<< 2;
+        portValue |= mask;
     }
     else
     {
-        qDebug()<<HVFAILCMMD;
-        sngFtdiCnnt::Ins()->sendCommand("4,9",false);
+        qDebug() << HVFAILCMMD;
+        mask = 0xFF-(1<<2);
+        portValue &= mask;
     }
+    emit hvStatusChanged(value);
+    sngFtdiCnnt::Ins()->sendCommand("3,"+ QString::number(portValue));
 
 }
 
-void clsFtdiOperation::setChannel(int channel)
+void clsFtdiOperation::setIo(int value)
 {
-    if(this->channel == channel)
-        return;
 
-    emit channelChanged(channel);
+    qDebug() << "\tFtdi-->Set IO Command "<<value;
+    sngFtdiCnnt::Ins()->sendCommand("3,"+ QString::number(value));
+    this->portValue = value;
+}
 
-    QString cmmd = "4," + QString::number(channel);
-    qDebug() << SETCHANNEL << QString::number(channel);
+void clsFtdiOperation::setChannel(QPoint channel, QString type)
+{
+    QString channelStr = QString("%1-%2").arg(channel.x()).arg(channel.y());
 
-    sngFtdiCnnt::Ins()->sendCommand( cmmd,false);
 
-    this->channel = channel;
+    emit channelChanged(channelStr);
+
+    QString cmmd;
+    if(type == "WK6500")
+        cmmd = QString("7,%1,%2,0,0").arg(channel.x()).arg(channel.y());
+    else
+        cmmd = QString("7,0,0,%1,%2").arg(channel.x()).arg(channel.y());
+
+    qDebug() << SETCHANNEL <<channelStr;
+
+    sngFtdiCnnt::Ins()->sendCommand(cmmd);
+
 }
 
 void clsFtdiOperation::setRelay(bool value)
 {
-    if(value == relayStatus)
-        return;
 
     if(value)
     {
         qDebug()<< SETRELAY;
-        sngFtdiCnnt::Ins()->sendCommand("4,8",false);
+        sngFtdiCnnt::Ins()->sendCommand("13,2");
     }
     else
     {
         qDebug()<< OPENRELAY;
-        sngFtdiCnnt::Ins()->sendCommand("4,7",false);
+        sngFtdiCnnt::Ins()->sendCommand("13,0");
     }
     relayStatus = value;
-}
-
-void clsFtdiOperation::turnOffAllLight()
-{
-
-}
-
-void clsFtdiOperation::setOnlyOneOrangeLEDON(int)
-{
-
-}
-
-QString clsFtdiOperation::getValue() const
-{
-    return sngFtdiCnnt::Ins()->sendCommand("12", true);
-}
-
-void clsFtdiOperation::stop()
-{
-    blStop = true;
-}
-
-QString clsFtdiOperation::getReadString() const
-{
-    return getValue();
-}
-
-void clsFtdiOperation::setReadString(const QString &value)
-{
-      readString = value;
 }
 
 void clsFtdiOperation::sleepMs(int svalue)

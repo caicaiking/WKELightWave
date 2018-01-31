@@ -3,10 +3,12 @@
 #include <QJsonDocument>
 #include <QJsonParseError>
 #include <QVariantMap>
+#include <QPoint>
+
 class clsTestConditons
 {
 public:
-    int channel;
+    QPoint channel;
     QString condition;
     QString meter;
     void setJson(QString str)
@@ -23,7 +25,10 @@ public:
             return;
 
         QVariantMap map = jsDocument.toVariant().toMap();
-        channel = map["channel"].toInt();
+      int channelStart = map["channelStart"].toInt();
+        int channelStop = map["channelStop"].toInt();
+        channel.setX(channelStart);
+        channel.setY(channelStop);
         condition = map["conditions"].toString();
         meter = map["meter"].toString();
 
@@ -32,7 +37,8 @@ public:
     QString toJson()
     {
         QVariantMap map;
-        map.insert("channel", this->channel);
+        map.insert("channelStart", this->channel.x());
+        map.insert("channelStop", this->channel.y());
         map.insert("conditions", this->condition);
         map.insert("meter",this->meter);
         QJsonDocument jsDocument = QJsonDocument::fromVariant(map);

@@ -15,7 +15,7 @@ class clsHVConnection : public QObject
 {
     Q_OBJECT
 public:
-    explicit clsHVConnection(QObject *parent = nullptr);
+    explicit clsHVConnection(QObject *parent = 0);
     ~clsHVConnection();
 
     void setConnectionType(QString);

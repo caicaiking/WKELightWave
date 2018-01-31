@@ -45,7 +45,7 @@ void clsHVChannelSettings::setCondition(const QString condition)
     }
 }
 
-void clsHVChannelSettings::setChannel(const int channel)
+void clsHVChannelSettings::setChannel(const QPoint channel)
 {
     this->channel=channel;
 }
@@ -57,12 +57,12 @@ void clsHVChannelSettings::updateLabels()
             <<"#FA6E79"<<"#FE6F5E"<<"#ACE5EE"<<"#66FF00"<<"#FF007F"<<"#84DE02"<<"#1F75FE"
            <<"#08E8DE"<<"#FFAA1D"<<"#FF55A3"<<"#FF033E"<<"#FF2052"<<"#E0218A"<<"#ACE5EE";
 
-    int colorIndex =(channel-1) % colorList.length();
+    int colorIndex =(channel.x()-1) % colorList.length();
     this->setStyleSheet(QString("QDialog{background-color:%1;border:2px solid %2;border-radius: 9px;}")
                         .arg(colorList.at(colorIndex)).arg(colorList.at(colorIndex)));
 
     //labelChannel->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
-    labelChannel->setText(QString::number(channel));
+    labelChannel->setText(QString("%1-%2").arg(channel.x()).arg(channel.y()));
 
     lblTrigStar->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
     labelChannel1->setStyleSheet(QString("background-color:%1").arg(colorList.at(colorIndex)));
@@ -171,7 +171,9 @@ void clsHVChannelSettings::updateRes(const QString res)
 
     resMap = jsonDocument.toVariant().toMap();
 
-    if(resMap["channel"].toInt() != this->channel)
+    if(resMap["channelStart"].toInt() != this->channel.x())
+        return ;
+    if(resMap["channelStop"].toInt() != this->channel.y())
         return ;
 
     resList = resMap["data"].toList();

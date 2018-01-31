@@ -733,7 +733,7 @@ border: 3px solid rgb(252, 255, 74);</string>
         </property>
         <property name="maximumSize">
          <size>
-          <width>165</width>
+          <width>210</width>
           <height>16777215</height>
          </size>
         </property>

@@ -237,22 +237,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/main.cpp" line="28"/>
+        <location filename="../../PublicFiles/main.cpp" line="33"/>
         <source>版本号：V%1  正在初始化测试窗口，请稍等...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/main.cpp" line="39"/>
+        <location filename="../../PublicFiles/main.cpp" line="44"/>
         <source>初始化WK6500B网络连接...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/main.cpp" line="48"/>
+        <location filename="../../PublicFiles/main.cpp" line="53"/>
         <source>初始化高压机串口连接...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/main.cpp" line="57"/>
+        <location filename="../../PublicFiles/main.cpp" line="62"/>
         <source>初始化WKE控制箱FTDI连接...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -550,55 +550,55 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="160"/>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="166"/>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="190"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="163"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="169"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="193"/>
         <source>开路校准</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="211"/>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="217"/>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="242"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="213"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="219"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="244"/>
         <source>短路校准</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="273"/>
-        <source>&lt;p&gt;现在第&lt;strong&gt;&lt;span style=&quot;font-size:16px;color:#E53333;&quot;&gt;%1&lt;/span&gt;&lt;/strong&gt;通道&lt;/p&gt;</source>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="275"/>
+        <source>&lt;p&gt;现在第&lt;strong&gt;&lt;span style=&quot;font-size:16px;color:#E53333;&quot;&gt;%1-%2&lt;/span&gt;&lt;/strong&gt;通道&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="280"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="282"/>
         <source>%3时间为：%1 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="320"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="322"/>
         <source>确定是否已经做完了开路和短路校准</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="320"/>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="325"/>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="374"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="322"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="327"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="375"/>
         <location filename="../../MulitChannel/clsCalibration.cpp" line="420"/>
         <source>阻容校准</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="325"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="327"/>
         <source>放入负载100R</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="344"/>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="361"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="345"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="362"/>
         <source>100R校准</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="374"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="375"/>
         <source>放入负载100pF</source>
         <translation type="unfinished"></translation>
     </message>
@@ -644,7 +644,7 @@
     </message>
     <message>
         <location filename="../../UiFiles/clsMeterChannelSettings.ui" line="221"/>
-        <location filename="../../UiFiles/clsChannelSettings.cpp" line="183"/>
+        <location filename="../../UiFiles/clsChannelSettings.cpp" line="186"/>
         <source>点我修改参数</source>
         <translation type="unfinished"></translation>
     </message>
@@ -742,23 +742,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsChannelSettings.cpp" line="108"/>
-        <location filename="../../UiFiles/clsChannelSettings.cpp" line="144"/>
+        <location filename="../../UiFiles/clsChannelSettings.cpp" line="111"/>
+        <location filename="../../UiFiles/clsChannelSettings.cpp" line="147"/>
         <source>关</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsChannelSettings.cpp" line="113"/>
-        <location filename="../../UiFiles/clsChannelSettings.cpp" line="121"/>
-        <location filename="../../UiFiles/clsChannelSettings.cpp" line="129"/>
-        <location filename="../../UiFiles/clsChannelSettings.cpp" line="136"/>
-        <location filename="../../UiFiles/clsChannelSettings.cpp" line="256"/>
-        <location filename="../../UiFiles/clsChannelSettings.cpp" line="277"/>
+        <location filename="../../UiFiles/clsChannelSettings.cpp" line="116"/>
+        <location filename="../../UiFiles/clsChannelSettings.cpp" line="124"/>
+        <location filename="../../UiFiles/clsChannelSettings.cpp" line="132"/>
+        <location filename="../../UiFiles/clsChannelSettings.cpp" line="139"/>
+        <location filename="../../UiFiles/clsChannelSettings.cpp" line="261"/>
+        <location filename="../../UiFiles/clsChannelSettings.cpp" line="282"/>
         <source>自动</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsChannelSettings.cpp" line="185"/>
+        <location filename="../../UiFiles/clsChannelSettings.cpp" line="188"/>
         <source>点击我切换显示</source>
         <translation type="unfinished"></translation>
     </message>
@@ -817,17 +817,17 @@
 <context>
     <name>clsFtdiConnection</name>
     <message>
-        <location filename="../../connections/clsFtdiConnection.cpp" line="67"/>
+        <location filename="../../connections/clsFtdiConnection.cpp" line="70"/>
         <source>WKE控制箱连线错误</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../connections/clsFtdiConnection.cpp" line="67"/>
+        <location filename="../../connections/clsFtdiConnection.cpp" line="70"/>
         <source>请仔细检查串口连线，或者重新插拔！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../connections/clsFtdiConnection.cpp" line="178"/>
+        <location filename="../../connections/clsFtdiConnection.cpp" line="193"/>
         <source>WKE 控制箱</source>
         <translation type="unfinished"></translation>
     </message>
@@ -846,7 +846,7 @@
     </message>
     <message>
         <location filename="../../UiFiles/clsHVChannelSettings.ui" line="211"/>
-        <location filename="../../UiFiles/clsHVChannelSettings.cpp" line="235"/>
+        <location filename="../../UiFiles/clsHVChannelSettings.cpp" line="237"/>
         <source>点我修改参数</source>
         <translation type="unfinished"></translation>
     </message>
@@ -902,12 +902,12 @@
     </message>
     <message>
         <location filename="../../UiFiles/clsHVChannelSettings.cpp" line="94"/>
-        <location filename="../../UiFiles/clsHVChannelSettings.cpp" line="187"/>
+        <location filename="../../UiFiles/clsHVChannelSettings.cpp" line="189"/>
         <source>自动</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsHVChannelSettings.cpp" line="237"/>
+        <location filename="../../UiFiles/clsHVChannelSettings.cpp" line="239"/>
         <source>点击我切换显示</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1221,44 +1221,44 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsMainTestWindow.cpp" line="199"/>
+        <location filename="../../UiFiles/clsMainTestWindow.cpp" line="201"/>
         <source>警告</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsMainTestWindow.cpp" line="200"/>
-        <source>通道 %1 已经存在设置,请选择操作.</source>
+        <location filename="../../UiFiles/clsMainTestWindow.cpp" line="202"/>
+        <source>通道 %1-%2 已经存在设置,请选择操作.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsMainTestWindow.cpp" line="394"/>
+        <location filename="../../UiFiles/clsMainTestWindow.cpp" line="396"/>
         <source>成功打开步骤文件：%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsMainTestWindow.cpp" line="410"/>
+        <location filename="../../UiFiles/clsMainTestWindow.cpp" line="412"/>
         <source>文件已保存至：%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsMainTestWindow.cpp" line="415"/>
-        <location filename="../../UiFiles/clsMainTestWindow.cpp" line="425"/>
+        <location filename="../../UiFiles/clsMainTestWindow.cpp" line="417"/>
+        <location filename="../../UiFiles/clsMainTestWindow.cpp" line="427"/>
         <source>保存测试任务</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsMainTestWindow.cpp" line="416"/>
-        <location filename="../../UiFiles/clsMainTestWindow.cpp" line="426"/>
+        <location filename="../../UiFiles/clsMainTestWindow.cpp" line="418"/>
+        <location filename="../../UiFiles/clsMainTestWindow.cpp" line="428"/>
         <source>WKE FactoryView 任务 (*.wket)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsMainTestWindow.cpp" line="529"/>
+        <location filename="../../UiFiles/clsMainTestWindow.cpp" line="530"/>
         <source>通道校准</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsMainTestWindow.cpp" line="555"/>
+        <location filename="../../UiFiles/clsMainTestWindow.cpp" line="556"/>
         <source>运行设定</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1321,42 +1321,56 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsNewSetup.ui" line="41"/>
+        <location filename="../../UiFiles/clsNewSetup.ui" line="52"/>
         <source>通道：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsNewSetup.ui" line="58"/>
+        <location filename="../../UiFiles/clsNewSetup.ui" line="70"/>
+        <source>端点1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../UiFiles/clsNewSetup.ui" line="86"/>
+        <source>端点2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../UiFiles/clsNewSetup.ui" line="103"/>
+        <location filename="../../UiFiles/clsNewSetup.ui" line="136"/>
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsNewSetup.ui" line="63"/>
+        <location filename="../../UiFiles/clsNewSetup.ui" line="108"/>
+        <location filename="../../UiFiles/clsNewSetup.ui" line="141"/>
         <source>2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsNewSetup.ui" line="68"/>
+        <location filename="../../UiFiles/clsNewSetup.ui" line="113"/>
+        <location filename="../../UiFiles/clsNewSetup.ui" line="146"/>
         <source>3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsNewSetup.ui" line="73"/>
+        <location filename="../../UiFiles/clsNewSetup.ui" line="118"/>
+        <location filename="../../UiFiles/clsNewSetup.ui" line="151"/>
         <source>4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsNewSetup.ui" line="114"/>
+        <location filename="../../UiFiles/clsNewSetup.ui" line="196"/>
         <source>LCR表</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsNewSetup.ui" line="130"/>
+        <location filename="../../UiFiles/clsNewSetup.ui" line="212"/>
         <source>高压表</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsNewSetup.ui" line="146"/>
+        <location filename="../../UiFiles/clsNewSetup.ui" line="228"/>
         <source>取消</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1418,12 +1432,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Service/clsRunService.cpp" line="164"/>
+        <location filename="../../Service/clsRunService.cpp" line="101"/>
+        <source>Channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Service/clsRunService.cpp" line="207"/>
         <source>Handler Remote</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Service/clsRunService.cpp" line="173"/>
+        <location filename="../../Service/clsRunService.cpp" line="217"/>
         <source>Lan Remote</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1431,17 +1450,17 @@
 <context>
     <name>clsRunSettings</name>
     <message>
-        <location filename="../../Service/clsRunSettings.cpp" line="51"/>
+        <location filename="../../Service/clsRunSettings.cpp" line="49"/>
         <source>手动</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Service/clsRunSettings.cpp" line="60"/>
+        <location filename="../../Service/clsRunSettings.cpp" line="55"/>
         <source>硬件</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Service/clsRunSettings.cpp" line="66"/>
+        <location filename="../../Service/clsRunSettings.cpp" line="61"/>
         <source>网络</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2004,9 +2023,10 @@
     </message>
     <message>
         <location filename="../../UiFiles/clsWK6500Meter.ui" line="541"/>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="255"/>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="262"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="34"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="256"/>
         <location filename="../../UiFiles/clsWK6500Meter.cpp" line="263"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="264"/>
         <source>串联</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2023,8 +2043,8 @@
     <message>
         <location filename="../../UiFiles/clsWK6500Meter.ui" line="590"/>
         <location filename="../../UiFiles/clsWK6500Meter.cpp" line="90"/>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="294"/>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="296"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="295"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="297"/>
         <source>电压</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2036,9 +2056,10 @@
     <message>
         <location filename="../../UiFiles/clsWK6500Meter.ui" line="625"/>
         <location filename="../../UiFiles/clsWK6500Meter.ui" line="762"/>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="314"/>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="325"/>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="333"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="47"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="315"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="326"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="334"/>
         <source>开</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2050,6 +2071,8 @@
     <message>
         <location filename="../../UiFiles/clsWK6500Meter.ui" line="689"/>
         <location filename="../../UiFiles/clsWK6500Meter.cpp" line="32"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="41"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="42"/>
         <location filename="../../UiFiles/clsWK6500Meter.cpp" line="62"/>
         <location filename="../../UiFiles/clsWK6500Meter.cpp" line="67"/>
         <source>自动</source>
@@ -2083,63 +2106,64 @@
     </message>
     <message>
         <location filename="../../UiFiles/clsWK6500Meter.cpp" line="84"/>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="291"/>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="299"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="292"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="300"/>
         <source>电流</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="212"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="213"/>
         <source>设置频率</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="236"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="237"/>
         <source>设置电平</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="257"/>
         <location filename="../../UiFiles/clsWK6500Meter.cpp" line="258"/>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="260"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="259"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="261"/>
         <source>并联</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="270"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="271"/>
         <source>设置档位</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="281"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="282"/>
         <source>设置速度</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="309"/>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="328"/>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="330"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="39"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="310"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="329"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="331"/>
         <source>关</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="340"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="341"/>
         <source>输入数值</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="380"/>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="397"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="381"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="398"/>
         <source>选择后缀</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="412"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="413"/>
         <source>设置Item1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="423"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="424"/>
         <source>设置Item2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2147,39 +2171,39 @@
 <context>
     <name>clsWK6500RunningMode</name>
     <message>
-        <location filename="../../Instruments/clsWK6500RunningMode.cpp" line="183"/>
-        <location filename="../../Instruments/clsWK6500RunningMode.cpp" line="247"/>
+        <location filename="../../Instruments/clsWK6500RunningMode.cpp" line="179"/>
+        <location filename="../../Instruments/clsWK6500RunningMode.cpp" line="243"/>
         <source>自动</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Instruments/clsWK6500RunningMode.cpp" line="241"/>
+        <location filename="../../Instruments/clsWK6500RunningMode.cpp" line="237"/>
         <source>串联</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Instruments/clsWK6500RunningMode.cpp" line="252"/>
+        <location filename="../../Instruments/clsWK6500RunningMode.cpp" line="248"/>
         <source>最快</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Instruments/clsWK6500RunningMode.cpp" line="254"/>
+        <location filename="../../Instruments/clsWK6500RunningMode.cpp" line="250"/>
         <source>快速</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Instruments/clsWK6500RunningMode.cpp" line="256"/>
+        <location filename="../../Instruments/clsWK6500RunningMode.cpp" line="252"/>
         <source>中速</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Instruments/clsWK6500RunningMode.cpp" line="258"/>
+        <location filename="../../Instruments/clsWK6500RunningMode.cpp" line="254"/>
         <source>慢速</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Instruments/clsWK6500RunningMode.cpp" line="300"/>
-        <location filename="../../Instruments/clsWK6500RunningMode.cpp" line="311"/>
+        <location filename="../../Instruments/clsWK6500RunningMode.cpp" line="296"/>
+        <location filename="../../Instruments/clsWK6500RunningMode.cpp" line="307"/>
         <source>开</source>
         <translation type="unfinished"></translation>
     </message>

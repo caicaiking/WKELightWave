@@ -5,6 +5,7 @@
 #include "clsInstrument.h"
 #include "singleton.h"
 #include "clsMeterLimit.h"
+#include <QPoint>
 class clsWK6500RunningMode: public clsInstrument
 {
     Q_OBJECT
@@ -59,7 +60,7 @@ private:
 
     QString strConditon;
     QList<clsMeterLimit* > limits;
-    int channel;
+    QPoint channel;
 
 };
 typedef Singleton<clsWK6500RunningMode> sngWK6500Run;

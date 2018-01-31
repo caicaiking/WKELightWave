@@ -10,7 +10,7 @@ class clsChannelSettings : public clsMeter, private Ui::clsChannelSettings
 
 public:
     explicit clsChannelSettings(clsMeter *parent = 0);
-    void setChannel(const int channel);
+    void setChannel(const QPoint channel);
     void setCondition(const QString condition);
 
     void updateLabels();
@@ -30,7 +30,7 @@ private slots:
     void showTrigStart(int i);
 private:
     QString condition;
-    int channel;
+    QPoint channel;
     QString item1,item2;
     bool isItem2Enable;
     double frequency,level,bias;

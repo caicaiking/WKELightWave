@@ -3,7 +3,7 @@
 #include "clsGlobleVarient.h"
 clsLcrConnection::clsLcrConnection(QObject *parent) : QObject(parent)
 {
-    cnnt =nullptr;
+    cnnt =0;
     isInit = false;
 }
 

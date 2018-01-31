@@ -15,12 +15,12 @@ public:
     void setStrDataBaseName(const QString &value);
     bool openDataBase();
     bool initTable();
-    bool insertRecord(double freq, int channal, double z, double a, QString type);
+    bool insertRecord(double freq, QPoint channal, double z, double a, QString type);
     bool removeAllData();
     QString getTableName();
-    bool deleteRecord(double freq, int channel, QString type);
+    bool deleteRecord(double freq, QPoint channel, QString type);
 
-    QList<double> getCalData(double freq, int channal, QString type);
+    QList<double> getCalData(double freq, QPoint channal, QString type);
 signals:
 
 public slots:
@@ -32,6 +32,7 @@ private:
     QString strDataBaseName;
     bool isDataBaseIsOpen;
     bool hasTable;
+    QString ps(QPoint p);
 };
 
 #endif // CLSCALIBRATIONDBOP_H

@@ -9,7 +9,7 @@ public:
     clsInstrumentCalibration();
 
     virtual void set10KHz()=0;                  //设置10kHz为了校准
-    virtual void setChannel(int value)=0;       //通道测试
+    virtual void setChannel(QPoint value)=0;       //通道测试
     virtual void setUseLoad(bool value)=0;      //使用Load数据
     virtual void setConditionForCalibration(int)=0; //设置条件为了校准；
     virtual QList<double> getOriginZA()=0;      //获得原始的没有进行过校准的Z A

@@ -10,7 +10,7 @@ public:
     explicit clsMeter(QDialog *parent=0);
 
     virtual void setCondition(const QString condition)=0;   //设置测试条件
-    virtual void setChannel(const int channel)=0;           //设置通道
+    virtual void setChannel(const QPoint channel)=0;           //设置通道
     virtual void setChannelSettings()=0;                    //切换成设置模式
     virtual void setChannelRunnings()=0;                    //切换成运行模式
     virtual void setCloseEnabled(const bool bl)=0;          //使能关闭按钮

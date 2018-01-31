@@ -8,7 +8,7 @@ class clsRunSettings: public QObject
     Q_OBJECT
 
 public:
-    explicit clsRunSettings(QObject *parent =nullptr);
+    explicit clsRunSettings(QObject *parent =0);
 
     enum TrigSource
     {

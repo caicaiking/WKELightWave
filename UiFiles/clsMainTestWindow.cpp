@@ -21,7 +21,6 @@
 #include "clsHightVoltage.h"
 #include <QFile>
 #include <QDir>
-#include "clsRunningThread.h"
 #include "clsCalibration.h"
 #include <QDesktopServices>
 #include <QProcess>
@@ -134,7 +133,9 @@ void clsMainTestWindow::showAllStep()
         QVariantMap cMap = jsDocument.toVariant().toMap();
 
         QString condition = cMap["conditions"].toString();
-        int channel = cMap["channel"].toInt();
+        int channelStart = cMap["channelStart"].toInt();
+        int channelStop = cMap["channelStop"].toInt();
+        QPoint channel(channelStart,channelStop);
         tmp->setCondition(condition);
         tmp->setChannel(channel);
         tmp->setCloseEnabled(true);
@@ -179,39 +180,40 @@ void clsMainTestWindow::on_btnNewSetup_clicked()
     clsTestConditons* tmp = new clsTestConditons();
     if(dlg->exec()==QDialog::Accepted)
     {
-        tmp->channel = dlg->getChannel();
+        tmp->channel.setX(dlg->getChannelStart());
+        tmp->channel.setY(dlg->getChannelStop());
         tmp->meter = dlg->getMeter();
         tmp->condition = dlg->getCondtion();
 
         auto getKeys = [](QList<clsTestConditons *> items)
         {
-            QList<int> tmp;
+            QList<QPoint> tmp;
             for(int i = 0; i< items.length(); i++)
                 tmp.append(items.at(i)->channel);
             return tmp;
         };
 
-        QList<int> keys =getKeys(steps);
+        QList<QPoint> keys =getKeys(steps);
 
-        if(keys.contains(dlg->getChannel()))
+        if(keys.contains(QPoint(dlg->getChannelStart(), dlg->getChannelStop())))
         {
-            int index = keys.indexOf(dlg->getChannel());
+            int index = keys.indexOf(QPoint(dlg->getChannelStart(), dlg->getChannelStop()));
             int value = clsWarningBox::warning(0,tr("警告"),
-                                               QString(tr("通道 %1 已经存在设置,请选择操作.")).arg(dlg->getChannel()));
+                                               QString(tr("通道 %1-%2 已经存在设置,请选择操作.")).arg(dlg->getChannelStart()).arg(dlg->getChannelStop()));
 
             if(value == QMessageBox::No)
                 return ;
             else if(value == QMessageBox::Ok) //更新步骤
             {
-                QList<int> tmpList;
+                QList<QPoint> tmpList;
 
                 for(int i=0; i<keys.length(); i++)
                 {
                     if(keys.at(i)==dlg->getChannel())
-                        tmpList.append(i);
+                        tmpList.append(keys.at(i));
                 }
 
-                int tmpIndex = clsSelectUpdateStep::selectStep(0,tmpList);
+              int tmpIndex = clsSelectUpdateStep::selectStep(0,tmpList);
 
                 steps[tmpIndex] = tmp;
             }
@@ -435,7 +437,7 @@ void clsMainTestWindow::on_btnTrig_clicked()
 {
     btnTrig->setEnabled(false);
 
-    sngRunService::Ins()->trig();
+    sngRunService::Ins()->manulTrig();
 
     btnTrig->setEnabled(true);
 }
@@ -515,7 +517,6 @@ void clsMainTestWindow::installSignalDispaly()
 void clsMainTestWindow::closeEvent(QCloseEvent *event)
 {
     btnReptive->setChecked(false);
-    sngTrigThread::Ins()->stop();
     qApp->processEvents();
     publicUtility::sleepMs(10);
     event->accept();

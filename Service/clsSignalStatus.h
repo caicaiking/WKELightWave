@@ -8,7 +8,7 @@ class clsSignalStatus : public QObject
 {
     Q_OBJECT
 public:
-    explicit clsSignalStatus(QObject *parent = nullptr);
+    explicit clsSignalStatus(QObject *parent = 0);
 
     void resetLCRStatus();
     void resetHVStatus();

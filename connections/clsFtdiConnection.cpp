@@ -5,13 +5,16 @@
 #include <QMessageBox>
 #include "publicUtility.h"
 #include <QDebug>
-#include "clsRunningThread.h"
 clsFtdiConnection::clsFtdiConnection(QObject *parent) : QObject(parent)
 {
     isInit = false;
     this->instrument = "WKEC";
 
-    this->moveToThread(sngTrigThread::Ins()->thread());
+    connect(this, &clsFtdiConnection::recievFinished,this,&clsFtdiConnection::setResString);
+}
+void clsFtdiConnection::setResString(QString value)
+{
+   this->retData = value;
 }
 
 clsFtdiConnection::~clsFtdiConnection()
@@ -36,15 +39,8 @@ bool clsFtdiConnection::setupConnection()
         return false;
     }
 
-    serialPort = new QextSerialPort(QextSerialPort::EventDriven, this->parent());
+    serialPort = new QSerialPort(this);
     serialPort->setPortName(portName);
-
-
-    serialPort->setBaudRate(BAUD9600);
-    serialPort->setParity(PAR_NONE);
-    serialPort->setDataBits(DATA_8);
-    serialPort->setStopBits(STOP_1);
-    serialPort->setFlowControl(FLOW_OFF);
 
     if(!serialPort->open(QIODevice::ReadWrite))
     {
@@ -52,10 +48,17 @@ bool clsFtdiConnection::setupConnection()
         isInit = false;
         return false;
     }
-    connect(serialPort, &QextSerialPort::readyRead,this,&clsFtdiConnection::readCom);
+    serialPort->setBaudRate(QSerialPort::Baud9600);
+    serialPort->setParity(QSerialPort::NoParity);
+    serialPort->setDataBits(QSerialPort::Data8);
+    serialPort->setStopBits(QSerialPort::OneStop);
+
     isInit = true;
+
+    connect(serialPort,&QSerialPort::readyRead,this,&clsFtdiConnection::readCom);
+
     QTime t1 = QTime::currentTime();
-    QString idn = sendCommand("1", true);
+    QString idn = sendCommand("1");
     qDebug()<< idn;
     qDebug()<<"Read id need time: " << t1.msecsTo(QTime::currentTime())<<"ms";
     if(idn.contains("Scan"))
@@ -70,7 +73,7 @@ bool clsFtdiConnection::setupConnection()
     return true;
 }
 
-QString clsFtdiConnection::sendCommand(QString command, bool hasReturn)
+QString clsFtdiConnection::sendCommand(QString command)
 {
     if(!isInit)
         return "";
@@ -79,19 +82,16 @@ QString clsFtdiConnection::sendCommand(QString command, bool hasReturn)
         emit commandMsg(command);
 
     readData.clear();
-   // disconnect(serialPort, &QextSerialPort::readyRead,this,&clsFtdiConnection::readCom);
+    retData.clear();
     QString cmd = command + "\r";
     serialPort->write(cmd.toUtf8(), cmd.length());
     serialPort->waitForBytesWritten(1000);
+    publicUtility::sleepMs(20);
 
-    if(!hasReturn)
-        return "";
-
-    //connect(serialPort, &QextSerialPort::readyRead,this,&clsFtdiConnection::readCom);
     int i=0;
     forever
     {
-        if(!readData.isEmpty())
+        if(!retData.isEmpty())
             break;
 
         if(i>1000)
@@ -99,7 +99,7 @@ QString clsFtdiConnection::sendCommand(QString command, bool hasReturn)
         publicUtility::sleepMs(3);
         i++;
     }
-    return readData;
+    return retData;
 }
 
 void clsFtdiConnection::disConnectInstrument()
@@ -115,16 +115,31 @@ bool clsFtdiConnection::hasInitSucess()
 
 void clsFtdiConnection::readCom()
 {
-    publicUtility::sleepMs(45);
-REREAD:
     publicUtility::sleepMs(3);
     readData += serialPort->readAll();
 
     if(readData.contains("\r"))
+    {
         emit recievFinished(readData);
-    else
-        goto REREAD;
 
+        QStringList rec = readData.split("\r",QString::SkipEmptyParts);
+        if(rec.length()==0)
+            return;
+        if(rec.last().toInt()==11)
+        {
+            emit trigSingal();
+            qDebug()<<"Trig";
+            readData.clear();
+        }
+
+        if(rec.last().toInt() ==12)
+        {
+            emit resetSignal();
+            qDebug()<<"Reset";
+            readData.clear();
+        }
+        return;
+    }
 }
 
 bool clsFtdiConnection::closeDevice()

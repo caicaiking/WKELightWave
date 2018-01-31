@@ -15,45 +15,30 @@
 #define SETRELAY    "\tFtdi-->Set Relay Command"
 #define OPENRELAY   "\tFtdi-->Reset Relay Command"
 
-#include <QMutex>
-#include <QReadWriteLock>
 class clsFtdiOperation : public QObject
 {
     Q_OBJECT
 public:
-    explicit clsFtdiOperation(QObject *parent = nullptr);
+    explicit clsFtdiOperation(QObject *parent = 0);
 
     void setBusy(bool value);
     void setLcrPassFail(bool value);
     void setHvPassFail(bool value);
-    void setChannel(int channel);       //切换通道，这里是采用互斥的方法
+    void setChannel(QPoint channel, QString type);       //切换通道，这里是采用互斥的方法
     void setRelay(bool value);          //设置Relay
-
-    void turnOffAllLight();
-    void setOnlyOneOrangeLEDON(int);
-
-    QString getValue() const;                 //主要是为了判定用户是否是输入了Trig 或者reset指令
-    void stop();
-
-    QString getReadString() const;
-    void setReadString(const QString &value);
-
+    void setIo(int value);
 signals:
-    void channelChanged(int value);
+    void channelChanged(QString value);
     void lcrStatusChanged(bool value);
     void hvStatusChanged(bool value);
     void busyStatusChanged(bool value);
+    void trigSignal();
+    void resetSignal();
 public slots:
     void sleepMs(int svalue);
 private:
-    bool blStop;
-
-    int channel;
+    int portValue;
     bool relayStatus;
-
-    QString readString;         //用于更新Binning口的数据
-    QMutex mutex;
-    QReadWriteLock locker;
 };
 
 typedef Singleton<clsFtdiOperation> clsConnectSWBox;

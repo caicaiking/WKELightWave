@@ -3,8 +3,7 @@
 #include "clsRunService.h"
 #include "clsWKServer.h"
 #include "clsWKCommandProcess.h"
-#include "clsRunningThread.h"
-
+#include "clsFtdiOperation.h"
 clsRunSettings::clsRunSettings(QObject *parent): QObject(parent)
 {
 }
@@ -43,26 +42,22 @@ void clsRunSettings::setRemoteControlType(TrigSource value)
     remoteControlType = value;
 
     sngWKServer::Ins()->stopServer();
-    sngTrigThread::Ins()->stop();
     switch (remoteControlType) {
     case ManualTrig:
         sngWKServer::Ins()->stopServer();
-        sngTrigThread::Ins()->stop();
+        disconnect(clsConnectSWBox::Ins(),SIGNAL(trigSignal()),sngRunService::Ins(),SLOT(handlerTrig()));
         emit remoteType(tr("手动"));
         break;
     case HandlerTrig:
         sngWKServer::Ins()->stopServer();
 
-        sngTrigThread::Ins()->setName("Trig");
-        sngTrigThread::Ins()->setCaptureBit(1);
-        connect(sngTrigThread::Ins(),SIGNAL(getSignal()),sngRunService::Ins(),SLOT(handlerTrig()));
-        sngTrigThread::Ins()->start();
+        connect(clsConnectSWBox::Ins(),SIGNAL(trigSignal()),sngRunService::Ins(),SLOT(handlerTrig()));
         emit remoteType(tr("硬件"));
         break;
     case LanTrig:
-        sngTrigThread::Ins()->stop();
         sngWKServer::Ins()->startServer();
 
+        disconnect(clsConnectSWBox::Ins(),SIGNAL(trigSignal()),sngRunService::Ins(),SLOT(handlerTrig()));
         emit remoteType(tr("网络"));
         break;
     default:

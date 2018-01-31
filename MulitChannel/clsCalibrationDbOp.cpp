@@ -60,7 +60,7 @@ bool clsCalDb::initTable()
     QSqlQuery qry;
     QString tmpSql=QString("CREATE TABLE IF NOT EXISTS %1 ("
                            "id INTEGER UNIQUE PRIMARY KEY, "
-                           "channel INTGEGER, "
+                           "channel VARCHAR(10), "
                            "frequency NUMERIC, "
                            "zValue NUMERIC, "
                            "aValue NUMERIC, "
@@ -84,7 +84,7 @@ bool clsCalDb::initTable()
 }
 
 QList<double> clsCalDb::getCalData(
-        double freq, int channal,QString type)
+        double freq, QPoint channal,QString type)
 {
     QSqlQuery query;
 
@@ -100,7 +100,7 @@ QList<double> clsCalDb::getCalData(
                 "DATATYPE ='%4'"
                 )
             .arg(getTableName())
-            .arg(channal)
+            .arg(ps(channal))
             .arg(freq)
             .arg(type);
 
@@ -128,7 +128,7 @@ QList<double> clsCalDb::getCalData(
     }
 }
 
-bool clsCalDb::insertRecord(double freq, int channal,
+bool clsCalDb::insertRecord(double freq, QPoint channal,
                             double z, double a, QString type)
 {
     if(getCalData(freq,channal,type).length()>0)
@@ -145,7 +145,7 @@ bool clsCalDb::insertRecord(double freq, int channal,
                                  "frequency = %5"
                                  " and"
                                  " DATATYPE='%6'")
-                .arg(getTableName()).arg(z).arg(a).arg(channal).arg(freq).arg(type);
+                .arg(getTableName()).arg(z).arg(a).arg(QString("%1-%2").arg(channal.x()).arg(channal.y())).arg(freq).arg(type);
 
         //qDebug()<< strSql;
         QSqlQuery query;
@@ -160,7 +160,7 @@ bool clsCalDb::insertRecord(double freq, int channal,
                                  " %1"
                                  " (CHANNEL,FREQUENCY,ZVALUE,AVALUE,DATATYPE)"
                                  " VALUES(%2,%3,%4,%5,'%6')")
-                .arg(getTableName()).arg(channal).arg(freq).arg(z).arg(a).arg(type);
+                .arg(getTableName()).arg(ps(channal)).arg(freq).arg(z).arg(a).arg(type);
         //qDebug()<< strSql;
         QSqlQuery query;
         query.prepare(strSql);
@@ -183,7 +183,7 @@ QString clsCalDb::getTableName()
     return QString("MTC_%1").arg(clsRS::Ins()->meterSeries);
 }
 
-bool clsCalDb::deleteRecord(double freq, int channel, QString type)
+bool clsCalDb::deleteRecord(double freq, QPoint channel, QString type)
 {
     QString strSql =
             QString("DELETE FROM"
@@ -195,7 +195,7 @@ bool clsCalDb::deleteRecord(double freq, int channel, QString type)
                     " AND"
                     " DATATYPE='%4'")
                     .arg(getTableName())
-                    .arg(channel)
+                    .arg(ps(channel))
                     .arg(freq)
                     .arg(type);
     QSqlQuery query;
@@ -203,4 +203,8 @@ bool clsCalDb::deleteRecord(double freq, int channel, QString type)
     return query.exec();
 }
 
+QString clsCalDb::ps(QPoint p)
+{
+    return QString("'c%1-%2'").arg(p.x()).arg(p.y());
+}
 

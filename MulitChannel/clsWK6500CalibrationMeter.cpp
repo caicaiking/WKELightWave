@@ -11,9 +11,9 @@ void clsWK6500CalibrationMeter::set10KHz()
     sngLCRCnnt::Ins()->sendCommand(QString(":METER:FREQ 10000"),false);
 }
 
-void clsWK6500CalibrationMeter::setChannel(int value)
+void clsWK6500CalibrationMeter::setChannel(QPoint value)
 {
-    clsConnectSWBox::Ins()->setChannel(value);
+    clsConnectSWBox::Ins()->setChannel(value,"WK6500");
 }
 
 void clsWK6500CalibrationMeter::setUseLoad(bool /*value*/)

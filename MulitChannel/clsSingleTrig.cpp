@@ -5,12 +5,12 @@
 clsSingleTrig::clsSingleTrig()
 {
 }
-int clsSingleTrig::getChannel() const
+QPoint clsSingleTrig::getChannel() const
 {
     return channel;
 }
 
-void clsSingleTrig::setChannel(int value)
+void clsSingleTrig::setChannel(QPoint value)
 {
     channel = value;
 }
@@ -154,7 +154,7 @@ void clsSingleTrig::doRCCalibration()
         QList<double> _100PRef = applyOpenShort(openData_10K,shortData_10K,z100Pref,10E3);
 
         //角度适配
-        double angleRange = abs(_100P.last() - _100R.last());
+        double angleRange = qAbs(_100P.last() - _100R.last());
         double diffA = __Dut.last() - _100P.last();
         Am = diffA/angleRange *90 -90;
 

@@ -49,22 +49,26 @@ void clsCalibration::setSteps(const QList<clsTestConditons *> steps)
 
         if(tmpStep->meter == "WK6500")
         {
-            if(!channels.contains(QString::number(tmpStep->channel)))
+            if(!channels.contains(tmpStep->channel))
             {
-                channels.append(QString::number(tmpStep->channel));
-                calFreq[tmpStep->channel] =  QList<double>()<< getFreqFromConditon(tmpStep->condition);
+                channels.append(tmpStep->channel);
+                calFreq[ps(tmpStep->channel)] =  QList<double>()<< getFreqFromConditon(tmpStep->condition);
             }
             else
             {
                 double tmpFreq = getFreqFromConditon(tmpStep->condition);
 
-                if(!calFreq[tmpStep->channel].contains(tmpFreq))
-                    calFreq[tmpStep->channel].append(getFreqFromConditon(tmpStep->condition));
+                if(!calFreq[ps(tmpStep->channel)].contains(tmpFreq))
+                    calFreq[ps(tmpStep->channel)].append(getFreqFromConditon(tmpStep->condition));
             }
         }
     }
 }
 
+QString clsCalibration::ps(QPoint p)
+{
+    return QString("%1-%2").arg(p.x()).arg(p.y());
+}
 
 double clsCalibration::getFreqFromConditon(const QString condition)
 {
@@ -109,7 +113,7 @@ double clsCalibration::getFreqFromConditon(const QString condition)
  * \param type 类型
  */
 QList<double> clsCalibration::getCalDataFromDb(
-        double freq, int channal,QString type)
+        double freq, QPoint channal,QString type)
 {
     return clsCalDb::getInst()->getCalData(freq,channal,type);
 }
@@ -123,7 +127,7 @@ QList<double> clsCalibration::getCalDataFromDb(
  * \param type 类型 O 开路 S 短路 Lm负载量测值 Ls负载标准值
  */
 void clsCalibration::insertRecord(
-        double freq, int channal,
+        double freq, QPoint channal,
         double z,double a, QString type)
 {
     clsCalDb::getInst()->insertRecord(freq,channal,z,a,type);
@@ -141,26 +145,25 @@ void clsCalibration::on_btnDone_clicked()
 void clsCalibration::on_btnOpenTrim_clicked()
 {
 
-    QList<int> calChannels = this->getCalChannels();
+    QList<QPoint> calChannels = this->getCalChannels();
 
     meter->setConditionForCalibration(0);
     clsSampleTest * sample = new clsSampleTest(meter,this);
 
     for(int c=0; c< calChannels.length(); c++)
     {
+
+        QPoint currentChannel = calChannels.at(c);
+        clsConnectSWBox::Ins()->setChannel(currentChannel,"WK6500");
+
         sample->setOption(0);
         if(sample->exec() !=QDialog::Accepted)
             return;
 
-        int currentChannel = calChannels.at(c);
-        clsConnectSWBox::Ins()->setChannel(currentChannel);
-        clsConnectSWBox::Ins()->turnOffAllLight();
-        clsConnectSWBox::Ins()->setOnlyOneOrangeLEDON(currentChannel);
-
         int res=showCalMessage(tr("开路校准"),currentChannel);
         if(res==QDialog::Rejected)
             return;
-        QList<double> calFrequencys =  calFreq[calChannels.at(c)];
+        QList<double> calFrequencys =  calFreq[ps(calChannels.at(c))];
         for(int f=0; f<calFrequencys.length(); f++)
         {
             showCalMessage(tr("开路校准"),calFrequencys.at(f),currentChannel);
@@ -192,26 +195,25 @@ void clsCalibration::on_btnOpenTrim_clicked()
 
 void clsCalibration::on_btnShortTrim_clicked()
 {
-    QList<int> calChannels = this->getCalChannels();
+    QList<QPoint> calChannels = this->getCalChannels();
 
     meter->setConditionForCalibration(0);
 
     clsSampleTest * sample = new clsSampleTest(meter,this);
     for(int c=0; c< calChannels.length(); c++)
     {
+
+       QPoint currentChannel = calChannels.at(c);
+        clsConnectSWBox::Ins()->setChannel(currentChannel,"WK6500");
+
         sample->setOption(1);
         if(sample->exec() !=QDialog::Accepted)
             return;
 
-        int currentChannel = calChannels.at(c);
-        clsConnectSWBox::Ins()->setChannel(currentChannel);
-        clsConnectSWBox::Ins()->turnOffAllLight();
-        clsConnectSWBox::Ins()->setOnlyOneOrangeLEDON(currentChannel);
-
         int res=showCalMessage(tr("短路校准"),currentChannel);
         if(res==QDialog::Rejected)
             return;
-        QList<double> calFrequencys =  calFreq[calChannels.at(c)];
+        QList<double> calFrequencys =  calFreq[ps(calChannels.at(c))];
         for(int f=0; f<calFrequencys.length(); f++)
         {
             showCalMessage(tr("短路校准"),calFrequencys.at(f),currentChannel);
@@ -242,35 +244,35 @@ void clsCalibration::on_btnShortTrim_clicked()
     setCalLabelInfo(lblShortTrim,tr("短路校准"));
 }
 
-QList<int> clsCalibration::getCalChannels()
+QList<QPoint> clsCalibration::getCalChannels()
 {
-    QList<int> tmp;
+    QList<QPoint> tmp;
     for(int i=0; i< channels.length(); i++)
     {
-        if(!channels.at(i).isEmpty())
-            tmp.append(channels.at(i).toInt());
+        if(!channels.at(i).isNull())
+            tmp.append(channels.at(i));
     }
 
     return tmp;
 }
 
-int clsCalibration::showCalMessage(QString calType, double calFreq, int channel)
+int clsCalibration::showCalMessage(QString calType, double calFreq, QPoint channel)
 {
     this->lblCalbrationType->setText(calType);
     doubleType dt;
     dt.setData(calFreq,"");
     this->lblCalFrequency->setText(dt.formateToString()+"Hz");
-    lblCalChannel->setText(QString::number(channel));
+    lblCalChannel->setText(QString("%1-%2").arg(channel.x()).arg(channel.y()));
     qApp->processEvents();
     return 0;
 }
 
-int clsCalibration::showCalMessage(QString calType, int channel)
+int clsCalibration::showCalMessage(QString calType, QPoint channel)
 {
     MessageDialog *ms = new MessageDialog(this);
 
     ms->layout()->setSizeConstraint(QLayout::SetFixedSize);
-    QString strMessage = tr("<p>现在第<strong><span style=\"font-size:16px;color:#E53333;\">%1</span></strong>通道</p>").arg(channel);
+    QString strMessage = tr("<p>现在第<strong><span style=\"font-size:16px;color:#E53333;\">%1-%2</span></strong>通道</p>").arg(channel.x()).arg(channel.y());
     ms->setMessage(strMessage,calType);
     return ms->exec();
 }
@@ -328,18 +330,17 @@ void clsCalibration::on_btnRCLoadCalibration_clicked()
         return;
 
     clsSampleTest * sample = new clsSampleTest(meter,this);
-    QList<int> calChannels = this->getCalChannels();
+    QList<QPoint> calChannels = this->getCalChannels();
 
     for(int c=0; c< calChannels.length(); c++)
     {
+
+        QPoint currentChannel = calChannels.at(c);
+        clsConnectSWBox::Ins()->setChannel(currentChannel,"WK6500");
+
         sample->setOption(2);
         if(sample->exec() !=QDialog::Accepted)
             return;
-
-        int currentChannel = calChannels.at(c);
-        clsConnectSWBox::Ins()->setChannel(currentChannel);
-        clsConnectSWBox::Ins()->turnOffAllLight();
-        clsConnectSWBox::Ins()->setOnlyOneOrangeLEDON(currentChannel);
 
         int res1= showCalMessage(tr("100R校准"),currentChannel);
         if(res1==QDialog::Rejected)
@@ -355,7 +356,7 @@ void clsCalibration::on_btnRCLoadCalibration_clicked()
         //不对100R校准数据进行开路校准
         clsCalDb::getInst()->insertRecord(10000,currentChannel,Zm_100R_10K,A_100R_10k,"HF_100RRef");
 
-        QList<double> calFrequencys =  calFreq[calChannels.at(c)];
+        QList<double> calFrequencys =  calFreq[ps(calChannels.at(c))];
         for(int f=0; f<calFrequencys.length(); f++)
         {
             showCalMessage(tr("100R校准"),calFrequencys.at(f),currentChannel);
@@ -379,14 +380,13 @@ void clsCalibration::on_btnRCLoadCalibration_clicked()
     meter->setConditionForCalibration(0);
     for(int c=0; c< calChannels.length(); c++)
     {
+
+        QPoint currentChannel = calChannels.at(c);
+        clsConnectSWBox::Ins()->setChannel(currentChannel,"WK6500");
+
         sample->setOption(3);
         if(sample->exec() !=QDialog::Accepted) //Sample 检测
             return;
-
-        int currentChannel = calChannels.at(c);
-        clsConnectSWBox::Ins()->setChannel(currentChannel);
-        clsConnectSWBox::Ins()->turnOffAllLight();
-        clsConnectSWBox::Ins()->setOnlyOneOrangeLEDON(currentChannel);
 
         showCalMessage(tr("100pF校准"),currentChannel);
 
@@ -401,7 +401,7 @@ void clsCalibration::on_btnRCLoadCalibration_clicked()
         //不对100P校准数据进行开路校准
         clsCalDb::getInst()->insertRecord(10000,currentChannel,Zm_100P_10K,A_100P_10k,"HF_100PRef");
 
-        QList<double> calFrequencys = calFreq[calChannels.at(c)];
+        QList<double> calFrequencys = calFreq.value(ps(calChannels.at(c)));
         for(int f=0; f<calFrequencys.length(); f++)
         {
             showCalMessage(tr("100P校准"),calFrequencys.at(f),currentChannel);

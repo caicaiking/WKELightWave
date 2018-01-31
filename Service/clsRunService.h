@@ -12,7 +12,7 @@ class clsRunService : public QObject
 {
     Q_OBJECT
 public:
-    explicit clsRunService(QObject *parent = nullptr);
+    explicit clsRunService(QObject *parent = 0);
 ~clsRunService();
 signals:
     void showRes(QString);
@@ -28,6 +28,7 @@ public slots:
 
     void handlerTrig();
     QString lanTrig();
+    void manulTrig();
 signals:
     void busyStatus(bool);
     void lcrPF(bool);
@@ -40,6 +41,7 @@ signals:
 private:
     bool isRunningMode;
     bool isReset;
+    bool isInTesting;
     QString strCondition;
     QList<clsTestConditons* > steps;
     clsInstrument *meter;

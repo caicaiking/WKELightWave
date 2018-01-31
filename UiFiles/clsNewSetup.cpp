@@ -14,14 +14,26 @@ clsNewSetup::clsNewSetup(QWidget *parent) :
 
 }
 
-int clsNewSetup::getChannel() const
+int clsNewSetup::getChannelStart() const
 {
-    return this->channel;
+    return this->channelStart;
 }
 
-void clsNewSetup::setChannel(int channel)
+int clsNewSetup::getChannelStop() const
 {
-    this->cmbChannel->setCurrentIndex(channel-1);
+    return this->channelStop;
+}
+
+QPoint clsNewSetup::getChannel() const
+{
+   return QPoint(channelStart,this->channelStop);
+}
+
+
+void clsNewSetup::setChannel(int channelStart, int channelStop)
+{
+    this->cmbTerminal1->setCurrentIndex(channelStart-1);
+    this->cmbTerminal2->setCurrentIndex(channelStop-1);
 }
 
 void clsNewSetup::setMeter(QString meter)
@@ -43,14 +55,11 @@ QString clsNewSetup::getMeter() const
     return meter;
 }
 
-void clsNewSetup::on_cmbChannel_currentIndexChanged(int index)
-{
-    this->channel=index+1;
-}
 
 void clsNewSetup::on_btnLCR_clicked()
 {
-    channel=cmbChannel->currentIndex()+1;
+    this->channelStart = cmbTerminal1->currentIndex()+1;
+    this->channelStop = cmbTerminal2->currentIndex()+1;
     clsWK6500Meter *dlg=new clsWK6500Meter(this);
     if(dlg->exec()==QDialog::Accepted)
     {
@@ -59,7 +68,8 @@ void clsNewSetup::on_btnLCR_clicked()
         QVariantMap conditionMap;
         QJsonDocument jsondocument;
 
-        conditionMap.insert("channel", channel);
+        conditionMap.insert("channelStart", channelStart);
+        conditionMap.insert("channelStop", channelStop);
         conditionMap.insert("meter", meter);
         conditionMap.insert("conditions", tmpCondition);
 
@@ -74,14 +84,16 @@ void clsNewSetup::on_btnLCR_clicked()
 
 void clsNewSetup::on_btnHV_clicked()
 {
-    channel=cmbChannel->currentIndex()+1;
+    this->channelStart = cmbTerminal1->currentIndex()+1;
+    this->channelStop = cmbTerminal2->currentIndex()+1;
     clsHightVoltage *dlg=new clsHightVoltage(this);
     if(dlg->exec()==QDialog::Accepted)
     {
         this->meter="HV";
         QString tmpCondition=dlg->getCondition();
         QVariantMap conditionMap;
-        conditionMap.insert("channel",channel);
+        conditionMap.insert("channelStart",channelStart);
+        conditionMap.insert("channelStop",channelStop);
         conditionMap.insert("meter",meter);
         conditionMap.insert("conditions", tmpCondition);
         QJsonDocument jsondocument=QJsonDocument::fromVariant(conditionMap);
@@ -97,4 +109,14 @@ void clsNewSetup::on_btnHV_clicked()
 void clsNewSetup::on_btnCancel_clicked()
 {
     this->reject();
+}
+
+void clsNewSetup::on_cmbTerminal1_currentIndexChanged(int index)
+{
+    this->channelStart = index +1;
+}
+
+void clsNewSetup::on_cmbTerminal2_currentIndexChanged(int index)
+{
+   this->channelStop = index +1;
 }

@@ -8,11 +8,9 @@
 #include "singleton.h"
 #include <QFlowLayout.h>
 #include <QJsonDocument>
-#include "clsRunningThread.h"
 #include "clsTestConditon.h"
 #include "clsSignalDisplayWidget.h"
 #include <QThread>
-#include "clsRunningThread.h"
 class clsMainTestWindow : public QMainWindow, private Ui::clsMainTestWindow
 {
     Q_OBJECT
@@ -65,7 +63,6 @@ private:
     QList<clsMeter *> items;
     QFlowLayout *layout;
     clsSignalDisplayWidget * signalWidget;
-    clsRunningThread *trigThread;
     void initDataBase();
     bool runningMode;
 };

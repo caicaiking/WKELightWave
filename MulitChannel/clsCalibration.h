@@ -14,7 +14,7 @@ public:
     explicit clsCalibration(QWidget *parent = 0);
     void setMeter(clsInstrumentCalibration *meter);
     void setSteps(const QList<clsTestConditons *> steps);
-    void insertRecord(double freq, int channal, double z, double a, QString type);
+    void insertRecord(double freq, QPoint channal, double z, double a, QString type);
     void updataText();
     void saveSettings();
 private slots:
@@ -31,17 +31,18 @@ private:
     double freq;
     QList<double> freqList;
     clsInstrumentCalibration *meter;
-    QStringList channels;
-    QMap<int, QList<double> > calFreq;
-    QList<double> getCalDataFromDb(double freq, int channal, QString type);
+    QList<QPoint> channels;
+    QMap<QString, QList<double> > calFreq;
+    QList<double> getCalDataFromDb(double freq, QPoint channal, QString type);
     void getAllDataFromDb(double freq, int channel);
-    QList<int> getCalChannels();
-    int showCalMessage(QString calType, double calFreq, int channel);
-    int showCalMessage(QString calType, int channel);
+    QList<QPoint> getCalChannels();
+    int showCalMessage(QString calType, double calFreq, QPoint channel);
+    int showCalMessage(QString calType, QPoint channel);
     void setCalLabelInfo(QLabel *lbl, QString calType);
     void readSettings();
     QList<clsTestConditons *> steps;
     double getFreqFromConditon(const QString condition);
+    QString ps(QPoint p);
 };
 
 #endif // CLSCALIBRATION_H

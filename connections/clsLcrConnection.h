@@ -8,7 +8,7 @@ class clsLcrConnection : public QObject
 {
     Q_OBJECT
 public:
-    explicit clsLcrConnection(QObject *parent = nullptr);
+    explicit clsLcrConnection(QObject *parent = 0);
 
     void setConnectionType(QString cnntType);
     void setAddress(QString address);

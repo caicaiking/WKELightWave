@@ -13,19 +13,19 @@
 #include <QTextStream>
 #include <stdio.h>
 #include <QApplication>
-#include "clsRunningThread.h"
 #include "clsRunSettings.h"
 clsRunService::clsRunService(QObject *parent) : QObject(parent)
 {
     isRunningMode = false;
     isReset = false;
     file =0;
+    isInTesting = false;
 
 }
 
 clsRunService::~clsRunService()
 {
-    if(file != nullptr && file->isOpen())
+    if(file != 0 && file->isOpen())
     {
         file->flush();
         file->close();
@@ -72,7 +72,7 @@ void clsRunService::switchToRunningMode(bool value)
 
     if(isRunningMode)
     {
-        if(file != nullptr)
+        if(file != 0)
         {
             file->flush();
             file->close();
@@ -98,7 +98,7 @@ void clsRunService::switchToRunningMode(bool value)
 
             clsTestConditons * tmpStep = steps.at(i);
             meter->setCondition(tmpStep->condition);
-            title.append(QString::number(tmpStep->channel));
+            title.append(tr("Channel"));
 
             for(int j=0; j< meter->getItemsCount(); j++)
             {
@@ -120,7 +120,7 @@ void clsRunService::switchToRunningMode(bool value)
     }
     else
     {
-        if(file != nullptr)
+        if(file != 0)
         {
             file->flush();
             file->close();
@@ -141,28 +141,72 @@ QString clsRunService::getLastFilePath()
         return ".";
 }
 
-void clsRunService::handlerTrig()
+void clsRunService::manulTrig()
 {
+
     if(!isRunningMode)
         return;
     emit trigSignal();
 
-    sngTrigThread::Ins()->stop();
-    publicUtility::sleepMs(70);
+    if(isInTesting)
+        return;
+
+    isInTesting = true;
+
     //Set busy
     clsConnectSWBox::Ins()->setBusy(true);
 
     //触发测试
     trig();
 
-    //set bing PASS Fail
-    clsConnectSWBox::Ins()->setLcrPassFail(sngSignalStatus::Ins()->getLcrStatus());
-    //set binning HV Pass Fail
-    clsConnectSWBox::Ins()->setHvPassFail(sngSignalStatus::Ins()->getHvStatus());
-    //set binning Busy line down
-    clsConnectSWBox::Ins()->setBusy(false);
+    int sendValue =0;
+    if(sngSignalStatus::Ins()->getLcrStatus())
+        sendValue +=2;
+    if(sngSignalStatus::Ins()->getHvStatus())
+        sendValue += 4;
+    if(sngSignalStatus::Ins()->getLcrStatus() && sngSignalStatus::Ins()->getHvStatus())
+        sendValue += 8;
+    clsConnectSWBox::Ins()->setIo(sendValue);
+
+    isInTesting = false;
+}
+
+void clsRunService::handlerTrig()
+{
+    if(!isRunningMode)
+        return;
+    emit trigSignal();
+
+    if(isInTesting)
+        return;
+
+    isInTesting = true;
+
+    //Set busy
+    clsConnectSWBox::Ins()->setBusy(true);
+
+    //触发测试
+    trig();
+
+    int sendValue =0;
+
+    if(sngSignalStatus::Ins()->getLcrStatus())
+        sendValue +=2;
+    if(sngSignalStatus::Ins()->getHvStatus())
+        sendValue += 4;
+    if(sngSignalStatus::Ins()->getLcrStatus() && sngSignalStatus::Ins()->getHvStatus())
+        sendValue += 8;
+    clsConnectSWBox::Ins()->setIo(sendValue);
+
+//    //set bing PASS Fail
+//    clsConnectSWBox::Ins()->setLcrPassFail(sngSignalStatus::Ins()->getLcrStatus());
+//    //set binning HV Pass Fail
+//    clsConnectSWBox::Ins()->setHvPassFail(sngSignalStatus::Ins()->getHvStatus());
+//    //set binning Busy line down
+//    clsConnectSWBox::Ins()->setBusy(false);
     emit controlStatus(tr("Handler Remote"));
-    sngTrigThread::Ins()->start();
+
+    isInTesting = false;
 }
 
 QString clsRunService::lanTrig()
@@ -191,7 +235,7 @@ QString clsRunService::lanTrig()
 
 void clsRunService::trig()
 {
-    QList<QString> results;
+    QStringList results;
     sngSignalStatus::Ins()->resetHVStatus(); //恢复原始值
     sngSignalStatus::Ins()->resetLCRStatus();//恢复原始值
 
@@ -212,9 +256,9 @@ void clsRunService::trig()
         clsTestConditons *tmpStep = steps.at(i);
 
         //切换通道
-        clsConnectSWBox::Ins()->setChannel(tmpStep->channel);
+        clsConnectSWBox::Ins()->setChannel(QPoint(tmpStep->channel.x(),tmpStep->channel.y()),tmpStep->meter);
         //数据记录
-        results.append(QString::number(tmpStep->channel));
+        results.append(QString("c%1-%2").arg(tmpStep->channel.x()).arg(tmpStep->channel.y()));
 
         //更新仪表的测试条件
         meter->setCondition(tmpStep->condition);
@@ -230,7 +274,8 @@ void clsRunService::trig()
         QVariantMap tmpMap;
         tmpMap.insert("step", i);
         tmpMap.insert("meter", tmpStep->meter);
-        tmpMap.insert("channel", tmpStep->channel);
+        tmpMap.insert("channelStart", tmpStep->channel.x());
+        tmpMap.insert("channelStop", tmpStep->channel.y());
 
         QVariantList res;
         for(int j=0; j< meter->getItemsCount(); j++)
@@ -243,7 +288,7 @@ void clsRunService::trig()
 
             res.append(tmpRes);
 
-            results.append(QLocale::system().toString( meter->getItemValue(j)));
+            results.append(QString::number(meter->getItemValue(j),'E',6));
         }
         results.append(meter->getTotleStatus()?"PASS": "FAIL");
 
@@ -268,7 +313,7 @@ void clsRunService::trig()
         QString timeDate = QDate::currentDate().toString("yyyy/MM/dd")+sep + QTime::currentTime().toString("HH:mm:ss");
         QString strRes = results.join(sep)+ sep+ timeDate +"\n";
         out<<strRes.toUtf8();
-        out.flush();
+      //  out.flush();
     }
     goto END;
 RESET:

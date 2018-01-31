@@ -11,7 +11,7 @@ class clsWKCommandProcess : public QObject
 {
     Q_OBJECT
 public:
-    explicit clsWKCommandProcess(QObject *parent = nullptr);
+    explicit clsWKCommandProcess(QObject *parent = 0);
     void setIsRemote(bool value);
 
     typedef void (clsWKCommandProcess::* QUERY_FUNCTION)();

@@ -1,14 +1,15 @@
 #ifndef CLSSINGLETRIG_H
 #define CLSSINGLETRIG_H
 #include <QString>
+#include <QPoint>
 #include "clsDataProcess.h"
 class clsSingleTrig
 {
 public:
     clsSingleTrig();
 
-    int getChannel() const;
-    void setChannel(int value);
+    QPoint getChannel() const;
+    void setChannel(QPoint value);
 
     double getFrequency() const;
     void setFrequency(double value);
@@ -28,7 +29,7 @@ public:
     double getItem(QString item, QString equcct);
 
 private:
-    int channel;
+    QPoint channel;
     double frequency;
     double Zm;
     double Am;

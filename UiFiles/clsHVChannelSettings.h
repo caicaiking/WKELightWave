@@ -11,7 +11,7 @@ class clsHVChannelSettings : public clsMeter, private Ui::clsHVChannelSettings
 public:
     explicit clsHVChannelSettings(clsMeter *parent = 0);
     void setCondition(const QString condition);
-    void setChannel(const int channel);
+    void setChannel(const QPoint channel);
     void updateLabels();
     void setChannelSettings();
     void setChannelRunnings();
@@ -26,7 +26,7 @@ public slots:
     void setLablChannelToolTip();
     void showTrigStar(int i);
 private:
-    int channel;
+    QPoint channel;
     QString condition;
     QString resStatus;
     QString item;
