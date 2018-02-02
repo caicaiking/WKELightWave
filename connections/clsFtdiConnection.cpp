@@ -48,7 +48,7 @@ bool clsFtdiConnection::setupConnection()
         isInit = false;
         return false;
     }
-    serialPort->setBaudRate(QSerialPort::Baud9600);
+    serialPort->setBaudRate(QSerialPort::Baud57600);
     serialPort->setParity(QSerialPort::NoParity);
     serialPort->setDataBits(QSerialPort::Data8);
     serialPort->setStopBits(QSerialPort::OneStop);
@@ -83,6 +83,7 @@ QString clsFtdiConnection::sendCommand(QString command)
 
     readData.clear();
     retData.clear();
+    QTime startTime= QTime::currentTime();
     QString cmd = command + "\r";
     serialPort->write(cmd.toUtf8(), cmd.length());
     serialPort->waitForBytesWritten(1000);
@@ -99,6 +100,8 @@ QString clsFtdiConnection::sendCommand(QString command)
         publicUtility::sleepMs(3);
         i++;
     }
+    qDebug()<< "Send command time:\t" << startTime.msecsTo(QTime::currentTime())<< "ms";
+
     return retData;
 }
 
