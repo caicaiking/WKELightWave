@@ -145,7 +145,7 @@ bool clsCalDb::insertRecord(double freq, QPoint channal,
                                  "frequency = %5"
                                  " and"
                                  " DATATYPE='%6'")
-                .arg(getTableName()).arg(z).arg(a).arg(QString("%1-%2").arg(channal.x()).arg(channal.y())).arg(freq).arg(type);
+                .arg(getTableName()).arg(z).arg(a).arg(ps(channal)).arg(freq).arg(type);
 
         //qDebug()<< strSql;
         QSqlQuery query;

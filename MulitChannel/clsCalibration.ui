@@ -142,9 +142,9 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_5">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="0,1">
+       <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="0,1">
         <item>
-         <widget class="QPushButton" name="btnRCLoadCalibration">
+         <widget class="QPushButton" name="btnGoldenCalibrate">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -160,13 +160,13 @@
            </font>
           </property>
           <property name="text">
-           <string>阻容
+           <string>标样
 校准</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="lblRCTrime">
+         <widget class="QLabel" name="lblGoldenSample">
           <property name="minimumSize">
            <size>
             <width>0</width>

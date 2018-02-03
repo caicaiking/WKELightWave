@@ -116,9 +116,9 @@ bool clsWK6500RunningMode::trig()
 
     d.setFrequency(this->frequency);
     d.setChannel(this->channel);
+    d.setBlUseLoad(true);
 
-    d.doRCCalibration();
-
+    d.doLoadCalibration();
     //输出数据
     results.clear();
     results.append(d.getItem(item1, this->equcct));
