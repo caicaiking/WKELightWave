@@ -54,6 +54,8 @@ private slots:
     void setRemote(QString str);
     void setRemoteType(QString str);
     void setLanRemote(bool value);
+    void on_btnSignal_toggled(bool checked);
+
 protected:
     void closeEvent(QCloseEvent *event);
 signals:

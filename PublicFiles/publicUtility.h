@@ -44,7 +44,8 @@ public:
     static QString converToQString(QList<QString> tmp,QChar sp=',');
     static QString converToQString(QList<double> tmp);
     static QList<double> converToDoubleList(QString tmp);
-
+    static int getLanChoice();
+    static void setLanChoice(int i);
 };
 
 #endif // PUBLICUTILITY_H

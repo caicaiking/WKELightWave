@@ -594,3 +594,8 @@ void clsMainTestWindow::setLanRemote(bool value)
         this->menuStack->setCurrentIndex(0);
     }
 }
+
+void clsMainTestWindow::on_btnSignal_toggled(bool checked)
+{
+   this->wgtSignalPannel->setVisible(checked);
+}

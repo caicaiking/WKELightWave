@@ -13,6 +13,7 @@
 #include "Server/clsWKServer.h"
 #include "clsWKCommandProcess.h"
 #include <QTranslator>
+#include "frmSelectLang.h"
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -20,10 +21,22 @@ int main(int argc, char *argv[])
     a.setApplicationName("WKE LightWave");
     a.setApplicationVersion(publicUtility::getVersion());
 
-//    QTranslator translator;
-//    translator.load(":/Translation/WKEFV_EN.qm");
-//    a.installTranslator(&translator);
+    int langChoice =0;
+    langChoice = publicUtility::getLanChoice();
 
+    if(langChoice==0)
+    {
+        langChoice = frmSelectLang::getLanguage();
+        publicUtility::setLanChoice(langChoice);
+    }
+
+    QTranslator translator;
+    if(langChoice == 2)
+        translator.load(":/Translation/WKEFV_EN.qm");
+    else
+        translator.load(":/Translation/WKEFV_Zh.qm");
+
+    a.installTranslator(&translator);
     //设置Splash 屏幕
     QPixmap pixmap(":/Background3.png");
     QSplashScreen splash(pixmap);

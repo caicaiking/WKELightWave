@@ -237,144 +237,144 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/main.cpp" line="33"/>
+        <location filename="../../PublicFiles/main.cpp" line="46"/>
         <source>版本号：V%1  正在初始化测试窗口，请稍等...</source>
         <translation>Version: V%1  Initializing test window, please wait ...</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/main.cpp" line="44"/>
+        <location filename="../../PublicFiles/main.cpp" line="57"/>
         <source>初始化WK6500B网络连接...</source>
         <translation>Initializing WK6500 network connection....</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/main.cpp" line="53"/>
+        <location filename="../../PublicFiles/main.cpp" line="66"/>
         <source>初始化高压机串口连接...</source>
         <translation>Initializing HV machine com port...</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/main.cpp" line="62"/>
+        <location filename="../../PublicFiles/main.cpp" line="75"/>
         <source>初始化WKE控制箱FTDI连接...</source>
         <translation>Initializing WKE control box FTDI connection...</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="85"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="86"/>
         <source>频率</source>
         <translation>Frequency</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="89"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="90"/>
         <source>偏置电压</source>
         <translation>Bias Voltage</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="89"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="90"/>
         <source>外置偏压</source>
         <translation>External Bias Voltage</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="89"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="90"/>
         <source>电压信号</source>
         <translation>Voltage Signal</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="91"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="92"/>
         <source>时间</source>
         <translation>Time</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="95"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="96"/>
         <source>偏置电流</source>
         <translation>Bias Current</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="97"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="98"/>
         <source>电流信号</source>
         <translation>Current Signal</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="99"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="100"/>
         <source>次数</source>
         <translation>Times</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="110"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="111"/>
         <source>阻抗</source>
         <translation>Impedance</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="112"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="113"/>
         <source>交流电阻</source>
         <translation>Resistance</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="114"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="115"/>
         <source>电抗</source>
         <translation>Reactance</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="116"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="117"/>
         <source>直流电阻</source>
         <translation>Dc Resistance</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="118"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="119"/>
         <source>相位</source>
         <translation>Angle</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="120"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="121"/>
         <source>电导</source>
         <translation>Conductance</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="122"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="123"/>
         <source>电纳</source>
         <translation>Susceptance</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="124"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="125"/>
         <source>导纳</source>
         <translation>Admittance</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="126"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="127"/>
         <source>电感</source>
         <translation>Inductance</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="128"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="129"/>
         <source>电容</source>
         <translation>Capacitance</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="130"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="131"/>
         <source>品质因素</source>
         <translation>Quality Factor</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="132"/>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="139"/>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="145"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="133"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="140"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="146"/>
         <source>损耗</source>
         <translation>Dissipation Factor</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="135"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="136"/>
         <source>介电实部</source>
         <translation>Permittivity Real</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="137"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="138"/>
         <source>介电虚部</source>
         <translation>Permittivity Image</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="141"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="142"/>
         <source>磁导率实部</source>
         <translation>Permeability Real</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/publicUtility.cpp" line="143"/>
+        <location filename="../../PublicFiles/publicUtility.cpp" line="144"/>
         <source>磁导率虚部</source>
         <translation>Permeability Image</translation>
     </message>
@@ -509,11 +509,17 @@ Trim</translation>
         <translation>Multi-channel Load calibration</translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.ui" line="163"/>
         <source>阻容
 校准</source>
-        <translation>RC
+        <translation type="vanished">RC
 Trim</translation>
+    </message>
+    <message>
+        <location filename="../../MulitChannel/clsCalibration.ui" line="163"/>
+        <source>标样
+校准</source>
+        <translation>Sample
+Calibraion</translation>
     </message>
     <message>
         <location filename="../../MulitChannel/clsCalibration.ui" line="203"/>
@@ -555,16 +561,16 @@ Calibration</translation>
         <translation>Done</translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="163"/>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="169"/>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="193"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="196"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="200"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="223"/>
         <source>开路校准</source>
         <translation>Open Trim</translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="213"/>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="219"/>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="244"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="247"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="250"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="275"/>
         <source>短路校准</source>
         <translation>Short Trim</translation>
     </message>
@@ -573,68 +579,86 @@ Calibration</translation>
         <translation type="vanished">&lt;p&gt;Current &lt;strong&gt;&lt;span style=&quot;font-size:16px;color:#E53333;&quot;&gt;%1&lt;/span&gt;&lt;/strong&gt;Channel&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="275"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="93"/>
+        <source>开</source>
+        <translation>On</translation>
+    </message>
+    <message>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="128"/>
+        <source>关</source>
+        <translation>Off</translation>
+    </message>
+    <message>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="295"/>
         <source>&lt;p&gt;现在第&lt;strong&gt;&lt;span style=&quot;font-size:16px;color:#E53333;&quot;&gt;%1-%2&lt;/span&gt;&lt;/strong&gt;通道&lt;/p&gt;</source>
         <translation>&lt;p&gt;Current &lt;strong&gt;&lt;span style=&quot;font-size:16px;color:#E53333;&quot;&gt;%1-%2&lt;/span&gt;&lt;/strong&gt; channel&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="282"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="302"/>
         <source>%3时间为：%1 %2</source>
         <translation>%3 time is：%1 %2</translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="322"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="372"/>
         <source>确定是否已经做完了开路和短路校准</source>
         <translation>Make sure you already finished open and short trims</translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="322"/>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="327"/>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="375"/>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="420"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="372"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="402"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="418"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="430"/>
+        <source>负载校准</source>
+        <translation>Sample calibration</translation>
+    </message>
+    <message>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="385"/>
+        <source>通道%2, 频率%1的标准负载值</source>
+        <translation>The sample value on Channel %2 &amp;&amp; Frequency %1</translation>
+    </message>
+    <message>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="402"/>
+        <source>请放置好标准负载!</source>
+        <translation>Please put the standard sample!</translation>
+    </message>
+    <message>
         <source>阻容校准</source>
-        <translation>RC Calibration</translation>
+        <translation type="vanished">RC Calibration</translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="327"/>
         <source>放入负载100R</source>
-        <translation>Put 100 R</translation>
+        <translation type="vanished">Put 100 R</translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="345"/>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="362"/>
         <source>100R校准</source>
-        <translation>100R Calibration</translation>
+        <translation type="vanished">100R Calibration</translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="375"/>
         <source>放入负载100pF</source>
-        <translation>Put 100pF</translation>
+        <translation type="vanished">Put 100pF</translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="391"/>
         <source>100pF校准</source>
-        <translation>100pF calibration</translation>
+        <translation type="vanished">100pF calibration</translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="407"/>
         <source>100P校准</source>
-        <translation>100pF calibration</translation>
+        <translation type="vanished">100pF calibration</translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="426"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="336"/>
         <source>打开频率点数据文件</source>
         <translation>Open frequency points data file</translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="426"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="336"/>
         <source>CSV 文件(*.csv)</source>
         <translation>CSV file(*.csv)</translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="454"/>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="455"/>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="456"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="364"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="365"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="366"/>
         <source>没有校准数据</source>
         <translation>No calibration data</translation>
     </message>
@@ -836,7 +860,7 @@ Calibration</translation>
         <translation>Please check the FTDI cable, or re-plugin.</translation>
     </message>
     <message>
-        <location filename="../../connections/clsFtdiConnection.cpp" line="193"/>
+        <location filename="../../connections/clsFtdiConnection.cpp" line="196"/>
         <source>WKE 控制箱</source>
         <translation>WKE control box</translation>
     </message>
@@ -2083,6 +2107,7 @@ Pannel</translation>
         <location filename="../../UiFiles/clsWK6500Meter.cpp" line="47"/>
         <location filename="../../UiFiles/clsWK6500Meter.cpp" line="315"/>
         <location filename="../../UiFiles/clsWK6500Meter.cpp" line="326"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="333"/>
         <location filename="../../UiFiles/clsWK6500Meter.cpp" line="334"/>
         <source>开</source>
         <translation>On</translation>
@@ -2165,6 +2190,7 @@ Pannel</translation>
     <message>
         <location filename="../../UiFiles/clsWK6500Meter.cpp" line="39"/>
         <location filename="../../UiFiles/clsWK6500Meter.cpp" line="310"/>
+        <location filename="../../UiFiles/clsWK6500Meter.cpp" line="328"/>
         <location filename="../../UiFiles/clsWK6500Meter.cpp" line="329"/>
         <location filename="../../UiFiles/clsWK6500Meter.cpp" line="331"/>
         <source>关</source>
@@ -2413,6 +2439,39 @@ Pannel</translation>
     <message>
         <location filename="../../UiFiles/dlgLevelInputBox.ui" line="679"/>
         <source>Shift+V</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
+    <name>frmSelectLang</name>
+    <message>
+        <location filename="../../UiFiles/frmSelectLang.ui" line="14"/>
+        <source>Information</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../UiFiles/frmSelectLang.ui" line="28"/>
+        <source>选择软件语言</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../UiFiles/frmSelectLang.ui" line="41"/>
+        <source>Select software Language</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../UiFiles/frmSelectLang.ui" line="62"/>
+        <source>简体中文</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../UiFiles/frmSelectLang.ui" line="75"/>
+        <source>English</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../UiFiles/frmSelectLang.ui" line="112"/>
+        <source>OK</source>
         <translation></translation>
     </message>
 </context>

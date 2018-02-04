@@ -99,7 +99,8 @@ HEADERS += \
     Server/clsWKServer.h \
     Server/clsWKCommandProcess.h \
     UiFiles/clsRunningSettings.h \
-    Service/clsRunSettings.h
+    Service/clsRunSettings.h \
+    UiFiles/frmSelectLang.h
 
 SOURCES += \
     PublicFiles/clsMeterLimit.cpp \
@@ -162,7 +163,8 @@ SOURCES += \
     Server/clsWKServer.cpp \
     Server/clsWKCommandProcess.cpp \
     UiFiles/clsRunningSettings.cpp \
-    Service/clsRunSettings.cpp
+    Service/clsRunSettings.cpp \
+    UiFiles/frmSelectLang.cpp
 
 FORMS += \
     UiFiles/clsHightVoltage.ui \
@@ -190,7 +192,8 @@ FORMS += \
     MulitChannel/clsSampleTest.ui \
     UiFiles/clsRunningSettings.ui \
     UiFiles/clsMeterChannelSettings.ui \
-    UiFiles/clsRunningStatus.ui
+    UiFiles/clsRunningStatus.ui \
+    UiFiles/frmSelectLang.ui
 
 DISTFILES += \
     Describle.txt

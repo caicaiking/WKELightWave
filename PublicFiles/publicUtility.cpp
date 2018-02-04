@@ -7,6 +7,7 @@
 #include <QStringListIterator>
 #include <QCoreApplication>
 #include <QDebug>
+#include "clsSettings.h"
 #include <QMap>
 #include <QTime>
 using  std::vector;
@@ -207,6 +208,27 @@ QList<double> publicUtility::converToDoubleList(QString tmp)
     }
 
     return list;
+}
+
+
+void publicUtility::setLanChoice(int i)
+{
+    clsSettings settings;
+    QString strNode ="Language/";
+    int choice;
+   settings.writeSetting(strNode + "Choice", i);
+
+
+}
+int publicUtility::getLanChoice()
+{
+    clsSettings settings;
+    QString strNode ="Language/";
+    int choice;
+   settings.readSetting(strNode + "Choice", choice);
+
+   return choice;
+
 }
 
 double publicUtility::Max(const QList<double> &arry)
