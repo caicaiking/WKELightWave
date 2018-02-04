@@ -27,7 +27,6 @@ INPUT(
 ./release/clsHVCnntWindow.o
 ./release/clsFtdiConnection.o
 ./release/clsFtdiCnntWindow.o
-./release/clsRunningThread.o
 ./release/clsTestClass.o
 ./release/clsFtdiOperation.o
 ./release/QFlowLayout.o
@@ -61,6 +60,7 @@ INPUT(
 ./release/clsWKCommandProcess.o
 ./release/clsRunningSettings.o
 ./release/clsRunSettings.o
+./release/frmSelectLang.o
 ./release/qrc_res.o
 ./release/moc_clsChannelSettings.o
 ./release/moc_clsHightVoltage.o
@@ -85,7 +85,6 @@ INPUT(
 ./release/moc_clsHVCnntWindow.o
 ./release/moc_clsFtdiConnection.o
 ./release/moc_clsFtdiCnntWindow.o
-./release/moc_clsRunningThread.o
 ./release/moc_clsFtdiOperation.o
 ./release/moc_clsMainTestWindow.o
 ./release/moc_clsWarningBox.o
@@ -107,4 +106,5 @@ INPUT(
 ./release/moc_clsWKCommandProcess.o
 ./release/moc_clsRunningSettings.o
 ./release/moc_clsRunSettings.o
+./release/moc_frmSelectLang.o
 );

@@ -27,7 +27,6 @@ INPUT(
 ./debug/clsHVCnntWindow.o
 ./debug/clsFtdiConnection.o
 ./debug/clsFtdiCnntWindow.o
-./debug/clsRunningThread.o
 ./debug/clsTestClass.o
 ./debug/clsFtdiOperation.o
 ./debug/QFlowLayout.o
@@ -61,6 +60,7 @@ INPUT(
 ./debug/clsWKCommandProcess.o
 ./debug/clsRunningSettings.o
 ./debug/clsRunSettings.o
+./debug/frmSelectLang.o
 ./debug/qrc_res.o
 ./debug/moc_clsChannelSettings.o
 ./debug/moc_clsHightVoltage.o
@@ -85,7 +85,6 @@ INPUT(
 ./debug/moc_clsHVCnntWindow.o
 ./debug/moc_clsFtdiConnection.o
 ./debug/moc_clsFtdiCnntWindow.o
-./debug/moc_clsRunningThread.o
 ./debug/moc_clsFtdiOperation.o
 ./debug/moc_clsMainTestWindow.o
 ./debug/moc_clsWarningBox.o
@@ -107,4 +106,5 @@ INPUT(
 ./debug/moc_clsWKCommandProcess.o
 ./debug/moc_clsRunningSettings.o
 ./debug/moc_clsRunSettings.o
+./debug/moc_frmSelectLang.o
 );
