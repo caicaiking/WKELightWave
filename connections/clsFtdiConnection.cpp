@@ -48,7 +48,7 @@ bool clsFtdiConnection::setupConnection()
         isInit = false;
         return false;
     }
-    serialPort->setBaudRate(QSerialPort::Baud9600);
+    serialPort->setBaudRate(QSerialPort::Baud57600);
     serialPort->setParity(QSerialPort::NoParity);
     serialPort->setDataBits(QSerialPort::Data8);
     serialPort->setStopBits(QSerialPort::OneStop);
