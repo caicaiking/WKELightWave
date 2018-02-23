@@ -385,7 +385,10 @@ void clsCalibration::on_btnGoldenCalibrate_clicked()
             dlg->setWindowTitle(tr("通道%2, 频率%1的标准负载值").arg(dt.formateToString()+"Hz").arg(ps(tmpPar.channel)));
             dlg->setFrequency(tmpPar.freqnecy);
 
-            QList<double> resValue=meter->getOriginZA();
+            QList<double> resValue;
+            resValue = clsCalDb::getInst()->getCalData(tmpPar.freqnecy, tmpPar.channel,"Ls");
+            if(resValue.length()<2)
+                resValue =meter->getOriginZA();
             stdZ = resValue.at(0);
             stdA = resValue.at(1);
             dlg->setZ(stdZ);
