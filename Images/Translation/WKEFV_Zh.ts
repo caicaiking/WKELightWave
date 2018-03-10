@@ -590,9 +590,9 @@
     </message>
     <message>
         <location filename="../../MulitChannel/clsCalibration.cpp" line="372"/>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="402"/>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="418"/>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="430"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="405"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="421"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="433"/>
         <source>负载校准</source>
         <translation></translation>
     </message>
@@ -602,7 +602,7 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../../MulitChannel/clsCalibration.cpp" line="402"/>
+        <location filename="../../MulitChannel/clsCalibration.cpp" line="405"/>
         <source>请放置好标准负载!</source>
         <translation></translation>
     </message>
@@ -1044,7 +1044,9 @@
     </message>
     <message>
         <location filename="../../UiFiles/clsHightVoltage.ui" line="349"/>
+        <location filename="../../UiFiles/clsHightVoltage.cpp" line="28"/>
         <location filename="../../UiFiles/clsHightVoltage.cpp" line="137"/>
+        <location filename="../../UiFiles/clsHightVoltage.cpp" line="140"/>
         <source>开</source>
         <translation></translation>
     </message>
@@ -1062,6 +1064,11 @@
         <location filename="../../UiFiles/clsHightVoltage.cpp" line="88"/>
         <source>自动</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="../../UiFiles/clsHightVoltage.cpp" line="138"/>
+        <source>关</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../UiFiles/clsHightVoltage.cpp" line="172"/>

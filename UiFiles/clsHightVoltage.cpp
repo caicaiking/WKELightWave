@@ -25,7 +25,7 @@ clsHightVoltage::clsHightVoltage(QWidget *parent) :
         this->dblDelay = 0.4;
         this->dblRampDown = 0.0;
         lowLimit=0.00;
-        relaySwitch="开";
+        relaySwitch=tr("开");
     }
     else
     {
@@ -135,9 +135,9 @@ void clsHightVoltage::on_btnCancel_clicked()
 void clsHightVoltage::on_btnRelay_clicked()
 {
     if(btnRelay->text()==tr("开"))
-        relaySwitch="关";
+        relaySwitch=tr("关");
     else
-        relaySwitch="开";
+        relaySwitch=tr("开");
     updateButtons();
 }
 

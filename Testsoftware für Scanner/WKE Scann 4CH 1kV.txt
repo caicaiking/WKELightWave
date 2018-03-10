@@ -1,0 +1,40 @@
+IDN
+Read Ext I/O
+Write Ext I/O
+Set MP A-D
+MP bitkomb
+LCR/HV
+MP auto LCR/HV
+Prog Mem
+CLR Prog Mem
+CLR Trig. Counter
+Trig Prog Mem
+Get Prog Step
+O/S Relay
+not used
+Set Boudrate
+MCU RST
+read rec. string
+not used
+not used
+not used
+
+8
+0
+1,1,13,4
+4,6,6,0,0
+0
+0,0,2,3
+0,0,2,0,1
+
+
+0
+
+3
+
+5
+
+
+
+
+
