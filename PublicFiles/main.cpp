@@ -10,8 +10,6 @@
 #include <QPixmap>
 #include "publicUtility.h"
 #include "logmanager.h"
-#include "Server/clsWKServer.h"
-#include "clsWKCommandProcess.h"
 #include <QTranslator>
 #include "frmSelectLang.h"
 int main(int argc, char *argv[])

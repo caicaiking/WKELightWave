@@ -27,7 +27,7 @@ public slots:
     void reset();
 
     void handlerTrig();
-    QString lanTrig();
+    void lanTrig();
     void manulTrig();
 signals:
     void busyStatus(bool);

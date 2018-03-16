@@ -25,7 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-INCLUDEPATH += PublicFiles UiFiles Service Instruments connections Ftdi MulitChannel Qextseial update Server
+INCLUDEPATH += PublicFiles UiFiles Service Instruments connections Ftdi MulitChannel Qextseial update
 
 
 DESTDIR =$$PWD/Libs/
@@ -95,12 +95,10 @@ HEADERS += \
     MulitChannel/clsSampleTest.h \
     Service/clsRunService.h \
     Service/singleton.h \
-    Server/clsTcpIpThread.h \
-    Server/clsWKServer.h \
-    Server/clsWKCommandProcess.h \
     UiFiles/clsRunningSettings.h \
     Service/clsRunSettings.h \
-    UiFiles/frmSelectLang.h
+    UiFiles/frmSelectLang.h \
+    connections/clsConnectToServer.h
 
 SOURCES += \
     PublicFiles/clsMeterLimit.cpp \
@@ -159,12 +157,10 @@ SOURCES += \
     MulitChannel/clsWK6500CalibrationMeter.cpp \
     MulitChannel/clsSingleTrig.cpp \
     MulitChannel/clsSampleTest.cpp \
-    Server/clsTcpIpThread.cpp \
-    Server/clsWKServer.cpp \
-    Server/clsWKCommandProcess.cpp \
     UiFiles/clsRunningSettings.cpp \
     Service/clsRunSettings.cpp \
-    UiFiles/frmSelectLang.cpp
+    UiFiles/frmSelectLang.cpp \
+    connections/clsConnectToServer.cpp
 
 FORMS += \
     UiFiles/clsHightVoltage.ui \

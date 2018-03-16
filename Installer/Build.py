@@ -38,8 +38,8 @@ jsonContent = {
     "updates":{
         "windows":{
             "open-url":"",
-            "download-url":"https://raw.githubusercontent.com/Leroy888/DelphiTestSystem/abama/Installer/WKELightWave.exe",
-            "defs-url":"https://raw.githubusercontent.com/Leroy888/DelphiTestSystem/abama/Installer/updates.json", #本Json文件放的网络地址
+            "download-url":"https://github.com/caicaiking/WKELightWave/blob/master/Installer/WKELightWave.exe",
+            "defs-url":"https://github.com/caicaiking/WKELightWave/blob/master/Installer/updates.json", #本Json文件放的网络地址
             "latest-version":version_str,
             "changelog": change_log
         }

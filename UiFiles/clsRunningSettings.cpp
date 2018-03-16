@@ -1,5 +1,6 @@
 #include "clsRunningSettings.h"
 #include "clsRunSettings.h"
+#include "clsConnectToServer.h"
 clsRunningSettings::clsRunningSettings(QWidget *parent) :
     QDialog(parent)
 {
@@ -21,6 +22,10 @@ clsRunningSettings::clsRunningSettings(QWidget *parent) :
         break;
     }
     chkJumpOut->setChecked(sngRunSettings::Ins()->getJumpOut());
+    btnConnect->setEnabled(!sngConnectServer::Ins()->getIsInit());
+
+    txtIp->setText(sngRunSettings::Ins()->getStrIp());
+    txtPort->setText(sngRunSettings::Ins()->getPort());
 }
 
 void clsRunningSettings::on_btnOk_clicked()
@@ -41,4 +46,15 @@ void clsRunningSettings::on_btnOk_clicked()
 void clsRunningSettings::on_btnCancel_clicked()
 {
     this->reject();
+}
+
+void clsRunningSettings::on_btnConnect_clicked()
+{
+
+    sngRunSettings::Ins()->setStrIp(txtIp->text());
+    sngRunSettings::Ins()->setPort(txtPort->text());
+    sngConnectServer::Ins()->setIpAddressAndPort(sngRunSettings::Ins()->getStrIp(),sngRunSettings::Ins()->getPort().toInt());
+    sngConnectServer::Ins()->startConnect();
+
+    btnConnect->setEnabled(!sngConnectServer::Ins()->getIsInit());
 }

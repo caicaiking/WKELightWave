@@ -24,11 +24,20 @@ public:
 
     bool getJumpOut() const;
     void setJumpOut(bool value);
+
+    QString getStrIp() const;
+    QString getPort() const;
+    void setPort(const QString &value);
+    void setStrIp(const QString &value);
+
 signals:
     void remoteType(QString);
 private:
     TrigSource remoteControlType;
     bool jumpOut;
+
+    QString strIp;
+    QString port;
 };
 
 typedef Singleton<clsRunSettings> sngRunSettings;

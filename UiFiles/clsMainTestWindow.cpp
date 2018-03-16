@@ -26,7 +26,7 @@
 #include <QProcess>
 #include "clsRunningSettings.h"
 #include "clsRunSettings.h"
-#include "clsWKServer.h"
+#include "clsConnectToServer.h"
 //TODO: 主界面增加运行时候的设定
 //TODO: 增加服务器设置，端口号2018
 //TODO: 增加软件自动更新功能
@@ -66,7 +66,7 @@ clsMainTestWindow::clsMainTestWindow(QWidget *parent) :
         setRunningMode(true);
     }
 
-    connect(sngWKServer::Ins(),&clsWKServer::lanRemote, this, &clsMainTestWindow::setLanRemote);
+    connect(sngConnectServer::Ins(),&clsConnectToServer::lanRemote, this, &clsMainTestWindow::setLanRemote);
 
     connect(sngRunSettings::Ins(), &clsRunSettings::remoteType, [=](QString value)
     {

@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <QApplication>
 #include "clsRunSettings.h"
+#include "clsConnectToServer.h"
 clsRunService::clsRunService(QObject *parent) : QObject(parent)
 {
     isRunningMode = false;
@@ -209,10 +210,10 @@ void clsRunService::handlerTrig()
     isInTesting = false;
 }
 
-QString clsRunService::lanTrig()
+void clsRunService::lanTrig()
 {
     if(!isRunningMode)
-        return "Err 1";
+        return ;
 
     emit controlStatus(tr("Lan Remote"));
 
@@ -230,7 +231,8 @@ QString clsRunService::lanTrig()
 
     QString strTotleStatus = totleStatus.join(",");
 
-    return strTotleStatus;
+    sngConnectServer::Ins()->writeRes(strTotleStatus);
+
 }
 
 void clsRunService::trig()
