@@ -237,22 +237,22 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/main.cpp" line="46"/>
+        <location filename="../../PublicFiles/main.cpp" line="44"/>
         <source>版本号：V%1  正在初始化测试窗口，请稍等...</source>
         <translation>Version: V%1  Initializing test window, please wait ...</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/main.cpp" line="57"/>
+        <location filename="../../PublicFiles/main.cpp" line="55"/>
         <source>初始化WK6500B网络连接...</source>
         <translation>Initializing WK6500 network connection....</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/main.cpp" line="66"/>
+        <location filename="../../PublicFiles/main.cpp" line="64"/>
         <source>初始化高压机串口连接...</source>
         <translation>Initializing HV machine com port...</translation>
     </message>
     <message>
-        <location filename="../../PublicFiles/main.cpp" line="75"/>
+        <location filename="../../PublicFiles/main.cpp" line="73"/>
         <source>初始化WKE控制箱FTDI连接...</source>
         <translation>Initializing WKE control box FTDI connection...</translation>
     </message>
@@ -1482,22 +1482,22 @@ Pannel</translation>
 <context>
     <name>clsRunService</name>
     <message>
-        <location filename="../../Service/clsRunService.cpp" line="64"/>
+        <location filename="../../Service/clsRunService.cpp" line="65"/>
         <source>步骤总数 %1 </source>
         <translation>Total steps: %1</translation>
     </message>
     <message>
-        <location filename="../../Service/clsRunService.cpp" line="101"/>
+        <location filename="../../Service/clsRunService.cpp" line="102"/>
         <source>Channel</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../Service/clsRunService.cpp" line="207"/>
+        <location filename="../../Service/clsRunService.cpp" line="208"/>
         <source>Handler Remote</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../Service/clsRunService.cpp" line="217"/>
+        <location filename="../../Service/clsRunService.cpp" line="218"/>
         <source>Lan Remote</source>
         <translation></translation>
     </message>
@@ -1505,17 +1505,17 @@ Pannel</translation>
 <context>
     <name>clsRunSettings</name>
     <message>
-        <location filename="../../Service/clsRunSettings.cpp" line="49"/>
+        <location filename="../../Service/clsRunSettings.cpp" line="55"/>
         <source>手动</source>
         <translation>Manual</translation>
     </message>
     <message>
-        <location filename="../../Service/clsRunSettings.cpp" line="55"/>
+        <location filename="../../Service/clsRunSettings.cpp" line="61"/>
         <source>硬件</source>
         <translation>Handler</translation>
     </message>
     <message>
-        <location filename="../../Service/clsRunSettings.cpp" line="61"/>
+        <location filename="../../Service/clsRunSettings.cpp" line="70"/>
         <source>网络</source>
         <translation>Network</translation>
     </message>
@@ -1538,9 +1538,13 @@ Pannel</translation>
         <translation>Handler control</translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsRunningSettings.ui" line="58"/>
         <source>网络控制（Port：2018）</source>
-        <translation>Lan control(port:2018)</translation>
+        <translation type="vanished">Lan control(port:2018)</translation>
+    </message>
+    <message>
+        <location filename="../../UiFiles/clsRunningSettings.ui" line="58"/>
+        <source>网络控制</source>
+        <translation>Lan Control</translation>
     </message>
     <message>
         <location filename="../../UiFiles/clsRunningSettings.ui" line="71"/>
@@ -1553,12 +1557,42 @@ Pannel</translation>
         <translation>The step failed to exit the current product test</translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsRunningSettings.ui" line="115"/>
+        <location filename="../../UiFiles/clsRunningSettings.ui" line="100"/>
+        <source>服务器设置</source>
+        <translation>Server settings</translation>
+    </message>
+    <message>
+        <location filename="../../UiFiles/clsRunningSettings.ui" line="114"/>
+        <source>服务器地址：</source>
+        <translation>Server Ip:</translation>
+    </message>
+    <message>
+        <location filename="../../UiFiles/clsRunningSettings.ui" line="133"/>
+        <source>127.0.0.1</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../UiFiles/clsRunningSettings.ui" line="146"/>
+        <source>服务器端口：</source>
+        <translation>Server Port:</translation>
+    </message>
+    <message>
+        <location filename="../../UiFiles/clsRunningSettings.ui" line="165"/>
+        <source>5700</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../UiFiles/clsRunningSettings.ui" line="184"/>
+        <source>连接</source>
+        <translation>Connect</translation>
+    </message>
+    <message>
+        <location filename="../../UiFiles/clsRunningSettings.ui" line="217"/>
         <source>取消</source>
         <translation>Cancel</translation>
     </message>
     <message>
-        <location filename="../../UiFiles/clsRunningSettings.ui" line="128"/>
+        <location filename="../../UiFiles/clsRunningSettings.ui" line="230"/>
         <source>确定</source>
         <translation>Ok</translation>
     </message>
