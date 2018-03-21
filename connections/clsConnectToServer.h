@@ -20,6 +20,7 @@ public slots:
     void readPort();
     void writeRes(QString res);
 
+    void disCon();
 
 
 signals:

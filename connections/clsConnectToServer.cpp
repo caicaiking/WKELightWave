@@ -5,6 +5,7 @@ clsConnectToServer::clsConnectToServer(QObject *parent):QTcpSocket(parent)
 {
     isInit = false;
     connect(this,SIGNAL(readyRead()),this, SLOT(readPort()));
+    connect(this,SIGNAL(disconnected()),this,SLOT(disCon()));
 }
 
 void clsConnectToServer::setIpAddressAndPort(QString ip, int port)
@@ -43,6 +44,12 @@ void clsConnectToServer::writeRes(QString res)
 {
     this->write(res.toStdString().c_str()) ;
     this->flush();
+}
+
+void clsConnectToServer::disCon()
+{
+    isInit = false;
+    emit lanRemote(false);
 }
 
 bool clsConnectToServer::getIsInit() const
